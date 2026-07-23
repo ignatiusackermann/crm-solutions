@@ -1,0 +1,421 @@
+
+import { DiscoveryCallSection, SiteFooter } from "./site-components";
+
+const leakCards = [
+  {
+    number: "01",
+    title: "Attention without relevance",
+    body: "Marketing attracts visits, but the offer does not answer the buyer’s real concern.",
+    consequence: "Higher acquisition cost",
+  },
+  {
+    number: "02",
+    title: "Interest without action",
+    body: "Weak proof, confusing choices and unnecessary friction reduce conversion.",
+    consequence: "Fewer qualified enquiries",
+  },
+  {
+    number: "03",
+    title: "Enquiries without follow-through",
+    body: "Slow response and invisible pipelines allow valuable opportunities to decay.",
+    consequence: "Lost sales and time",
+  },
+  {
+    number: "04",
+    title: "Customers without a next step",
+    body: "Poor onboarding and absent retention journeys keep lifetime value unnecessarily low.",
+    consequence: "Revenue left behind",
+  },
+];
+
+const loopSteps = [
+  ["Position", "Make the value and next step unmistakable."],
+  ["Attract", "Create relevant demand around real buyer intent."],
+  ["Convert", "Turn attention into enquiries, bookings and sales."],
+  ["Follow through", "Respond faster and keep every opportunity visible."],
+  ["Retain", "Improve repeat business, reviews and referrals."],
+  ["Improve", "Measure the journey and act on the next constraint."],
+];
+
+const projects = [
+  {
+    name: "Lava-SA",
+    category: "Specialist commerce",
+    statement:
+      "Turning a specialist product catalogue into a premium commerce and education platform.",
+    themes: ["Product architecture", "Buying confidence", "Commerce"],
+    href: "/work/lava-sa",
+    linkLabel: "Read the case study",
+    className: "lava",
+  },
+  {
+    name: "Star Aesthetic",
+    category: "Aesthetic practice",
+    statement:
+      "Structuring complex treatment choices into a calm, credible patient journey.",
+    themes: ["Premium identity", "Treatment clarity", "Consultations"],
+    href: "https://staraesthetic.co.za/",
+    linkLabel: "View the live project",
+    className: "star",
+  },
+  {
+    name: "Storvac Systems",
+    category: "Product selection",
+    statement:
+      "Helping buyers understand capacity and find the right solution faster.",
+    themes: ["Decision support", "Find my size", "Restrained commerce"],
+    href: "https://www.storvac.co.za/",
+    linkLabel: "View the live project",
+    className: "storvac",
+  },
+];
+
+const principles = [
+  "Business model before feature list",
+  "Customer decision before page decoration",
+  "Evidence before claims",
+  "Useful automation before fashionable automation",
+  "Measurable outcomes before vanity metrics",
+  "Long-term asset before quick-launch theatre",
+];
+
+const process = [
+  ["Diagnose", "Establish the objective, current numbers, customer journey and most expensive leakage."],
+  ["Architect", "Define the offer, content, journeys, system connections, measurement plan and exact scope."],
+  ["Build", "Design and develop the customer platform, integrations and automation with clear decision points."],
+  ["Launch & improve", "Validate the experience, train the business and prioritize the next commercial gain."],
+];
+
+function Arrow() {
+  return <span aria-hidden="true">↗</span>;
+}
+
+function RevenueJourney() {
+  return (
+    <div className="journey" aria-label="A customer journey from first visit to increasing customer value">
+      <svg className="journey-lines" viewBox="0 0 760 520" aria-hidden="true">
+        <defs>
+          <linearGradient id="journeyGradient" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stopColor="#82909b" />
+            <stop offset="0.52" stopColor="#c75c36" />
+            <stop offset="1" stopColor="#d98a64" />
+          </linearGradient>
+        </defs>
+        <path className="ghost-orbit orbit-one" d="M82 370 C260 338 238 130 410 226 S582 130 720 54" />
+        <path className="ghost-orbit orbit-two" d="M318 530 C328 305 452 324 520 174 S624 18 760 0" />
+        <circle className="ghost-orbit" cx="420" cy="270" r="112" />
+        <circle className="ghost-orbit" cx="708" cy="104" r="56" />
+        <path className="active-route" pathLength="1" d="M44 360 C140 360 152 302 216 322 S284 370 332 318 S426 296 480 340 S572 372 618 306 S686 250 726 214" />
+      </svg>
+      <div className="journey-node node-website"><i /><span>Website</span></div>
+      <div className="journey-node node-enquiry"><i /><span>Enquiry</span></div>
+      <div className="journey-node node-crm"><i /><span>CRM</span></div>
+      <div className="journey-node node-follow"><i /><span>Follow-up</span></div>
+      <div className="journey-node node-value"><i /><span>Customer value</span></div>
+      <div className="journey-pulse" aria-hidden="true" />
+      <p className="journey-note">One connected commercial journey</p>
+    </div>
+  );
+}
+
+function ProjectVisual({ type }: { type: string }) {
+  const screenshots: Record<string, { src: string; alt: string; width: number; height: number }> = {
+    lava: {
+      src: "/portfolio/lava-sa-desktop.jpg",
+      alt: "Lava-SA premium ecommerce homepage",
+      width: 1348,
+      height: 926,
+    },
+    star: {
+      src: "/portfolio/star-aesthetic-desktop.jpg",
+      alt: "Star Aesthetic Centre doctor-led aesthetics homepage",
+      width: 1348,
+      height: 926,
+    },
+    storvac: {
+      src: "/portfolio/storvac-desktop.jpg",
+      alt: "Storvac Systems product selection homepage",
+      width: 1348,
+      height: 926,
+    },
+  };
+
+  if (screenshots[type]) {
+    return (
+      <div className={`project-visual project-visual-real ${type}`}>
+        <div className="project-browser project-browser-real">
+          <div className="browser-bar"><i /><i /><i /><span>Live platform</span></div>
+          <div className="screenshot-window">
+            <img
+              src={screenshots[type].src}
+              alt={screenshots[type].alt}
+              width={screenshots[type].width}
+              height={screenshots[type].height}
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+        </div>
+        <span className="visual-label">Live platform preview</span>
+      </div>
+    );
+  }
+
+  return (
+    <div className={`project-visual ${type}`} aria-hidden="true">
+      <div className="project-browser">
+        <div className="browser-bar"><i /><i /><i /></div>
+        <div className="project-brand">
+          <span className="brand-mark" />
+          <span>{type === "lava" ? "LAVA" : type === "star" ? "STAR AESTHETIC" : "STORVAC"}</span>
+        </div>
+        <div className="project-display">
+          <div className="display-copy">
+            <b>{type === "lava" ? "Freshness, sealed." : type === "star" ? "Confidence, naturally." : "The right fit, faster."}</b>
+            <span />
+            <span />
+            <button tabIndex={-1}>{type === "star" ? "Explore treatments" : "Find your solution"}</button>
+          </div>
+          <div className="display-object"><i /><i /><i /></div>
+        </div>
+      </div>
+      <span className="visual-label">Live platform</span>
+    </div>
+  );
+}
+
+export default function Home() {
+  return (
+    <main id="top">
+      <header className="site-header">
+        <a className="wordmark" href="#top" aria-label="CRM Solutions home">
+          <span className="wordmark-icon"><i /><i /><i /></span>
+          <span>CRM Solutions</span>
+        </a>
+        <nav className="desktop-nav" aria-label="Main navigation">
+          <a href="/revenue-platform">Revenue Platform</a>
+          <a href="#work">Work</a>
+          <a href="#insights">Insights</a>
+          <a href="#about">About</a>
+        </nav>
+        <a className="header-cta" href="/book-discovery-call">Book a Discovery Call <Arrow /></a>
+        <details className="mobile-menu">
+          <summary aria-label="Open navigation">Menu</summary>
+          <nav aria-label="Mobile navigation">
+            <a href="/revenue-platform">Revenue Platform</a>
+            <a href="#work">Work</a>
+            <a href="#about">About</a>
+            <a href="/revenue-leak-audit">Find Your Revenue Leaks</a>
+            <a href="/book-discovery-call">Book a Discovery Call</a>
+          </nav>
+        </details>
+      </header>
+
+      <section className="hero section-shell">
+        <div className="hero-copy">
+          <p className="eyebrow">Founder-led business growth systems</p>
+          <h1>
+            <span className="headline-line">Make every click,</span>
+            <span className="headline-line">enquiry and</span>
+            <span className="headline-line">customer worth <em>more</em><b>.</b></span>
+          </h1>
+          <p className="hero-intro">
+            Connected revenue platforms for established businesses—bringing your website,
+            customer journey, CRM, automation and follow-up together.
+          </p>
+          <div className="hero-actions">
+            <a className="button button-primary" href="/revenue-leak-audit">Find Your Revenue Leaks <Arrow /></a>
+            <a className="text-link" href="#work">See the Work <Arrow /></a>
+          </div>
+          <p className="founder-note">
+            Strategy, design, development, automation and measurement—directly led by
+            <span> Ignatius Ackermann.</span>
+          </p>
+        </div>
+        <RevenueJourney />
+      </section>
+
+      <section className="credibility section-shell" aria-label="CRM Solutions experience">
+        <div className="credibility-intro">
+          <span className="section-index">01 / Commercial reality</span>
+          <h2>Built around commercial reality—<em>not</em> a technology trend.</h2>
+        </div>
+        <div className="credibility-grid">
+          <div><strong>Since 2001</strong><span>Building commercial digital platforms</span></div>
+          <div><strong>Founder-led</strong><span>From commercial strategy through launch</span></div>
+          <div><strong>Limited engagements</strong><span>Direct senior attention throughout</span></div>
+          <div><strong>One connected view</strong><span>Marketing, sales, service and retention</span></div>
+        </div>
+      </section>
+
+      <section className="problem-section" id="insights">
+        <div className="section-shell">
+          <div className="section-heading split-heading">
+            <div>
+              <p className="eyebrow eyebrow-light">The expensive gaps are often between the tools</p>
+              <h2>Your website may not be the <em>real</em> problem.</h2>
+            </div>
+            <p>
+              You may already have traffic, a capable team, a CRM and a credible business.
+              Yet prospects still hesitate, enquiries wait and existing customers are rarely invited back.
+            </p>
+          </div>
+          <div className="leak-grid">
+            {leakCards.map((card) => (
+              <article className="leak-card" key={card.number}>
+                <div className="leak-top"><span>{card.number}</span><i /></div>
+                <h3>{card.title}</h3>
+                <p>{card.body}</p>
+                <strong>{card.consequence}</strong>
+              </article>
+            ))}
+          </div>
+          <p className="problem-transition">
+            A redesign placed on top of a broken customer journey only makes the leakage look better.
+          </p>
+        </div>
+      </section>
+
+      <section className="audit-section section-shell" id="audit">
+        <div className="audit-card">
+          <div className="audit-copy">
+            <p className="eyebrow">The Revenue Leak Audit</p>
+            <h2>Find where growth is leaking out of the system.</h2>
+            <p>
+              In a few focused minutes, examine the commercial journey across positioning,
+              demand, conversion, follow-up, retention and measurement.
+            </p>
+            <a className="button button-copper" href="/revenue-leak-audit">Start the Revenue Leak Audit <Arrow /></a>
+            <small>No obligation. Useful even if we never work together.</small>
+          </div>
+          <div className="audit-output">
+            <p>Your diagnostic will identify</p>
+            <ol>
+              <li><span>01</span><b>Your most expensive likely leak</b></li>
+              <li><span>02</span><b>Two supporting constraints</b></li>
+              <li><span>03</span><b>The commercial consequence</b></li>
+              <li><span>04</span><b>A practical first action</b></li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <section className="platform-section section-shell" id="platform">
+        <div className="section-heading split-heading light-split">
+          <div>
+            <p className="eyebrow">The Revenue Platform</p>
+            <h2>One connected system.<br /><em>Six</em> commercial jobs.</h2>
+          </div>
+          <p>
+            Your customer does not experience a website, CRM, email sequence and sales team
+            as separate tools. They experience one business. The Revenue Platform is designed the same way.
+          </p>
+        </div>
+        <div className="loop-list">
+          {loopSteps.map(([title, body], index) => (
+            <article className="loop-step" key={title}>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <h3>{title}</h3>
+              <p>{body}</p>
+              <i aria-hidden="true" />
+            </article>
+          ))}
+        </div>
+        <a className="text-link platform-link" href="/revenue-platform">Explore the Revenue Platform <Arrow /></a>
+      </section>
+
+      <section className="work-section" id="work">
+        <div className="section-shell">
+          <div className="work-heading">
+            <div>
+              <p className="eyebrow">Systems built around real buying decisions</p>
+              <h2>The work should explain itself—and prove the <em>thinking</em> behind it.</h2>
+            </div>
+            <p>
+              Each platform starts with a different commercial problem. The craft follows the customer decision,
+              the operating reality and the result the business needs.
+            </p>
+          </div>
+          <div className="project-list">
+            {projects.map((project, index) => (
+              <article className="project" key={project.name}>
+                <ProjectVisual type={project.className} />
+                <div className="project-copy">
+                  <span className="project-number">0{index + 1} / {project.category}</span>
+                  <h3>{project.name}</h3>
+                  <p>{project.statement}</p>
+                  <ul>{project.themes.map((theme) => <li key={theme}>{theme}</li>)}</ul>
+                  <a className="text-link" href={project.href} target={project.href.startsWith("http") ? "_blank" : undefined} rel={project.href.startsWith("http") ? "noreferrer" : undefined}>{project.linkLabel} <Arrow /></a>
+                  <small>{project.name === "Lava-SA" ? "Full commercial case study now available" : "Full case study and trailer in production"}</small>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="founder-section section-shell" id="about">
+        <div className="founder-panel">
+          <div className="founder-years" aria-label="Building digital platforms since 2001">
+            <span>2001</span><i /><span>Today</span>
+          </div>
+          <div className="founder-copy">
+            <p className="eyebrow eyebrow-light">Why founder-led matters</p>
+            <h2>Senior judgment stays in the room.</h2>
+            <p>
+              The person who helps diagnose the commercial problem remains involved in the strategy,
+              architecture, build and measurement. There is no sales handoff to a junior delivery team.
+            </p>
+            <p>
+              Ignatius Ackermann has built digital platforms across changing technologies and business models
+              since 2001. The objective is not to chase the newest tool. It is to decide what will help the business
+              earn, save, learn and improve.
+            </p>
+            <a className="text-link text-link-light" href="mailto:ignatius@crmsolutions.app?subject=CRM%20Solutions%20conversation">Meet Ignatius <Arrow /></a>
+          </div>
+          <ul className="principles">
+            {principles.map((principle) => <li key={principle}>{principle}</li>)}
+          </ul>
+        </div>
+      </section>
+
+      <section className="process-section section-shell" id="process">
+        <div className="process-intro">
+          <span className="section-index">02 / A controlled path</span>
+          <h2>From uncertainty to a working revenue system.</h2>
+          <p>Clear responsibilities, scheduled decisions, visible progress and direct founder communication.</p>
+        </div>
+        <div className="process-grid">
+          {process.map(([title, body], index) => (
+            <article key={title}>
+              <span>0{index + 1}</span>
+              <h3>{title}</h3>
+              <p>{body}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="investment-section section-shell">
+        <div className="investment-card">
+          <div>
+            <p className="eyebrow eyebrow-light">For established businesses ready to improve the system</p>
+            <h2>A serious commercial asset deserves a clear investment case.</h2>
+          </div>
+          <div className="investment-copy">
+            <p>Revenue Platform engagements begin at</p>
+            <strong>US$10,000</strong>
+            <p>
+              Final investment depends on business complexity, customer journeys, content depth,
+              integrations and the value of the problem—not an arbitrary page count.
+            </p>
+            <a className="button button-copper" href="/revenue-leak-audit">Find Out If We Are a Fit <Arrow /></a>
+          </div>
+        </div>
+      </section>
+
+      <DiscoveryCallSection title="Turn the diagnosis into a decision." />
+      <SiteFooter />
+    </main>
+  );
+}
