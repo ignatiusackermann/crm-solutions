@@ -248,7 +248,7 @@ export function VoiceBusinessAdvisor() {
     if (context.state === "suspended") void context.resume();
     const samples = base64ToFloat32(base64);
     const buffer = context.createBuffer(1, samples.length, 24000);
-    buffer.copyToChannel(samples, 0);
+    buffer.copyToChannel(new Float32Array(samples), 0);
     const source = context.createBufferSource();
     source.buffer = buffer;
     source.connect(context.destination);
