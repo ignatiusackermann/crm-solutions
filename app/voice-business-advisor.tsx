@@ -20,6 +20,8 @@ const ROUTES = {
   audit: "/revenue-leak-audit",
   work: "/#work",
   lava: "/work/lava-sa",
+  star: "/work/star-aesthetic",
+  storvac: "/work/storvac",
   discovery: "/book-discovery-call",
   payments: "/payment-options",
   commitment: "/delivery-commitment",

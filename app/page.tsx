@@ -54,8 +54,8 @@ const projects = [
     statement:
       "Structuring complex treatment choices into a calm, credible patient journey.",
     themes: ["Premium identity", "Treatment clarity", "Consultations"],
-    href: "https://staraesthetic.co.za/",
-    linkLabel: "View the live project",
+    href: "/work/star-aesthetic",
+    linkLabel: "Read the case study",
     className: "star",
   },
   {
@@ -64,8 +64,8 @@ const projects = [
     statement:
       "Helping buyers understand capacity and find the right solution faster.",
     themes: ["Decision support", "Find my size", "Restrained commerce"],
-    href: "https://www.storvac.co.za/",
-    linkLabel: "View the live project",
+    href: "/work/storvac",
+    linkLabel: "Read the case study",
     className: "storvac",
   },
 ];
@@ -119,48 +119,6 @@ function RevenueJourney() {
 }
 
 function ProjectVisual({ type }: { type: string }) {
-  const screenshots: Record<string, { src: string; alt: string; width: number; height: number }> = {
-    lava: {
-      src: "/portfolio/lava-sa-desktop.jpg",
-      alt: "Lava-SA premium ecommerce homepage",
-      width: 1348,
-      height: 926,
-    },
-    star: {
-      src: "/portfolio/star-aesthetic-desktop.jpg",
-      alt: "Star Aesthetic Centre doctor-led aesthetics homepage",
-      width: 1348,
-      height: 926,
-    },
-    storvac: {
-      src: "/portfolio/storvac-desktop.jpg",
-      alt: "Storvac Systems product selection homepage",
-      width: 1348,
-      height: 926,
-    },
-  };
-
-  if (screenshots[type]) {
-    return (
-      <div className={`project-visual project-visual-real ${type}`}>
-        <div className="project-browser project-browser-real">
-          <div className="browser-bar"><i /><i /><i /><span>Live platform</span></div>
-          <div className="screenshot-window">
-            <img
-              src={screenshots[type].src}
-              alt={screenshots[type].alt}
-              width={screenshots[type].width}
-              height={screenshots[type].height}
-              loading="lazy"
-              decoding="async"
-            />
-          </div>
-        </div>
-        <span className="visual-label">Live platform preview</span>
-      </div>
-    );
-  }
-
   return (
     <div className={`project-visual ${type}`} aria-hidden="true">
       <div className="project-browser">
@@ -345,8 +303,8 @@ export default function Home() {
                   <h3>{project.name}</h3>
                   <p>{project.statement}</p>
                   <ul>{project.themes.map((theme) => <li key={theme}>{theme}</li>)}</ul>
-                  <a className="text-link" href={project.href} target={project.href.startsWith("http") ? "_blank" : undefined} rel={project.href.startsWith("http") ? "noreferrer" : undefined}>{project.linkLabel} <Arrow /></a>
-                  <small>{project.name === "Lava-SA" ? "Full commercial case study now available" : "Full case study and trailer in production"}</small>
+                  <a className="text-link" href={project.href}>{project.linkLabel} <Arrow /></a>
+                  <small>Full commercial case study</small>
                 </div>
               </article>
             ))}
