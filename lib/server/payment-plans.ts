@@ -21,7 +21,7 @@ function reference(){return `CRM-${new Date().getUTCFullYear()}-${crypto.getRand
 async function listPlans(r:Request,e:Env){
  if(!(await admin(r,e)))return json({error:"Authorised administrator access is required."},403);
  if(!e.DB)return json({error:"Payment storage is not available."},503);
- const q=await e.DB.prepare(`SELECT p.id,p.reference,p.title,p.currency,p.total_amount_cents AS totalAmountCents,c.first_name||' '||c.last_name AS clientName,c.email,SUM(CASE WHEN i.status='paid' THEN 1 ELSE 0 END) AS paidCount,COUNT(i.id) AS installmentCount FROM payment_plans p JOIN payment_clients c ON c.id=p.client_id LEFT JOIN payment_installments i ON i.plan_id=p.id GROUP BY p.id ORDER BY p.created_at DESC LIMIT 100`).all();
+ const q=await e.DB.prepare(`SELECT p.id,p.reference,p.title,p.currency,p.total_amount_cents AS "totalAmountCents",c.first_name||' '||c.last_name AS "clientName",c.email,SUM(CASE WHEN i.status='paid' THEN 1 ELSE 0 END) AS "paidCount",COUNT(i.id) AS "installmentCount" FROM payment_plans p JOIN payment_clients c ON c.id=p.client_id LEFT JOIN payment_installments i ON i.plan_id=p.id GROUP BY p.id, p.reference, p.title, p.currency, p.total_amount_cents, p.created_at, c.first_name, c.last_name, c.email ORDER BY p.created_at DESC LIMIT 100`).all();
  return json({plans:q.results});
 }
 async function createPlan(r:Request,e:Env){
@@ -45,9 +45,9 @@ async function createPlan(r:Request,e:Env){
 async function clientPlan(r:Request,e:Env){
  if(!e.DB)return json({error:"Payment storage is not available."},503);
  const access=clean(new URL(r.url).searchParams.get("token"),100);if(!access)return json({error:"A secure access link is required."},400);
- const p=await e.DB.prepare(`SELECT p.id,p.reference,p.title,p.description,p.currency,p.total_amount_cents AS totalAmountCents,c.first_name AS firstName,c.last_name AS lastName,c.company,c.email FROM payment_plans p JOIN payment_clients c ON c.id=p.client_id WHERE p.access_token_hash=? AND p.status!='revoked' LIMIT 1`).bind(await hash(access)).first<Record<string,unknown>>();
+ const p=await e.DB.prepare(`SELECT p.id,p.reference,p.title,p.description,p.currency,p.total_amount_cents AS "totalAmountCents",c.first_name AS "firstName",c.last_name AS "lastName",c.company,c.email FROM payment_plans p JOIN payment_clients c ON c.id=p.client_id WHERE p.access_token_hash=? AND p.status!='revoked' LIMIT 1`).bind(await hash(access)).first<Record<string,unknown>>();
  if(!p)return json({error:"This access link is invalid or no longer active."},404);
- const i=await e.DB.prepare("SELECT id,sequence,label,amount_cents AS amountCents,due_description AS dueDescription,status,paid_at AS paidAt FROM payment_installments WHERE plan_id=? ORDER BY sequence").bind(p.id as string).all();
+ const i=await e.DB.prepare(`SELECT id,sequence,label,amount_cents AS "amountCents",due_description AS "dueDescription",status,paid_at AS "paidAt" FROM payment_installments WHERE plan_id=? ORDER BY sequence`).bind(p.id as string).all();
  return json({plan:{reference:p.reference,title:p.title,description:p.description,currency:p.currency,totalAmountCents:p.totalAmountCents,client:{firstName:p.firstName,lastName:p.lastName,company:p.company,email:p.email},installments:i.results,paypalReady:Boolean(e.PAYPAL_CLIENT_ID&&e.PAYPAL_CLIENT_SECRET)}});
 }
 const base=(e:Env)=>e.PAYPAL_ENV==="live"?"https://api-m.paypal.com":"https://api-m.sandbox.paypal.com";
@@ -55,7 +55,7 @@ async function paypalToken(e:Env){if(!e.PAYPAL_CLIENT_ID||!e.PAYPAL_CLIENT_SECRE
 async function createOrder(r:Request,e:Env){
  if(!e.DB)return json({error:"Payment storage is not available."},503);
  let x:{token?:string;installmentId?:string};try{x=await r.json();}catch{return json({error:"Reopen the panel and try again."},400);}const access=clean(x.token,100),id=clean(x.installmentId,80);if(!access||!id)return json({error:"Payment request is incomplete."},400);
- const i=await e.DB.prepare(`SELECT i.id,i.plan_id AS planId,i.label,i.amount_cents AS amountCents,i.status,p.reference,p.title,p.currency FROM payment_installments i JOIN payment_plans p ON p.id=i.plan_id WHERE i.id=? AND p.access_token_hash=? AND p.status!='revoked' LIMIT 1`).bind(id,await hash(access)).first<Record<string,unknown>>();
+ const i=await e.DB.prepare(`SELECT i.id,i.plan_id AS "planId",i.label,i.amount_cents AS "amountCents",i.status,p.reference,p.title,p.currency FROM payment_installments i JOIN payment_plans p ON p.id=i.plan_id WHERE i.id=? AND p.access_token_hash=? AND p.status!='revoked' LIMIT 1`).bind(id,await hash(access)).first<Record<string,unknown>>();
  if(!i||i.status!=="pending")return json({error:"This payment is not available."},409);
  let at:string;try{at=await paypalToken(e);}catch(x){return json({error:x instanceof Error?x.message:"PayPal unavailable."},503);}
  const origin=new URL(r.url).origin,ret=new URL("/api/paypal/return",origin),cancel=new URL("/client/payment",origin);ret.searchParams.set("access",access);ret.searchParams.set("installment",id);cancel.searchParams.set("token",access);cancel.searchParams.set("payment","cancelled");
@@ -66,7 +66,7 @@ async function createOrder(r:Request,e:Env){
 async function capture(r:Request,e:Env){
  if(!e.DB){const panel=new URL("/client/payment",new URL(r.url).origin);panel.searchParams.set("payment","error");return Response.redirect(panel.toString(),303);}
  const u=new URL(r.url),access=clean(u.searchParams.get("access"),100),id=clean(u.searchParams.get("installment"),80),order=clean(u.searchParams.get("token"),120),panel=new URL("/client/payment",u.origin);panel.searchParams.set("token",access);
- const i=await e.DB.prepare(`SELECT i.plan_id AS planId,i.amount_cents AS amountCents,i.paypal_order_id AS paypalOrderId,p.currency FROM payment_installments i JOIN payment_plans p ON p.id=i.plan_id WHERE i.id=? AND p.access_token_hash=? AND i.status='pending' LIMIT 1`).bind(id,await hash(access)).first<Record<string,unknown>>();
+ const i=await e.DB.prepare(`SELECT i.plan_id AS "planId",i.amount_cents AS "amountCents",i.paypal_order_id AS "paypalOrderId",p.currency FROM payment_installments i JOIN payment_plans p ON p.id=i.plan_id WHERE i.id=? AND p.access_token_hash=? AND i.status='pending' LIMIT 1`).bind(id,await hash(access)).first<Record<string,unknown>>();
  if(!i||i.paypalOrderId!==order){panel.searchParams.set("payment","error");return Response.redirect(panel.toString(),303);}
  try{const at=await paypalToken(e),cr=await fetch(`${base(e)}/v2/checkout/orders/${encodeURIComponent(order)}/capture`,{method:"POST",headers:{Authorization:`Bearer ${at}`,"Content-Type":"application/json","PayPal-Request-Id":`capture-${id}`},body:"{}"}),d=await cr.json() as {status?:string;purchase_units?:Array<{payments?:{captures?:Array<{id?:string;status?:string;amount?:{currency_code?:string;value?:string}}>} }>};const c=d.purchase_units?.[0]?.payments?.captures?.find(x=>x.status==="COMPLETED"),amount=c?.amount?.value?Math.round(Number(c.amount.value)*100):NaN;if(!cr.ok||d.status!=="COMPLETED"||!c?.id||amount!==Number(i.amountCents)||c.amount?.currency_code!==i.currency)throw new Error();const now=new Date().toISOString();await e.DB.prepare("UPDATE payment_installments SET status='paid',paypal_capture_id=?,paid_at=?,updated_at=? WHERE id=? AND status='pending'").bind(c.id,now,now,id).run();await e.DB.prepare("UPDATE payment_plans SET status='paid' WHERE id=? AND NOT EXISTS(SELECT 1 FROM payment_installments WHERE plan_id=? AND status!='paid')").bind(i.planId as string,i.planId as string).run();panel.searchParams.set("payment","success");}catch{panel.searchParams.set("payment","error");}
  return Response.redirect(panel.toString(),303);

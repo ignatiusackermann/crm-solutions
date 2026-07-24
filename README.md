@@ -1,6 +1,6 @@
 # CRM Solutions — Vercel / local Next.js
 
-Next.js 16 (App Router) · React 19 · Tailwind CSS 4 · TypeScript
+Next.js 16 (App Router) · React 19 · Tailwind CSS 4 · TypeScript · Supabase Postgres
 
 ## Local development
 
@@ -14,32 +14,30 @@ Open [http://localhost:3000](http://localhost:3000).
 ## Vercel deploy
 
 1. Import `ignatiusackermann/crm-solutions` in Vercel.
-2. Framework Preset: **Next.js** (auto).
-3. Build command: `next build` · Output: default.
-4. Set **Node.js 22.x**.
-5. Add environment variables (see below), then Redeploy.
+2. Framework Preset: **Next.js**.
+3. Node.js **22.x** or **24.x**.
+4. Add environment variables (below), then Redeploy.
+
+## Supabase setup
+
+1. Create/open your Supabase project.
+2. Open **SQL Editor** and run the full script in `supabase/schema.sql`.
+3. Copy **Project Settings → Database → Connection string (URI)**.
+   - For Vercel, prefer the **Transaction pooler** connection (port `6543`).
+4. Put that URI in Vercel as `DATABASE_URL`.
 
 ## Environment variables
-
-Add these in **Vercel → Project → Settings → Environment Variables** (never commit secrets):
 
 | Variable | Required for |
 |----------|----------------|
 | `ADMIN_PASSWORD` | Admin login at `/admin/login` |
-| `ADMIN_SESSION_SECRET` | Signed admin cookie (recommended) |
+| `ADMIN_SESSION_SECRET` | Signed admin cookie |
 | `ADMIN_EMAIL` | Admin identity (default `ignatius@crmsolutions.app`) |
-| `DATABASE_URL` | Turso/libSQL SQLite URL (bookings + payments) |
-| `DATABASE_AUTH_TOKEN` | Turso auth token (if required) |
+| `DATABASE_URL` | Supabase Postgres connection URI |
 | `RESEND_API_KEY` | Booking / payment emails |
-| `DISCOVERY_ADMIN_EMAIL` | Booking admin notify |
-| `DISCOVERY_FROM_EMAIL` | Booking from address |
-| `DISCOVERY_MEETING_URL` | Fallback meeting link |
-| `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET` / `GOOGLE_REFRESH_TOKEN` / `GOOGLE_CALENDAR_ID` | Calendar invites |
-| `PAYPAL_CLIENT_ID` / `PAYPAL_CLIENT_SECRET` / `PAYPAL_ENV` | Client payments (`sandbox` or `live`) |
-| `PAYMENT_FROM_EMAIL` | Payment plan emails |
+| `DISCOVERY_*` / Google Calendar vars | Discovery bookings |
+| `PAYPAL_*` / `PAYMENT_FROM_EMAIL` | Client payments |
 | `GEMINI_API_KEY` | Voice Business Advisor |
-
-Apply SQL in `drizzle/*.sql` to your Turso database before using bookings/payments.
 
 ## Main routes
 

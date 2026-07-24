@@ -1,4 +1,4 @@
-import { createClient } from "@libsql/client";
+import postgres, { type Sql } from "postgres";
 
 export type SqlRow = Record<string, unknown>;
 
@@ -16,36 +16,61 @@ export type SqlDatabase = {
   batch(statements: SqlPreparedStatement[]): Promise<unknown[]>;
 };
 
-export function getSqlDatabase(): SqlDatabase | null {
-  const url = process.env.DATABASE_URL || process.env.TURSO_DATABASE_URL;
+declare global {
+  // eslint-disable-next-line no-var
+  var __crm_postgres__: Sql | undefined;
+}
+
+function toPostgresParams(sql: string) {
+  let index = 0;
+  return sql.replaceAll("?", () => {
+    index += 1;
+    return `$${index}`;
+  });
+}
+
+function getClient() {
+  const url = process.env.DATABASE_URL || process.env.POSTGRES_URL;
   if (!url) return null;
 
-  const authToken =
-    process.env.DATABASE_AUTH_TOKEN || process.env.TURSO_AUTH_TOKEN;
-  const client = createClient({
-    url,
-    authToken: authToken || undefined,
-  });
+  if (!globalThis.__crm_postgres__) {
+    globalThis.__crm_postgres__ = postgres(url, {
+      prepare: false,
+      max: 1,
+      idle_timeout: 20,
+      connect_timeout: 10,
+      ssl: "require",
+    });
+  }
 
-  const prepare = (sql: string, args: SqlValue[] = []): SqlPreparedStatement => ({
-    bind(...nextArgs: SqlValue[]) {
-      return prepare(sql, nextArgs);
-    },
-    async all<T extends SqlRow = SqlRow>() {
-      const result = await client.execute({ sql, args });
-      return {
-        results: result.rows.map((row) => ({ ...row }) as unknown as T),
-      };
-    },
-    async first<T extends SqlRow = SqlRow>(): Promise<T | null> {
-      const { results } = await prepare(sql, args).all<T>();
-      return results.length > 0 ? results[0] : null;
-    },
-    async run() {
-      await client.execute({ sql, args });
-      return { success: true };
-    },
-  });
+  return globalThis.__crm_postgres__;
+}
+
+export function getSqlDatabase(): SqlDatabase | null {
+  const client = getClient();
+  if (!client) return null;
+
+  const prepare = (sql: string, args: SqlValue[] = []): SqlPreparedStatement => {
+    const pgSql = toPostgresParams(sql);
+
+    return {
+      bind(...nextArgs: SqlValue[]) {
+        return prepare(sql, nextArgs);
+      },
+      async all<T extends SqlRow = SqlRow>() {
+        const rows = (await client.unsafe(pgSql, args as never[])) as T[];
+        return { results: rows };
+      },
+      async first<T extends SqlRow = SqlRow>(): Promise<T | null> {
+        const { results } = await prepare(sql, args).all<T>();
+        return results.length > 0 ? results[0] : null;
+      },
+      async run() {
+        await client.unsafe(pgSql, args as never[]);
+        return { success: true };
+      },
+    };
+  };
 
   return {
     prepare(sql: string) {
