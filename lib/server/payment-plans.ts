@@ -3,7 +3,7 @@ import {
   readClientSessionFromCookieHeader,
   verifyClientSessionToken,
 } from "../client-auth";
-import type { SqlDatabase } from "../sql";
+import { databaseConfigMessage, type SqlDatabase } from "../sql";
 
 const ADMIN_EMAIL = "ignatius@crmsolutions.app";
 
@@ -34,8 +34,19 @@ const json = (data: unknown, status = 200) =>
 const clean = (v: unknown, n: number) =>
   typeof v === "string" ? v.trim().slice(0, n) : "";
 const validEmail = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
-const cents = (v: string) =>
-  /^\d+(?:\.\d{1,2})?$/.test(v) ? Math.round(Number(v) * 100) : NaN;
+const cents = (v: string) => {
+  let s = v.trim().replace(/\s/g, "");
+  if (s.includes(",") && s.includes(".")) {
+    if (s.lastIndexOf(",") > s.lastIndexOf(".")) {
+      s = s.replace(/\./g, "").replace(",", ".");
+    } else {
+      s = s.replace(/,/g, "");
+    }
+  } else if (s.includes(",")) {
+    s = s.replace(",", ".");
+  }
+  return /^\d+(?:\.\d{1,2})?$/.test(s) ? Math.round(Number(s) * 100) : NaN;
+};
 const esc = (v: string) =>
   v
     .replaceAll("&", "&amp;")
@@ -131,18 +142,46 @@ async function listPlans(r: Request, e: Env) {
   if (!(await admin(r, e))) {
     return json({ error: "Authorised administrator access is required." }, 403);
   }
-  if (!e.DB) return json({ error: "Payment storage is not available." }, 503);
-  const q = await e.DB.prepare(
-    `SELECT p.id,p.reference,p.title,p.currency,p.total_amount_cents AS "totalAmountCents",c.first_name||' '||c.last_name AS "clientName",c.email,SUM(CASE WHEN i.status='paid' THEN 1 ELSE 0 END) AS "paidCount",COUNT(i.id) AS "installmentCount" FROM payment_plans p JOIN payment_clients c ON c.id=p.client_id LEFT JOIN payment_installments i ON i.plan_id=p.id GROUP BY p.id, p.reference, p.title, p.currency, p.total_amount_cents, p.created_at, c.first_name, c.last_name, c.email ORDER BY p.created_at DESC LIMIT 100`,
-  ).all();
-  return json({ plans: q.results });
+  if (!e.DB) {
+    return json(
+      {
+        error: `Payment storage is not available. ${databaseConfigMessage()}`,
+        code: "DATABASE_UNAVAILABLE",
+      },
+      503,
+    );
+  }
+  try {
+    const q = await e.DB.prepare(
+      `SELECT p.id,p.reference,p.title,p.currency,p.total_amount_cents AS "totalAmountCents",c.first_name||' '||c.last_name AS "clientName",c.email,SUM(CASE WHEN i.status='paid' THEN 1 ELSE 0 END) AS "paidCount",COUNT(i.id) AS "installmentCount" FROM payment_plans p JOIN payment_clients c ON c.id=p.client_id LEFT JOIN payment_installments i ON i.plan_id=p.id GROUP BY p.id, p.reference, p.title, p.currency, p.total_amount_cents, p.created_at, c.first_name, c.last_name, c.email ORDER BY p.created_at DESC LIMIT 100`,
+    ).all();
+    return json({ plans: q.results });
+  } catch (error) {
+    console.error("payment plans list failed", error);
+    return json(
+      {
+        error:
+          "Payment storage query failed. Confirm DATABASE_URL points at Supabase Postgres and that payment tables exist.",
+        code: "DATABASE_QUERY_FAILED",
+      },
+      503,
+    );
+  }
 }
 
 async function createPlan(r: Request, e: Env) {
   if (!(await admin(r, e))) {
     return json({ error: "Authorised administrator access is required." }, 403);
   }
-  if (!e.DB) return json({ error: "Payment storage is not available." }, 503);
+  if (!e.DB) {
+    return json(
+      {
+        error: `Payment storage is not available. ${databaseConfigMessage()}`,
+        code: "DATABASE_UNAVAILABLE",
+      },
+      503,
+    );
+  }
 
   let x: Record<string, unknown>;
   try {
@@ -241,7 +280,18 @@ async function createPlan(r: Request, e: Env) {
     ]);
   } catch (error) {
     console.error("payment plan create failed", error);
-    return json({ error: "The client payment plan could not be stored." }, 500);
+    const detail = error instanceof Error ? error.message : "";
+    const missingCode =
+      /access_code_hash/i.test(detail)
+        ? " Run supabase/migration-contact-client-login.sql in the Supabase SQL Editor."
+        : "";
+    return json(
+      {
+        error: `The client payment plan could not be stored.${missingCode}`,
+        code: "DATABASE_WRITE_FAILED",
+      },
+      500,
+    );
   }
 
   const origin = new URL(r.url).origin;

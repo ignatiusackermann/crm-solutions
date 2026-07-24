@@ -19,6 +19,8 @@ export type SqlDatabase = {
 declare global {
   // eslint-disable-next-line no-var
   var __crm_postgres__: Sql | undefined;
+  // eslint-disable-next-line no-var
+  var __crm_postgres_url__: string | undefined;
 }
 
 function toPostgresParams(sql: string) {
@@ -29,12 +31,23 @@ function toPostgresParams(sql: string) {
   });
 }
 
+export function resolveDatabaseUrl() {
+  const raw =
+    process.env.DATABASE_URL ||
+    process.env.POSTGRES_URL ||
+    process.env.POSTGRES_PRISMA_URL ||
+    process.env.SUPABASE_DB_URL ||
+    "";
+  const trimmed = raw.trim().replace(/^['"]|['"]$/g, "");
+  return trimmed || null;
+}
+
 function getClient() {
-  const url = process.env.DATABASE_URL || process.env.POSTGRES_URL;
+  const url = resolveDatabaseUrl();
   if (!url) return null;
 
-  if (!globalThis.__crm_postgres__) {
-    // Supabase pooler URIs often include ?pgbouncer=true; postgres.js handles SSL via URL.
+  // Recreate the client if the URL changed between hot reloads / deploys.
+  if (!globalThis.__crm_postgres__ || globalThis.__crm_postgres_url__ !== url) {
     globalThis.__crm_postgres__ = postgres(url, {
       prepare: false,
       max: 1,
@@ -45,6 +58,7 @@ function getClient() {
         application_name: "crm-solutions",
       },
     });
+    globalThis.__crm_postgres_url__ = url;
   }
 
   return globalThis.__crm_postgres__;
@@ -96,4 +110,11 @@ export function getSqlDatabase(): SqlDatabase | null {
     console.error("Supabase database client failed to initialise", error);
     return null;
   }
+}
+
+export function databaseConfigMessage() {
+  if (resolveDatabaseUrl()) {
+    return "Database URL is present, but the connection could not be opened.";
+  }
+  return "DATABASE_URL is missing in the hosting environment. Add the Supabase Postgres URI (pooler, port 6543) and redeploy.";
 }
