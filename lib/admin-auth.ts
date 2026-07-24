@@ -52,11 +52,23 @@ export async function createAdminSessionToken(email: string) {
   return `${payload}.${signature}`;
 }
 
+function parseAdminSessionToken(token: string) {
+  const parts = token.split(".");
+  // Email may contain dots (e.g. ignatius@crmsolutions.app), so parse from the end.
+  if (parts.length < 3) return null;
+  const signature = parts.pop();
+  const issuedAt = parts.pop();
+  const email = parts.join(".");
+  if (!signature || !issuedAt || !email) return null;
+  if (!/^\d+$/.test(issuedAt)) return null;
+  return { email, issuedAt, signature };
+}
+
 export async function verifyAdminSessionToken(token: string | undefined | null) {
   if (!token) return null;
-  const parts = token.split(".");
-  if (parts.length !== 3) return null;
-  const [email, issuedAt, signature] = parts;
+  const parsed = parseAdminSessionToken(token);
+  if (!parsed) return null;
+  const { email, issuedAt, signature } = parsed;
   const expected = await hmac(`${email}.${issuedAt}`);
   if (signature !== expected) return null;
   if (email.toLowerCase() !== adminEmail()) return null;
