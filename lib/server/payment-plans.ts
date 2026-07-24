@@ -66,8 +66,14 @@ function shell(title: string, body: string) {
   return `<!doctype html><html><body style="margin:0;background:#f5f2ea;color:#081521;font-family:Arial,sans-serif"><table width="100%"><tr><td style="padding:32px 16px"><table width="100%" style="max-width:640px;margin:auto;background:#fff;border-top:5px solid #c75c36"><tr><td style="padding:38px"><p style="color:#c75c36;font-size:11px;letter-spacing:2px;text-transform:uppercase">CRM Solutions · Client Payment Panel</p><h1 style="color:#0b2a55">${title}</h1>${body}<p style="margin-top:32px;padding-top:24px;border-top:1px solid #dce3e8;color:#526172;font-size:13px;line-height:1.6">Ignatius Ackermann<br>Founder, CRM Solutions<br><a href="mailto:ignatius@crmsolutions.app">ignatius@crmsolutions.app</a></p></td></tr></table></td></tr></table></body></html>`;
 }
 
-async function send(e: Env, payload: unknown, key: string) {
-  if (!e.RESEND_API_KEY) return false;
+async function send(
+  e: Env,
+  payload: unknown,
+  key: string,
+): Promise<{ ok: boolean; error?: string }> {
+  if (!e.RESEND_API_KEY) {
+    return { ok: false, error: "RESEND_API_KEY is not configured." };
+  }
   const r = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
@@ -77,7 +83,24 @@ async function send(e: Env, payload: unknown, key: string) {
     },
     body: JSON.stringify(payload),
   });
-  return r.ok;
+  if (r.ok) return { ok: true };
+  let detail = `Resend returned ${r.status}.`;
+  try {
+    const body = (await r.json()) as {
+      message?: string;
+      name?: string;
+      error?: string;
+    };
+    detail =
+      body.message ||
+      body.error ||
+      body.name ||
+      detail;
+  } catch {
+    // ignore parse errors
+  }
+  console.error("Resend payment email failed", detail);
+  return { ok: false, error: detail };
 }
 
 const hex = (b: Uint8Array) =>
@@ -298,7 +321,7 @@ async function createPlan(r: Request, e: Env) {
   const panelUrl = `${origin}/client/payment?token=${encodeURIComponent(access)}`;
   const loginUrl = `${origin}/client/login`;
 
-  const sent = await send(
+  const emailResult = await send(
     e,
     {
       from: e.PAYMENT_FROM_EMAIL || "CRM Solutions <payments@crmsolutions.app>",
@@ -333,7 +356,8 @@ async function createPlan(r: Request, e: Env) {
         panelUrl,
         loginUrl,
         accessCode: code,
-        emailStatus: sent ? "sent" : "configuration_required",
+        emailStatus: emailResult.ok ? "sent" : "configuration_required",
+        emailError: emailResult.ok ? undefined : emailResult.error,
       },
     },
     201,
