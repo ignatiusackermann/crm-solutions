@@ -15,7 +15,15 @@ type Env = {
   PAYPAL_CLIENT_ID?: string;
   PAYPAL_CLIENT_SECRET?: string;
   PAYPAL_ENV?: string;
+  PAYMENT_TEST_BYPASS?: string;
 };
+
+function testBypassEnabled(e: Env) {
+  return (
+    e.PAYMENT_TEST_BYPASS === "true" &&
+    e.PAYPAL_ENV !== "live"
+  );
+}
 
 const json = (data: unknown, status = 200) =>
   Response.json(data, {
@@ -317,6 +325,7 @@ async function clientPlan(r: Request, e: Env) {
       },
       installments: i.results,
       paypalReady: Boolean(e.PAYPAL_CLIENT_ID && e.PAYPAL_CLIENT_SECRET),
+      testBypass: testBypassEnabled(e),
       accessToken: resolved.access,
     },
   });
@@ -563,6 +572,68 @@ async function capture(r: Request, e: Env) {
   return Response.redirect(panel.toString(), 303);
 }
 
+async function markTestPayment(r: Request, e: Env) {
+  if (!testBypassEnabled(e)) {
+    return json({ error: "Test payment bypass is not enabled." }, 403);
+  }
+  if (!e.DB) return json({ error: "Payment storage is not available." }, 503);
+
+  let x: { token?: string; installmentId?: string };
+  try {
+    x = await r.json();
+  } catch {
+    return json({ error: "Reopen the panel and try again." }, 400);
+  }
+
+  const access = clean(x.token, 100);
+  const id = clean(x.installmentId, 80);
+  if (!id) return json({ error: "Payment request is incomplete." }, 400);
+
+  let installment: Record<string, unknown> | null = null;
+  if (access) {
+    installment = await e.DB.prepare(
+      `SELECT i.id,i.plan_id AS "planId",i.status
+       FROM payment_installments i
+       JOIN payment_plans p ON p.id=i.plan_id
+       WHERE i.id=? AND p.access_token_hash=? AND p.status!='revoked' LIMIT 1`,
+    )
+      .bind(id, await hash(access))
+      .first<Record<string, unknown>>();
+  } else {
+    const session = await verifyClientSessionToken(
+      readClientSessionFromCookieHeader(r.headers.get("cookie")),
+    );
+    if (!session) return json({ error: "Sign in again to continue." }, 401);
+    installment = await e.DB.prepare(
+      `SELECT i.id,i.plan_id AS "planId",i.status
+       FROM payment_installments i
+       JOIN payment_plans p ON p.id=i.plan_id
+       WHERE i.id=? AND p.id=? AND p.status!='revoked' LIMIT 1`,
+    )
+      .bind(id, session.planId)
+      .first<Record<string, unknown>>();
+  }
+
+  if (!installment || installment.status !== "pending") {
+    return json({ error: "This payment is not available." }, 409);
+  }
+
+  const now = new Date().toISOString();
+  const captureId = `TEST-${crypto.randomUUID().slice(0, 8).toUpperCase()}`;
+  await e.DB.prepare(
+    "UPDATE payment_installments SET status='paid',paypal_capture_id=?,paid_at=?,updated_at=? WHERE id=? AND status='pending'",
+  )
+    .bind(captureId, now, now, id)
+    .run();
+  await e.DB.prepare(
+    "UPDATE payment_plans SET status='paid' WHERE id=? AND NOT EXISTS(SELECT 1 FROM payment_installments WHERE plan_id=? AND status!='paid')",
+  )
+    .bind(installment.planId as string, installment.planId as string)
+    .run();
+
+  return json({ ok: true, captureId });
+}
+
 export async function handleAdminPaymentPlans(r: Request, e: Env) {
   return r.method === "GET"
     ? listPlans(r, e)
@@ -586,5 +657,11 @@ export async function handleCreatePayPalOrder(r: Request, e: Env) {
 export async function handlePayPalReturn(r: Request, e: Env) {
   return r.method === "GET"
     ? capture(r, e)
+    : json({ error: "Method not allowed." }, 405);
+}
+
+export async function handleTestPayment(r: Request, e: Env) {
+  return r.method === "POST"
+    ? markTestPayment(r, e)
     : json({ error: "Method not allowed." }, 405);
 }

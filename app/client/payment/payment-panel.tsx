@@ -25,6 +25,7 @@ type Plan = {
   };
   installments: Instalment[];
   paypalReady: boolean;
+  testBypass?: boolean;
   accessToken?: string | null;
 };
 
@@ -67,6 +68,22 @@ export default function PaymentPanel() {
     setPaying(id);
     setError("");
     try {
+      if (plan?.testBypass) {
+        const r = await fetch("/api/client/test-payment", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          credentials: "same-origin",
+          body: JSON.stringify({ token: token || undefined, installmentId: id }),
+        });
+        const d = (await r.json()) as { error?: string };
+        if (!r.ok) throw new Error(d.error || "Test payment failed.");
+        const next = new URL("/client/payment", location.origin);
+        if (token) next.searchParams.set("token", token);
+        next.searchParams.set("payment", "success");
+        location.assign(next.toString());
+        return;
+      }
+
       const r = await fetch("/api/paypal/create-order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -159,7 +176,11 @@ export default function PaymentPanel() {
       <section className="client-installments">
         <div className="client-installment-heading">
           <p className="eyebrow">Agreed payments</p>
-          <span>Processed securely by PayPal</span>
+          <span>
+            {plan.testBypass
+              ? "Test mode · PayPal bypassed"
+              : "Processed securely by PayPal"}
+          </span>
         </div>
         {plan.installments.map((i) => (
           <article
@@ -181,14 +202,21 @@ export default function PaymentPanel() {
               </em>
             ) : next?.id === i.id ? (
               <button
-                disabled={!plan.paypalReady || paying === i.id}
+                disabled={
+                  paying === i.id ||
+                  (!plan.testBypass && !plan.paypalReady)
+                }
                 onClick={() => pay(i.id)}
               >
                 {paying === i.id
-                  ? "Opening PayPal…"
-                  : plan.paypalReady
-                    ? "Pay securely with PayPal ↗"
-                    : "PayPal activation pending"}
+                  ? plan.testBypass
+                    ? "Confirming…"
+                    : "Opening PayPal…"
+                  : plan.testBypass
+                    ? "Confirm test payment ↗"
+                    : plan.paypalReady
+                      ? "Pay securely with PayPal ↗"
+                      : "PayPal activation pending"}
               </button>
             ) : (
               <em>Follows previous payment</em>
@@ -197,10 +225,15 @@ export default function PaymentPanel() {
         ))}
       </section>
       <section className="client-security-note">
-        <strong>Your payment remains on PayPal.</strong>
+        <strong>
+          {plan.testBypass
+            ? "Test payments do not charge a card."
+            : "Your payment remains on PayPal."}
+        </strong>
         <p>
-          CRM Solutions does not receive your PayPal password or complete card
-          credentials. Keep this access confidential.
+          {plan.testBypass
+            ? "This bypass is for stress testing only. Turn PAYMENT_TEST_BYPASS off before live clients pay."
+            : "CRM Solutions does not receive your PayPal password or complete card credentials. Keep this access confidential."}
         </p>
         <a href="/terms-and-conditions">Terms</a>
         <a href="/privacy-policy">Privacy</a>
