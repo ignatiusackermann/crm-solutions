@@ -151,9 +151,7 @@ export default function DeliveryCommitmentPage() {
             </p>
             <p>
               Contact:{" "}
-              <a href="mailto:ignatius@crmsolutions.app">
-                ignatius@crmsolutions.app
-              </a>
+              <a href="/contact">Contact page</a>
               .
             </p>
           </section>

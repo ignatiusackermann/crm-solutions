@@ -66,7 +66,7 @@ export default function ClientLoginForm() {
         </p>
       ) : null}
       <button className="button button-primary" disabled={submitting} type="submit">
-        {submitting ? "Signing in…" : "Open payment panel"}{" "}
+        {submitting ? "Signing in…" : "Continue"}{" "}
         <span aria-hidden="true">↗</span>
       </button>
     </form>

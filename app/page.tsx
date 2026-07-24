@@ -353,7 +353,7 @@ export default function Home() {
               since 2001. The objective is not to chase the newest tool. It is to decide what will help the business
               earn, save, learn and improve.
             </p>
-            <a className="text-link text-link-light" href="mailto:ignatius@crmsolutions.app?subject=CRM%20Solutions%20conversation">Meet Ignatius <Arrow /></a>
+            <a className="text-link text-link-light" href="/contact">Meet Ignatius <Arrow /></a>
           </div>
           <ul className="principles">
             {principles.map((principle) => <li key={principle}>{principle}</li>)}

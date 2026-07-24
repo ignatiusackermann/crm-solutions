@@ -60,7 +60,7 @@ export default function CookiePolicyPage() {
           <section id="changes">
             <h2>6. Changes and contact</h2>
             <p>This policy may change when website functionality or providers change. The effective date above identifies the current published version.</p>
-            <p>Questions may be sent to <a href="mailto:ignatius@crmsolutions.app">ignatius@crmsolutions.app</a>.</p>
+            <p>Questions may be sent via the <a href="/contact">Contact page</a>.</p>
           </section>
           <p className="legal-review-note">This is a practical POPIA-conscious draft. Final provider names, cookie durations, business identity and Information Officer details should be confirmed before the public legal review.</p>
         </div>

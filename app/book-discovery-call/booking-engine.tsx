@@ -201,8 +201,8 @@ export default function BookingEngine() {
           <p className="eyebrow eyebrow-light">Availability temporarily unavailable</p>
           <h2>Please contact Ignatius directly.</h2>
           <p>{loadError}</p>
-          <a className="text-link text-link-light" href="mailto:ignatius@crmsolutions.app?subject=Discovery%20Call">
-            Email Ignatius <Arrow />
+          <a className="text-link text-link-light" href="/contact">
+            Contact Ignatius <Arrow />
           </a>
         </div>
       </section>

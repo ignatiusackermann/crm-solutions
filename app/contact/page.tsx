@@ -39,8 +39,8 @@ export default function ContactPage() {
       <section className="contact-body section-shell">
         <aside className="contact-aside">
           <div>
-            <span>Email</span>
-            <a href="mailto:ignatius@crmsolutions.app">ignatius@crmsolutions.app</a>
+            <span>Prefer a call?</span>
+            <a href="/book-discovery-call">Book a Discovery Call</a>
           </div>
           <div>
             <span>Client access</span>

@@ -277,9 +277,9 @@ export function CaseStudyPage({ study }: { study: CaseStudy }) {
             <Link className="button button-primary" href="/book-discovery-call">
               Book a Discovery Call <Arrow />
             </Link>
-            <a className="text-link" href="mailto:ignatius@crmsolutions.app">
-              Email Ignatius <Arrow />
-            </a>
+            <Link className="text-link" href="/contact">
+              Contact Ignatius <Arrow />
+            </Link>
           </div>
         </div>
       </section>

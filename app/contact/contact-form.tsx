@@ -45,8 +45,8 @@ export default function ContactForm() {
         <p className="eyebrow">Message received</p>
         <h2>Thank you. I will reply shortly.</h2>
         <p>
-          Your note has been saved. If it is urgent, email{" "}
-          <a href="mailto:ignatius@crmsolutions.app">ignatius@crmsolutions.app</a>.
+          Your note has been saved. If it is urgent,{" "}
+          <a href="/book-discovery-call">book a Discovery Call</a>.
         </p>
         <button type="button" className="text-link" onClick={() => setDone(false)}>
           Send another message

@@ -33,24 +33,24 @@ export default function ClientLoginPage() {
           <span>CRM Solutions</span>
         </Link>
         <span>Secure client access</span>
-        <a href="mailto:ignatius@crmsolutions.app">Need help?</a>
+        <Link href="/contact">Need help?</Link>
       </header>
       <section className="client-login-shell">
         <div>
           <p className="eyebrow">Client login</p>
           <h1>
-            Access your payment plan
+            Sign in to your account
             <span>.</span>
           </h1>
           <p>
-            Use the email and temporary access code from your CRM Solutions payment
-            email. After the deposit is paid, this same login remains your private
-            client door.
+            Use the email and temporary access code from your CRM Solutions welcome
+            email. This secure login remains your private client door for the life of
+            the engagement.
           </p>
         </div>
         <ClientLoginForm />
         <p className="client-login-note">
-          Prefer the private link? Open the payment URL from your email instead.
+          Prefer the private link from your email? You can use that instead.
           Cloudflare Turnstile protects this form when configured.
         </p>
       </section>

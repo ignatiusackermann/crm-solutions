@@ -93,7 +93,7 @@ export function SiteFooter() {
             Founder-led from South Africa. Working remotely with growth-minded
             businesses in the United States and selected international markets.
           </p>
-          <a href="mailto:ignatius@crmsolutions.app">ignatius@crmsolutions.app</a>
+          <Link href="/contact">Contact</Link>
         </div>
         <nav className="footer-column" aria-label="Explore">
           <strong>Explore</strong>

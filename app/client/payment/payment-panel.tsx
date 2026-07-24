@@ -110,10 +110,7 @@ export default function PaymentPanel() {
         <a className="button button-primary" href="/client/login">
           Client login <span>↗</span>
         </a>
-        <a
-          className="text-link"
-          href="mailto:ignatius@crmsolutions.app?subject=Client%20Payment%20Panel%20access"
-        >
+        <a className="text-link" href="/contact">
           Request assistance <span>↗</span>
         </a>
       </section>
