@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { DiscoveryCallSection, SiteFooter } from "../site-components";
+import { DiscoveryCallSection, SiteFooter, StandardHeader } from "../site-components";
 
 export const metadata: Metadata = {
   title: "Revenue Platform | CRM Solutions",
@@ -35,18 +35,9 @@ const sequence = [
 
 function Arrow() { return <span aria-hidden="true">↗</span>; }
 
-function Header() {
-  return <header className="site-header">
-    <Link className="wordmark" href="/" aria-label="CRM Solutions home"><span className="wordmark-icon"><i /><i /><i /></span><span>CRM Solutions</span></Link>
-    <nav className="desktop-nav" aria-label="Main navigation"><Link className="nav-current" href="/revenue-platform">Revenue Platform</Link><Link href="/#work">Work</Link><Link href="/#insights">Insights</Link><Link href="/#about">About</Link></nav>
-    <Link className="header-cta" href="/book-discovery-call">Book a Discovery Call <Arrow /></Link>
-    <details className="mobile-menu"><summary aria-label="Open navigation">Menu</summary><nav aria-label="Mobile navigation"><Link href="/">Home</Link><Link href="/revenue-platform">Revenue Platform</Link><Link href="/#work">Work</Link><Link href="/#about">About</Link><Link href="/revenue-leak-audit">Find Your Revenue Leaks</Link><Link href="/book-discovery-call">Book a Discovery Call</Link></nav></details>
-  </header>;
-}
-
 export default function RevenuePlatformPage() {
   return <main className="platform-page" id="top">
-    <Header />
+    <StandardHeader current="platform" />
 
     <section className="platform-hero section-shell">
       <div className="platform-hero-copy"><p className="eyebrow">The Revenue Platform</p><h1>From first click to retained customer—<em>one revenue system</em><span>.</span></h1><p>A premium website cannot repair a weak offer, slow follow-up or invisible pipeline on its own. The Revenue Platform connects the customer-facing experience to the commercial system behind it.</p><div className="hero-actions"><Link className="button button-primary" href="/revenue-leak-audit">Find Your Revenue Leaks <Arrow /></Link><a className="text-link" href="#included">See What Is Included <Arrow /></a></div></div>

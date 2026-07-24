@@ -7,6 +7,7 @@ const study: CaseStudy = {
   liveUrl: "https://www.storvac.co.za/",
   liveLabel: "Visit the live platform",
   heroTone: "storvac",
+  screenshot: "/portfolio/storvac-desktop.jpg",
   headline: "From product list to a faster fit decision",
   intro:
     "Storvac Systems needed a platform that helps buyers understand capacity, choose the right configuration, and reach a confident next step—without turning every visit into a long sales call.",
@@ -117,9 +118,6 @@ const study: CaseStudy = {
     "The platform remains a commercial tool for selection—not a static brochure.",
   ],
   closingTitle: "Do you need more products online—or a clearer path to the right one?",
-  brandLabel: "STORVAC",
-  brandLine: "The right fit, faster.",
-  brandCta: "Find my size",
 };
 
 export const metadata = caseMetadata(study);

@@ -7,6 +7,7 @@ const study: CaseStudy = {
   liveUrl: "https://staraesthetic.co.za/",
   liveLabel: "Visit the live platform",
   heroTone: "star",
+  screenshot: "/portfolio/star-aesthetic-desktop.jpg",
   headline: "From treatment menu to a calm patient journey",
   intro:
     "Star Aesthetic Centre needed a digital experience that builds clinical trust quickly—clarifying treatments, presenting doctor-led care, and making consultation the natural next step.",
@@ -117,9 +118,6 @@ const study: CaseStudy = {
     "The site remains an asset that supports the consultation room—not a static brochure.",
   ],
   closingTitle: "Do you need a prettier clinic site—or a clearer patient engine?",
-  brandLabel: "STAR AESTHETIC",
-  brandLine: "Confidence, naturally.",
-  brandCta: "Book a consultation",
 };
 
 export const metadata = caseMetadata(study);

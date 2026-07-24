@@ -47,6 +47,8 @@ const projects = [
     href: "/work/lava-sa",
     linkLabel: "Read the case study",
     className: "lava",
+    screenshot: "/portfolio/lava-sa-desktop.jpg",
+    host: "lava-sa.com",
   },
   {
     name: "Star Aesthetic",
@@ -57,6 +59,8 @@ const projects = [
     href: "/work/star-aesthetic",
     linkLabel: "Read the case study",
     className: "star",
+    screenshot: "/portfolio/star-aesthetic-desktop.jpg",
+    host: "staraesthetic.co.za",
   },
   {
     name: "Storvac Systems",
@@ -67,6 +71,8 @@ const projects = [
     href: "/work/storvac",
     linkLabel: "Read the case study",
     className: "storvac",
+    screenshot: "/portfolio/storvac-desktop.jpg",
+    host: "storvac.co.za",
   },
 ];
 
@@ -118,23 +124,27 @@ function RevenueJourney() {
   );
 }
 
-function ProjectVisual({ type }: { type: string }) {
+function ProjectVisual({
+  type,
+  screenshot,
+  host,
+}: {
+  type: string;
+  screenshot: string;
+  host: string;
+}) {
   return (
-    <div className={`project-visual ${type}`} aria-hidden="true">
-      <div className="project-browser">
-        <div className="browser-bar"><i /><i /><i /></div>
-        <div className="project-brand">
-          <span className="brand-mark" />
-          <span>{type === "lava" ? "LAVA" : type === "star" ? "STAR AESTHETIC" : "STORVAC"}</span>
+    <div className={`project-visual project-visual-real ${type}`} aria-hidden="true">
+      <div className="project-browser project-browser-real">
+        <div className="browser-bar">
+          <i />
+          <i />
+          <i />
+          <span>{host}</span>
         </div>
-        <div className="project-display">
-          <div className="display-copy">
-            <b>{type === "lava" ? "Freshness, sealed." : type === "star" ? "Confidence, naturally." : "The right fit, faster."}</b>
-            <span />
-            <span />
-            <button tabIndex={-1}>{type === "star" ? "Explore treatments" : "Find your solution"}</button>
-          </div>
-          <div className="display-object"><i /><i /><i /></div>
+        <div className="screenshot-window">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={screenshot} alt="" />
         </div>
       </div>
       <span className="visual-label">Live platform</span>
@@ -154,14 +164,24 @@ export default function Home() {
           <a href="/revenue-platform">Revenue Platform</a>
           <a href="#work">Work</a>
           <a href="#insights">Insights</a>
-          <a href="#about">About</a>
+          <a href="/contact">Contact</a>
         </nav>
-        <a className="header-cta" href="/book-discovery-call">Book a Discovery Call <Arrow /></a>
+        <div className="header-actions">
+          <a className="header-account" href="/client/login" aria-label="Client login" title="Client login">
+            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+              <circle cx="12" cy="8" r="3.25" fill="none" stroke="currentColor" strokeWidth="1.6" />
+              <path d="M5.5 19.2c1.7-3.1 4-4.7 6.5-4.7s4.8 1.6 6.5 4.7" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+            </svg>
+          </a>
+          <a className="header-cta" href="/book-discovery-call">Book a Discovery Call <Arrow /></a>
+        </div>
         <details className="mobile-menu">
           <summary aria-label="Open navigation">Menu</summary>
           <nav aria-label="Mobile navigation">
             <a href="/revenue-platform">Revenue Platform</a>
             <a href="#work">Work</a>
+            <a href="/contact">Contact</a>
+            <a href="/client/login">Client login</a>
             <a href="#about">About</a>
             <a href="/revenue-leak-audit">Find Your Revenue Leaks</a>
             <a href="/book-discovery-call">Book a Discovery Call</a>
@@ -297,7 +317,11 @@ export default function Home() {
           <div className="project-list">
             {projects.map((project, index) => (
               <article className="project" key={project.name}>
-                <ProjectVisual type={project.className} />
+                <ProjectVisual
+                  type={project.className}
+                  screenshot={project.screenshot}
+                  host={project.host}
+                />
                 <div className="project-copy">
                   <span className="project-number">0{index + 1} / {project.category}</span>
                   <h3>{project.name}</h3>

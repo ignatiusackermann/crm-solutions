@@ -7,6 +7,7 @@ const study: CaseStudy = {
   liveUrl: "https://www.lava-sa.com",
   liveLabel: "Visit the live platform",
   heroTone: "lava",
+  screenshot: "/portfolio/lava-sa-desktop.jpg",
   headline: "From specialist catalogue to a premium ecommerce system",
   intro:
     "Lava-SA needed a commercial platform that educates specialist buyers, builds trust around high-consideration products, and carries the sale cleanly from selection to payment and fulfilment.",
@@ -117,9 +118,6 @@ const study: CaseStudy = {
     "The platform remains a commercial asset the business can operate and extend.",
   ],
   closingTitle: "Do you need a new website—or a better revenue engine?",
-  brandLabel: "LAVA",
-  brandLine: "Freshness, sealed.",
-  brandCta: "Shop the range",
 };
 
 export const metadata = caseMetadata(study);

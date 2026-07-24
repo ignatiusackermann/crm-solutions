@@ -1,7 +1,15 @@
 "use client";
 import { FormEvent, useEffect, useState } from "react";
 type Plan = { id:string; reference:string; title:string; currency:string; totalAmountCents:number; clientName:string; email:string; paidCount:number; installmentCount:number };
-type Created = { reference:string; clientName:string; email:string; panelUrl:string; emailStatus:string };
+type Created = {
+  reference: string;
+  clientName: string;
+  email: string;
+  panelUrl: string;
+  loginUrl?: string;
+  accessCode?: string;
+  emailStatus: string;
+};
 const money=(c:number,x:string)=>new Intl.NumberFormat("en-US",{style:"currency",currency:x}).format(c/100);
 export default function PaymentGenerator() {
   const [plans,setPlans]=useState<Plan[]>([]),[loading,setLoading]=useState(true),[submitting,setSubmitting]=useState(false);
@@ -17,7 +25,7 @@ export default function PaymentGenerator() {
       <fieldset><legend><span>03</span> Payment arrangement</legend><div className="generator-grid"><label><span>Deposit amount *</span><input name="depositAmount" type="number" min="1" step=".01" defaultValue="5000.00" required /></label><label><span>Deposit timing *</span><input name="depositDue" defaultValue="Due on acceptance" required /></label><label><span>Final amount *</span><input name="finalAmount" type="number" min="1" step=".01" defaultValue="5000.00" required /></label><label><span>Final payment timing *</span><input name="finalDue" defaultValue="Due at the agreed pre-launch milestone" required /></label></div></fieldset>
       {error&&<p className="admin-error" role="alert">{error}</p>}<div className="generator-submit"><p>The two instalments must add up to the total.</p><button className="button button-copper" disabled={submitting}>{submitting?"Generating…":"Generate Client Payment Panel"} <span>↗</span></button></div>
     </form>
-    {created&&<section className="generated-panel"><div><p className="eyebrow eyebrow-light">Client panel generated</p><h2>{created.clientName}</h2><p>{created.reference} · {created.email}</p></div><div><p>{created.emailStatus==="sent"?"The personalised access email has been sent.":"Email delivery is not connected yet. Copy and send the private link securely."}</p><button onClick={()=>navigator.clipboard.writeText(created.panelUrl)}>Copy private client link</button><a href={created.panelUrl} target="_blank" rel="noreferrer">Open client panel ↗</a></div></section>}
+    {created&&<section className="generated-panel"><div><p className="eyebrow eyebrow-light">Client panel generated</p><h2>{created.clientName}</h2><p>{created.reference} · {created.email}</p>{created.accessCode?<p>Access code: <strong>{created.accessCode}</strong></p>:null}</div><div><p>{created.emailStatus==="sent"?"The payment email (login + deposit link) has been sent.":"Email delivery is not connected yet. Copy and send the private link and access code securely."}</p><button onClick={()=>navigator.clipboard.writeText(created.panelUrl)}>Copy private client link</button>{created.accessCode?<button onClick={()=>navigator.clipboard.writeText(created.accessCode||"")}>Copy access code</button>:null}<a href={created.loginUrl||"/client/login"} target="_blank" rel="noreferrer">Open client login ↗</a><a href={created.panelUrl} target="_blank" rel="noreferrer">Open client panel ↗</a></div></section>}
     <section className="admin-plans" id="plans"><div className="admin-plans-heading"><div><p className="eyebrow">Client plans</p><h2>Generated payment arrangements.</h2></div><span>{plans.length} plans</span></div>{loading?<p>Loading…</p>:plans.length===0?<div className="admin-empty">No payment plans yet.</div>:<div className="admin-plan-list">{plans.map(p=><article key={p.id}><div><span>{p.reference}</span><strong>{p.clientName}</strong><small>{p.email}</small></div><div><span>Engagement</span><strong>{p.title}</strong></div><div><span>Investment</span><strong>{money(p.totalAmountCents,p.currency)}</strong></div><div><span>Status</span><strong>{p.paidCount}/{p.installmentCount} paid</strong></div></article>)}</div>}</section>
   </div></div>;
 }

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import RevenueLeakAudit from "./revenue-leak-audit";
-import { DiscoveryCallSection, SiteFooter } from "../site-components";
+import { DiscoveryCallSection, SiteFooter, StandardHeader } from "../site-components";
 
 export const metadata: Metadata = {
   title: "Revenue Leak Audit | CRM Solutions",
@@ -9,45 +8,10 @@ export const metadata: Metadata = {
     "Assess the six stages of your customer journey and identify the commercial constraint that deserves attention first.",
 };
 
-function Arrow() {
-  return <span aria-hidden="true">↗</span>;
-}
-
-function Header() {
-  return (
-    <header className="site-header">
-      <Link className="wordmark" href="/" aria-label="CRM Solutions home">
-        <span className="wordmark-icon"><i /><i /><i /></span>
-        <span>CRM Solutions</span>
-      </Link>
-      <nav className="desktop-nav" aria-label="Main navigation">
-        <Link href="/revenue-platform">Revenue Platform</Link>
-        <Link href="/#work">Work</Link>
-        <Link href="/#insights">Insights</Link>
-        <Link href="/#about">About</Link>
-      </nav>
-      <Link className="header-cta" href="/book-discovery-call">
-        Book a Discovery Call <Arrow />
-      </Link>
-      <details className="mobile-menu">
-        <summary aria-label="Open navigation">Menu</summary>
-        <nav aria-label="Mobile navigation">
-          <Link href="/">Home</Link>
-          <Link href="/revenue-platform">Revenue Platform</Link>
-          <Link href="/#work">Work</Link>
-          <Link href="/#about">About</Link>
-          <Link href="/revenue-leak-audit">Revenue Leak Audit</Link>
-          <Link href="/book-discovery-call">Book a Discovery Call</Link>
-        </nav>
-      </details>
-    </header>
-  );
-}
-
 export default function RevenueLeakAuditPage() {
   return (
     <main className="audit-page" id="top">
-      <Header />
+      <StandardHeader />
       <section className="audit-hero section-shell">
         <div>
           <p className="eyebrow">A seven-minute commercial diagnostic</p>

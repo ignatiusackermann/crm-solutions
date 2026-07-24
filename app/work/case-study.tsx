@@ -9,6 +9,7 @@ export type CaseStudy = {
   liveUrl: string;
   liveLabel: string;
   heroTone: "lava" | "star" | "storvac";
+  screenshot: string;
   headline: string;
   intro: string;
   meta: { label: string; value: string }[];
@@ -29,9 +30,6 @@ export type CaseStudy = {
   stewardshipTitle: string;
   stewardship: string[];
   closingTitle: string;
-  brandLabel: string;
-  brandLine: string;
-  brandCta: string;
 };
 
 function Arrow() {
@@ -52,17 +50,38 @@ function CaseHeader({ tone }: { tone: CaseStudy["heroTone"] }) {
       <nav className="desktop-nav" aria-label="Main navigation">
         <Link href="/revenue-platform">Revenue Platform</Link>
         <Link href="/#work">Work</Link>
-        <Link href="/#insights">Insights</Link>
+        <Link href="/contact">Contact</Link>
         <Link href="/#about">About</Link>
       </nav>
-      <Link className="header-cta" href="/book-discovery-call">
-        Book a Discovery Call <Arrow />
-      </Link>
+      <div className="header-actions">
+        <Link
+          className="header-account"
+          href="/client/login"
+          aria-label="Client login"
+          title="Client login"
+        >
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+            <circle cx="12" cy="8" r="3.25" fill="none" stroke="currentColor" strokeWidth="1.6" />
+            <path
+              d="M5.5 19.2c1.7-3.1 4-4.7 6.5-4.7s4.8 1.6 6.5 4.7"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+            />
+          </svg>
+        </Link>
+        <Link className="header-cta" href="/book-discovery-call">
+          Book a Discovery Call <Arrow />
+        </Link>
+      </div>
       <details className="mobile-menu">
         <summary aria-label="Open navigation">Menu</summary>
         <nav aria-label="Mobile navigation">
           <Link href="/">Home</Link>
           <Link href="/#work">Work</Link>
+          <Link href="/contact">Contact</Link>
+          <Link href="/client/login">Client login</Link>
           <Link href="/book-discovery-call">Book a Discovery Call</Link>
         </nav>
       </details>
@@ -72,32 +91,23 @@ function CaseHeader({ tone }: { tone: CaseStudy["heroTone"] }) {
 
 function CaseVisual({ study }: { study: CaseStudy }) {
   return (
-    <div className={`project-visual case-hero-visual ${study.heroTone}`} aria-hidden="true">
-      <div className="project-browser">
+    <div
+      className={`project-visual project-visual-real case-hero-visual ${study.heroTone}`}
+      aria-hidden="true"
+    >
+      <div className="project-browser project-browser-real">
         <div className="browser-bar">
           <i />
           <i />
           <i />
+          <span>{study.liveUrl.replace(/^https?:\/\//, "")}</span>
         </div>
-        <div className="project-brand">
-          <span className="brand-mark" />
-          <span>{study.brandLabel}</span>
-        </div>
-        <div className="project-display">
-          <div className="display-copy">
-            <b>{study.brandLine}</b>
-            <span />
-            <span />
-            <button tabIndex={-1}>{study.brandCta}</button>
-          </div>
-          <div className="display-object">
-            <i />
-            <i />
-            <i />
-          </div>
+        <div className="screenshot-window">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={study.screenshot} alt="" />
         </div>
       </div>
-      <span className="visual-label">Live platform preview</span>
+      <span className="visual-label">Live platform</span>
     </div>
   );
 }
