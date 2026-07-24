@@ -16,6 +16,8 @@ export default function PaymentGenerator() {
   const [plans,setPlans]=useState<Plan[]>([]),[loading,setLoading]=useState(true),[submitting,setSubmitting]=useState(false);
   const [error,setError]=useState(""),[created,setCreated]=useState<Created|null>(null);
   const [copied,setCopied]=useState<""|"link"|"code">("");
+  const [emailTest,setEmailTest]=useState("");
+  const [emailTesting,setEmailTesting]=useState(false);
   async function load(){const r=await fetch("/api/admin/payment-plans",{cache:"no-store"});const d=await r.json() as {plans?:Plan[];error?:string};if(!r.ok)throw new Error(d.error||"Plans could not be loaded.");setPlans(d.plans||[]);}
   useEffect(()=>{load().catch((e:Error)=>setError(e.message)).finally(()=>setLoading(false));},[]);
   useEffect(()=>{if(!copied)return;const t=window.setTimeout(()=>setCopied(""),1800);return()=>window.clearTimeout(t);},[copied]);
@@ -23,8 +25,18 @@ export default function PaymentGenerator() {
     try{await navigator.clipboard.writeText(value);setCopied(kind);}
     catch{setError("Could not copy to clipboard. Select and copy manually.");}
   }
+  async function sendTestEmail(){
+    setEmailTesting(true);setEmailTest("");
+    try{
+      const r=await fetch("/api/admin/test-email",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({})});
+      const d=await r.json() as {ok?:boolean;error?:string;to?:string;from?:string;id?:string};
+      if(!r.ok||!d.ok)throw new Error(d.error||"Test email failed.");
+      setEmailTest(`Test email sent to ${d.to}. Check inbox and Resend → Emails.`);
+    }catch(x){setEmailTest(x instanceof Error?x.message:"Test email failed.");}
+    finally{setEmailTesting(false);}
+  }
   async function submit(e:FormEvent<HTMLFormElement>){e.preventDefault();setSubmitting(true);setError("");setCreated(null);setCopied("");const form=e.currentTarget;try{const r=await fetch("/api/admin/payment-plans",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(Object.fromEntries(new FormData(form).entries()))});const d=await r.json() as {plan?:Created;error?:string};if(!r.ok||!d.plan)throw new Error(d.error||"Plan could not be created.");setCreated(d.plan);form.reset();await load();}catch(x){setError(x instanceof Error?x.message:"Plan could not be created.");}finally{setSubmitting(false);}}
-  return <div className="admin-workspace"><aside className="admin-sidebar"><p>Workspace</p><a className="active" href="#generator"><span>01</span> Payment Generator</a><a href="#plans"><span>02</span> Client Plans</a><div><strong>Secure access</strong><p>Client panels use a private access link. PayPal credentials never enter this dashboard.</p></div></aside><div className="admin-content">
+  return <div className="admin-workspace"><aside className="admin-sidebar"><p>Workspace</p><a className="active" href="#generator"><span>01</span> Payment Generator</a><a href="#plans"><span>02</span> Client Plans</a><div><strong>Secure access</strong><p>Client panels use a private access link. PayPal credentials never enter this dashboard.</p><button type="button" className="admin-sidebar-test" disabled={emailTesting} onClick={sendTestEmail}>{emailTesting?"Sending test…":"Send test email"}</button>{emailTest?<small>{emailTest}</small>:null}</div></aside><div className="admin-content">
     <section className="admin-intro" id="generator"><div><p className="eyebrow">Payment Generator</p><h1>Create a personalised client payment plan<span>.</span></h1></div><p>Enter the agreed commercial details. The system creates the client profile, two instalments and a private Client Payment Panel.</p></section>
     <form className="generator-form" onSubmit={submit}>
       <fieldset><legend><span>01</span> Client details</legend><div className="generator-grid"><label><span>First name *</span><input name="firstName" required /></label><label><span>Surname *</span><input name="lastName" required /></label><label><span>Email *</span><input name="email" type="email" required /></label><label><span>Phone / WhatsApp</span><input name="phone" type="tel" /></label><label className="form-wide"><span>Company</span><input name="company" /></label></div></fieldset>
