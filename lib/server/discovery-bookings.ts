@@ -179,23 +179,33 @@ function emailShell(title: string, body: string) {
 }
 
 async function getAvailability(env: DiscoveryEnv) {
-  if (!env.DB) return json({ error: "Booking storage is not available." }, 503);
   const dates = nextBusinessDates();
-  const first = `${dates[0]}T00:00:00.000Z`;
-  const last = `${dates[dates.length - 1]}T23:59:59.999Z`;
-  const result = await env.DB.prepare(
-    "SELECT start_utc FROM discovery_bookings WHERE status = 'confirmed' AND start_utc BETWEEN ? AND ?",
-  )
-    .bind(first, last)
-    .all<{ start_utc: string }>();
+  const slots = SLOT_HOURS.map((hour) => `${String(hour).padStart(2, "0")}:00`);
+  let booked: string[] = [];
+
+  if (env.DB) {
+    try {
+      const first = `${dates[0]}T00:00:00.000Z`;
+      const last = `${dates[dates.length - 1]}T23:59:59.999Z`;
+      const result = await env.DB.prepare(
+        "SELECT start_utc FROM discovery_bookings WHERE status = 'confirmed' AND start_utc BETWEEN ? AND ?",
+      )
+        .bind(first, last)
+        .all<{ start_utc: string }>();
+      booked = result.results.map((row) => String(row.start_utc));
+    } catch (error) {
+      console.error("discovery availability query failed", error);
+    }
+  }
 
   return json({
     dates,
-    slots: SLOT_HOURS.map((hour) => `${String(hour).padStart(2, "0")}:00`),
-    booked: result.results.map((row) => row.start_utc),
+    slots,
+    booked,
     baseTimezone: "Africa/Johannesburg",
     durationMinutes: 60,
     emailReady: Boolean(env.RESEND_API_KEY),
+    storageReady: Boolean(env.DB),
   });
 }
 

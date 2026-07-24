@@ -34,12 +34,16 @@ function getClient() {
   if (!url) return null;
 
   if (!globalThis.__crm_postgres__) {
+    // Supabase pooler URIs often include ?pgbouncer=true; postgres.js handles SSL via URL.
     globalThis.__crm_postgres__ = postgres(url, {
       prepare: false,
       max: 1,
       idle_timeout: 20,
-      connect_timeout: 10,
+      connect_timeout: 15,
       ssl: "require",
+      connection: {
+        application_name: "crm-solutions",
+      },
     });
   }
 
@@ -47,41 +51,49 @@ function getClient() {
 }
 
 export function getSqlDatabase(): SqlDatabase | null {
-  const client = getClient();
-  if (!client) return null;
+  try {
+    const client = getClient();
+    if (!client) return null;
 
-  const prepare = (sql: string, args: SqlValue[] = []): SqlPreparedStatement => {
-    const pgSql = toPostgresParams(sql);
+    const prepare = (
+      sql: string,
+      args: SqlValue[] = [],
+    ): SqlPreparedStatement => {
+      const pgSql = toPostgresParams(sql);
+
+      return {
+        bind(...nextArgs: SqlValue[]) {
+          return prepare(sql, nextArgs);
+        },
+        async all<T extends SqlRow = SqlRow>() {
+          const rows = (await client.unsafe(pgSql, args as never[])) as T[];
+          return { results: rows };
+        },
+        async first<T extends SqlRow = SqlRow>(): Promise<T | null> {
+          const { results } = await prepare(sql, args).all<T>();
+          return results.length > 0 ? results[0] : null;
+        },
+        async run() {
+          await client.unsafe(pgSql, args as never[]);
+          return { success: true };
+        },
+      };
+    };
 
     return {
-      bind(...nextArgs: SqlValue[]) {
-        return prepare(sql, nextArgs);
+      prepare(sql: string) {
+        return prepare(sql);
       },
-      async all<T extends SqlRow = SqlRow>() {
-        const rows = (await client.unsafe(pgSql, args as never[])) as T[];
-        return { results: rows };
-      },
-      async first<T extends SqlRow = SqlRow>(): Promise<T | null> {
-        const { results } = await prepare(sql, args).all<T>();
-        return results.length > 0 ? results[0] : null;
-      },
-      async run() {
-        await client.unsafe(pgSql, args as never[]);
-        return { success: true };
+      async batch(statements: SqlPreparedStatement[]) {
+        const results = [];
+        for (const statement of statements) {
+          results.push(await statement.run());
+        }
+        return results;
       },
     };
-  };
-
-  return {
-    prepare(sql: string) {
-      return prepare(sql);
-    },
-    async batch(statements: SqlPreparedStatement[]) {
-      const results = [];
-      for (const statement of statements) {
-        results.push(await statement.run());
-      }
-      return results;
-    },
-  };
+  } catch (error) {
+    console.error("Supabase database client failed to initialise", error);
+    return null;
+  }
 }
