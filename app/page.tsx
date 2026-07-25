@@ -191,7 +191,7 @@ export default function Home() {
 
       <section className="hero section-shell">
         <div className="hero-copy">
-          <p className="eyebrow">Founder-led business growth systems</p>
+          <p className="eyebrow">Revenue systems that stop leakage between click and cash</p>
           <h1>
             <span className="headline-line">Make every click,</span>
             <span className="headline-line">enquiry and</span>
@@ -216,7 +216,7 @@ export default function Home() {
       <section className="credibility section-shell" aria-label="CRM Solutions experience">
         <div className="credibility-intro">
           <span className="section-index">01 / Commercial reality</span>
-          <h2>Built around commercial reality—<em>not</em> a technology trend.</h2>
+          <h2>Growth breaks when tools don’t share <em>one</em> journey.</h2>
         </div>
         <div className="credibility-grid">
           <div><strong>Since 2001</strong><span>Building commercial digital platforms</span></div>
@@ -224,6 +224,11 @@ export default function Home() {
           <div><strong>Limited engagements</strong><span>Direct senior attention throughout</span></div>
           <div><strong>One connected view</strong><span>Marketing, sales, service and retention</span></div>
         </div>
+        <p className="section-deep-link">
+          <a href="/insights/why-traffic-does-not-create-revenue">
+            Why doesn’t more traffic create more revenue? <Arrow />
+          </a>
+        </p>
       </section>
 
       <section className="problem-section" id="insights">
@@ -251,6 +256,11 @@ export default function Home() {
           <p className="problem-transition">
             A redesign placed on top of a broken customer journey only makes the leakage look better.
           </p>
+          <p className="section-deep-link">
+            <a href="/insights/website-or-customer-journey">
+              Is the website the constraint—or the journey after it? <Arrow />
+            </a>
+          </p>
         </div>
       </section>
 
@@ -265,6 +275,11 @@ export default function Home() {
             </p>
             <a className="button button-copper" href="/revenue-leak-audit">Start the Revenue Leak Audit <Arrow /></a>
             <small>No obligation. Useful even if we never work together.</small>
+            <p className="section-deep-link">
+              <a href="/insights/find-revenue-leaks">
+                How do you find the most expensive revenue leak? <Arrow />
+              </a>
+            </p>
           </div>
           <div className="audit-output">
             <p>Your diagnostic will identify</p>
@@ -300,6 +315,11 @@ export default function Home() {
           ))}
         </div>
         <a className="text-link platform-link" href="/revenue-platform">Explore the Revenue Platform <Arrow /></a>
+        <p className="section-deep-link">
+          <a href="/insights/connected-revenue-platform">
+            What does a connected revenue platform actually do? <Arrow />
+          </a>
+        </p>
       </section>
 
       <section className="work-section" id="work">
@@ -307,7 +327,7 @@ export default function Home() {
           <div className="work-heading">
             <div>
               <p className="eyebrow">Systems built around real buying decisions</p>
-              <h2>The work should explain itself—and prove the <em>thinking</em> behind it.</h2>
+              <h2>Proof beats <em>claims</em>.</h2>
             </div>
             <p>
               Each platform starts with a different commercial problem. The craft follows the customer decision,
@@ -333,6 +353,11 @@ export default function Home() {
               </article>
             ))}
           </div>
+          <p className="section-deep-link">
+            <a href="/insights/proof-before-claims">
+              How do you know a platform will work before you buy it? <Arrow />
+            </a>
+          </p>
         </div>
       </section>
 
@@ -343,7 +368,7 @@ export default function Home() {
           </div>
           <div className="founder-copy">
             <p className="eyebrow eyebrow-light">Why founder-led matters</p>
-            <h2>Senior judgment stays in the room.</h2>
+            <h2>No junior handoff after the sale.</h2>
             <p>
               The person who helps diagnose the commercial problem remains involved in the strategy,
               architecture, build and measurement. There is no sales handoff to a junior delivery team.
@@ -354,6 +379,11 @@ export default function Home() {
               earn, save, learn and improve.
             </p>
             <a className="text-link text-link-light" href="/contact">Meet Ignatius <Arrow /></a>
+            <p className="section-deep-link">
+              <a href="/insights/no-junior-handoff">
+                Who actually builds the system after the strategy call? <Arrow />
+              </a>
+            </p>
           </div>
           <ul className="principles">
             {principles.map((principle) => <li key={principle}>{principle}</li>)}
@@ -364,7 +394,7 @@ export default function Home() {
       <section className="process-section section-shell" id="process">
         <div className="process-intro">
           <span className="section-index">02 / A controlled path</span>
-          <h2>From uncertainty to a working revenue system.</h2>
+          <h2>A controlled path from diagnosis to live system.</h2>
           <p>Clear responsibilities, scheduled decisions, visible progress and direct founder communication.</p>
         </div>
         <div className="process-grid">
@@ -376,6 +406,11 @@ export default function Home() {
             </article>
           ))}
         </div>
+        <p className="section-deep-link">
+          <a href="/insights/from-diagnosis-to-live-system">
+            How do you go from uncertainty to a working revenue system? <Arrow />
+          </a>
+        </p>
       </section>
 
       <section className="investment-section section-shell">
@@ -392,6 +427,11 @@ export default function Home() {
               integrations and the value of the problem—not an arbitrary page count.
             </p>
             <a className="button button-copper" href="/revenue-leak-audit">Find Out If We Are a Fit <Arrow /></a>
+            <p className="section-deep-link">
+              <a href="/insights/revenue-platform-investment">
+                What should a revenue platform investment actually buy? <Arrow />
+              </a>
+            </p>
           </div>
         </div>
       </section>
