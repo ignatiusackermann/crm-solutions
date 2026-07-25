@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { articleSchema, breadcrumbSchema, JsonLd } from "@/lib/json-ld";
 import { DiscoveryCallSection, SiteFooter, StandardHeader } from "../../site-components";
 import { allInsightSlugs, getInsight } from "../insights";
 
@@ -33,8 +34,24 @@ export default async function InsightPage({ params }: { params: Params }) {
   const insight = getInsight(slug);
   if (!insight) notFound();
 
+  const url = `https://www.crmsolutions.app/insights/${insight.slug}`;
+
   return (
     <main className="insight-page" id="top">
+      <JsonLd
+        data={[
+          articleSchema({
+            title: insight.question,
+            description: insight.summary,
+            url,
+          }),
+          breadcrumbSchema([
+            { name: "Home", url: "https://www.crmsolutions.app/" },
+            { name: "Insights", url: "https://www.crmsolutions.app/#insights" },
+            { name: insight.question, url },
+          ]),
+        ]}
+      />
       <StandardHeader />
       <section className="insight-hero section-shell">
         <p className="eyebrow">{insight.eyebrow}</p>

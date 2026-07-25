@@ -1,7 +1,13 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import AdminLoginForm from "./login-form";
 
 export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "Admin Login",
+  robots: { index: false, follow: false },
+};
 
 type SearchParams = Promise<{ return_to?: string }>;
 
