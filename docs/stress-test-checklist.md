@@ -1,5 +1,14 @@
 # Stress-test client payment flow (PayPal bypassed)
 
+## 0. Resend gate (mandatory — do not skip)
+
+Complete [`docs/sop-resend-email.md`](sop-resend-email.md) first:
+
+- Resend → Domains → `crmsolutions.app` = **Verified**
+- Admin **Send test email** lands (inbox + Resend → Emails = Delivered)
+
+If this fails, stop. Do not create payment plans or Discovery bookings for real prospects.
+
 ## 1. Enable bypass in Vercel
 Add env var:
 - `PAYMENT_TEST_BYPASS` = `true`

@@ -142,6 +142,163 @@ function reference() {
     .slice(0, 6)}`;
 }
 
+type PlanAccessRow = {
+  id: string;
+  reference: string;
+  title: string;
+  firstName: string;
+  email: string;
+};
+
+async function regeneratePlanAccess(e: Env, planId: string, origin: string) {
+  const db = requireDb(e);
+  const plan = await db
+    .prepare(
+      `SELECT p.id, p.reference, p.title,
+              c.first_name AS "firstName", c.email
+       FROM payment_plans p
+       JOIN payment_clients c ON c.id = p.client_id
+       WHERE p.id = ? AND p.status != 'revoked'
+       LIMIT 1`,
+    )
+    .bind(planId)
+    .first<PlanAccessRow>();
+
+  if (!plan) return null;
+
+  const access = token();
+  const code = accessCode();
+  const accessHash = await hash(access);
+  const codeHash = await hash(code.replaceAll("-", ""));
+  const now = new Date().toISOString();
+
+  await db
+    .prepare(
+      `UPDATE payment_plans
+       SET access_token_hash = ?, access_code_hash = ?
+       WHERE id = ? AND status != 'revoked'`,
+    )
+    .bind(accessHash, codeHash, planId)
+    .run();
+
+  const panelUrl = `${origin}/client/payment?token=${encodeURIComponent(access)}`;
+  const loginUrl = `${origin}/client/login`;
+
+  const emailResult = await send(
+    e,
+    {
+      from: e.PAYMENT_FROM_EMAIL || "CRM Solutions <payments@crmsolutions.app>",
+      to: [plan.email],
+      reply_to: e.ADMIN_EMAIL || ADMIN_EMAIL,
+      subject: `Your new CRM Solutions access code — ${plan.reference}`,
+      html: shell(
+        `Here is your new access, ${esc(plan.firstName)}.`,
+        `<p style="color:#526172;line-height:1.7">A fresh login code and private panel link have been issued for <strong>${esc(plan.title)}</strong> (${esc(plan.reference)}). Previous codes and links for this plan no longer work.</p>
+         <div style="padding:18px 22px;background:#0b2a55;color:#fff;margin:22px 0">
+           <p style="margin:0 0 8px;font-size:11px;letter-spacing:1px;text-transform:uppercase;opacity:.8">Client login</p>
+           <p style="margin:0;line-height:1.7">Username (email): <strong>${esc(plan.email)}</strong><br>Temporary access code: <strong>${esc(code)}</strong></p>
+           <p style="margin:12px 0 0;opacity:.85;font-size:13px">Sign in at <a href="${esc(loginUrl)}" style="color:#fff">${esc(loginUrl)}</a></p>
+         </div>
+         <p><a href="${esc(panelUrl)}" style="display:inline-block;margin-top:8px;padding:14px 20px;background:#c75c36;color:#fff;text-decoration:none">Open payment panel</a></p>
+         <p style="color:#526172">Keep this email confidential.</p>`,
+      ),
+    },
+    `payment-access-resend-${planId}-${now}`,
+  );
+
+  return {
+    planId: plan.id,
+    reference: plan.reference,
+    clientName: plan.firstName,
+    email: plan.email,
+    panelUrl,
+    loginUrl,
+    accessCode: code,
+    emailStatus: emailResult.ok ? "sent" : "configuration_required",
+    emailError: emailResult.ok ? undefined : emailResult.error,
+  };
+}
+
+async function resendAccessAdmin(r: Request, e: Env) {
+  if (!(await admin(r, e))) {
+    return json({ error: "Authorised administrator access is required." }, 403);
+  }
+  if (!e.DB) {
+    return json(
+      {
+        error: `Payment storage is not available. ${databaseConfigMessage()}`,
+        code: "DATABASE_UNAVAILABLE",
+      },
+      503,
+    );
+  }
+
+  let body: Record<string, unknown>;
+  try {
+    body = await r.json();
+  } catch {
+    return json({ error: "Invalid request." }, 400);
+  }
+
+  const planId = clean(body.planId, 80);
+  if (!planId) return json({ error: "Choose a client plan." }, 400);
+
+  try {
+    const result = await regeneratePlanAccess(e, planId, new URL(r.url).origin);
+    if (!result) return json({ error: "That plan was not found or is revoked." }, 404);
+    return json({ ok: true, access: result });
+  } catch (error) {
+    console.error("admin resend access failed", error);
+    return json({ error: "Could not issue a new access code." }, 500);
+  }
+}
+
+export async function handleClientRequestAccess(r: Request, e: Env) {
+  if (r.method !== "POST") return json({ error: "Method not allowed." }, 405);
+  if (!e.DB) {
+    return json({ error: "Client access is temporarily unavailable." }, 503);
+  }
+
+  let body: Record<string, unknown>;
+  try {
+    body = await r.json();
+  } catch {
+    return json({ error: "Check your email and try again." }, 400);
+  }
+
+  const email = clean(body.email, 160).toLowerCase();
+  if (!validEmail(email)) {
+    return json({ error: "Enter the email used on your payment plan." }, 400);
+  }
+
+  const generic = {
+    ok: true,
+    message:
+      "If that email matches an active client plan, a new access code is on its way. Check inbox and junk.",
+  };
+
+  try {
+    const plan = await e.DB.prepare(
+      `SELECT p.id
+       FROM payment_plans p
+       JOIN payment_clients c ON c.id = p.client_id
+       WHERE lower(c.email) = ? AND p.status != 'revoked'
+       ORDER BY p.created_at DESC
+       LIMIT 1`,
+    )
+      .bind(email)
+      .first<{ id: string }>();
+
+    if (plan) {
+      await regeneratePlanAccess(e, plan.id, new URL(r.url).origin);
+    }
+  } catch (error) {
+    console.error("client request access failed", error);
+  }
+
+  return json(generic);
+}
+
 async function resolvePlanAccess(r: Request, e: Env) {
   const url = new URL(r.url);
   const access = clean(url.searchParams.get("token") || url.searchParams.get("access"), 120);
@@ -709,11 +866,21 @@ async function markTestPayment(r: Request, e: Env) {
 }
 
 export async function handleAdminPaymentPlans(r: Request, e: Env) {
-  return r.method === "GET"
-    ? listPlans(r, e)
-    : r.method === "POST"
-      ? createPlan(r, e)
-      : json({ error: "Method not allowed." }, 405);
+  if (r.method === "GET") return listPlans(r, e);
+  if (r.method !== "POST") return json({ error: "Method not allowed." }, 405);
+
+  const clone = r.clone();
+  let body: Record<string, unknown> = {};
+  try {
+    body = (await clone.json()) as Record<string, unknown>;
+  } catch {
+    body = {};
+  }
+
+  if (clean(body.action, 40) === "resend-access") {
+    return resendAccessAdmin(r, e);
+  }
+  return createPlan(r, e);
 }
 
 export async function handleClientPaymentPlan(r: Request, e: Env) {

@@ -20,6 +20,18 @@ const esc = (v: string) =>
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
 
+function fromAddress(env: Env) {
+  return (
+    env.CONTACT_FROM_EMAIL ||
+    env.DISCOVERY_FROM_EMAIL ||
+    "CRM Solutions <bookings@crmsolutions.app>"
+  );
+}
+
+function emailShell(title: string, body: string) {
+  return `<!doctype html><html><body style="margin:0;background:#f5f2ea;color:#081521;font-family:Arial,sans-serif"><table width="100%" cellpadding="0" cellspacing="0"><tr><td style="padding:32px 16px"><table width="100%" cellpadding="0" cellspacing="0" style="max-width:640px;margin:auto;background:#fff;border-top:5px solid #c75c36"><tr><td style="padding:38px"><p style="margin:0 0 22px;color:#c75c36;font-size:11px;letter-spacing:2px;text-transform:uppercase">CRM Solutions · Contact</p><h1 style="margin:0 0 24px;color:#0b2a55;font-size:30px;line-height:1.2">${title}</h1>${body}<p style="margin:32px 0 0;padding-top:24px;border-top:1px solid #dce3e8;color:#526172;font-size:13px;line-height:1.6">Ignatius Ackermann<br>Founder, CRM Solutions<br><a href="mailto:ignatius@crmsolutions.app" style="color:#123b74">ignatius@crmsolutions.app</a></p></td></tr></table></td></tr></table></body></html>`;
+}
+
 async function verifyTurnstile(token: string | undefined, ip: string | null) {
   const secret = process.env.TURNSTILE_SECRET_KEY;
   if (!secret) return true;
@@ -37,7 +49,16 @@ async function verifyTurnstile(token: string | undefined, ip: string | null) {
   return Boolean(data.success);
 }
 
-async function sendAdminEmail(env: Env, subject: string, html: string, key: string) {
+async function sendEmail(
+  env: Env,
+  payload: {
+    to: string[];
+    replyTo?: string;
+    subject: string;
+    html: string;
+  },
+  key: string,
+) {
   if (!env.RESEND_API_KEY) return false;
   const response = await fetch("https://api.resend.com/emails", {
     method: "POST",
@@ -47,13 +68,11 @@ async function sendAdminEmail(env: Env, subject: string, html: string, key: stri
       "Idempotency-Key": key,
     },
     body: JSON.stringify({
-      from:
-        env.CONTACT_FROM_EMAIL ||
-        env.DISCOVERY_FROM_EMAIL ||
-        "CRM Solutions <bookings@crmsolutions.app>",
-      to: [env.ADMIN_EMAIL || ADMIN_EMAIL],
-      subject,
-      html,
+      from: fromAddress(env),
+      to: payload.to,
+      reply_to: payload.replyTo,
+      subject: payload.subject,
+      html: payload.html,
     }),
   });
   return response.ok;
@@ -106,6 +125,7 @@ export async function handleContactSubmission(request: Request, env: Env) {
 
   const id = crypto.randomUUID();
   const now = new Date().toISOString();
+  const adminEmail = env.ADMIN_EMAIL || ADMIN_EMAIL;
 
   try {
     await env.DB.prepare(
@@ -132,21 +152,41 @@ export async function handleContactSubmission(request: Request, env: Env) {
     );
   }
 
-  const emailed = await sendAdminEmail(
+  const adminSent = await sendEmail(
     env,
-    `Website contact — ${firstName} ${lastName}`,
-    `<p><strong>${esc(firstName)} ${esc(lastName)}</strong> sent a message from the website.</p>
+    {
+      to: [adminEmail],
+      replyTo: email,
+      subject: `Website contact — ${firstName} ${lastName}`,
+      html: `<p><strong>${esc(firstName)} ${esc(lastName)}</strong> sent a message from the website.</p>
      <p>Email: <a href="mailto:${esc(email)}">${esc(email)}</a><br>
      Phone: ${esc(phone || "—")}<br>
      Company: ${esc(company || "—")}</p>
      <p style="white-space:pre-wrap;line-height:1.6">${esc(message)}</p>`,
-    `contact-${id}`,
+    },
+    `contact-admin-${id}`,
+  );
+
+  const clientSent = await sendEmail(
+    env,
+    {
+      to: [email],
+      replyTo: adminEmail,
+      subject: "Thank you for contacting CRM Solutions",
+      html: emailShell(
+        `Thank you, ${esc(firstName)}.`,
+        `<p style="color:#526172;line-height:1.7">Your message has been received. I read every enquiry personally and will reply with a clear, respectful response — usually within one business day.</p>
+         <p style="color:#526172;line-height:1.7">If the constraint is larger than email can cover, you are welcome to <a href="https://www.crmsolutions.app/book-discovery-call" style="color:#123b74">book a Discovery Call</a> meanwhile.</p>
+         <p style="color:#526172;line-height:1.7">No pressure. No hard sell — just a serious conversation about what is costing attention, enquiries or revenue.</p>`,
+      ),
+    },
+    `contact-client-${id}`,
   );
 
   return Response.json(
     {
       ok: true,
-      emailStatus: emailed ? "sent" : "saved",
+      emailStatus: adminSent && clientSent ? "sent" : adminSent || clientSent ? "partial" : "saved",
     },
     { status: 201 },
   );

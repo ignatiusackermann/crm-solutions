@@ -6,27 +6,27 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/admin/", "/client/", "/api/", "/site-info"],
+        disallow: ["/admin/", "/client/", "/api/", "/site-info", "/book-discovery-call/thank-you", "/contact/thank-you"],
       },
       {
         userAgent: "GPTBot",
         allow: "/",
-        disallow: ["/admin/", "/client/", "/api/", "/site-info"],
+        disallow: ["/admin/", "/client/", "/api/", "/site-info", "/book-discovery-call/thank-you", "/contact/thank-you"],
       },
       {
         userAgent: "ClaudeBot",
         allow: "/",
-        disallow: ["/admin/", "/client/", "/api/", "/site-info"],
+        disallow: ["/admin/", "/client/", "/api/", "/site-info", "/book-discovery-call/thank-you", "/contact/thank-you"],
       },
       {
         userAgent: "PerplexityBot",
         allow: "/",
-        disallow: ["/admin/", "/client/", "/api/", "/site-info"],
+        disallow: ["/admin/", "/client/", "/api/", "/site-info", "/book-discovery-call/thank-you", "/contact/thank-you"],
       },
       {
         userAgent: "Google-Extended",
         allow: "/",
-        disallow: ["/admin/", "/client/", "/api/", "/site-info"],
+        disallow: ["/admin/", "/client/", "/api/", "/site-info", "/book-discovery-call/thank-you", "/contact/thank-you"],
       },
     ],
     sitemap: "https://www.crmsolutions.app/sitemap.xml",

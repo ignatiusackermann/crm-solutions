@@ -39,6 +39,23 @@ Open [http://localhost:3000](http://localhost:3000).
 | `PAYPAL_*` / `PAYMENT_FROM_EMAIL` | Client payments |
 | `GEMINI_API_KEY` | Voice Business Advisor |
 
+## Mandatory: Resend domain gate
+
+**Before any Discovery Call, payment plan, or outbound that relies on site email:**
+
+1. Resend → Domains → `crmsolutions.app` must be **Verified** (not “Not Started”).
+2. Prove it: `/admin/payments` → **Send test email** → Delivered in Resend + inbox.
+
+cPanel mailboxes receive mail; Resend sends only after the **sending** domain is verified. Do not verify recipient domains.
+
+Full SOP: [`docs/sop-resend-email.md`](docs/sop-resend-email.md)
+
+## Project blueprint (copy to next sites)
+
+Reusable launch pack — forms, thank-you pages, admin modules, Jul 2026 lessons:
+
+[`docs/project-blueprint/`](docs/project-blueprint/README.md)
+
 ## Main routes
 
 - `/` · `/revenue-platform` · `/revenue-leak-audit` · `/book-discovery-call`

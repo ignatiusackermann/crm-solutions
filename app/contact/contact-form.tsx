@@ -1,13 +1,15 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { useRouter } from "next/navigation";
+import { CONTACT_THANK_YOU_STORAGE_KEY } from "./contact-storage";
 
 const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "";
 
 export default function ContactForm() {
+  const router = useRouter();
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
-  const [done, setDone] = useState(false);
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -15,6 +17,9 @@ export default function ContactForm() {
     setError("");
     const form = event.currentTarget;
     const data = Object.fromEntries(new FormData(form).entries());
+    const firstName = String(data.firstName || "").trim();
+    const company = String(data.company || "").trim();
+
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
@@ -30,29 +35,18 @@ export default function ContactForm() {
       });
       const payload = (await response.json()) as { error?: string };
       if (!response.ok) throw new Error(payload.error || "Message could not be sent.");
-      setDone(true);
-      form.reset();
+
+      sessionStorage.setItem(
+        CONTACT_THANK_YOU_STORAGE_KEY,
+        JSON.stringify({ firstName, company: company || undefined }),
+      );
+      router.push("/contact/thank-you");
+      return;
     } catch (err) {
       setError(err instanceof Error ? err.message : "Message could not be sent.");
     } finally {
       setSubmitting(false);
     }
-  }
-
-  if (done) {
-    return (
-      <div className="contact-success">
-        <p className="eyebrow">Message received</p>
-        <h2>Thank you. I will reply shortly.</h2>
-        <p>
-          Your note has been saved. If it is urgent,{" "}
-          <a href="/book-discovery-call">book a Discovery Call</a>.
-        </p>
-        <button type="button" className="text-link" onClick={() => setDone(false)}>
-          Send another message
-        </button>
-      </div>
-    );
   }
 
   return (

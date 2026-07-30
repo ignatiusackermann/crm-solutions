@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-const updated = "25 July 2026";
+const updated = "30 July 2026";
 
 const seoScores = [
   { label: "Overall SEO Health", score: 62 },
@@ -26,7 +26,10 @@ const seoScores = [
 const systems = [
   { name: "Public marketing site", status: "PASS", note: "Homepage, platform, audit, booking, contact, work, insights live on Vercel." },
   { name: "Supabase Postgres", status: "PASS", note: "Contact submissions, discovery bookings, payment plans." },
-  { name: "Resend email", status: "WATCH", note: "Test email to info@ delivered. Domain verification required for client mailboxes (itools24 etc.)." },
+  { name: "Resend email", status: "PASS", note: "crmsolutions.app Verified on Resend (30 Jul 2026). Admin test delivered to info@. SOP: docs/sop-resend-email.md — gate before every launch." },
+  { name: "Admin — payments", status: "PASS", note: "Generator + client plans list." },
+  { name: "Admin — Discovery bookings", status: "GAP", note: "Rows in discovery_bookings; no list/cancel UI yet. Blueprint: docs/project-blueprint/02-admin-dashboard-modules.md" },
+  { name: "Admin — Contact inbox", status: "GAP", note: "Rows in contact_submissions; no admin list yet. Same blueprint." },
   { name: "PayPal deposits", status: "WATCH", note: "Generator + client panel wired. Test bypass available in sandbox only." },
   { name: "Cloudflare Turnstile", status: "OPTIONAL", note: "Contact + client login when keys set; localhost skips when unset." },
   { name: "Clara voice advisor", status: "WATCH", note: "Depends on GEMINI_API_KEY; soft-fails with clear message if missing." },
@@ -41,7 +44,9 @@ const pages = [
   ["/revenue-platform", "Revenue Platform"],
   ["/revenue-leak-audit", "Revenue Leak Audit"],
   ["/book-discovery-call", "Book a Discovery Call"],
+  ["/book-discovery-call/thank-you", "Discovery thank-you (noindex)"],
   ["/contact", "Contact"],
+  ["/contact/thank-you", "Contact thank-you (noindex)"],
   ["/delivery-commitment", "Delivery Commitment"],
   ["/payment-options", "Payment Options"],
   ["/work/lava-sa", "Case study — Lava-SA"],
@@ -59,7 +64,10 @@ const pages = [
 ];
 
 const nextActions = [
-  { priority: "Do now", item: "Verify Resend domain crmsolutions.app and set PAYMENT_FROM_EMAIL for client plan emails." },
+  { priority: "Always", item: "Before outbound or live bookings: run docs/sop-resend-email.md hard gate (domain Verified + admin test Delivered). Never skip." },
+  { priority: "Always", item: "Copy docs/project-blueprint/ into every new site; run 00-pre-launch-gate.md before calling launch done." },
+  { priority: "Do now", item: "Admin: Discovery bookings list + cancel email; Contact submissions inbox (see project-blueprint/02)." },
+  { priority: "Do now", item: "Book one Discovery Call test after Resend verify; confirm client + admin rows in Resend → Emails." },
   { priority: "Do now", item: "Submit sitemap in Google Search Console: https://www.crmsolutions.app/sitemap.xml" },
   { priority: "Do now", item: "Add a dedicated OG image (1200×630) — currently summary cards without custom art." },
   { priority: "Soon", item: "Create /insights index hub and add Insights to footer + mobile nav." },

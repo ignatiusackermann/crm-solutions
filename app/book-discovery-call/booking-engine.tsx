@@ -1,6 +1,8 @@
 "use client";
 
 import { FormEvent, useEffect, useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
+import { DISCOVERY_BOOKING_STORAGE_KEY } from "./booking-storage";
 
 type Availability = {
   dates: string[];
@@ -72,37 +74,8 @@ function longSelection(date: string, time: string, timeZone: string) {
   }).format(localDateTime(date, time));
 }
 
-function makeIcs(booking: Booking) {
-  const stamp = (iso: string) => iso.replaceAll("-", "").replaceAll(":", "").replace(".000", "");
-  const safe = (value: string) =>
-    value.replaceAll("\\", "\\\\").replaceAll(",", "\\,").replaceAll(";", "\\;").replaceAll("\n", "\\n");
-  const content = [
-    "BEGIN:VCALENDAR",
-    "VERSION:2.0",
-    "PRODID:-//CRM Solutions//Discovery Call//EN",
-    "CALSCALE:GREGORIAN",
-    "METHOD:PUBLISH",
-    "BEGIN:VEVENT",
-    `UID:${booking.id}@crmsolutions.app`,
-    `DTSTAMP:${stamp(new Date().toISOString())}`,
-    `DTSTART:${stamp(booking.startUtc)}`,
-    `DTEND:${stamp(booking.endUtc)}`,
-    "SUMMARY:CRM Solutions Discovery Call",
-    `DESCRIPTION:${safe("Discovery Call with Ignatius Ackermann, CRM Solutions.")}`,
-    booking.meetingUrl ? `LOCATION:${safe(booking.meetingUrl)}` : "LOCATION:Online — joining details to follow",
-    "END:VEVENT",
-    "END:VCALENDAR",
-  ].join("\r\n");
-  const blob = new Blob([content], { type: "text/calendar;charset=utf-8" });
-  const href = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-  link.href = href;
-  link.download = "crm-solutions-discovery-call.ics";
-  link.click();
-  URL.revokeObjectURL(href);
-}
-
 export default function BookingEngine() {
+  const router = useRouter();
   const [availability, setAvailability] = useState<Availability | null>(null);
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState("");
@@ -114,7 +87,6 @@ export default function BookingEngine() {
   );
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
-  const [booking, setBooking] = useState<Booking | null>(null);
 
   useEffect(() => {
     fetch("/api/discovery-bookings", { cache: "no-store" })
@@ -166,9 +138,9 @@ export default function BookingEngine() {
       });
       const data = (await response.json()) as { booking?: Booking; error?: string };
       if (!response.ok || !data.booking) throw new Error(data.error || "The booking could not be completed.");
-      setBooking(data.booking);
-      setStep(4);
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      sessionStorage.setItem(DISCOVERY_BOOKING_STORAGE_KEY, JSON.stringify(data.booking));
+      router.push("/book-discovery-call/thank-you");
+      return;
     } catch (error) {
       setSubmitError(error instanceof Error ? error.message : "The booking could not be completed.");
       if (/already|choose another/i.test(error instanceof Error ? error.message : "")) {
@@ -209,51 +181,6 @@ export default function BookingEngine() {
     );
   }
 
-  if (booking) {
-    return (
-      <section className="booking-workspace booking-confirmed" aria-live="polite">
-        <div className="booking-confirmation">
-          <div className="confirmation-mark" aria-hidden="true">✓</div>
-          <p className="eyebrow eyebrow-light">Discovery Call reserved</p>
-          <h2>Thank you, {booking.firstName}.<br />Your call is confirmed.</h2>
-          <div className="confirmation-time">
-            <span>Your time</span>
-            <strong>{booking.visitorTime}</strong>
-            <small>South Africa: {booking.saTime}</small>
-          </div>
-          {booking.emailStatus === "scheduled" ? (
-            <p className="confirmation-copy">
-              A confirmation has been sent to <strong>{booking.email}</strong>, and Ignatius has been notified.
-            </p>
-          ) : booking.calendarStatus === "created" ? (
-            <p className="confirmation-copy">
-              A Google Calendar invitation with the Meet link has been sent to <strong>{booking.email}</strong>.
-            </p>
-          ) : (
-            <p className="confirmation-copy">
-              The appointment is securely reserved. Email delivery is awaiting final activation, so please
-              download the calendar file below for this test booking.
-            </p>
-          )}
-          <div className="confirmation-actions">
-            <a className="button button-copper" href={booking.googleCalendarUrl} target="_blank" rel="noreferrer">
-              Add to Google Calendar <Arrow />
-            </a>
-            <button className="result-secondary" type="button" onClick={() => makeIcs(booking)}>
-              Download calendar file
-            </button>
-          </div>
-          <p className="confirmation-note">
-            {booking.emailStatus === "scheduled"
-              ? "You will receive a reminder 24 hours before the meeting."
-              : "The 24-hour reminder will activate with the email-delivery connection."}
-            {booking.meetingUrl ? " Your joining link is included in the confirmation." : " Joining details will follow from Ignatius."}
-          </p>
-        </div>
-      </section>
-    );
-  }
-
   return (
     <section className="booking-workspace" id="booking">
       <div className="booking-shell section-shell">
@@ -264,14 +191,13 @@ export default function BookingEngine() {
               ["01", "Select date"],
               ["02", "Select time"],
               ["03", "Your details"],
-              ["04", "Confirmation"],
             ].map(([number, label], index) => {
               const itemStep = index + 1;
               return (
                 <li className={step === itemStep ? "current" : step > itemStep ? "complete" : ""} key={number}>
                   <button
                     type="button"
-                    disabled={itemStep >= step || itemStep === 4}
+                    disabled={itemStep >= step}
                     onClick={() => setStep(itemStep)}
                   >
                     <span>{step > itemStep ? "✓" : number}</span>

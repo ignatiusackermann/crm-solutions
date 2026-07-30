@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Script from "next/script";
 import ClientLoginForm from "./login-form";
+import RequestAccessForm from "./request-access-form";
 
 export const dynamic = "force-dynamic";
 
@@ -43,12 +44,12 @@ export default function ClientLoginPage() {
             <span>.</span>
           </h1>
           <p>
-            Use the email and temporary access code from your CRM Solutions welcome
-            email. This secure login remains your private client door for the life of
-            the engagement.
+            Use the email and temporary access code from your CRM Solutions payment
+            email. If that email is lost, request a new code below.
           </p>
         </div>
         <ClientLoginForm />
+        <RequestAccessForm />
         <p className="client-login-note">
           Prefer the private link from your email? You can use that instead.
           Cloudflare Turnstile protects this form when configured.

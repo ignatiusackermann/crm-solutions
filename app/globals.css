@@ -1,4 +1,4 @@
-@import "tailwindcss";
+﻿@import "tailwindcss";
 
 :root {
   --ink: #081521;
@@ -216,6 +216,69 @@ button, summary { font: inherit; }
   color: var(--slate);
   font-size: 14px;
   line-height: 1.7;
+}
+.client-request-access {
+  padding: 28px 36px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-top: 0;
+  display: grid;
+  gap: 14px;
+}
+.client-request-access-title {
+  margin: 0;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 600;
+}
+.client-request-access-copy {
+  margin: 0;
+  color: var(--slate);
+  font-size: 13px;
+  line-height: 1.65;
+}
+.client-request-access label {
+  display: grid;
+  gap: 8px;
+}
+.client-request-access label span {
+  font-size: 11px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--slate);
+}
+.client-request-access input {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: var(--canvas);
+  color: var(--ink);
+  font: inherit;
+}
+.client-request-access-done {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 13px;
+  line-height: 1.6;
+}
+.client-request-access .thank-you-secondary {
+  justify-self: start;
+}
+.admin-plan-resend {
+  display: block;
+  margin-top: 12px;
+  padding: 0;
+  border: 0;
+  border-bottom: 1px solid var(--copper);
+  background: transparent;
+  color: var(--ink-soft);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+.admin-plan-resend:disabled {
+  opacity: .5;
+  cursor: default;
 }
 
 .admin-login-page {
@@ -1376,6 +1439,212 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--copper); outli
   cursor: pointer;
 }
 .confirmation-note { margin: 30px 0 0; color: #758694; font-size: 11px; line-height: 1.65; }
+
+/* Discovery thank-you — light canvas (no navy-on-black card) */
+.thank-you-page { background: var(--canvas); }
+.thank-you-hero {
+  display: grid;
+  grid-template-columns: .95fr 1fr;
+  gap: 72px;
+  align-items: start;
+  padding: 110px 0 70px;
+  border-bottom: 1px solid var(--line);
+}
+.thank-you-hero h1 {
+  max-width: 10ch;
+  margin: 0;
+  font-size: clamp(52px, 6.2vw, 92px);
+  line-height: .98;
+  font-weight: 420;
+  letter-spacing: -.06em;
+}
+.thank-you-hero h1 > span { color: var(--copper); }
+.thank-you-lede {
+  margin: 22px 0 0;
+  max-width: 28ch;
+  color: var(--slate);
+  font-size: 17px;
+  line-height: 1.7;
+}
+.thank-you-panel {
+  padding: 42px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.thank-you-time {
+  margin: 0 0 28px;
+  padding: 0 0 28px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.thank-you-time span {
+  color: var(--copper);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+}
+.thank-you-time strong {
+  color: var(--ink);
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.35;
+}
+.thank-you-time small { color: var(--slate); font-size: 13px; }
+.thank-you-copy {
+  margin: 0;
+  color: var(--slate);
+  font-size: 16px;
+  line-height: 1.75;
+}
+.thank-you-actions {
+  margin-top: 34px;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+.thank-you-secondary {
+  padding: 8px 0;
+  border: 0;
+  border-bottom: 1px solid var(--copper);
+  background: transparent;
+  color: var(--ink-soft);
+  font: inherit;
+  font-size: 13px;
+  text-decoration: none;
+  cursor: pointer;
+}
+.thank-you-note {
+  margin: 28px 0 0;
+  color: var(--slate);
+  font-size: 12px;
+  line-height: 1.65;
+  max-width: 46ch;
+}
+
+@media (max-width: 900px) {
+  .thank-you-hero { grid-template-columns: 1fr; gap: 40px; padding: 70px 0 50px; }
+  .thank-you-hero h1 { max-width: none; font-size: 52px; }
+  .thank-you-actions { flex-direction: column; align-items: stretch; gap: 18px; }
+  .thank-you-secondary { align-self: flex-start; }
+}
+
+.thank-you-copy-gap { margin-top: 18px; }
+
+.contact-next {
+  padding: 95px 0 70px;
+  border-bottom: 1px solid var(--line);
+}
+.contact-next-head {
+  display: grid;
+  grid-template-columns: .9fr 1fr;
+  gap: 40px;
+  margin-bottom: 48px;
+  align-items: end;
+}
+.contact-next-head h2 {
+  margin: 0;
+  max-width: 18ch;
+  font-size: clamp(36px, 4vw, 54px);
+  line-height: 1.05;
+  font-weight: 420;
+  letter-spacing: -.04em;
+}
+.contact-next-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+.contact-next-card {
+  padding: 28px 0 8px;
+  border-top: 1px solid var(--line);
+}
+.contact-next-card > span {
+  display: block;
+  margin-bottom: 18px;
+  color: var(--copper);
+  font-size: 10px;
+  letter-spacing: .14em;
+}
+.contact-next-card h3 {
+  margin: 0 0 14px;
+  font-size: 22px;
+  font-weight: 480;
+  letter-spacing: -.02em;
+}
+.contact-next-card p {
+  margin: 0 0 22px;
+  color: var(--slate);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.contact-insights {
+  padding: 90px 0 110px;
+}
+.contact-insights-head {
+  max-width: 720px;
+  margin-bottom: 42px;
+}
+.contact-insights-head h2 {
+  margin: 0;
+  font-size: clamp(36px, 4vw, 54px);
+  line-height: 1.05;
+  font-weight: 420;
+  letter-spacing: -.04em;
+}
+.contact-insights-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+}
+.contact-insights-list li {
+  border-bottom: 1px solid var(--line);
+}
+.contact-insights-list a {
+  display: grid;
+  grid-template-columns: 1.1fr 1.2fr auto;
+  gap: 28px;
+  align-items: center;
+  padding: 26px 0;
+  text-decoration: none;
+  color: inherit;
+}
+.contact-insights-list a span {
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -.02em;
+  line-height: 1.35;
+}
+.contact-insights-list a em {
+  color: var(--slate);
+  font-style: normal;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.contact-insights-list a b {
+  color: var(--copper);
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.contact-insights-list a:hover span {
+  color: var(--copper);
+}
+
+@media (max-width: 900px) {
+  .contact-next-head,
+  .contact-next-grid,
+  .contact-insights-list a {
+    grid-template-columns: 1fr;
+  }
+  .contact-next-head { gap: 18px; }
+  .contact-insights-list a { gap: 10px; padding: 22px 0; }
+}
 .booking-expect {
   padding: 140px 0;
   display: grid;
@@ -1998,7 +2267,7 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--copper); outli
 @media(max-width:960px){.admin-workspace{grid-template-columns:1fr}.admin-sidebar{display:none}.admin-intro,.client-engagement{grid-template-columns:1fr;gap:55px}.client-payment-welcome{grid-template-columns:1fr}.client-payment-total{padding:30px 0 0;border-left:0;border-top:1px solid var(--line)}.client-installments article{grid-template-columns:40px 1fr .7fr}.client-installments article>button,.client-installments article>em{grid-column:2/-1;justify-self:start}.client-security-note{grid-template-columns:1fr 1fr}}
 @media(max-width:620px){.admin-header{grid-template-columns:1fr auto;padding:0 18px}.admin-header>div{display:none}.admin-content{width:calc(100% - 32px);padding-top:50px}.admin-intro h1{font-size:43px}.generator-form fieldset{padding:30px 20px}.generator-grid{grid-template-columns:1fr}.generator-submit{padding:25px 20px;align-items:stretch;flex-direction:column}.generated-panel{padding:30px 22px;grid-template-columns:1fr;gap:25px}.admin-plan-list article{grid-template-columns:1fr 1fr}.client-payment-header{grid-template-columns:1fr auto}.client-payment-header>span{display:none}.client-payment-shell{width:calc(100% - 36px);padding-top:60px}.client-payment-welcome h1{font-size:53px}.client-payment-total{min-width:0}.client-installments article{padding:25px 0;grid-template-columns:35px 1fr}.client-installments article>b,.client-installments article>button,.client-installments article>em{grid-column:2}.client-security-note{grid-template-columns:1fr;padding:28px 22px}}
 
-/* Clara — site-wide Gemini Live Voice Business Advisor */
+/* Clara â€” site-wide Gemini Live Voice Business Advisor */
 .voice-launcher {
   position: fixed;
   right: 24px;
@@ -2264,7 +2533,7 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--copper); outli
   body:has(.cookie-banner) .voice-launcher { display: none; }
 }
 
-/* —— Work case studies (ChatGPT Sites structure) —— */
+/* â€”â€” Work case studies (ChatGPT Sites structure) â€”â€” */
 .case-header-lava { background: #173b36; }
 .case-header-star { background: #2a3140; }
 .case-header-storvac { background: #1d3d48; }
