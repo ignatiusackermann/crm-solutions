@@ -45,11 +45,14 @@ export default function ClientLoginPage() {
           </h1>
           <p>
             Use the email and temporary access code from your CRM Solutions payment
-            email. If that email is lost, request a new code below.
+            email. If that email is lost, use the form under the login card to request a
+            new code.
           </p>
         </div>
-        <ClientLoginForm />
-        <RequestAccessForm />
+        <div className="client-login-stack">
+          <ClientLoginForm />
+          <RequestAccessForm />
+        </div>
         <p className="client-login-note">
           Prefer the private link from your email? You can use that instead.
           Cloudflare Turnstile protects this form when configured.

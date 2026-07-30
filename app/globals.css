@@ -211,6 +211,11 @@ button, summary { font: inherit; }
   display: grid;
   gap: 18px;
 }
+.client-login-stack {
+  display: grid;
+  gap: 0;
+  min-width: 0;
+}
 .client-login-note {
   grid-column: 1 / -1;
   color: var(--slate);
@@ -218,6 +223,7 @@ button, summary { font: inherit; }
   line-height: 1.7;
 }
 .client-request-access {
+  margin-top: 0;
   padding: 28px 36px;
   background: #fff;
   border: 1px solid var(--line);
