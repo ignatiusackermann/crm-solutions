@@ -133,13 +133,25 @@ function accessCode() {
   return `${code.slice(0, 4)}-${code.slice(4)}`;
 }
 
-function reference() {
-  return `CRM-${new Date().getUTCFullYear()}-${crypto
-    .getRandomValues(new Uint32Array(1))[0]
-    .toString(36)
-    .toUpperCase()
-    .padStart(6, "0")
-    .slice(0, 6)}`;
+/** Memorable sequential refs: CRM-2026-5801, CRM-2026-5802, … */
+async function nextReference(db: SqlDatabase) {
+  const year = new Date().getUTCFullYear();
+  const prefix = `CRM-${year}-`;
+  const startAt = 5801;
+  const rows = await db
+    .prepare(`SELECT reference FROM payment_plans WHERE reference LIKE ?`)
+    .bind(`${prefix}%`)
+    .all<{ reference: string }>();
+
+  let max = startAt - 1;
+  for (const row of rows.results || []) {
+    const match = String(row.reference).match(/^CRM-\d{4}-(\d+)$/);
+    if (!match) continue;
+    const value = Number(match[1]);
+    if (Number.isFinite(value) && value > max) max = value;
+  }
+
+  return `${prefix}${String(max + 1).padStart(4, "0")}`;
 }
 
 type PlanAccessRow = {
@@ -414,7 +426,6 @@ async function createPlan(r: Request, e: Env) {
   const planId = crypto.randomUUID();
   const depositId = crypto.randomUUID();
   const finalId = crypto.randomUUID();
-  const ref = reference();
   const access = token();
   const code = accessCode();
   const accessHash = await hash(access);
@@ -422,9 +433,11 @@ async function createPlan(r: Request, e: Env) {
   const now = new Date().toISOString();
   const dp = Math.round((deposit / total) * 1000) / 10;
   const fp = Math.round((final / total) * 1000) / 10;
+  let ref = "";
 
   try {
     const db = requireDb(e);
+    ref = await nextReference(db);
     await db.batch([
       db
         .prepare(

@@ -109,6 +109,10 @@ export default function RevenueLeakAudit() {
   const [answers, setAnswers] = useState<Answers>({});
   const [showResults, setShowResults] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [emailTo, setEmailTo] = useState("");
+  const [emailSending, setEmailSending] = useState(false);
+  const [emailStatus, setEmailStatus] = useState("");
+  const [emailError, setEmailError] = useState("");
 
   const stage = stages[stageIndex];
   const keys = stage.questions.map((_, index) => `${stageIndex}-${index}`);
@@ -143,6 +147,9 @@ export default function RevenueLeakAudit() {
     setStageIndex(0);
     setShowResults(false);
     setCopied(false);
+    setEmailTo("");
+    setEmailStatus("");
+    setEmailError("");
   }
 
   const summary = showResults
@@ -153,6 +160,43 @@ export default function RevenueLeakAudit() {
     await navigator.clipboard.writeText(summary);
     setCopied(true);
     window.setTimeout(() => setCopied(false), 2200);
+  }
+
+  async function emailResults() {
+    setEmailSending(true);
+    setEmailError("");
+    setEmailStatus("");
+    const band = bandFor(results.overall);
+    try {
+      const response = await fetch("/api/audit-results-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: emailTo,
+          overall: results.overall,
+          bandTitle: band.title,
+          bandCopy: band.copy,
+          summary,
+          priorities: results.ranked.slice(0, 3).map((item) => ({
+            title: item.title,
+            score: item.score,
+            consequence: item.consequence,
+            action: item.action,
+          })),
+        }),
+      });
+      const payload = (await response.json()) as { error?: string };
+      if (!response.ok) {
+        throw new Error(payload.error || "The results email could not be sent.");
+      }
+      setEmailStatus(`Results sent to ${emailTo.trim()}. Check inbox and junk.`);
+    } catch (error) {
+      setEmailError(
+        error instanceof Error ? error.message : "The results email could not be sent.",
+      );
+    } finally {
+      setEmailSending(false);
+    }
   }
 
   if (showResults) {
@@ -205,6 +249,38 @@ export default function RevenueLeakAudit() {
             </div>
             <div>
               <a className="button button-copper" href={`/book-discovery-call?source=revenue-leak-audit&score=${results.overall}`}>Book a Discovery Call <span aria-hidden="true">↗</span></a>
+              <form
+                className="audit-email-results"
+                onSubmit={(event) => {
+                  event.preventDefault();
+                  void emailResults();
+                }}
+              >
+                <label>
+                  <span>Email results to <em>(optional)</em></span>
+                  <input
+                    type="email"
+                    name="email"
+                    value={emailTo}
+                    onChange={(event) => setEmailTo(event.target.value)}
+                    placeholder="you@company.com"
+                    autoComplete="email"
+                  />
+                </label>
+                <button
+                  className="result-secondary"
+                  type="submit"
+                  disabled={emailSending || !emailTo.trim()}
+                >
+                  {emailSending ? "Sending…" : "Email my results"}
+                </button>
+              </form>
+              {emailStatus ? <p className="audit-email-status">{emailStatus}</p> : null}
+              {emailError ? (
+                <p className="audit-email-error" role="alert">
+                  {emailError}
+                </p>
+              ) : null}
               <button className="result-secondary" type="button" onClick={copySummary}>{copied ? "Summary copied" : "Copy result summary"}</button>
               <button className="result-secondary" type="button" onClick={reset}>Retake the audit</button>
             </div>

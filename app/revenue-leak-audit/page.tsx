@@ -26,8 +26,8 @@ export default function RevenueLeakAuditPage() {
             first action.
           </p>
           <div>
-            <span>No email required</span>
-            <span>Immediate result</span>
+            <span>No email to start</span>
+            <span>Optional email of results</span>
             <span>Built for decision-makers</span>
           </div>
         </div>
