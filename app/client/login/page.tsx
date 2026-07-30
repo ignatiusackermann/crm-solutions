@@ -37,19 +37,18 @@ export default function ClientLoginPage() {
         <Link href="/contact">Need help?</Link>
       </header>
       <section className="client-login-shell">
-        <div>
+        <div className="client-login-intro">
           <p className="eyebrow">Client login</p>
           <h1>
             Sign in to your account
             <span>.</span>
           </h1>
           <p>
-            Use the email and temporary access code from your CRM Solutions payment
-            email. If that email is lost, use the form under the login card to request a
-            new code.
+            Use the email and access code from your payment email. Lost the code? Request a
+            new one in the panel on the right — both options stay visible above the fold.
           </p>
         </div>
-        <div className="client-login-stack">
+        <div className="client-login-panels">
           <ClientLoginForm />
           <RequestAccessForm />
         </div>
