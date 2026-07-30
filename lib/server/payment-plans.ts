@@ -103,6 +103,147 @@ async function send(
   return { ok: false, error: detail };
 }
 
+const paymentFrom = (e: Env) =>
+  e.PAYMENT_FROM_EMAIL || "CRM Solutions <payments@crmsolutions.app>";
+
+/** Client + admin receipt after an installment is marked paid. Never throws. */
+async function notifyPaymentReceived(
+  e: Env,
+  installmentId: string,
+  opts?: { testMode?: boolean; forceResend?: boolean },
+): Promise<{ ok: boolean; error?: string }> {
+  if (!e.DB) return { ok: false, error: "Payment storage is not available." };
+  try {
+    const row = await e.DB.prepare(
+      `SELECT i.label, i.amount_cents AS "amountCents", i.sequence,
+              i.paypal_capture_id AS "captureId", i.status,
+              p.reference, p.title, p.currency,
+              c.first_name AS "firstName", c.email
+       FROM payment_installments i
+       JOIN payment_plans p ON p.id = i.plan_id
+       JOIN payment_clients c ON c.id = p.client_id
+       WHERE i.id = ? LIMIT 1`,
+    )
+      .bind(installmentId)
+      .first<{
+        label: string;
+        amountCents: number;
+        sequence: number;
+        captureId: string | null;
+        status: string;
+        reference: string;
+        title: string;
+        currency: string;
+        firstName: string;
+        email: string;
+      }>();
+
+    if (!row || row.status !== "paid") {
+      return { ok: false, error: "No paid instalment found." };
+    }
+    if (!validEmail(row.email)) {
+      return { ok: false, error: "Client email is invalid." };
+    }
+
+    const amount = money(Number(row.amountCents), String(row.currency));
+    const capture = row.captureId ? String(row.captureId) : "";
+    const testNote = opts?.testMode
+      ? `<p style="color:#c75c36;margin:16px 0 0"><strong>Test mode</strong> — this was a simulated payment for verification.</p>`
+      : "";
+    const details = `<div style="padding:22px;background:#f5f2ea;border-left:3px solid #c75c36;margin:22px 0">
+           <strong style="font-size:22px">${esc(amount)}</strong><br>
+           <small>${esc(String(row.label))} · ${esc(String(row.reference))}</small>
+           ${capture ? `<br><small style="color:#526172">Ref: ${esc(capture)}</small>` : ""}
+         </div>`;
+
+    const keySuffix = opts?.forceResend
+      ? `resend-${Date.now()}`
+      : installmentId;
+
+    const clientResult = await send(
+      e,
+      {
+        from: paymentFrom(e),
+        to: [row.email],
+        reply_to: e.ADMIN_EMAIL || ADMIN_EMAIL,
+        subject: `Payment received — ${row.reference}`,
+        html: shell(
+          `Payment confirmed, ${esc(String(row.firstName))}.`,
+          `<p style="color:#526172;line-height:1.7">Thank you. We have received your payment for <strong>${esc(String(row.title))}</strong>.</p>
+           ${details}
+           <p style="color:#526172;line-height:1.7">You can review remaining instalments anytime from your secure client payment panel.</p>
+           ${testNote}`,
+        ),
+      },
+      `payment-receipt-${keySuffix}`,
+    );
+
+    await send(
+      e,
+      {
+        from: paymentFrom(e),
+        to: [e.ADMIN_EMAIL || ADMIN_EMAIL],
+        subject: `Client paid ${amount} — ${row.reference}`,
+        html: shell(
+          `Payment received`,
+          `<p style="color:#526172;line-height:1.7"><strong>${esc(String(row.firstName))}</strong> (${esc(String(row.email))}) paid instalment ${esc(String(row.sequence))} on <strong>${esc(String(row.title))}</strong>.</p>
+           ${details}
+           ${testNote}`,
+        ),
+      },
+      `payment-receipt-admin-${keySuffix}`,
+    );
+
+    return clientResult.ok
+      ? { ok: true }
+      : { ok: false, error: clientResult.error };
+  } catch (error) {
+    console.error("Payment receipt notify failed", error);
+    return { ok: false, error: "Receipt email failed." };
+  }
+}
+
+async function resendReceiptAdmin(r: Request, e: Env) {
+  if (!(await admin(r, e))) {
+    return json({ error: "Authorised administrator access is required." }, 403);
+  }
+  if (!e.DB) return json({ error: "Payment storage is not available." }, 503);
+
+  let body: { planId?: string };
+  try {
+    body = await r.json();
+  } catch {
+    return json({ error: "Check the request and try again." }, 400);
+  }
+
+  const planId = clean(body.planId, 80);
+  if (!planId) return json({ error: "Select a payment plan." }, 400);
+
+  const paid = await e.DB.prepare(
+    `SELECT id, paypal_capture_id AS "captureId"
+     FROM payment_installments
+     WHERE plan_id = ? AND status = 'paid'
+     ORDER BY sequence DESC LIMIT 1`,
+  )
+    .bind(planId)
+    .first<{ id: string; captureId: string | null }>();
+
+  if (!paid) {
+    return json({ error: "No paid instalment on this plan yet." }, 409);
+  }
+
+  const result = await notifyPaymentReceived(e, paid.id, {
+    forceResend: true,
+    testMode: String(paid.captureId || "").startsWith("TEST-"),
+  });
+
+  return json({
+    ok: result.ok,
+    emailStatus: result.ok ? "sent" : "failed",
+    emailError: result.error,
+  });
+}
+
 const hex = (b: Uint8Array) =>
   [...b].map((x) => x.toString(16).padStart(2, "0")).join("");
 
@@ -494,7 +635,7 @@ async function createPlan(r: Request, e: Env) {
   const emailResult = await send(
     e,
     {
-      from: e.PAYMENT_FROM_EMAIL || "CRM Solutions <payments@crmsolutions.app>",
+      from: paymentFrom(e),
       to: [email],
       reply_to: e.ADMIN_EMAIL || ADMIN_EMAIL,
       subject: `Your CRM Solutions payment plan — ${ref}`,
@@ -515,6 +656,27 @@ async function createPlan(r: Request, e: Env) {
       ),
     },
     `payment-plan-${planId}`,
+  );
+
+  await send(
+    e,
+    {
+      from: paymentFrom(e),
+      to: [e.ADMIN_EMAIL || ADMIN_EMAIL],
+      subject: `Payment plan issued — ${ref} · ${first} ${last}`,
+      html: shell(
+        `Client payment plan issued`,
+        `<p style="color:#526172;line-height:1.7">A payment plan was generated for <strong>${esc(`${first} ${last}`)}</strong> (${esc(email)}).</p>
+         <div style="padding:22px;background:#f5f2ea;border-left:3px solid #c75c36;margin:22px 0">
+           <strong style="font-size:22px">${esc(money(total, currency))}</strong><br>
+           <small>${esc(ref)} · ${esc(title)}</small><br>
+           <small>Deposit due: ${esc(money(deposit, currency))}</small>
+         </div>
+         <p style="color:#526172;line-height:1.7">Client email status: <strong>${emailResult.ok ? "sent" : "failed"}</strong>${emailResult.error ? ` — ${esc(emailResult.error)}` : ""}.</p>
+         <p><a href="${esc(panelUrl)}" style="display:inline-block;margin-top:8px;padding:14px 20px;background:#0b2a55;color:#fff;text-decoration:none">Open client panel</a></p>`,
+      ),
+    },
+    `payment-plan-admin-${planId}`,
   );
 
   return json(
@@ -808,6 +970,7 @@ async function capture(r: Request, e: Env) {
     )
       .bind(installment.planId as string, installment.planId as string)
       .run();
+    await notifyPaymentReceived(e, id);
     panel.searchParams.set("payment", "success");
   } catch {
     panel.searchParams.set("payment", "error");
@@ -875,6 +1038,8 @@ async function markTestPayment(r: Request, e: Env) {
     .bind(installment.planId as string, installment.planId as string)
     .run();
 
+  await notifyPaymentReceived(e, id, { testMode: true });
+
   return json({ ok: true, captureId });
 }
 
@@ -892,6 +1057,9 @@ export async function handleAdminPaymentPlans(r: Request, e: Env) {
 
   if (clean(body.action, 40) === "resend-access") {
     return resendAccessAdmin(r, e);
+  }
+  if (clean(body.action, 40) === "resend-receipt") {
+    return resendReceiptAdmin(r, e);
   }
   return createPlan(r, e);
 }

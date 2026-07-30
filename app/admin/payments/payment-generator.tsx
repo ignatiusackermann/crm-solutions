@@ -39,7 +39,9 @@ export default function PaymentGenerator() {
   const [emailTest, setEmailTest] = useState("");
   const [emailTesting, setEmailTesting] = useState(false);
   const [resendingId, setResendingId] = useState("");
+  const [receiptingId, setReceiptingId] = useState("");
   const [accessResend, setAccessResend] = useState<AccessResend | null>(null);
+  const [receiptNotice, setReceiptNotice] = useState("");
 
   async function load() {
     const r = await fetch("/api/admin/payment-plans", { cache: "no-store" });
@@ -116,6 +118,33 @@ export default function PaymentGenerator() {
       setError(x instanceof Error ? x.message : "Could not resend access.");
     } finally {
       setResendingId("");
+    }
+  }
+
+  async function resendReceipt(planId: string) {
+    setReceiptingId(planId);
+    setError("");
+    setReceiptNotice("");
+    try {
+      const r = await fetch("/api/admin/payment-plans", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "resend-receipt", planId }),
+      });
+      const d = (await r.json()) as {
+        ok?: boolean;
+        emailStatus?: string;
+        emailError?: string;
+        error?: string;
+      };
+      if (!r.ok || !d.ok) {
+        throw new Error(d.error || d.emailError || "Could not send receipt.");
+      }
+      setReceiptNotice("Payment receipt emailed to the client (and admin copy).");
+    } catch (x) {
+      setError(x instanceof Error ? x.message : "Could not send receipt.");
+    } finally {
+      setReceiptingId("");
     }
   }
 
@@ -295,6 +324,11 @@ export default function PaymentGenerator() {
               {error}
             </p>
           ) : null}
+          {receiptNotice ? (
+            <p role="status" style={{ color: "#0b2a55", marginTop: 12 }}>
+              {receiptNotice}
+            </p>
+          ) : null}
           <div className="generator-submit">
             <p>The two instalments must add up to the total.</p>
             <button className="button button-copper" disabled={submitting}>
@@ -439,6 +473,18 @@ export default function PaymentGenerator() {
                     >
                       {resendingId === p.id ? "Sending…" : "Email new access code"}
                     </button>
+                    {p.paidCount > 0 ? (
+                      <button
+                        type="button"
+                        className="admin-plan-resend"
+                        disabled={receiptingId === p.id}
+                        onClick={() => resendReceipt(p.id)}
+                      >
+                        {receiptingId === p.id
+                          ? "Sending…"
+                          : "Email payment receipt"}
+                      </button>
+                    ) : null}
                   </div>
                 </article>
               ))}
