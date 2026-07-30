@@ -187,7 +187,6 @@ export function VoiceBusinessAdvisor() {
   const [muted, setMuted] = useState(false);
   const [speaking, setSpeaking] = useState(false);
   const [error, setError] = useState("");
-  const [microphone, setMicrophone] = useState("Microphone permission required");
 
   const sessionRef = useRef<Session | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
@@ -352,7 +351,6 @@ export function VoiceBusinessAdvisor() {
         },
       });
       streamRef.current = stream;
-      setMicrophone(stream.getAudioTracks()[0]?.label || "Connected microphone");
 
       const tokenResult = await fetch("/api/gemini-voice-token", {
         method: "POST",
@@ -529,18 +527,11 @@ export function VoiceBusinessAdvisor() {
             <button type="button" onClick={() => setOpen(false)} aria-label="Close voice advisor">×</button>
           </header>
           <div className="voice-panel-body">
-            <p className="voice-eyebrow">Your commercial guide</p>
             <h2>Ask. Understand.<br />Move forward.</h2>
             <p className="voice-intro">Clara can explain any point on this website, compare the options and open the page that makes the answer clearer.</p>
             <div className="voice-orbit" aria-hidden="true">
               <span /><span /><span />
               <VoiceGlyph />
-            </div>
-            <p className="voice-prompt">Tap below, then speak naturally.</p>
-            <div className="voice-device">
-              <span>Audio connection</span>
-              <strong>{microphone}</strong>
-              <small>Output: your system default</small>
             </div>
             {error && <p className="voice-error">{error}</p>}
             <button type="button" className="voice-start" onClick={() => void start()} disabled={status === "connecting"}>

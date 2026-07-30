@@ -2089,9 +2089,15 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--copper); outli
   padding-top: 28px;
   border-top: 1px solid var(--line);
 }
-.site-info-meta span {
+.site-info-meta span,
+.site-info-meta a {
   color: var(--ink-soft);
   font-size: 13px;
+}
+.site-info-meta a {
+  color: var(--copper);
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 .site-info-section { padding: 70px 0; border-top: 1px solid var(--line); }
 .site-info-section-head { max-width: 820px; margin-bottom: 36px; }
@@ -2231,6 +2237,89 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--copper); outli
   font-size: 12px;
   letter-spacing: .12em;
   text-transform: uppercase;
+}
+.site-info-clara-bounds {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0;
+  margin: 0 0 28px;
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+.site-info-clara-bounds article {
+  padding: 20px 22px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: #fff;
+}
+.site-info-clara-bounds p {
+  margin: 0 0 12px;
+  color: var(--ink-soft);
+  font-size: 14px;
+  line-height: 1.6;
+}
+.site-info-clara-bounds p:last-child { margin-bottom: 0; }
+.site-info-clara-bounds strong {
+  display: inline-block;
+  min-width: 4.2em;
+  color: var(--copper);
+  font-size: 11px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.site-info-clara-score {
+  margin: 0 0 36px;
+  padding: 18px 22px;
+  border-left: 3px solid var(--copper);
+  background: rgba(199, 92, 54, .06);
+}
+.site-info-clara-score p {
+  margin: 0 0 8px;
+  color: var(--ink-soft);
+  font-size: 14px;
+  line-height: 1.55;
+}
+.site-info-clara-score p:last-child { margin-bottom: 0; }
+.site-info-clara-blocks {
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--line);
+}
+.site-info-clara-blocks article {
+  padding: 28px 0;
+  border-bottom: 1px solid var(--line);
+}
+.site-info-clara-blocks header {
+  max-width: 720px;
+  margin-bottom: 16px;
+}
+.site-info-clara-blocks h3 {
+  margin: 0 0 8px;
+  color: var(--deep-blue);
+  font-size: 18px;
+  font-weight: 560;
+}
+.site-info-clara-blocks header p {
+  margin: 0;
+  color: var(--slate, #526172);
+  font-size: 14px;
+  line-height: 1.55;
+}
+.site-info-clara-blocks ol {
+  margin: 0;
+  padding: 0 0 0 1.25rem;
+  display: grid;
+  gap: 10px;
+}
+.site-info-clara-blocks li {
+  color: var(--ink-soft);
+  font-size: 15px;
+  line-height: 1.55;
+}
+@media (max-width: 760px) {
+  .site-info-clara-bounds {
+    grid-template-columns: 1fr;
+  }
 }
 .site-info-actions { display: grid; gap: 0; border-top: 1px solid var(--line); }
 .site-info-actions article {
@@ -2419,14 +2508,13 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--copper); outli
   font-size: 25px;
   font-weight: 250;
 }
-.voice-panel-body { padding: 31px 28px 24px; text-align: center; }
-.voice-eyebrow { margin: 0 0 14px; color: var(--copper); font-size: 9px; text-transform: uppercase; letter-spacing: .18em; font-weight: 650; }
-.voice-panel-body h2 { font-size: 39px; line-height: .98; font-weight: 430; letter-spacing: -.055em; }
-.voice-intro { max-width: 330px; margin: 17px auto 18px; color: var(--slate); font-size: 12px; line-height: 1.65; }
+.voice-panel-body { padding: 28px 28px 22px; text-align: center; }
+.voice-panel-body h2 { margin: 0; font-size: 36px; line-height: .98; font-weight: 430; letter-spacing: -.055em; }
+.voice-intro { max-width: 330px; margin: 14px auto 10px; color: var(--slate); font-size: 12px; line-height: 1.65; }
 .voice-orbit {
-  width: 104px;
-  height: 104px;
-  margin: 12px auto 8px;
+  width: 96px;
+  height: 96px;
+  margin: 8px auto 4px;
   position: relative;
   display: grid;
   place-items: center;
@@ -2446,23 +2534,11 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--copper); outli
 .voice-orbit > span:nth-child(2) { top: 17px; right: 19px; }
 .voice-orbit > span:nth-child(3) { bottom: 12px; left: 24px; background: var(--blue); }
 .voice-orbit svg { position: relative; z-index: 2; width: 25px; height: 25px; }
-.voice-prompt { margin: 0 0 16px; color: var(--copper); font-family: Georgia,serif; font-size: 11px; letter-spacing: .11em; text-transform: uppercase; }
-.voice-device {
-  padding: 12px 14px;
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-  border: 1px solid #dfe4e7;
-  text-align: left;
-}
-.voice-device span { color: var(--copper); font-size: 8px; text-transform: uppercase; letter-spacing: .12em; }
-.voice-device strong { overflow: hidden; color: var(--ink-soft); font-size: 10px; font-weight: 550; text-overflow: ellipsis; white-space: nowrap; }
-.voice-device small { color: #7a8995; font-size: 9px; }
 .voice-error { margin: 11px 0 0; padding: 10px 12px; border-left: 3px solid var(--copper); background: #fff2ed; color: #8c371f; font-size: 10px; line-height: 1.5; text-align: left; }
 .voice-start {
   width: 100%;
   min-height: 54px;
-  margin-top: 16px;
+  margin-top: 14px;
   border: 0;
   display: flex;
   align-items: center;
@@ -2524,8 +2600,10 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--copper); outli
   width: min(540px,calc(100vw - 32px));
   padding: 27px;
   position: fixed;
-  left: 16px;
-  bottom: 16px;
+  left: 50%;
+  top: 50%;
+  bottom: auto;
+  transform: translate(-50%, -50%);
   z-index: 1050;
   display: grid;
   grid-template-columns: 34px 1fr;
@@ -2587,18 +2665,25 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--copper); outli
   .voice-launcher-icon { width: 46px; height: 46px; border-radius: 50%; }
   .voice-launcher > span:last-child { display: none; }
   .voice-panel { left: 10px; right: auto; bottom: 10px; width: calc(100vw - 20px); max-height: calc(100svh - 20px); }
-  .voice-panel-body { padding: 25px 20px 20px; }
-  .voice-panel-body h2 { font-size: 35px; }
+  .voice-panel-body { padding: 22px 20px 18px; }
+  .voice-panel-body h2 { font-size: 32px; }
   .voice-intro { font-size: 11px; }
   .voice-active-bar { bottom: 10px; min-width: calc(100vw - 20px); grid-template-columns: 10px 1fr auto auto; gap: 8px; padding-left: 13px; }
   .voice-active-bar small { display: none; }
   .voice-control { width: 44px; padding: 0; justify-content: center; }
   .voice-control span { display: none; }
   .voice-end { min-width: 56px; }
-  .cookie-banner { width: calc(100vw - 20px); left: 10px; bottom: 10px; padding: 21px 18px; grid-template-columns: 28px 1fr; }
+  .cookie-banner {
+    width: calc(100vw - 20px);
+    left: 50%;
+    top: 50%;
+    bottom: auto;
+    transform: translate(-50%, -50%);
+    padding: 21px 18px;
+    grid-template-columns: 28px 1fr;
+  }
   .cookie-copy h2 { font-size: 21px; }
   .cookie-actions { grid-template-columns: 1fr; }
-  body:has(.cookie-banner) .voice-launcher { display: none; }
 }
 
 /* â€”â€” Work case studies (ChatGPT Sites structure) â€”â€” */
