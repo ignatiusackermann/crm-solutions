@@ -15,7 +15,7 @@ Recipient addresses (`@gmail.com`, `@itools24.co.za`, prospect clinics, etc.) ne
 | 2 | DNS SPF includes Resend (HostGator Zone Editor) | Single TXT: `v=spf1 +a +mx +ip4:… include:amazonses.com ~all` (one SPF only) |
 | 3 | DKIM CNAMEs present | `resend` / `resend2` / `resend3` `._domainkey` → Resend |
 | 4 | Vercel Production `RESEND_API_KEY` | Matches an API key from **this same** Resend project |
-| 5 | From addresses | `DISCOVERY_FROM_EMAIL` / `PAYMENT_FROM_EMAIL` use `@crmsolutions.app` (e.g. `bookings@` or `payments@`) |
+| 5 | From addresses | Contact: `contact@` · Discovery: `bookings@` · Payments: `payments@` (all on verified domain) |
 | 6 | Proof send | `/admin/payments` → **Send test email** → inbox + Resend → Emails = **Delivered** |
 | 7 | Discovery proof | Book one test Discovery Call → client + admin rows appear in Resend |
 

@@ -23,8 +23,7 @@ const esc = (v: string) =>
 function fromAddress(env: Env) {
   return (
     env.CONTACT_FROM_EMAIL ||
-    env.DISCOVERY_FROM_EMAIL ||
-    "CRM Solutions <bookings@crmsolutions.app>"
+    "CRM Solutions <contact@crmsolutions.app>"
   );
 }
 
