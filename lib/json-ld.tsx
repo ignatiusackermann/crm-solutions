@@ -23,7 +23,7 @@ export function organizationSchema() {
     url: SITE_URL,
     logo: `${SITE_URL}/favicon.svg`,
     description:
-      "Founder-led connected revenue platforms for established businesses—website, customer journey, CRM, automation and follow-up designed as one commercial system.",
+      "Connected revenue platforms for established businesses—website, customer journey, CRM, automation and follow-up designed as one commercial system.",
     founder: {
       "@type": "Person",
       name: "Ignatius Ackermann",

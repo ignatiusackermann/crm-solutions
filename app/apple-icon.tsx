@@ -3,7 +3,7 @@ import { ImageResponse } from "next/og";
 export const size = { width: 180, height: 180 };
 export const contentType = "image/png";
 
-/** Apple touch icon — same three-node brand mark as the site wordmark. */
+/** Apple touch icon — light canvas so it matches the site, not a black tile. */
 export default function AppleIcon() {
   return new ImageResponse(
     (
@@ -14,17 +14,16 @@ export default function AppleIcon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "#071726",
+          background: "#f5f2ea",
           position: "relative",
         }}
       >
-        {/* Connectors approximated as thin bars */}
         <div
           style={{
             position: "absolute",
             width: 52,
             height: 3,
-            background: "#8a9aa8",
+            background: "#6b7c8a",
             left: 58,
             top: 72,
             transform: "rotate(-28deg)",
@@ -36,14 +35,13 @@ export default function AppleIcon() {
             position: "absolute",
             width: 52,
             height: 3,
-            background: "#8a9aa8",
+            background: "#6b7c8a",
             left: 58,
             top: 105,
             transform: "rotate(28deg)",
             transformOrigin: "left center",
           }}
         />
-        {/* Left — deep blue filled */}
         <div
           style={{
             position: "absolute",
@@ -55,7 +53,6 @@ export default function AppleIcon() {
             top: 72,
           }}
         />
-        {/* Top-right — copper outline */}
         <div
           style={{
             position: "absolute",
@@ -67,7 +64,6 @@ export default function AppleIcon() {
             top: 36,
           }}
         />
-        {/* Bottom-right — copper filled */}
         <div
           style={{
             position: "absolute",

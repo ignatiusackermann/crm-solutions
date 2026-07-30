@@ -30,13 +30,13 @@ export const metadata: Metadata = {
     siteName: "CRM Solutions",
     title: "CRM Solutions | Connected Revenue Platforms",
     description:
-      "Founder-led revenue systems that stop leakage between click and cash.",
+      "Revenue systems that stop leakage between click and cash.",
   },
   twitter: {
     card: "summary_large_image",
     title: "CRM Solutions | Connected Revenue Platforms",
     description:
-      "Founder-led revenue systems that stop leakage between click and cash.",
+      "Revenue systems that stop leakage between click and cash.",
   },
   robots: {
     index: true,
