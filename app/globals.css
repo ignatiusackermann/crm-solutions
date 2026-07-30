@@ -2293,7 +2293,8 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--copper); outli
 /* Clara â€” site-wide Gemini Live Voice Business Advisor */
 .voice-launcher {
   position: fixed;
-  right: 24px;
+  left: 24px;
+  right: auto;
   bottom: 24px;
   z-index: 1100;
   min-width: 224px;
