@@ -4,22 +4,25 @@
 
 ## Module checklist for every agency site
 
-| # | Module | Must do | CRM Solutions (30 Jul 2026) |
+| # | Module | Must do | CRM Solutions (1 Aug 2026) |
 |---|--------|---------|------------------------------|
 | 1 | **Auth** | Secure admin login | PASS |
 | 2 | **Payment plans** | Create plan, list, status, test email | PASS (`/admin/payments`) |
-| 3 | **Discovery / bookings** | Calendar or list, confirm, **cancel + email client** | **GAP** — data in `discovery_bookings` only |
-| 4 | **Contact submissions** | List, open message, mark handled | **GAP** — data in `contact_submissions` only |
-| 5 | **Survey / Leak Audit** | Who took it, scores, answers | **GAP** — not stored |
-| 6 | **Voice register** | Timestamp, summary/notes (even manual) | **GAP** |
+| 3 | **Discovery / bookings** | Calendar or list, confirm, **cancel + email client** | **PASS** — `/admin/bookings` list + month calendar + cancel email |
+| 4 | **Contact submissions** | List, open message, mark handled | **PASS** — `/admin/contact` |
+| 5 | **Survey / Leak Audit** | Who took it, scores, answers | **PASS** — stored on email-results + `/admin/audits` |
+| 6 | **Voice register** | Timestamp, summary/notes (even manual) | **PASS** — `/admin/voice` (manual; missed calls supported) |
 | 7 | **Client progress** (later) | Milestones beyond payment | Not started |
-| 8 | **Traffic / Analytics** | GA embed or link-out | Deferred (OK) |
+| 8 | **Traffic / Analytics** | GA embed or link-out | **PASS** — `/admin/traffic` + consent-gated GA4 tag |
 
-## Minimum booking admin (build next)
+## Minimum booking admin
 
 1. Table: date/time (visitor + SA), name, company, email, phone, status, email_status  
 2. Actions: open detail, **Cancel** (set status `cancelled`, free slot, email client + remove/update Google event if present)  
 3. Filter: upcoming / past / cancelled  
+4. Month calendar of confirmed calls (SAST)
+
+**Confirm model:** bookings are auto-confirmed on public submit (slot + Google + emails). Admin action is cancel (and join Meet / email).
 
 ## Minimum contact admin
 
@@ -27,14 +30,26 @@
 2. Detail view: full message + mailto / WhatsApp  
 3. Mark handled  
 
-## Sidebar IA (suggested)
+## Voice / missed calls
+
+1. Manual log today: channel, direction, outcome (`missed` | `answered` | `voicemail` | `callback` | …), summary, notes  
+2. Later: Twilio (or similar) inbound webhook → same `voice_call_log` table  
+
+## Traffic
+
+1. Yes — pull from **Google Analytics 4**  
+2. Site: `NEXT_PUBLIC_GA_MEASUREMENT_ID` + cookie consent gate  
+3. Admin: link-out to GA4 (`/admin/traffic`), optional `GA4_PROPERTY_ID` deep link  
+
+## Sidebar IA
 
 ```
-01 Payment Generator / Plans
-02 Discovery Bookings     ← missing
-03 Contact Inbox          ← missing
-04 Audit Results          ← later
-05 Voice Log              ← later
+01 Discovery Bookings     ← /admin/bookings
+02 Contact Inbox          ← /admin/contact
+03 Voice Log              ← /admin/voice
+04 Audit Results          ← /admin/audits
+05 Payment Generator      ← /admin/payments
+06 Website Traffic        ← /admin/traffic
 ```
 
 ## Do not ship again without

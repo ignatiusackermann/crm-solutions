@@ -1,33 +1,33 @@
 import type { Metadata } from "next";
 import { AdminShell } from "@/components/admin/admin-shell";
 import { requireAdminUser } from "@/lib/admin-auth";
-import PaymentGenerator from "./payment-generator";
+import VoiceClient from "./voice-client";
 
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Payment Generator | CRM Solutions Admin",
+  title: "Voice Log | CRM Solutions Admin",
   robots: { index: false, follow: false },
 };
 
-export default async function AdminPaymentsPage() {
-  const user = await requireAdminUser("/admin/payments");
+export default async function AdminVoicePage() {
+  const user = await requireAdminUser("/admin/voice");
 
   return (
     <AdminShell
       user={user}
-      active="payments"
+      active="voice"
       sidebarExtra={
         <div>
-          <strong>Secure access</strong>
+          <strong>Missed calls</strong>
           <p>
-            Client panels use a private access link. PayPal credentials never enter this
-            dashboard.
+            Log missed inbound calls here today. Automatic capture needs a phone provider
+            webhook (e.g. Twilio) pointed at this table later.
           </p>
         </div>
       }
     >
-      <PaymentGenerator />
+      <VoiceClient />
     </AdminShell>
   );
 }

@@ -1,33 +1,33 @@
 import type { Metadata } from "next";
 import { AdminShell } from "@/components/admin/admin-shell";
 import { requireAdminUser } from "@/lib/admin-auth";
-import PaymentGenerator from "./payment-generator";
+import AuditsClient from "./audits-client";
 
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Payment Generator | CRM Solutions Admin",
+  title: "Audit Results | CRM Solutions Admin",
   robots: { index: false, follow: false },
 };
 
-export default async function AdminPaymentsPage() {
-  const user = await requireAdminUser("/admin/payments");
+export default async function AdminAuditsPage() {
+  const user = await requireAdminUser("/admin/audits");
 
   return (
     <AdminShell
       user={user}
-      active="payments"
+      active="audits"
       sidebarExtra={
         <div>
-          <strong>Secure access</strong>
+          <strong>Leak Audit</strong>
           <p>
-            Client panels use a private access link. PayPal credentials never enter this
-            dashboard.
+            Results are stored when a prospect emails themselves the diagnostic from the public
+            audit tool.
           </p>
         </div>
       }
     >
-      <PaymentGenerator />
+      <AuditsClient />
     </AdminShell>
   );
 }

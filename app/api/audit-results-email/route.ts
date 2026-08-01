@@ -52,6 +52,32 @@ export async function POST(request: Request) {
     );
   }
 
+  const id = crypto.randomUUID();
+  const now = new Date().toISOString();
+  if (env.DB) {
+    try {
+      await env.DB.prepare(
+        `INSERT INTO audit_results
+          (id, email, overall, band_title, band_copy, summary, priorities_json, source, created_at)
+         VALUES (?, ?, ?, ?, ?, ?, ?, 'website', ?)`,
+      )
+        .bind(
+          id,
+          email,
+          Math.round(overall),
+          bandTitle || null,
+          bandCopy || null,
+          summary,
+          JSON.stringify(priorities),
+          now,
+        )
+        .run();
+    } catch (error) {
+      console.error("audit_results insert failed", error);
+      // Still send email — storage must not block the prospect.
+    }
+  }
+
   const priorityHtml = priorities
     .map((item, index) => {
       const title = esc(clean(item.title, 120) || `Priority ${index + 1}`);
@@ -72,7 +98,7 @@ export async function POST(request: Request) {
     headers: {
       Authorization: `Bearer ${env.RESEND_API_KEY}`,
       "Content-Type": "application/json",
-      "Idempotency-Key": `audit-results-${email}-${overall}-${Date.now()}`,
+      "Idempotency-Key": `audit-results-${id}`,
     },
     body: JSON.stringify({
       from,

@@ -28,7 +28,7 @@ const systems = [
   { name: "Supabase Postgres", status: "PASS", note: "Contact submissions, discovery bookings, payment plans." },
   { name: "Resend email", status: "PASS", note: "crmsolutions.app Verified on Resend (30 Jul 2026). Admin test delivered to info@. SOP: docs/sop-resend-email.md — gate before every launch." },
   { name: "Admin — payments", status: "PASS", note: "Generator + client plans list." },
-  { name: "Admin — Discovery bookings", status: "GAP", note: "Rows in discovery_bookings; no list/cancel UI yet. Blueprint: docs/project-blueprint/02-admin-dashboard-modules.md" },
+  { name: "Admin — Discovery bookings", status: "PASS", note: "/admin/bookings — list, filters, brief, cancel + email + calendar free." },
   { name: "Admin — Contact inbox", status: "GAP", note: "Rows in contact_submissions; no admin list yet. Same blueprint." },
   { name: "PayPal deposits", status: "WATCH", note: "Generator + client panel wired. Test bypass available in sandbox only." },
   { name: "Cloudflare Turnstile", status: "OPTIONAL", note: "Contact + client login when keys set; localhost skips when unset." },
@@ -60,6 +60,7 @@ const pages = [
   ["/client/payment", "Client payment (noindex)"],
   ["/admin/login", "Admin login (noindex)"],
   ["/admin/payments", "Payment Generator (noindex)"],
+  ["/admin/bookings", "Discovery Bookings log (noindex)"],
   ["/site-info", "Site Info (this page, noindex)"],
 ];
 
@@ -189,7 +190,7 @@ const claraQaBlocks: { id: string; title: string; note: string; items: string[] 
 const nextActions = [
   { priority: "Always", item: "Before outbound or live bookings: run docs/sop-resend-email.md hard gate (domain Verified + admin test Delivered). Never skip." },
   { priority: "Always", item: "Copy docs/project-blueprint/ into every new site; run 00-pre-launch-gate.md before calling launch done." },
-  { priority: "Do now", item: "Admin: Discovery bookings list + cancel email; Contact submissions inbox (see project-blueprint/02)." },
+  { priority: "Do now", item: "Admin: Contact submissions inbox (Discovery bookings shipped — see /admin/bookings)." },
   { priority: "Do now", item: "Book one Discovery Call test after Resend verify; confirm client + admin rows in Resend → Emails." },
   { priority: "Do now", item: "Run Clara QA checklist on this page (identity, navigation, audit, discovery, 3 projects, safety)." },
   { priority: "Do now", item: "Submit sitemap in Google Search Console: https://www.crmsolutions.app/sitemap.xml" },

@@ -175,33 +175,7 @@ export default function PaymentGenerator() {
   }
 
   return (
-    <div className="admin-workspace">
-      <aside className="admin-sidebar">
-        <p>Workspace</p>
-        <a className="active" href="#generator">
-          <span>01</span> Payment Generator
-        </a>
-        <a href="#plans">
-          <span>02</span> Client Plans
-        </a>
-        <div>
-          <strong>Secure access</strong>
-          <p>
-            Client panels use a private access link. PayPal credentials never enter this
-            dashboard.
-          </p>
-          <button
-            type="button"
-            className="admin-sidebar-test"
-            disabled={emailTesting}
-            onClick={sendTestEmail}
-          >
-            {emailTesting ? "Sending test…" : "Send test email"}
-          </button>
-          {emailTest ? <small>{emailTest}</small> : null}
-        </div>
-      </aside>
-      <div className="admin-content">
+    <>
         <section className="admin-intro" id="generator">
           <div>
             <p className="eyebrow">Payment Generator</p>
@@ -210,10 +184,21 @@ export default function PaymentGenerator() {
               <span>.</span>
             </h1>
           </div>
-          <p>
-            Enter the agreed commercial details. The system creates the client profile, two
-            instalments and a private Client Payment Panel.
-          </p>
+          <div>
+            <p>
+              Enter the agreed commercial details. The system creates the client profile, two
+              instalments and a private Client Payment Panel.
+            </p>
+            <button
+              type="button"
+              className="admin-inline-test"
+              disabled={emailTesting}
+              onClick={sendTestEmail}
+            >
+              {emailTesting ? "Sending test…" : "Send test email"}
+            </button>
+            {emailTest ? <small className="admin-inline-test-note">{emailTest}</small> : null}
+          </div>
         </section>
         <form className="generator-form" onSubmit={submit}>
           <fieldset>
@@ -491,7 +476,6 @@ export default function PaymentGenerator() {
             </div>
           )}
         </section>
-      </div>
-    </div>
+    </>
   );
 }

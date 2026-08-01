@@ -1,33 +1,33 @@
 import type { Metadata } from "next";
 import { AdminShell } from "@/components/admin/admin-shell";
 import { requireAdminUser } from "@/lib/admin-auth";
-import PaymentGenerator from "./payment-generator";
+import ContactClient from "./contact-client";
 
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Payment Generator | CRM Solutions Admin",
+  title: "Contact Inbox | CRM Solutions Admin",
   robots: { index: false, follow: false },
 };
 
-export default async function AdminPaymentsPage() {
-  const user = await requireAdminUser("/admin/payments");
+export default async function AdminContactPage() {
+  const user = await requireAdminUser("/admin/contact");
 
   return (
     <AdminShell
       user={user}
-      active="payments"
+      active="contact"
       sidebarExtra={
         <div>
-          <strong>Secure access</strong>
+          <strong>Contact inbox</strong>
           <p>
-            Client panels use a private access link. PayPal credentials never enter this
-            dashboard.
+            Website enquiries with full message text. Mark replied or archived after you act —
+            Resend is not the inbox.
           </p>
         </div>
       }
     >
-      <PaymentGenerator />
+      <ContactClient />
     </AdminShell>
   );
 }

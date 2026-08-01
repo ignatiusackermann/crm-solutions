@@ -71,8 +71,8 @@ Modules: [`02-admin-dashboard-modules.md`](02-admin-dashboard-modules.md)
 | Contact thank-you page | PASS (code; confirm after deploy) |
 | Discovery thank-you page | PASS (code; confirm after deploy) |
 | Admin payments | PASS |
-| Admin Discovery bookings | **GAP** |
-| Admin contact submissions | **GAP** |
-| Survey storage + admin | **GAP** |
-| Voice register | **GAP** |
-| Analytics panel | Deferred |
+| Admin Discovery bookings | **PASS** (`/admin/bookings` list + calendar + cancel) |
+| Admin contact submissions | **PASS** (`/admin/contact`) |
+| Survey storage + admin | **PASS** (`audit_results` + `/admin/audits`) |
+| Voice register | **PASS** (manual `/admin/voice`; Twilio later for auto missed calls) |
+| Analytics panel | **PASS** (`/admin/traffic` + consent-gated GA4) |

@@ -1,6 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import { Analytics } from "@/components/analytics";
 import { CookieConsent } from "./cookie-consent";
 import { VoiceBusinessAdvisor } from "./voice-business-advisor";
 
@@ -11,6 +12,7 @@ export function SiteExperience() {
 
   return (
     <>
+      <Analytics />
       <CookieConsent />
       <VoiceBusinessAdvisor />
     </>

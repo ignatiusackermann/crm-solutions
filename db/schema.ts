@@ -100,3 +100,45 @@ export const paymentInstallments = pgTable(
     ),
   ],
 );
+
+export const contactSubmissions = pgTable("contact_submissions", {
+  id: text("id").primaryKey(),
+  firstName: text("first_name").notNull(),
+  lastName: text("last_name").notNull(),
+  email: text("email").notNull(),
+  phone: text("phone"),
+  company: text("company"),
+  message: text("message").notNull(),
+  source: text("source").default("website").notNull(),
+  status: text("status").default("new").notNull(),
+  createdAt: text("created_at").notNull(),
+});
+
+export const voiceCallLog = pgTable("voice_call_log", {
+  id: text("id").primaryKey(),
+  occurredAt: text("occurred_at").notNull(),
+  channel: text("channel").default("phone").notNull(),
+  direction: text("direction").default("inbound").notNull(),
+  outcome: text("outcome").default("answered").notNull(),
+  contactName: text("contact_name"),
+  phone: text("phone"),
+  email: text("email"),
+  company: text("company"),
+  summary: text("summary").notNull(),
+  notes: text("notes"),
+  source: text("source").default("admin").notNull(),
+  createdAt: text("created_at").notNull(),
+  updatedAt: text("updated_at"),
+});
+
+export const auditResults = pgTable("audit_results", {
+  id: text("id").primaryKey(),
+  email: text("email").notNull(),
+  overall: integer("overall").notNull(),
+  bandTitle: text("band_title"),
+  bandCopy: text("band_copy"),
+  summary: text("summary").notNull(),
+  prioritiesJson: text("priorities_json"),
+  source: text("source").default("website").notNull(),
+  createdAt: text("created_at").notNull(),
+});
