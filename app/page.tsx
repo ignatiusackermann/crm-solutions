@@ -378,7 +378,7 @@ export default function Home() {
               since 2001. The objective is not to chase the newest tool. It is to decide what will help the business
               earn, save, learn and improve.
             </p>
-            <a className="text-link text-link-light" href="/contact">Meet Ignatius <Arrow /></a>
+            <a className="text-link text-link-light" href="/ignatius-ackermann">Meet Ignatius <Arrow /></a>
             <p className="section-deep-link">
               <a href="/insights/no-junior-handoff">
                 Who actually builds the system after the strategy call? <Arrow />
@@ -426,7 +426,11 @@ export default function Home() {
               Final investment depends on business complexity, customer journeys, content depth,
               integrations and the value of the problem—not an arbitrary page count.
             </p>
-            <a className="button button-copper" href="/revenue-leak-audit">Find Out If We Are a Fit <Arrow /></a>
+            <p>
+              The standard arrangement is two equal payments. Where it suits the business, a third
+              to begin with two monthly thirds can be arranged.
+            </p>
+            <a className="button button-copper" href="/book-discovery-call">Find Out If We Are a Fit <Arrow /></a>
             <p className="section-deep-link">
               <a href="/insights/revenue-platform-investment">
                 What should a revenue platform investment actually buy? <Arrow />

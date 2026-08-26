@@ -1,5 +1,5 @@
 "use client";
-import { FormEvent, useEffect, useState } from "react";
+import { Fragment, FormEvent, useEffect, useState } from "react";
 
 type Plan = {
   id: string;
@@ -42,6 +42,7 @@ export default function PaymentGenerator() {
   const [receiptingId, setReceiptingId] = useState("");
   const [accessResend, setAccessResend] = useState<AccessResend | null>(null);
   const [receiptNotice, setReceiptNotice] = useState("");
+  const [paymentCount, setPaymentCount] = useState(2);
 
   async function load() {
     const r = await fetch("/api/admin/payment-plans", { cache: "no-store" });
@@ -269,39 +270,67 @@ export default function PaymentGenerator() {
             </legend>
             <div className="generator-grid">
               <label>
-                <span>Deposit amount *</span>
-                <input
-                  name="depositAmount"
-                  type="number"
-                  min="1"
-                  step=".01"
-                  defaultValue="5000.00"
-                  required
-                />
+                <span>Number of payments *</span>
+                <select
+                  name="paymentCount"
+                  value={paymentCount}
+                  onChange={(event) => setPaymentCount(Number(event.target.value))}
+                >
+                  <option value={1}>1 — paid in full</option>
+                  <option value={2}>2 — deposit and final payment</option>
+                  <option value={3}>3 — a third to begin, two monthly thirds</option>
+                </select>
               </label>
-              <label>
-                <span>Deposit timing *</span>
-                <input name="depositDue" defaultValue="Due on acceptance" required />
-              </label>
-              <label>
-                <span>Final amount *</span>
-                <input
-                  name="finalAmount"
-                  type="number"
-                  min="1"
-                  step=".01"
-                  defaultValue="5000.00"
-                  required
-                />
-              </label>
-              <label>
-                <span>Final payment timing *</span>
-                <input
-                  name="finalDue"
-                  defaultValue="Due at the agreed pre-launch milestone"
-                  required
-                />
-              </label>
+              <p className="form-wide" style={{ margin: 0, color: "#526172", fontSize: 13 }}>
+                The {paymentCount === 1 ? "payment" : `${paymentCount} instalments`} must add up to
+                the total investment above.
+              </p>
+              {[1, 2, 3]
+                .filter((index) => index <= paymentCount)
+                .map((index) => (
+                  <Fragment key={index}>
+                    <label>
+                      <span>
+                        {paymentCount === 1
+                          ? "Payment amount *"
+                          : index === 1
+                            ? "Deposit amount *"
+                            : index === paymentCount
+                              ? "Final amount *"
+                              : `Payment ${index} amount *`}
+                      </span>
+                      <input
+                        name={`amount${index}`}
+                        type="number"
+                        min="1"
+                        step=".01"
+                        required
+                      />
+                    </label>
+                    <label>
+                      <span>
+                        {paymentCount === 1
+                          ? "Payment timing *"
+                          : index === 1
+                            ? "Deposit timing *"
+                            : index === paymentCount
+                              ? "Final payment timing *"
+                              : `Payment ${index} timing *`}
+                      </span>
+                      <input
+                        name={`due${index}`}
+                        defaultValue={
+                          index === 1
+                            ? "Due on acceptance"
+                            : index === 2
+                              ? "Due 30 days after acceptance"
+                              : "Due 60 days after acceptance"
+                        }
+                        required
+                      />
+                    </label>
+                  </Fragment>
+                ))}
             </div>
           </fieldset>
           {error ? (
@@ -315,7 +344,11 @@ export default function PaymentGenerator() {
             </p>
           ) : null}
           <div className="generator-submit">
-            <p>The two instalments must add up to the total.</p>
+            <p>
+              {paymentCount === 1
+                ? "One payment covering the full total."
+                : `The ${paymentCount} instalments must add up to the total.`}
+            </p>
             <button className="button button-copper" disabled={submitting}>
               {submitting ? "Generating…" : "Generate Client Payment Panel"} <span>↗</span>
             </button>

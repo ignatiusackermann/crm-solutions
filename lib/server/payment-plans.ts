@@ -532,10 +532,15 @@ async function createPlan(r: Request, e: Env) {
   const description = clean(x.description, 1800);
   const currency = clean(x.currency, 3).toUpperCase();
   const total = cents(clean(x.totalAmount, 20));
-  const deposit = cents(clean(x.depositAmount, 20));
-  const final = cents(clean(x.finalAmount, 20));
-  const depositDue = clean(x.depositDue, 180);
-  const finalDue = clean(x.finalDue, 180);
+  const count = Number(clean(x.paymentCount, 2));
+  // One, two or three instalments. Amounts arrive flat as amount1..amount3 so
+  // the admin form can keep posting a plain FormData object.
+  const parts = [1, 2, 3]
+    .filter((i) => i <= count)
+    .map((i) => ({
+      amount: cents(clean(x[`amount${i}`], 20)),
+      due: clean(x[`due${i}`], 180),
+    }));
 
   if (
     !first ||
@@ -546,18 +551,17 @@ async function createPlan(r: Request, e: Env) {
     !["USD", "ZAR", "EUR", "GBP"].includes(currency) ||
     !Number.isSafeInteger(total) ||
     total <= 0 ||
-    !Number.isSafeInteger(deposit) ||
-    deposit <= 0 ||
-    !Number.isSafeInteger(final) ||
-    final <= 0 ||
-    deposit + final !== total ||
-    !depositDue ||
-    !finalDue
+    ![1, 2, 3].includes(count) ||
+    parts.length !== count ||
+    parts.some(
+      (part) => !Number.isSafeInteger(part.amount) || part.amount <= 0 || !part.due,
+    ) ||
+    parts.reduce((sum, part) => sum + part.amount, 0) !== total
   ) {
     return json(
       {
         error:
-          "Complete the required fields and ensure the two payments equal the total.",
+          "Complete the required fields and ensure the payments add up to the total.",
       },
       400,
     );
@@ -565,15 +569,19 @@ async function createPlan(r: Request, e: Env) {
 
   const clientId = crypto.randomUUID();
   const planId = crypto.randomUUID();
-  const depositId = crypto.randomUUID();
-  const finalId = crypto.randomUUID();
+  const partIds = parts.map(() => crypto.randomUUID());
   const access = token();
   const code = accessCode();
   const accessHash = await hash(access);
   const codeHash = await hash(code.replaceAll("-", ""));
   const now = new Date().toISOString();
-  const dp = Math.round((deposit / total) * 1000) / 10;
-  const fp = Math.round((final / total) * 1000) / 10;
+  const label = (index: number) => {
+    const pct = Math.round((parts[index].amount / total) * 1000) / 10;
+    if (count === 1) return `Full payment · ${pct}%`;
+    if (index === 0) return `Deposit · ${pct}%`;
+    if (index === count - 1) return `Final payment · ${pct}%`;
+    return `Payment ${index + 1} · ${pct}%`;
+  };
   let ref = "";
 
   try {
@@ -601,16 +609,21 @@ async function createPlan(r: Request, e: Env) {
           codeHash,
           now,
         ),
-      db
-        .prepare(
-          "INSERT INTO payment_installments(id,plan_id,sequence,label,amount_cents,due_description,status,created_at) VALUES(?,?,1,?,?,?,'pending',?)",
-        )
-        .bind(depositId, planId, `Deposit · ${dp}%`, deposit, depositDue, now),
-      db
-        .prepare(
-          "INSERT INTO payment_installments(id,plan_id,sequence,label,amount_cents,due_description,status,created_at) VALUES(?,?,2,?,?,?,'pending',?)",
-        )
-        .bind(finalId, planId, `Final payment · ${fp}%`, final, finalDue, now),
+      ...parts.map((part, index) =>
+        db
+          .prepare(
+            "INSERT INTO payment_installments(id,plan_id,sequence,label,amount_cents,due_description,status,created_at) VALUES(?,?,?,?,?,?,'pending',?)",
+          )
+          .bind(
+            partIds[index],
+            planId,
+            index + 1,
+            label(index),
+            part.amount,
+            part.due,
+            now,
+          ),
+      ),
     ]);
   } catch (error) {
     console.error("payment plan create failed", error);
@@ -641,17 +654,17 @@ async function createPlan(r: Request, e: Env) {
       subject: `Your CRM Solutions payment plan — ${ref}`,
       html: shell(
         `Your personalised plan is ready, ${esc(first)}.`,
-        `<p style="color:#526172;line-height:1.7">The agreed payment arrangement for <strong>${esc(title)}</strong> is ready. Your deposit of <strong>${esc(money(deposit, currency))}</strong> can be completed from your private client panel.</p>
+        `<p style="color:#526172;line-height:1.7">The agreed payment arrangement for <strong>${esc(title)}</strong> is ready. Your first payment of <strong>${esc(money(parts[0].amount, currency))}</strong> can be completed from your private client panel.</p>
          <div style="padding:22px;background:#f5f2ea;border-left:3px solid #c75c36;margin:22px 0">
            <strong style="font-size:22px">${esc(money(total, currency))}</strong><br>
-           <small>${esc(ref)} · Two agreed payments</small>
+           <small>${esc(ref)} · ${count} agreed payment${count === 1 ? "" : "s"}</small>
          </div>
          <div style="padding:18px 22px;background:#0b2a55;color:#fff;margin:22px 0">
            <p style="margin:0 0 8px;font-size:11px;letter-spacing:1px;text-transform:uppercase;opacity:.8">Client login</p>
            <p style="margin:0;line-height:1.7">Username (email): <strong>${esc(email)}</strong><br>Temporary access code: <strong>${esc(code)}</strong></p>
            <p style="margin:12px 0 0;opacity:.85;font-size:13px">Sign in at <a href="${esc(loginUrl)}" style="color:#fff">${esc(loginUrl)}</a></p>
          </div>
-         <p><a href="${esc(panelUrl)}" style="display:inline-block;margin-top:8px;padding:14px 20px;background:#c75c36;color:#fff;text-decoration:none">Open payment panel / pay deposit</a></p>
+         <p><a href="${esc(panelUrl)}" style="display:inline-block;margin-top:8px;padding:14px 20px;background:#c75c36;color:#fff;text-decoration:none">Open payment panel / pay now</a></p>
          <p style="color:#526172">Keep this email confidential. You can use either the login details or the private link.</p>`,
       ),
     },
@@ -670,7 +683,7 @@ async function createPlan(r: Request, e: Env) {
          <div style="padding:22px;background:#f5f2ea;border-left:3px solid #c75c36;margin:22px 0">
            <strong style="font-size:22px">${esc(money(total, currency))}</strong><br>
            <small>${esc(ref)} · ${esc(title)}</small><br>
-           <small>Deposit due: ${esc(money(deposit, currency))}</small>
+           <small>First payment due: ${esc(money(parts[0].amount, currency))} · ${count} instalment${count === 1 ? "" : "s"}</small>
          </div>
          <p style="color:#526172;line-height:1.7">Client email status: <strong>${emailResult.ok ? "sent" : "failed"}</strong>${emailResult.error ? ` — ${esc(emailResult.error)}` : ""}.</p>
          <p><a href="${esc(panelUrl)}" style="display:inline-block;margin-top:8px;padding:14px 20px;background:#0b2a55;color:#fff;text-decoration:none">Open client panel</a></p>`,

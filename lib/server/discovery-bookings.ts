@@ -1,6 +1,11 @@
 import type { SqlDatabase } from "../sql";
 
-const SLOT_HOURS = [14, 15, 16] as const;
+/**
+ * SAST. 14–16 is 8–10am Eastern but only 5–7am Pacific; 18–20 is midday
+ * Eastern and 9–11am Pacific, so the whole US is reachable in working hours.
+ * 17:00 is deliberately skipped. Keep in step with aestheticbiz lib/discovery.ts.
+ */
+const SLOT_HOURS = [14, 15, 16, 18, 19, 20] as const;
 const SA_OFFSET = "+02:00";
 const ADMIN_EMAIL_FALLBACK = "ignatius@crmsolutions.app";
 const FROM_EMAIL_FALLBACK = "CRM Solutions <bookings@crmsolutions.app>";

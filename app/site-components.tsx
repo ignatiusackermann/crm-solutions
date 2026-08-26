@@ -104,7 +104,7 @@ export function SiteFooter() {
         </nav>
         <nav className="footer-column" aria-label="Working together">
           <strong>Working together</strong>
-          <Link href="/#about">About Ignatius</Link>
+          <Link href="/ignatius-ackermann">About Ignatius</Link>
           <Link href="/contact">Contact</Link>
           <Link href="/payment-options">Payment Options</Link>
           <Link href="/client/login">Client Login</Link>
