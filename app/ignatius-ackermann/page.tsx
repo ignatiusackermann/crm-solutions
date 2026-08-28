@@ -143,6 +143,37 @@ const LIVE_SITES = [
   ["autorepairshop.co.za", "Landing page for a customer-acquisition offer aimed at auto repair shops."],
 ] as const;
 
+const FUTURE = [
+  {
+    kicker: "2026",
+    title: "I am not giving an old car a facelift.",
+    body: [
+      "Twenty years inside content management systems taught me their limits better than their manuals ever did. Joomla, then WordPress. I am grateful for every site I built on them and I would not have had a career without them.",
+      "But I spent a great deal of that time working around guardrails rather than building. And by 2026 it was clear they are not moving fast enough any more. Staying with them would be giving an old car a facelift — new paint, same sluggish engine underneath. It will never be as nimble as what has come after it.",
+      "At this stage of my life I am not willing to be the man holding on to the past because it is familiar.",
+    ],
+  },
+  {
+    kicker: "The next ten years",
+    title: "The website stops being the job.",
+    body: [
+      "Things are changing at a pace I have not seen before in twenty-four years of this. I am on that train and I intend to enjoy the ride, wherever it ends up going.",
+      "I think web development as a trade is approaching its expiry date. Building the site will not be the work much longer — the tools are getting too good at it. The work that remains is the business itself: helping small and medium-sized businesses widen their footprint online, streamline how they market, how they take a new customer on, and how they look after the customers they already have.",
+      "Less a developer. More a business and customer consultant who can still build the thing himself when it needs building.",
+    ],
+  },
+  {
+    kicker: "The final lap",
+    title: "I work like the finish line is close, because it is.",
+    body: [
+      "I am sixty-eight. I am on the final lap and I can see the end of the race from here, even though nobody has told me where the line is.",
+      "We buried a school friend the other day. At my age death is not an abstraction — it waits around a corner somewhere and I have stopped pretending otherwise. None of us knows when we will be called home. If I am honest with you, that is the engine now. Knowing the time is limited is exactly what makes me work the way I do.",
+      "So I treat every project as though it might be the last one I am given to finish. I am an artist at heart, and I would like each build to be a piece of art rather than a delivery — solid enough that whatever technology comes next can be built on top of it, and still earning its place in the business long after I have handed it over.",
+      "And I have no intention of spending the years I have left on projects or partnerships where only one side benefits. That is not arrogance. It is arithmetic.",
+    ],
+  },
+] as const;
+
 const VALUES = [
   ["Honesty", "Maintained toward everyone I deal with, for as long as I am around to deal with them."],
   ["Passion", "The energy that keeps the wheels turning. Doing the work as well as I can, and enjoying it."],
@@ -166,7 +197,7 @@ const FAQ = [
   },
   {
     q: "What is he best known for?",
-    a: "Building an online tour booking and credit card payment system for Southern Circle Tours and Safaris around the 2010 FIFA World Cup, at a time when the commercial equivalents were priced out of reach of small and medium South African tour operators. It was built on Joomla and Jomres.",
+    a: "Building an online tour booking and credit card payment system for Southern Circle Tours and Safaris around the 2010 FIFA World Cup, at a time when the commercial equivalents were priced out of reach of small and medium-sized South African tour operators. It was built on Joomla and Jomres.",
   },
   {
     q: "What qualifications does he have?",
@@ -407,6 +438,28 @@ export default function IgnatiusAckermannPage() {
             </div>
           ))}
         </dl>
+      </section>
+
+      <section className="story-future">
+        <div className="section-shell">
+          <div className="story-heading">
+            <p className="eyebrow eyebrow-light">What comes next</p>
+            <h2>The part of the story that has not happened yet.</h2>
+          </div>
+          <div className="story-future-list">
+            {FUTURE.map((item) => (
+              <article key={item.kicker}>
+                <span>{item.kicker}</span>
+                <div>
+                  <h3>{item.title}</h3>
+                  {item.body.map((paragraph) => (
+                    <p key={paragraph.slice(0, 40)}>{paragraph}</p>
+                  ))}
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
       </section>
 
       <section className="story-faq section-shell">

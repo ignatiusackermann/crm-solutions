@@ -3967,3 +3967,17 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--copper); outli
   .review-invite { justify-content: space-between; padding-bottom: 14px; }
   .review-invite p { flex: 1 1 100%; font-size: 13px; }
 }
+
+.story-future { background: var(--midnight); color: var(--white); padding: 110px 0; margin-top: 110px; }
+.story-future .story-heading h2 { color: var(--white); }
+.story-future-list { display: grid; gap: 1px; background: rgba(255,255,255,.16); border-top: 1px solid rgba(255,255,255,.16); border-bottom: 1px solid rgba(255,255,255,.16); }
+.story-future-list article { display: grid; grid-template-columns: 240px 1fr; gap: 50px; padding: 46px 0; background: var(--midnight); }
+.story-future-list article > span { color: var(--copper-bright); font-size: 12px; font-weight: 650; text-transform: uppercase; letter-spacing: .16em; }
+.story-future-list h3 { font-size: clamp(24px, 2.4vw, 33px); font-weight: 500; letter-spacing: -.038em; line-height: 1.15; }
+.story-future-list p { margin-top: 20px !important; max-width: 720px; color: #bdc8d2; font-size: 16.5px; line-height: 1.82; }
+.story-future-list article:last-child p:last-child { color: var(--white); }
+
+@media (max-width: 1000px) {
+  .story-future { padding: 70px 0; margin-top: 70px; }
+  .story-future-list article { grid-template-columns: 1fr; gap: 16px; padding: 32px 0; }
+}
