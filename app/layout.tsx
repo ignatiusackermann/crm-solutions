@@ -5,6 +5,7 @@ import {
   organizationSchema,
   websiteSchema,
 } from "@/lib/json-ld";
+import { ReviewInvite } from "./review-invite";
 import { SiteExperience } from "./site-experience";
 import "./globals.css";
 
@@ -61,6 +62,7 @@ export default function RootLayout({
       >
         <JsonLd data={[organizationSchema(), websiteSchema()]} />
         {children}
+        <ReviewInvite />
         <SiteExperience />
       </body>
     </html>

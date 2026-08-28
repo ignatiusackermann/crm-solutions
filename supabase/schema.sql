@@ -138,3 +138,20 @@ CREATE UNIQUE INDEX IF NOT EXISTS payment_installments_plan_sequence_unique
 
 CREATE UNIQUE INDEX IF NOT EXISTS payment_installments_paypal_order_unique
   ON payment_installments (paypal_order_id);
+
+CREATE TABLE IF NOT EXISTS site_reviews (
+  id text PRIMARY KEY NOT NULL,
+  reviewer_name text,
+  relationship text,
+  email text,
+  rating_first_impression integer NOT NULL,
+  rating_content integer NOT NULL,
+  rating_usability integer NOT NULL,
+  unclear text,
+  broken text,
+  calculator text,
+  would_contact text,
+  source text DEFAULT 'website' NOT NULL,
+  status text DEFAULT 'new' NOT NULL,
+  created_at text NOT NULL
+);
