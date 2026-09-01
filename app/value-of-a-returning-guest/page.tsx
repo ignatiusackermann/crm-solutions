@@ -112,22 +112,16 @@ const PORTFOLIO = [
 
 const PAYMENTS = [
   {
-    step: "01 / To begin",
-    share: "⅓",
-    title: "Reserve capacity and start.",
+    step: "01 / Deposit",
+    share: "50%",
+    title: "Reserve capacity and begin.",
     body: "Paid once the written scope is accepted. It confirms the engagement, secures scheduled capacity and allows strategy and production to begin.",
   },
   {
-    step: "02 / Month two",
-    share: "⅓",
-    title: "Through the build.",
-    body: "Paid thirty days later, while the site, booking journey and follow-up are being built against the agreed milestones.",
-  },
-  {
-    step: "03 / Month three",
-    share: "⅓",
-    title: "At completion.",
-    body: "Paid sixty days from the start, at the agreed completion or pre-launch milestone recorded in your project agreement.",
+    step: "02 / Final payment",
+    share: "50%",
+    title: "Complete the agreed milestone.",
+    body: "Paid at the completion, approval or pre-launch milestone recorded in your project agreement — before final transfer or public launch where applicable.",
   },
 ] as const;
 
@@ -138,7 +132,7 @@ const FAQ = [
   },
   {
     q: "Why is there no price on this page?",
-    a: "Because the honest answer depends on what is actually broken. What is fixed is how you pay: a third to begin, a third at thirty days and a third at sixty days. The total, the scope and the dates are agreed in writing before a cent is due.",
+    a: "Because the honest answer depends on what is actually broken. What is fixed is how you pay: half to begin, half at the agreed completion milestone. The total, the scope and the dates are agreed in writing before a cent is due.",
   },
   {
     q: "I already have a website and a booking engine. Does this replace them?",
@@ -386,12 +380,12 @@ export default function ValueOfAReturningGuestPage() {
         <div className="vrc-heading vrc-heading-split">
           <div>
             <p className="eyebrow">The engagement</p>
-            <h2>A third to begin. Two monthly thirds.</h2>
+            <h2>Half to begin. Half at completion.</h2>
           </div>
           <p>
-            No large amount leaves your account in one month, and the payments run alongside the
-            build rather than ahead of it — which matters in a business with a season. Founder-led
-            from the first diagnosis through launch.
+            Nothing is due before the scope is agreed in writing, and the second half is not due
+            until the work reaches the agreed milestone — which matters in a business with a
+            season. Founder-led from the first diagnosis through launch.
           </p>
         </div>
 
