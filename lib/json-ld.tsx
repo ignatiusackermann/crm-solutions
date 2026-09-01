@@ -35,10 +35,7 @@ export function organizationSchema() {
       addressLocality: "Durban",
       addressCountry: "ZA",
     },
-    areaServed: [
-      { "@type": "Country", name: "South Africa" },
-      { "@type": "Country", name: "United States" },
-    ],
+    areaServed: [{ "@type": "Country", name: "South Africa" }],
     knowsAbout: [
       "Revenue platform design",
       "Customer journey architecture",
@@ -75,7 +72,7 @@ export function serviceSchema() {
     url: `${SITE_URL}/revenue-platform`,
     description:
       "A connected revenue system joining positioning, demand, conversion, CRM follow-up, retention and commercial measurement.",
-    areaServed: ["ZA", "US"],
+    areaServed: ["ZA"],
     offers: {
       "@type": "Offer",
       priceCurrency: "ZAR",

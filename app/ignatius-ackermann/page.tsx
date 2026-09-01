@@ -189,7 +189,7 @@ const FAQ = [
   },
   {
     q: "Where is Ignatius Ackermann based?",
-    a: "Durban, in KwaZulu-Natal, South Africa. He works remotely with clients in South Africa, the United States and selected international markets.",
+    a: "Durban, in KwaZulu-Natal, South Africa. He works with established businesses across South Africa, remotely or on site where it helps.",
   },
   {
     q: "What does he actually do?",

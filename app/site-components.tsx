@@ -90,8 +90,8 @@ export function SiteFooter() {
             />
           </Link>
           <p>
-            Founder-led from South Africa. Working remotely with growth-minded
-            businesses in the United States and selected international markets.
+            Founder-led from Durban. Working with established South African
+            businesses that want the whole customer journey connected.
           </p>
           <Link href="/contact">Contact</Link>
         </div>
