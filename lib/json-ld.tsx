@@ -78,10 +78,10 @@ export function serviceSchema() {
     areaServed: ["ZA", "US"],
     offers: {
       "@type": "Offer",
-      priceCurrency: "USD",
-      price: "10000",
+      priceCurrency: "ZAR",
+      price: "20000",
       priceValidUntil: "2027-12-31",
-      description: "Revenue Platform engagements begin at US$10,000.",
+      description: "Revenue Platform engagements begin at R20,000.",
       url: `${SITE_URL}/revenue-platform`,
     },
   };

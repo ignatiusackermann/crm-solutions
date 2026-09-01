@@ -135,7 +135,7 @@ CRM SOLUTIONS
 
 OFFERS AND METHOD
 - Revenue Leak Audit: 12 business questions across six Revenue Loop stages; produces a score out of 100, stage scores, three ranked constraints and practical first actions.
-- Revenue Platform: engagements begin at US$10,000. It connects positioning, website, conversion journeys, CRM, automation, follow-up, retention and measurement. Exact scope depends on complexity, content, journeys, integrations and value.
+- Revenue Platform: engagements begin at R20,000. It connects positioning, website, conversion journeys, CRM, automation, follow-up, retention and measurement. Exact scope depends on complexity, content, journeys, integrations and value.
 - Revenue Loop stages: Position, Attract, Convert, Follow through, Retain and Improve.
 - Growth Stewardship: ongoing review and optimisation after the core platform is live.
 - Discovery Call: a focused 60-minute conversation with Ignatius, Monday to Friday, with three South African availability slots shown automatically in the visitor's timezone.

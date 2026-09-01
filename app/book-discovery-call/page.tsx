@@ -44,7 +44,7 @@ export default function BookDiscoveryCallPage() {
             and the one commercial problem you most want to solve.
           </p>
           <p>
-            If the economics do not justify a US$10,000+ engagement, Ignatius will say so.
+            If the economics do not justify an R20,000+ engagement, Ignatius will say so.
           </p>
         </div>
       </section>

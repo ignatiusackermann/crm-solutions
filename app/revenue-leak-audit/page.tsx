@@ -43,7 +43,7 @@ export default function RevenueLeakAuditPage() {
         <div>
           <p>
             The score helps expose weak handoffs across positioning, acquisition, conversion,
-            follow-through, retention and measurement. It does not invent a dollar value for a
+            follow-through, retention and measurement. It does not invent a rand value for a
             problem without your margins, lead quality, capacity and sales cycle.
           </p>
           <p>

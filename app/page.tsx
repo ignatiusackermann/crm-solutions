@@ -425,7 +425,7 @@ export default function Home() {
           </div>
           <div className="investment-copy">
             <p>Revenue Platform engagements begin at</p>
-            <strong>US$10,000</strong>
+            <strong>R20,000</strong>
             <p>
               Final investment depends on business complexity, customer journeys, content depth,
               integrations and the value of the problem—not an arbitrary page count.

@@ -493,7 +493,7 @@ export default function RevenuePlatformPage() {
             </div>
             <div className="example">
               <span>Example</span>
-              <b>US$10,000 ÷ US$5,000 = 2 customers</b>
+              <b>R20,000 ÷ R10,000 = 2 customers</b>
             </div>
             <small>
               Illustration only. The actual business case uses your economics, capacity and sales
@@ -576,7 +576,7 @@ export default function RevenuePlatformPage() {
         <div>
           <p className="eyebrow">Revenue Platform engagements</p>
           <h2>
-            Begin at <em>US$10,000</em>.
+            Begin at <em>R20,000</em>.
           </h2>
         </div>
         <div>

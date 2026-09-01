@@ -342,7 +342,7 @@ export default function SiteInfoPage() {
             <h3>Schema markup</h3>
             <ul>
               <li>Organization + ProfessionalService + WebSite on every page.</li>
-              <li>Service (+ Offer from US$10,000) on `/revenue-platform`.</li>
+              <li>Service (+ Offer from R20,000) on `/revenue-platform`.</li>
               <li>Article + BreadcrumbList on each insight page.</li>
               <li>Validate in Rich Results Test / Schema Markup Validator after deploy.</li>
             </ul>
