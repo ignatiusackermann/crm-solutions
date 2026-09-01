@@ -35,12 +35,12 @@ export function StandardHeader({
   return (
     <header className="site-header">
       <Link className="wordmark" href="/" aria-label="CRM Solutions home">
-        <span className="wordmark-icon">
-          <i />
-          <i />
-          <i />
-        </span>
-        <span>CRM Solutions</span>
+        <img
+          src="/brand/crm-solutions-logo-primary-outlined.svg"
+          alt="CRM Solutions — Business Growth Systems"
+          width={350}
+          height={96}
+        />
       </Link>
       <nav className="desktop-nav" aria-label="Main navigation">
         <Link href="/revenue-platform">Revenue Platform</Link>
@@ -81,13 +81,13 @@ export function SiteFooter() {
     <footer className="site-footer">
       <div className="site-footer-inner section-shell">
         <div className="footer-identity">
-          <Link className="wordmark footer-wordmark" href="/">
-            <span className="wordmark-icon">
-              <i />
-              <i />
-              <i />
-            </span>
-            <span>CRM Solutions</span>
+          <Link className="wordmark footer-wordmark" href="/" aria-label="CRM Solutions home">
+            <img
+              src="/brand/crm-solutions-logo-primary-outlined.svg"
+              alt="CRM Solutions — Business Growth Systems"
+              width={350}
+              height={96}
+            />
           </Link>
           <p>
             Founder-led from South Africa. Working remotely with growth-minded

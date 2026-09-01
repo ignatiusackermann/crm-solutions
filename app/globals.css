@@ -46,15 +46,10 @@ button, summary { font: inherit; }
   position: relative;
   z-index: 20;
 }
-.wordmark { display: inline-flex; align-items: center; gap: 10px; width: fit-content; font-size: 20px; font-weight: 650; letter-spacing: -0.04em; }
-.wordmark-icon { width: 28px; height: 28px; position: relative; display: inline-block; }
-.wordmark-icon i { position: absolute; width: 8px; height: 8px; border: 1.5px solid var(--blue); border-radius: 50%; }
-.wordmark-icon i:nth-child(1) { left: 2px; top: 10px; background: var(--blue); }
-.wordmark-icon i:nth-child(2) { left: 17px; top: 2px; border-color: var(--copper); }
-.wordmark-icon i:nth-child(3) { left: 17px; bottom: 2px; border-color: var(--copper); background: var(--copper); }
-.wordmark-icon::before, .wordmark-icon::after { content: ""; position: absolute; width: 14px; height: 1px; background: var(--slate); transform-origin: left center; left: 8px; top: 14px; }
-.wordmark-icon::before { transform: rotate(-28deg); }
-.wordmark-icon::after { transform: rotate(28deg); }
+/* Brand lockup — the logo SVG carries its own clear space, so it is placed
+   at its minimum recommended 240px width with no extra padding. */
+.wordmark { display: inline-flex; align-items: center; width: fit-content; }
+.wordmark img { display: block; width: 240px; height: auto; }
 .desktop-nav { display: flex; align-items: center; gap: 28px; }
 .desktop-nav a { color: var(--ink-soft); font-size: 14px; transition: color .2s ease; }
 .desktop-nav a:hover { color: var(--copper); }
@@ -593,7 +588,7 @@ button, summary { font: inherit; }
 .final-cta h2 { max-width: 1050px; font-size: clamp(52px, 5.7vw, 88px); line-height: 1.04; }
 .final-cta > p:not(.eyebrow) { max-width: 720px; color: var(--slate); font-size: 17px; line-height: 1.8; margin: 32px 0 0; }
 .final-actions { justify-content: center; margin-top: 42px; }
-.footer-wordmark { font-size: 20px; }
+.footer-wordmark img { width: 240px; }
 
 /* Revenue Platform */
 .nav-current { color: var(--copper) !important; }
@@ -808,8 +803,7 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--copper); outli
 @media (max-width: 560px) {
   :root { --shell: calc(100% - 28px); }
   .site-header { height: 78px; }
-  .wordmark { font-size: 19px; }
-  .wordmark-icon { transform: scale(.86); transform-origin: left center; }
+  .wordmark img { width: 196px; }
   .hero-copy { padding-top: 60px; }
   .hero h1 { font-size: 50px; line-height: 1.02; }
   .hero-intro { font-size: 16px; line-height: 1.65; }

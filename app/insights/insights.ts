@@ -21,7 +21,7 @@ export const insights: InsightArticle[] = [
     slug: "why-traffic-does-not-create-revenue",
     eyebrow: "Commercial reality",
     question: "Why doesn’t more traffic create more revenue?",
-    statement: "Growth breaks when tools don’t share one journey.",
+    statement: "Growth stalls when tools don’t share one journey.",
     challenge:
       "The business is investing in attention—ads, content, SEO, referrals—yet the commercial result does not rise in proportion.",
     bottleneck:

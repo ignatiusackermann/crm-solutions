@@ -21,7 +21,7 @@ export function organizationSchema() {
     name: "CRM Solutions",
     legalName: "CRM Solutions",
     url: SITE_URL,
-    logo: `${SITE_URL}/favicon.svg`,
+    logo: `${SITE_URL}/brand/crm-solutions-icon-512.png`,
     description:
       "Connected revenue platforms for established businesses—website, customer journey, CRM, automation and follow-up designed as one commercial system.",
     founder: {
@@ -111,7 +111,7 @@ export function articleSchema(input: {
       name: "CRM Solutions",
       logo: {
         "@type": "ImageObject",
-        url: `${SITE_URL}/favicon.svg`,
+        url: `${SITE_URL}/brand/crm-solutions-icon-512.png`,
       },
     },
   };

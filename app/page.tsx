@@ -157,8 +157,12 @@ export default function Home() {
     <main id="top">
       <header className="site-header">
         <a className="wordmark" href="#top" aria-label="CRM Solutions home">
-          <span className="wordmark-icon"><i /><i /><i /></span>
-          <span>CRM Solutions</span>
+          <img
+            src="/brand/crm-solutions-logo-primary-outlined.svg"
+            alt="CRM Solutions — Business Growth Systems"
+            width={350}
+            height={96}
+          />
         </a>
         <nav className="desktop-nav" aria-label="Main navigation">
           <a href="/revenue-platform">Revenue Platform</a>
@@ -216,7 +220,7 @@ export default function Home() {
       <section className="credibility section-shell" aria-label="CRM Solutions experience">
         <div className="credibility-intro">
           <span className="section-index">01 / Commercial reality</span>
-          <h2>Growth breaks when tools don’t share <em>one</em> journey.</h2>
+          <h2>Growth stalls when tools don’t share <em>one</em> journey.</h2>
         </div>
         <div className="credibility-grid">
           <div><strong>Since 2001</strong><span>Building commercial digital platforms</span></div>

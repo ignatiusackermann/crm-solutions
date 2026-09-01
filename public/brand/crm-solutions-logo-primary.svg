@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="384" viewBox="0 0 350 96" role="img" aria-labelledby="title desc">
+  <title id="title">CRM Solutions — Business Growth Systems</title>
+  <desc id="desc">A refined connected-node symbol with the CRM Solutions wordmark and Business Growth Systems signature.</desc>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M41.8 44.2 L59.3 33.7" stroke="#173D67" stroke-width="2.25"/>
+    <path d="M41.8 51.8 L59.3 62.3" stroke="#C85A36" stroke-width="2.25"/>
+  </g>
+  <circle cx="36" cy="48" r="6.4" fill="#173D67"/>
+  <circle cx="64" cy="31" r="5.6" fill="#F8F4EC" stroke="#C85A36" stroke-width="2.2"/>
+  <circle cx="64" cy="65" r="5.6" fill="#C85A36"/>
+  <circle cx="64" cy="65" r="2.1" fill="#F8F4EC" opacity="0.92"/>
+
+  <text id="top-wordmark" x="90" y="45" fill="#071A2B" font-family="Arial, Helvetica, sans-serif" font-size="31" letter-spacing="1.265">
+    <tspan font-weight="700">CRM</tspan><tspan dx="6.5" font-weight="500">Solutions</tspan>
+  </text>
+  <text id="signature" x="91" y="68" fill="#A7462A" font-family="Arial, Helvetica, sans-serif" font-size="12.4" font-weight="700" letter-spacing="1.45">BUSINESS GROWTH SYSTEMS</text>
+</svg>

@@ -40,12 +40,12 @@ function CaseHeader({ tone }: { tone: CaseStudy["heroTone"] }) {
   return (
     <header className={`site-header case-header case-header-${tone}`}>
       <Link className="wordmark" href="/" aria-label="CRM Solutions home">
-        <span className="wordmark-icon">
-          <i />
-          <i />
-          <i />
-        </span>
-        <span>CRM Solutions</span>
+        <img
+          src="/brand/crm-solutions-logo-reversed-outlined.svg"
+          alt="CRM Solutions — Business Growth Systems"
+          width={350}
+          height={96}
+        />
       </Link>
       <nav className="desktop-nav" aria-label="Main navigation">
         <Link href="/revenue-platform">Revenue Platform</Link>

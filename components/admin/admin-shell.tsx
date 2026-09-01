@@ -24,12 +24,12 @@ export function AdminShell({ user, active, children, sidebarExtra }: Props) {
     <main className="admin-page">
       <header className="admin-header">
         <Link className="wordmark" href="/">
-          <span className="wordmark-icon">
-            <i />
-            <i />
-            <i />
-          </span>
-          <span>CRM Solutions</span>
+          <img
+            src="/brand/crm-solutions-logo-primary-outlined.svg"
+            alt="CRM Solutions — Business Growth Systems"
+            width={350}
+            height={96}
+          />
         </Link>
         <div>
           <span>Admin Dashboard</span>

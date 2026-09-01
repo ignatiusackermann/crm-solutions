@@ -26,12 +26,12 @@ export default async function AdminLoginPage({
     <main className="admin-login-page">
       <header className="client-payment-header">
         <Link className="wordmark" href="/">
-          <span className="wordmark-icon">
-            <i />
-            <i />
-            <i />
-          </span>
-          <span>CRM Solutions</span>
+          <img
+            src="/brand/crm-solutions-logo-primary-outlined.svg"
+            alt="CRM Solutions — Business Growth Systems"
+            width={350}
+            height={96}
+          />
         </Link>
         <span>Private administration</span>
         <Link href="/">Back to site</Link>

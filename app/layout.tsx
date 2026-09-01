@@ -44,7 +44,11 @@ export const metadata: Metadata = {
     follow: true,
   },
   icons: {
-    icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/brand/crm-solutions-favicon-32.png", type: "image/png", sizes: "32x32" },
+      { url: "/brand/crm-solutions-icon-192.png", type: "image/png", sizes: "192x192" },
+    ],
     shortcut: "/favicon.svg",
     apple: "/apple-icon",
   },

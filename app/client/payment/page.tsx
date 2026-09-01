@@ -15,12 +15,12 @@ export default function ClientPaymentPage() {
     <main className="client-payment-page">
       <header className="client-payment-header">
         <Link className="wordmark" href="/">
-          <span className="wordmark-icon">
-            <i />
-            <i />
-            <i />
-          </span>
-          <span>CRM Solutions</span>
+          <img
+            src="/brand/crm-solutions-logo-primary-outlined.svg"
+            alt="CRM Solutions — Business Growth Systems"
+            width={350}
+            height={96}
+          />
         </Link>
         <span>Secure Client Payment Panel</span>
         <div className="client-payment-header-actions">
