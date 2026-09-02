@@ -151,13 +151,17 @@ to warm on.
 
 | Category | Contacts | Batches | Fit with this email |
 |---|---:|---:|---|
-| Accountant | 1,580 | 6 | **Strongest.** Recurring annual clients — the second sale *is* their model. 51% role addresses. |
-| Security | 1,340 | 5 | **Strong.** Monitoring and guarding are contract revenue. 61% role, 87% have a website. |
-| Cleaning | 894 | 3 | **Strong.** Contract recurring. 59% role, 86% have a website. |
+| Accountant | 1,533 | 6 | **Strongest.** Recurring annual clients — the second sale *is* their model. 51% role addresses. |
+| Security | 1,265 | 5 | **Strong.** Monitoring and guarding are contract revenue. 61% role, 87% have a website. |
+| Cleaning | 842 | 3 | **Strong.** Contract recurring. 59% role, 86% have a website. |
 | Restaurants | 1,064 | 4 | **Good.** Repeat custom is the whole game — but thin margins against R20,000. |
 | Legal Practitioners & Attorneys | 2,049 | 7 | **Largest.** Repeat and referral driven, budget exists, but a heavily marketed-to audience. |
 
-**6,927 contacts — 23 days at 300 a day.**
+**6,753 contacts — 23 days at 300 a day.** Foreign firms (UK, Australia) that
+had leaked into the source directory are filtered out: the footer states the
+recipient is a South African business, so that has to be true.
+
+**Start with Accountant** — see `00-SEND-SHEET-accountant.md` for the ramp.
 
 Accommodation is **on hold**: 3,010 batched plus a 6,771 remaining pool already
 sit in `phplist-batches-hospitality/`.

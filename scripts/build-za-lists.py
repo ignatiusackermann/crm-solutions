@@ -56,6 +56,13 @@ PROVINCES = [
     "Limpopo", "Mpumalanga", "Northern Cape", "North West", "Western Cape",
 ]
 
+# The source directory carries a few foreign firms. The email footer states the
+# recipient is "listed as a South African business", so these must not go out.
+FOREIGN_SUFFIXES = (
+    ".uk", ".au", ".nz", ".ie", ".ca", ".in", ".sg", ".zw", ".ke", ".ng",
+    ".us", ".de", ".fr", ".nl", ".es", ".it", ".pt", ".br",
+)
+
 EMAIL_RE = re.compile(r"^[^@\s,;]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$")
 
 # Shared inboxes that are almost always a real business address.
@@ -105,7 +112,8 @@ def province_of(address: str) -> str:
 
 
 def clean(rows: list[list[str]], source: str,
-          require_website: bool = False) -> tuple[list[dict], dict]:
+          require_website: bool = False,
+          allow_free_domains: bool = False) -> tuple[list[dict], dict]:
     if not rows:
         return [], {}
     header = [h.strip().lower() for h in rows[0]]
@@ -115,8 +123,8 @@ def clean(rows: list[list[str]], source: str,
         i = idx.get(name)
         return row[i].strip() if i is not None and i < len(row) else ""
 
-    stats = {"raw": 0, "no_email": 0, "bad_email": 0, "not_own_domain": 0,
-             "no_website": 0, "dupe_domain": 0, "kept": 0}
+    stats = {"raw": 0, "no_email": 0, "bad_email": 0, "foreign": 0,
+             "not_own_domain": 0, "no_website": 0, "dupe_domain": 0, "kept": 0}
     seen_domains: set[str] = set()
     seen_emails: set[str] = set()
     out: list[dict] = []
@@ -134,17 +142,23 @@ def clean(rows: list[list[str]], source: str,
             stats["bad_email"] += 1
             continue
         domain = email.split("@", 1)[1]
+        if domain.endswith(FOREIGN_SUFFIXES):
+            stats["foreign"] += 1
+            continue
         if domain in NOT_OWN_DOMAIN:
             stats["not_own_domain"] += 1
-            continue
+            if not allow_free_domains:
+                continue
         website = col(row, "website")
         if require_website and not website:
             stats["no_website"] += 1
             continue
-        if domain in seen_domains or email in seen_emails:
+        free = domain in NOT_OWN_DOMAIN
+        if email in seen_emails or (not free and domain in seen_domains):
             stats["dupe_domain"] += 1
             continue
-        seen_domains.add(domain)
+        if not free:
+            seen_domains.add(domain)
         seen_emails.add(email)
         address = col(row, "address")
         out.append({
@@ -200,6 +214,10 @@ def main() -> int:
                     help="report yield only, write nothing")
     ap.add_argument("--size", type=int, default=300)
     ap.add_argument("--source-dir", default=SOURCE_DIR)
+    ap.add_argument("--allow-free-domains", action="store_true",
+                    help="keep gmail/ISP addresses. Right for product "
+                         "outreach to small owner-run trades; wrong for a "
+                         "R20,000 platform pitch")
     ap.add_argument("--require-website", action="store_true",
                     help="drop rows with no website (the directory data is "
                          "patchy, so this is off by default)")
@@ -214,11 +232,13 @@ def main() -> int:
                 continue
             path = hits[0]
         rows, stats = clean(read_sheet(path), os.path.basename(path),
-                            require_website=args.require_website)
+                            require_website=args.require_website,
+                            allow_free_domains=args.allow_free_domains)
         print(f"\n=== {category} ===")
         print(f"  raw rows        {stats.get('raw', 0):>6,}")
         print(f"  no email        {stats.get('no_email', 0):>6,}")
         print(f"  invalid email   {stats.get('bad_email', 0):>6,}")
+        print(f"  foreign domain  {stats.get('foreign', 0):>6,}")
         print(f"  free/ISP domain {stats.get('not_own_domain', 0):>6,}")
         print(f"  no website      {stats.get('no_website', 0):>6,}")
         print(f"  duplicate domain{stats.get('dupe_domain', 0):>6,}")
@@ -230,8 +250,13 @@ def main() -> int:
             sites = sum(1 for r in rows if r["website"])
             print(f"  role addresses  {roles:>6,} "
                   f"({roles * 100 // max(len(rows), 1)}%)")
+            free = sum(1 for r in rows
+                       if r["email"].split("@")[1] in NOT_OWN_DOMAIN)
             print(f"  with website    {sites:>6,} "
                   f"({sites * 100 // max(len(rows), 1)}%)")
+            if free:
+                print(f"  free/ISP kept   {free:>6,} "
+                      f"({free * 100 // max(len(rows), 1)}%)")
         if not args.probe and args.out:
             slug = re.sub(r"[^a-z0-9]+", "-", category.lower()).strip("-")
             target = os.path.join(args.out, f"phplist-batches-{slug}")
