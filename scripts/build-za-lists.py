@@ -213,6 +213,9 @@ def main() -> int:
     ap.add_argument("--probe", action="store_true",
                     help="report yield only, write nothing")
     ap.add_argument("--size", type=int, default=300)
+    ap.add_argument("--merge", metavar="NAME",
+                    help="combine every category into one deduplicated list "
+                         "written as phplist-batches-NAME")
     ap.add_argument("--source-dir", default=SOURCE_DIR)
     ap.add_argument("--allow-free-domains", action="store_true",
                     help="keep gmail/ISP addresses. Right for product "
@@ -222,6 +225,9 @@ def main() -> int:
                     help="drop rows with no website (the directory data is "
                          "patchy, so this is off by default)")
     args = ap.parse_args()
+
+    merged: list[dict] = []
+    seen: set[str] = set()
 
     for category in args.categories:
         path = os.path.join(args.source_dir, f"{category}.xlsx")
@@ -242,25 +248,42 @@ def main() -> int:
         print(f"  free/ISP domain {stats.get('not_own_domain', 0):>6,}")
         print(f"  no website      {stats.get('no_website', 0):>6,}")
         print(f"  duplicate domain{stats.get('dupe_domain', 0):>6,}")
-        print(f"  KEPT            {stats.get('kept', 0):>6,}"
-              f"   -> {(stats.get('kept', 0) + args.size - 1)//args.size}"
-              f" batches of {args.size}")
+        print(f"  KEPT            {stats.get('kept', 0):>6,}")
         if rows:
             roles = sum(r["email"].startswith(ROLE_PREFIXES) for r in rows)
             sites = sum(1 for r in rows if r["website"])
-            print(f"  role addresses  {roles:>6,} "
-                  f"({roles * 100 // max(len(rows), 1)}%)")
             free = sum(1 for r in rows
                        if r["email"].split("@")[1] in NOT_OWN_DOMAIN)
+            print(f"  role addresses  {roles:>6,} "
+                  f"({roles * 100 // max(len(rows), 1)}%)")
             print(f"  with website    {sites:>6,} "
                   f"({sites * 100 // max(len(rows), 1)}%)")
             if free:
                 print(f"  free/ISP kept   {free:>6,} "
                       f"({free * 100 // max(len(rows), 1)}%)")
-        if not args.probe and args.out:
+
+        if args.merge:
+            for r in rows:
+                if r["email"] in seen:
+                    continue
+                seen.add(r["email"])
+                merged.append(r)
+        elif not args.probe and args.out:
             slug = re.sub(r"[^a-z0-9]+", "-", category.lower()).strip("-")
             target = os.path.join(args.out, f"phplist-batches-{slug}")
             write_batches(rows, target, args.size)
+            print(f"  written -> {target}")
+
+    if args.merge and merged:
+        merged.sort(key=lambda r: (not r["email"].startswith(ROLE_PREFIXES),
+                                   r["company"].lower()))
+        print(f"\n=== MERGED: {args.merge} ===")
+        print(f"  unique contacts {len(merged):>6,}"
+              f"  -> {(len(merged) + args.size - 1)//args.size} batches")
+        if not args.probe and args.out:
+            slug = re.sub(r"[^a-z0-9]+", "-", args.merge.lower()).strip("-")
+            target = os.path.join(args.out, f"phplist-batches-{slug}")
+            write_batches(merged, target, args.size)
             print(f"  written -> {target}")
     return 0
 
