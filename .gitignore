@@ -42,3 +42,8 @@ next-env.d.ts
 /.sites-runtime/
 /outputs/
 /work/
+
+# Contact lists and lead data — never commit to a public repo
+*-contacts*.csv
+email-templates/*contact-list*.csv
+phplist-batches-*/
