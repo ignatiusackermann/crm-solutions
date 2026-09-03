@@ -1,0 +1,42 @@
+﻿PHPLIST SEND SHEET - ZA General 01 (Accountant campaign)
+========================================================
+
+FROM NAME     Ignatius Ackermann
+FROM ADDRESS  ignatius@crm-solutions.online
+REPLY-TO      a monitored mailbox - replies ARE the conversion
+
+SUBJECT A (odd sending days)
+  The first sale is the most expensive one you will ever make
+SUBJECT B (even sending days)
+  What does a new customer actually cost you?
+
+PREHEADER     none - deliberate
+
+TEXT PART     za-general-01-launch.txt
+HTML PART     za-general-01-launch.html
+
+ATTRIBUTE     [COMPANY] -> CSV column "company", default "your business"
+FOOTER        [UNSUBSCRIBEURL] must stay in BOTH parts (POPIA s69)
+
+THE LIST
+  F:\$$Josh\$$ignatius\$$$$$customers\$$$$$$$$biz-accelerator\data-002
+     \phplist-batches-accountant\batch-01.csv .. batch-06.csv
+  1,533 contacts. Start with batch-01 - 100% role addresses.
+
+BEFORE DAY 1
+  [ ] SPF, DKIM and DMARC live on crm-solutions.online
+  [ ] Test to Gmail - "Show original" must read PASS on all three
+  [ ] Test to Outlook/Hotmail - stricter for a new domain
+  [ ] Unsubscribe link clicked and confirmed working
+  [ ] Suppression list created, shared across ALL categories
+
+THE RAMP
+  day 1    50      day 2   100
+  day 3   200      day 4+  300 per day
+  Stop and diagnose if bounces exceed 5%.
+
+RULES FOR CAMPAIGN ONE
+  NO images. NO tracking pixel. NO price. NO [FIRSTNAME].
+  Judge on REPLIES, not opens.
+
+Full detail: email-templates\00-SEND-SHEET-accountant.md

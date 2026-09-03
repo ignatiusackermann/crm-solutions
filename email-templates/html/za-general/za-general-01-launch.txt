@@ -1,0 +1,50 @@
+﻿Most business owners know roughly what they spend to win a customer.
+The advertising, the discounting, the time spent on enquiries that go
+nowhere.
+
+Far fewer know what the second sale is worth. That is the number that
+decides what you can afford to spend on the first one.
+
+The arithmetic is not complicated. Every sale after the first carries
+no acquisition cost, so the margin on it is almost entirely yours. If
+one customer in five buys again, each new customer is worth about 20%
+more than the first sale suggests. If one in two buys again, you can
+afford half as much again for exactly the same customer as a
+competitor whose customers never come back -- and still be the more
+profitable of the two.
+
+That is the whole game. Not cheaper advertising. A customer worth more.
+
+Advertising gets more expensive every year, and no campaign trick
+reverses that. What you can change is what happens after the enquiry
+arrives, and whether there is anything worth buying next.
+
+We built a calculator that works it out on your own figures, in Rand.
+Six sliders, about four minutes:
+
+https://www.crmsolutions.app/value-of-returning-customer
+
+It shows what a customer is worth to you today, what you can afford to
+spend to win one, and what changes if more of them come back. Nothing
+is stored and nothing is sent -- it runs entirely in your browser, and
+there is no sign-up.
+
+If the number surprises you, reply to this email and I will tell you
+what usually causes it.
+
+Regards,
+
+Ignatius Ackermann
+CRM Solutions - Connected Revenue Platforms
+Durban, South Africa
+https://www.crmsolutions.app
+
+---
+You are receiving this because [COMPANY] is listed as a South African
+business in a public business directory. This is an occasional note
+about tools and ideas for owner-run businesses.
+
+Unsubscribe: [UNSUBSCRIBEURL]
+One click. No reply needed. The address is removed permanently.
+
+CRM Solutions, Durban, South Africa. ignatius@crmsolutions.app
