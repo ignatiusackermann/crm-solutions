@@ -6,6 +6,7 @@ import {
   websiteSchema,
 } from "@/lib/json-ld";
 import { ReviewInvite } from "./review-invite";
+import { PageTransition } from "./page-transition";
 import { SiteExperience } from "./site-experience";
 import "./globals.css";
 
@@ -54,18 +55,38 @@ export const metadata: Metadata = {
   },
 };
 
+/**
+ * Arms the entrance animation before the first paint, so content fades in
+ * rather than flashing visible and then hiding. The timeout is the safety
+ * valve: if React never hydrates, SiteMotion never clears it and everything
+ * is shown anyway. With JavaScript off this script does not run at all, so
+ * nothing is ever hidden.
+ */
+const armMotion = [
+  "var p = location.pathname;",
+  "if (p.indexOf('/admin') !== 0 && p.indexOf('/client') !== 0) {",
+  "  document.documentElement.classList.add('motion-ready');",
+  "  window.__motionFailsafe = setTimeout(function () {",
+  "    document.documentElement.classList.remove('motion-ready');",
+  "  }, 5000);",
+  "}",
+].join("");
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: armMotion }} />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <JsonLd data={[organizationSchema(), websiteSchema()]} />
-        {children}
+        <PageTransition>{children}</PageTransition>
         <ReviewInvite />
         <SiteExperience />
       </body>

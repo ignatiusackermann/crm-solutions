@@ -3,6 +3,8 @@
 import { usePathname } from "next/navigation";
 import { Analytics } from "@/components/analytics";
 import { CookieConsent } from "./cookie-consent";
+import { SiteMotion } from "./site-motion";
+import { SmoothScroll } from "./smooth-scroll";
 import { VoiceBusinessAdvisor } from "./voice-business-advisor";
 
 export function SiteExperience() {
@@ -12,6 +14,8 @@ export function SiteExperience() {
 
   return (
     <>
+      <SmoothScroll />
+      <SiteMotion />
       <Analytics />
       <CookieConsent />
       <VoiceBusinessAdvisor />

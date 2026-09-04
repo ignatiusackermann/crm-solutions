@@ -93,6 +93,13 @@ export function SiteFooter() {
             Founder-led from Durban. Working with established South African
             businesses that want the whole customer journey connected.
           </p>
+          {/* Visible NAP. The Organization schema in lib/json-ld.tsx claims the
+              same number and address, and structured data carries more weight
+              when the page it sits on corroborates it. */}
+          <address className="footer-contact">
+            <a href="tel:+27761809799">076 180 9799</a>
+            <span>104 Lothian Rd, Durban North, Durban, 4051</span>
+          </address>
           <Link href="/contact">Contact</Link>
         </div>
         <nav className="footer-column" aria-label="Explore">

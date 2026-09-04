@@ -1,4 +1,5 @@
 
+import Link from "next/link";
 import { DiscoveryCallSection, SiteFooter } from "./site-components";
 
 const leakCards = [
@@ -165,30 +166,30 @@ export default function Home() {
           />
         </a>
         <nav className="desktop-nav" aria-label="Main navigation">
-          <a href="/revenue-platform">Revenue Platform</a>
+          <Link href="/revenue-platform">Revenue Platform</Link>
           <a href="#work">Work</a>
           <a href="#insights">Insights</a>
-          <a href="/contact">Contact</a>
+          <Link href="/contact">Contact</Link>
         </nav>
         <div className="header-actions">
-          <a className="header-account" href="/client/login" aria-label="Client login" title="Client login">
+          <Link className="header-account" href="/client/login" aria-label="Client login" title="Client login">
             <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
               <circle cx="12" cy="8" r="3.25" fill="none" stroke="currentColor" strokeWidth="1.6" />
               <path d="M5.5 19.2c1.7-3.1 4-4.7 6.5-4.7s4.8 1.6 6.5 4.7" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
             </svg>
-          </a>
-          <a className="header-cta" href="/book-discovery-call">Book a Discovery Call <Arrow /></a>
+          </Link>
+          <Link className="header-cta" href="/book-discovery-call">Book a Discovery Call <Arrow /></Link>
         </div>
         <details className="mobile-menu">
           <summary aria-label="Open navigation">Menu</summary>
           <nav aria-label="Mobile navigation">
-            <a href="/revenue-platform">Revenue Platform</a>
+            <Link href="/revenue-platform">Revenue Platform</Link>
             <a href="#work">Work</a>
-            <a href="/contact">Contact</a>
-            <a href="/client/login">Client login</a>
+            <Link href="/contact">Contact</Link>
+            <Link href="/client/login">Client login</Link>
             <a href="#about">About</a>
-            <a href="/revenue-leak-audit">Find Your Revenue Leaks</a>
-            <a href="/book-discovery-call">Book a Discovery Call</a>
+            <Link href="/revenue-leak-audit">Find Your Revenue Leaks</Link>
+            <Link href="/book-discovery-call">Book a Discovery Call</Link>
           </nav>
         </details>
       </header>
@@ -206,7 +207,7 @@ export default function Home() {
             customer journey, CRM, automation and follow-up together.
           </p>
           <div className="hero-actions">
-            <a className="button button-primary" href="/revenue-leak-audit">Find Your Revenue Leaks <Arrow /></a>
+            <Link className="button button-primary" href="/revenue-leak-audit">Find Your Revenue Leaks <Arrow /></Link>
             <a className="text-link" href="#work">See the Work <Arrow /></a>
           </div>
           <p className="founder-note">
@@ -229,9 +230,9 @@ export default function Home() {
           <div><strong>One connected view</strong><span>Marketing, sales, service and retention</span></div>
         </div>
         <p className="section-deep-link">
-          <a href="/insights/why-traffic-does-not-create-revenue">
+          <Link href="/insights/why-traffic-does-not-create-revenue">
             Why doesn’t more traffic create more revenue? <Arrow />
-          </a>
+          </Link>
         </p>
       </section>
 
@@ -261,9 +262,9 @@ export default function Home() {
             A redesign placed on top of a broken customer journey only makes the leakage look better.
           </p>
           <p className="section-deep-link">
-            <a href="/insights/website-or-customer-journey">
+            <Link href="/insights/website-or-customer-journey">
               Is the website the constraint—or the journey after it? <Arrow />
-            </a>
+            </Link>
           </p>
         </div>
       </section>
@@ -277,12 +278,12 @@ export default function Home() {
               In a few focused minutes, examine the commercial journey across positioning,
               demand, conversion, follow-up, retention and measurement.
             </p>
-            <a className="button button-copper" href="/revenue-leak-audit">Start the Revenue Leak Audit <Arrow /></a>
+            <Link className="button button-copper" href="/revenue-leak-audit">Start the Revenue Leak Audit <Arrow /></Link>
             <small>No obligation. Useful even if we never work together.</small>
             <p className="section-deep-link">
-              <a href="/insights/find-revenue-leaks">
+              <Link href="/insights/find-revenue-leaks">
                 How do you find the most expensive revenue leak? <Arrow />
-              </a>
+              </Link>
             </p>
           </div>
           <div className="audit-output">
@@ -318,11 +319,11 @@ export default function Home() {
             </article>
           ))}
         </div>
-        <a className="text-link platform-link" href="/revenue-platform">Explore the Revenue Platform <Arrow /></a>
+        <Link className="text-link platform-link" href="/revenue-platform">Explore the Revenue Platform <Arrow /></Link>
         <p className="section-deep-link">
-          <a href="/insights/connected-revenue-platform">
+          <Link href="/insights/connected-revenue-platform">
             What does a connected revenue platform actually do? <Arrow />
-          </a>
+          </Link>
         </p>
       </section>
 
@@ -358,9 +359,9 @@ export default function Home() {
             ))}
           </div>
           <p className="section-deep-link">
-            <a href="/insights/proof-before-claims">
+            <Link href="/insights/proof-before-claims">
               How do you know a platform will work before you buy it? <Arrow />
-            </a>
+            </Link>
           </p>
         </div>
       </section>
@@ -382,11 +383,11 @@ export default function Home() {
               since 2001. The objective is not to chase the newest tool. It is to decide what will help the business
               earn, save, learn and improve.
             </p>
-            <a className="text-link text-link-light" href="/ignatius-ackermann">Meet Ignatius <Arrow /></a>
+            <Link className="text-link text-link-light" href="/ignatius-ackermann">Meet Ignatius <Arrow /></Link>
             <p className="section-deep-link">
-              <a href="/insights/no-junior-handoff">
+              <Link href="/insights/no-junior-handoff">
                 Who actually builds the system after the strategy call? <Arrow />
-              </a>
+              </Link>
             </p>
           </div>
           <ul className="principles">
@@ -411,9 +412,9 @@ export default function Home() {
           ))}
         </div>
         <p className="section-deep-link">
-          <a href="/insights/from-diagnosis-to-live-system">
+          <Link href="/insights/from-diagnosis-to-live-system">
             How do you go from uncertainty to a working revenue system? <Arrow />
-          </a>
+          </Link>
         </p>
       </section>
 
@@ -434,11 +435,11 @@ export default function Home() {
               The standard arrangement is two equal payments. Where it suits the business, a third
               to begin with two monthly thirds can be arranged.
             </p>
-            <a className="button button-copper" href="/book-discovery-call">Find Out If We Are a Fit <Arrow /></a>
+            <Link className="button button-copper" href="/book-discovery-call">Find Out If We Are a Fit <Arrow /></Link>
             <p className="section-deep-link">
-              <a href="/insights/revenue-platform-investment">
+              <Link href="/insights/revenue-platform-investment">
                 What should a revenue platform investment actually buy? <Arrow />
-              </a>
+              </Link>
             </p>
           </div>
         </div>
