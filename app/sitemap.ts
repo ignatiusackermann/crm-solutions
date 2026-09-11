@@ -12,6 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/revenue-leak-audit",
     "/value-of-returning-customer",
     "/value-of-a-returning-guest",
+    "/for-accounting-practices",
     "/ignatius-ackermann",
     "/book-discovery-call",
     "/contact",
