@@ -47,3 +47,14 @@ next-env.d.ts
 *-contacts*.csv
 email-templates/*contact-list*.csv
 phplist-batches-*/
+
+# Local working files — campaign drafts, outreach packs and tooling.
+# Kept out of the public repo; files already tracked stay tracked.
+/.claude/
+/email-templates/
+/docs/stress-test-clients-*.csv
+/public/outreach/
+/public/whatsapp-presentation/
+/scripts/build-medspa-packs.ps1
+__pycache__/
+tsconfig.tsbuildinfo
