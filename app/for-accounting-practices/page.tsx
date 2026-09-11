@@ -104,25 +104,10 @@ const PORTFOLIO = [
   },
 ] as const;
 
-const PAYMENTS = [
-  {
-    step: "01 / Deposit",
-    share: "50%",
-    title: "Reserve capacity and begin.",
-    body: "Paid once the written scope is accepted. It confirms the engagement, secures scheduled capacity and allows strategy and production to begin.",
-  },
-  {
-    step: "02 / Final payment",
-    share: "50%",
-    title: "Complete the agreed milestone.",
-    body: "Paid at the completion, approval or pre-launch milestone recorded in your project agreement — before final transfer or public launch where applicable.",
-  },
-] as const;
-
 const FAQ = [
   {
     q: "Why is there no price on this page?",
-    a: "Because the honest answer depends on what is actually broken. What is fixed is how you pay: half to begin, half at the agreed completion milestone. The total, the scope and the dates are agreed in writing before a cent is due.",
+    a: "Because the honest answer depends on what is actually broken. The scope, the total and the dates are discussed with you directly and agreed in writing before a cent is due.",
   },
   {
     q: "We already use practice and accounting software. Does this replace it?",
@@ -287,9 +272,9 @@ export default function ForAccountingPracticesPage() {
             works together — from the first enquiry to the tenth tax return — and how clearly the
             partner can see it.
           </p>
-          <a className="text-link" href="#investment">
-            See how the engagement works <span aria-hidden="true">↓</span>
-          </a>
+          <Link className="text-link" href="/book-discovery-call">
+            Talk it through with Ignatius <span aria-hidden="true">→</span>
+          </Link>
         </div>
         <div className="vrc-system-list">
           {SYSTEM_ITEMS.map((item, index) => (
@@ -346,38 +331,6 @@ export default function ForAccountingPracticesPage() {
         <p className="vrc-proof-note">
           We show what was built and why. We do not publish revenue claims without verified client
           data and permission.
-        </p>
-      </section>
-
-      <section className="vrc-investment section-shell" id="investment">
-        <div className="vrc-heading vrc-heading-split">
-          <div>
-            <p className="eyebrow">The engagement</p>
-            <h2>Half to begin. Half at completion.</h2>
-          </div>
-          <p>
-            Nothing is due before the scope is agreed in writing, and the second half is not due
-            until the work reaches the agreed milestone. Founder-led from the first diagnosis
-            through launch — no page-count package, no junior handover, no disappearing once the
-            platform is live.
-          </p>
-        </div>
-
-        <div className="vrc-payment-timeline">
-          {PAYMENTS.map((payment) => (
-            <article key={payment.step}>
-              <span>{payment.step}</span>
-              <strong>{payment.share}</strong>
-              <h3>{payment.title}</h3>
-              <p>{payment.body}</p>
-            </article>
-          ))}
-        </div>
-
-        <p className="vrc-payment-rule">
-          Your accepted proposal always controls the exact total, currency, milestone, due date and
-          project-specific terms. Full detail on the{" "}
-          <Link href="/payment-options">payment options page</Link>.
         </p>
       </section>
 
