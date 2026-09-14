@@ -58,13 +58,54 @@ function slotStart(date: string, time: string) {
   return new Date(`${date}T${time}:00${SA_OFFSET}`);
 }
 
+/**
+ * South African public holidays (Public Holidays Act 36 of 1994): the fixed
+ * dates, Good Friday and Family Day from Easter, and the Sunday rule — a
+ * holiday that falls on a Sunday makes the following Monday a holiday too.
+ * One-off declared holidays (an election day, say) go in EXTRA_HOLIDAYS as
+ * "YYYY-MM-DD". Keep in step with lib/server/discovery-bookings.ts.
+ */
+const FIXED_HOLIDAYS = ["01-01", "03-21", "04-27", "05-01", "06-16", "08-09", "09-24", "12-16", "12-25", "12-26"];
+const EXTRA_HOLIDAYS: string[] = [];
+
+/** Easter Sunday, anonymous Gregorian algorithm, at noon UTC. */
+function easterSunday(year: number) {
+  const a = year % 19;
+  const b = Math.floor(year / 100);
+  const c = year % 100;
+  const h = (19 * a + b - Math.floor(b / 4) - Math.floor((b - Math.floor((b + 8) / 25) + 1) / 3) + 15) % 30;
+  const l = (32 + 2 * (b % 4) + 2 * Math.floor(c / 4) - h - (c % 4)) % 7;
+  const m = Math.floor((a + 11 * h + 22 * l) / 451);
+  const month = Math.floor((h + l - 7 * m + 114) / 31);
+  const day = ((h + l - 7 * m + 114) % 31) + 1;
+  return new Date(Date.UTC(year, month - 1, day, 12));
+}
+
+function publicHolidays(year: number) {
+  const iso = (value: Date) => value.toISOString().slice(0, 10);
+  const shift = (value: Date, days: number) => new Date(value.getTime() + days * 24 * 60 * 60 * 1000);
+  const easter = easterSunday(year);
+  const holidays = new Set([iso(shift(easter, -2)), iso(shift(easter, 1))]);
+  for (const monthDay of FIXED_HOLIDAYS) {
+    const holiday = new Date(`${year}-${monthDay}T12:00:00Z`);
+    holidays.add(iso(holiday));
+    if (holiday.getUTCDay() === 0) holidays.add(iso(shift(holiday, 1)));
+  }
+  for (const extra of EXTRA_HOLIDAYS) if (extra.startsWith(`${year}-`)) holidays.add(extra);
+  return holidays;
+}
+
+function isPublicHoliday(date: string) {
+  return publicHolidays(Number(date.slice(0, 4))).has(date);
+}
+
 function isAllowedSlot(date: string, time: string) {
   if (!validDate(date) || !/^\d{2}:00$/.test(time)) return false;
   const hour = Number(time.slice(0, 2));
   if (!SLOT_HOURS.includes(hour as (typeof SLOT_HOURS)[number])) return false;
   const start = slotStart(date, time);
   const day = start.getUTCDay();
-  return !Number.isNaN(start.getTime()) && day >= 1 && day <= 5;
+  return !Number.isNaN(start.getTime()) && day >= 1 && day <= 5 && !isPublicHoliday(date);
 }
 
 function formatTime(iso: string, timeZone: string) {
@@ -104,7 +145,7 @@ function nextBusinessDates(count = 15) {
       const start = slotStart(date, `${String(hour).padStart(2, "0")}:00`);
       return start.getTime() - now.getTime() >= 24 * 60 * 60 * 1000;
     });
-    if (day >= 1 && day <= 5 && hasFutureSlot) dates.push(date);
+    if (day >= 1 && day <= 5 && !isPublicHoliday(date) && hasFutureSlot) dates.push(date);
     cursor.setUTCDate(cursor.getUTCDate() + 1);
   }
   return dates;
