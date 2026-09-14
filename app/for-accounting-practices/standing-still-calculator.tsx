@@ -3,21 +3,21 @@
 import { useMemo, useState } from "react";
 
 /**
- * The standing-still calculator — accounting-practice version of the
+ * The client replacement calculator — accounting-practice version of the
  * returning-customer model, in ZAR.
  *
  * An accounting practice does not need clients to "buy again"; it needs them
  * to stay. So the repeat rate becomes an annual loss rate, and the headline is
  * the number of new clients the practice must win just to stay the same size:
  *
- *   clients lost per year  = clients × loss %            (= the standing-still number)
+ *   clients lost per year  = clients × loss %            (= the replacement number)
  *   years a client stays   = 1 ÷ loss %                  (capped at MAX_YEARS)
  *
  * Loss % and years a client stays are the same figure seen two ways, so they
  * are one piece of state with two linked sliders: moving either moves the
  * other. An owner can set whichever number they actually know.
  *   profit from one client = annual fee × margin × years a client stays
- *   cost to stand still    = clients lost × cost to win and onboard one client
+ *   cost to replace them   = clients lost × cost to win and onboard one client
  *
  * The five-year figure compounds the clients kept by a lower loss rate, and
  * lets the kept clients leave at the lower rate too, so it does not overstate:
@@ -233,7 +233,7 @@ export function StandingStillCalculator() {
 
       <div className="vrc-result" aria-live="polite">
         <p className="vrc-result-kicker">Your practice, using your figures</p>
-        <p className="vrc-result-label">New clients you must win every year just to stand still</p>
+        <p className="vrc-result-label">New clients you must win every year just to stay the same size</p>
         <strong className="vrc-result-number">
           {standStill} {standStill === 1 ? "client" : "clients"}
         </strong>
@@ -287,7 +287,7 @@ export function StandingStillCalculator() {
             <strong>{formatMoney(calculation.feesOut)}</strong>
           </div>
           <div>
-            <span>Cost just to stand still</span>
+            <span>Cost to replace them</span>
             <strong>{formatMoney(calculation.standStillCost)}</strong>
           </div>
           <div>

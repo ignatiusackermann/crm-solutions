@@ -4,7 +4,7 @@ import { DiscoveryCallSection, SiteFooter, StandardHeader } from "../site-compon
 import { StandingStillCalculator } from "./standing-still-calculator";
 
 export const metadata: Metadata = {
-  title: "How Many New Clients Does Your Practice Need to Stand Still? | CRM Solutions",
+  title: "How Many Clients Does Your Practice Replace Each Year? | CRM Solutions",
   description:
     "The sum accountants run for their clients and rarely for their own practice. Work out how many new clients you need every year just to stay the same size — your figures, in Rand, in four minutes.",
   openGraph: {
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     locale: "en_ZA",
     url: "https://www.crmsolutions.app/for-accounting-practices",
     siteName: "CRM Solutions",
-    title: "How many new clients does your practice need just to stand still?",
+    title: "How many new clients does your practice need just to stay the same size?",
     description:
       "What a client is worth over the years they stay, how many leave, and what it costs to replace them.",
   },
@@ -136,7 +136,7 @@ export default function ForAccountingPracticesPage() {
         <div className="vrc-hero-copy">
           <p className="eyebrow">For South African accounting practices</p>
           <h1>
-            How many new clients does your practice need just to stand still?
+            How many new clients does your practice need just to stay the same size?
             <em>Most practices have never done the sum<span>.</span></em>
           </h1>
           <p className="vrc-hero-intro">
@@ -146,7 +146,7 @@ export default function ForAccountingPracticesPage() {
           </p>
           <div className="vrc-hero-actions">
             <a className="vrc-button" href="#calculator">
-              Work out your standing-still number
+              Work out your replacement number
             </a>
             <a className="text-link" href="#forces">
               See what actually moves it <span aria-hidden="true">↓</span>
@@ -208,7 +208,7 @@ export default function ForAccountingPracticesPage() {
       <section className="vrc-calculator-section section-shell" id="calculator">
         <div className="vrc-heading vrc-heading-split">
           <div>
-            <p className="eyebrow">The standing-still calculator</p>
+            <p className="eyebrow">The client replacement calculator</p>
             <h2>How many clients do you have to win just to stay the same size?</h2>
           </div>
           <p>
@@ -356,7 +356,7 @@ export default function ForAccountingPracticesPage() {
       <DiscoveryCallSection
         eyebrow="A focused commercial conversation"
         title="You have already earned the hard part."
-        body="Book a 60-minute Discovery Call with Ignatius. We will look at your standing-still number, where clients are leaving, and which part of the gap is worth closing first."
+        body="Book a 60-minute Discovery Call with Ignatius. We will look at your replacement number, where clients are leaving, and which part of the gap is worth closing first."
       />
 
       <SiteFooter />

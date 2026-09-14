@@ -165,7 +165,7 @@ SELECTED WORK
 - Never claim unverified revenue improvements. Describe the systems and verified launch evidence only.
 
 INDUSTRY PAGES
-- Accounting practices: /for-accounting-practices — the standing-still calculator: how many new clients a practice must win each year just to stay the same size.
+- Accounting practices: /for-accounting-practices — the client replacement calculator: how many new clients a practice must win each year just to stay the same size.
 - Established local businesses: /value-of-returning-customer — what a returning customer is worth.
 - Guest houses and hospitality: /value-of-a-returning-guest — what a returning guest is worth.
 
