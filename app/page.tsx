@@ -198,14 +198,15 @@ export default function Home() {
         <div className="hero-copy">
           <p className="eyebrow">Revenue systems that stop leakage between click and cash</p>
           <h1>
-            <span className="headline-line">Make every click,</span>
-            <span className="headline-line">enquiry and</span>
-            <span className="headline-line">customer worth <em>more</em><b>.</b></span>
+            <span className="headline-line">Make every click, enquiry</span>
+            <span className="headline-line">and customer worth <em>more</em><b>.</b></span>
           </h1>
-          <p className="hero-intro">
-            Connected revenue platforms for established businesses—bringing your website,
-            customer journey, CRM, automation and follow-up together.
-          </p>
+          <ul className="hero-points">
+            <li>
+              <strong>Connected revenue platforms for established businesses</strong>
+            </li>
+            <li>Bringing your website, customer journey, CRM, automation and follow-up together.</li>
+          </ul>
           <div className="hero-actions">
             <Link className="button button-primary" href="/revenue-leak-audit">Find Your Revenue Leaks <Arrow /></Link>
             <a className="text-link" href="#work">See the Work <Arrow /></a>

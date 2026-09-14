@@ -406,12 +406,16 @@ html.is-scrolled .site-header {
 .hero-copy { position: relative; z-index: 3; padding: 28px 0 22px; }
 .eyebrow { margin: 0 0 28px; color: var(--copper); font-size: 12px; font-weight: 650; text-transform: uppercase; letter-spacing: .19em; }
 .hero h1, h2 { margin: 0; font-weight: 430; letter-spacing: -0.055em; }
-.hero h1 { max-width: 690px; font-size: clamp(58px, 5.1vw, 76px); line-height: .97; }
+.hero h1 { max-width: none; font-size: clamp(42px, 4.2vw, 56px); line-height: 1.02; }
 .hero h1 .headline-line { display: block; color: var(--ink); white-space: nowrap; }
 .hero h1 em, h2 em { font-family: Georgia, "Times New Roman", serif; font-weight: 400; }
 .hero h1 em { font-size: 1.04em; }
 .hero h1 b { color: var(--copper); font: inherit; }
 .hero-intro { max-width: 590px; margin: 22px 0 0; color: var(--slate); font-size: 16px; line-height: 1.6; }
+.hero-points { max-width: 590px; margin: 24px 0 0; padding: 0; list-style: none; display: grid; gap: 8px; color: var(--slate); font-size: 16px; line-height: 1.55; }
+.hero-points li { position: relative; padding-left: 20px; }
+.hero-points li::before { content: ""; position: absolute; left: 0; top: .6em; width: 7px; height: 7px; border-radius: 50%; background: var(--copper); }
+.hero-points strong { color: var(--ink); font-weight: 600; }
 .hero-actions { display: flex; align-items: center; gap: 38px; margin-top: 22px; }
 .button { min-height: 52px; padding: 0 23px; display: inline-flex; align-items: center; justify-content: center; gap: 24px; font-size: 14px; font-weight: 620; border: 1px solid transparent; transition: transform .2s ease, background .2s ease, color .2s ease; }
 .button:hover { transform: translateY(-2px); }
