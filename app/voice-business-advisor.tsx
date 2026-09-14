@@ -138,7 +138,7 @@ OFFERS AND METHOD
 - Revenue Platform: engagements begin at R20,000. It connects positioning, website, conversion journeys, CRM, automation, follow-up, retention and measurement. Exact scope depends on complexity, content, journeys, integrations and value.
 - Revenue Loop stages: Position, Attract, Convert, Follow through, Retain and Improve.
 - Growth Stewardship: ongoing review and optimisation after the core platform is live.
-- Discovery Call: a focused 60-minute conversation with Ignatius, Monday to Friday, with three South African availability slots shown automatically in the visitor's timezone.
+- Discovery Call: a focused 60-minute conversation with Ignatius, Monday to Friday, with morning, afternoon and evening South African availability slots shown automatically in the visitor's timezone.
 - Payment approach: normally 50% deposit and 50% final payment. Custom two-part arrangements can be created. Public wording is provider-neutral; the current secure checkout provider is shown only when payment is made.
 - Delivery Commitment: CRM Solutions guarantees what it controls—approved scope, clear milestones, senior communication, testing, and correction of an agreed deliverable that misses its approved specification at no added professional fee. This is not a promise of revenue, rankings or outcomes beyond CRM Solutions' control. It includes 90-day launch support under the published terms.
 

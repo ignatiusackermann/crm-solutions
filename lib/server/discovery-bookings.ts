@@ -1,11 +1,14 @@
 import type { SqlDatabase } from "../sql";
 
 /**
- * SAST. 14–16 is 8–10am Eastern but only 5–7am Pacific; 18–20 is midday
- * Eastern and 9–11am Pacific, so the whole US is reachable in working hours.
- * 17:00 is deliberately skipped. Keep in step with aestheticbiz lib/discovery.ts.
+ * SAST. 09–11 are South African morning slots — CRM Solutions now serves the
+ * South African market, and owners there book mornings. 14–16 is 8–10am
+ * Eastern but only 5–7am Pacific; 18–20 is midday Eastern and 9–11am Pacific,
+ * so the whole US is still reachable in working hours. 12:00, 13:00 and 17:00
+ * are deliberately skipped. aestheticbiz lib/discovery.ts serves only the US
+ * and does not need the morning slots.
  */
-const SLOT_HOURS = [14, 15, 16, 18, 19, 20] as const;
+const SLOT_HOURS = [9, 10, 11, 14, 15, 16, 18, 19, 20] as const;
 const SA_OFFSET = "+02:00";
 const ADMIN_EMAIL_FALLBACK = "ignatius@crmsolutions.app";
 const FROM_EMAIL_FALLBACK = "CRM Solutions <bookings@crmsolutions.app>";

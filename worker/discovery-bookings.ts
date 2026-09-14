@@ -1,4 +1,4 @@
-const SLOT_HOURS = [14, 15, 16] as const;
+const SLOT_HOURS = [9, 10, 11, 14, 15, 16, 18, 19, 20] as const;
 const SA_OFFSET = "+02:00";
 const ADMIN_EMAIL_FALLBACK = "ignatius@crmsolutions.app";
 const FROM_EMAIL_FALLBACK = "CRM Solutions <bookings@crmsolutions.app>";
