@@ -181,7 +181,7 @@ export default function ValueOfAReturningGuestPage() {
       </section>
 
       <section className="vrc-forces" id="forces">
-        <div className="section-shell">
+        <div className="section-shell" data-reveal>
           <div className="vrc-heading">
             <p className="eyebrow eyebrow-light">The commercial problem</p>
             <h2>You are probably fighting the one number you cannot win.</h2>
@@ -321,7 +321,7 @@ export default function ValueOfAReturningGuestPage() {
             journey and a reason to come back.
           </p>
         </div>
-        <div className="vrc-proof-grid">
+        <div className="vrc-proof-grid" data-reveal>
           {PORTFOLIO.map((project) => (
             <article key={project.name} className="vrc-proof-card">
               <div className="vrc-browser" aria-hidden="true">

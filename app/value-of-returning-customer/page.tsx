@@ -184,7 +184,7 @@ export default function ValueOfReturningCustomerPage() {
       </section>
 
       <section className="vrc-forces" id="forces">
-        <div className="section-shell">
+        <div className="section-shell" data-reveal>
           <div className="vrc-heading">
             <p className="eyebrow eyebrow-light">The commercial problem</p>
             <h2>You are probably fighting the one number you cannot win.</h2>
@@ -319,7 +319,7 @@ export default function ValueOfReturningCustomerPage() {
           <p className="eyebrow">Evidence before claims</p>
           <h2>Built for real South African businesses.</h2>
         </div>
-        <div className="vrc-proof-grid">
+        <div className="vrc-proof-grid" data-reveal>
           {PORTFOLIO.map((project) => (
             <article key={project.name} className="vrc-proof-card">
               <div className="vrc-browser" aria-hidden="true">
