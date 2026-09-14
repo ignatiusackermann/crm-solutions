@@ -304,7 +304,14 @@ async function createBooking(request: Request, env: DiscoveryEnv) {
     if (/unique|constraint/i.test(text)) {
       return json({ error: "That time has just been booked. Please choose another slot." }, 409);
     }
-    return json({ error: "We could not reserve that time. Please try again." }, 500);
+    // Log the real database error (visible in the hosting logs) and surface
+    // only the five-character Postgres SQLSTATE to the visitor, so a failed
+    // booking can be diagnosed from a screenshot: 42501 = permission / row-level
+    // security, 42P01 = missing table, 42703 = missing column.
+    console.error("discovery booking insert failed", error);
+    const code = (error as { code?: unknown })?.code;
+    const reference = typeof code === "string" && /^[0-9A-Z]{5}$/.test(code) ? ` (ref ${code})` : "";
+    return json({ error: `We could not reserve that time. Please try again.${reference}` }, 500);
   }
 
   const googleEvent: GoogleEventResult = await createGoogleEvent(env,{id,startIso,endIso,firstName,lastName,email,company,phone,website,message}).catch((error:Error)=>({error:error.message}));
