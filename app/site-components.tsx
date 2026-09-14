@@ -102,6 +102,12 @@ export function SiteFooter() {
           </address>
           <Link href="/contact">Contact</Link>
         </div>
+        <nav className="footer-column" aria-label="Who we work with">
+          <strong>Who we work with</strong>
+          <Link href="/for-accounting-practices">Accounting practices</Link>
+          <Link href="/value-of-a-returning-guest">Guest houses &amp; hospitality</Link>
+          <Link href="/value-of-returning-customer">Established local businesses</Link>
+        </nav>
         <nav className="footer-column" aria-label="Explore">
           <strong>Explore</strong>
           <Link href="/revenue-platform">Revenue Platform</Link>

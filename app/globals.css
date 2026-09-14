@@ -1847,10 +1847,12 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--copper); outli
 /* Shared footer and commercial policy pages */
 .site-footer { width: 100%; min-height: 0; padding: 90px 0 30px; border-top: 1px solid var(--line); }
 .site-footer-inner { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: clamp(35px,4vw,70px); align-items: start; }
-.footer-identity { display: flex; flex-direction: column; align-items: flex-start; }
-.footer-identity > p { max-width: 390px; margin: 25px 0 21px; color: var(--slate); font-size: 12px; line-height: 1.75; }
+/* Identity spans the whole first row, centred at half width; the four link
+   columns sit in a row beneath it. */
+.footer-identity { grid-column: 1 / -1; justify-self: center; width: 50%; margin-bottom: 15px; display: flex; flex-direction: column; align-items: center; text-align: center; }
+.footer-identity > p { max-width: 460px; margin: 25px auto 21px; color: var(--slate); font-size: 12px; line-height: 1.75; }
 .footer-identity > a { color: var(--blue); border-bottom: 1px solid var(--copper); padding-bottom: 4px; font-size: 12px; }
-.footer-contact { display: flex; flex-direction: column; gap: 7px; margin: 0 0 21px; font-style: normal; }
+.footer-contact { display: flex; flex-direction: column; align-items: center; gap: 7px; margin: 0 0 21px; font-style: normal; }
 .footer-contact a { color: var(--ink); font-size: 13px; font-weight: 500; transition: color .2s ease; }
 .footer-contact a:hover { color: var(--copper); }
 .footer-contact span { color: var(--slate); font-size: 12px; line-height: 1.6; }
@@ -1918,6 +1920,7 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--copper); outli
 
 @media (max-width:960px) {
   .site-footer-inner { grid-template-columns: 1fr 1fr; gap: 55px 45px; }
+  .footer-identity { width: 100%; max-width: 560px; }
   .payments-hero, .custom-payment-grid, .client-panel-preview { grid-template-columns: 1fr; gap: 55px; }
   .legal-document { grid-template-columns: 1fr; gap: 50px; }
   .legal-document > aside { position: static; padding-bottom: 35px; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: repeat(3,1fr); }
