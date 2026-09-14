@@ -50,16 +50,24 @@ export function SiteMotion() {
     // has finished fading before you scroll down to it, which reads as no
     // animation at all.
     const units: HTMLElement[] = [];
-    for (const block of blocks) {
+    const tracked = new WeakSet<HTMLElement>();
+    const register = (block: HTMLElement) => {
       block.classList.add("reveal");
+      if (!blocks.includes(block)) blocks.push(block);
+      const added: HTMLElement[] = [];
       unitsOf(block).forEach((unit, index) => {
+        if (tracked.has(unit)) return;
+        tracked.add(unit);
         unit.style.setProperty(
           "--reveal-delay",
           `${Math.min(index * STAGGER_MS, MAX_DELAY_MS)}ms`,
         );
         units.push(unit);
+        added.push(unit);
       });
-    }
+      return added;
+    };
+    for (const block of [...blocks]) register(block);
 
     const cleanup = () => {
       root.classList.remove("motion-ready");
@@ -67,16 +75,45 @@ export function SiteMotion() {
       for (const unit of units) unit.classList.remove("is-in");
     };
 
-    if (reduced) {
-      for (const unit of units) unit.classList.add("is-in");
-      return cleanup;
-    }
-
     // Rect checks rather than IntersectionObserver: an observer can miss a
     // block that is scrolled past between two callback deliveries, which
     // would leave that section invisible for good.
-    let pending = units;
+    let pending: HTMLElement[] = reduced ? [] : [...units];
     let frame = 0;
+
+    // Client components swap markup after hydration — the booking calendar
+    // replaces its loading placeholder once availability arrives. The hiding
+    // CSS is structural, so a node inserted later starts invisible, and if
+    // nothing registers it, it stays invisible for good. Watch for inserted
+    // elements and register them like the originals; anything already in
+    // view simply fades in on the next check.
+    const observer = new MutationObserver((mutations) => {
+      const insertedElement = mutations.some((mutation) =>
+        Array.from(mutation.addedNodes).some((node) => node.nodeType === Node.ELEMENT_NODE),
+      );
+      if (!insertedElement) return;
+      const fresh: HTMLElement[] = [];
+      for (const block of document.querySelectorAll<HTMLElement>(BLOCK_SELECTOR)) {
+        fresh.push(...register(block));
+      }
+      if (!fresh.length) return;
+      if (reduced) {
+        for (const unit of fresh) unit.classList.add("is-in");
+        return;
+      }
+      pending.push(...fresh);
+      schedule();
+    });
+    const main = document.querySelector("main");
+    if (main) observer.observe(main, { childList: true, subtree: true });
+
+    if (reduced) {
+      for (const unit of units) unit.classList.add("is-in");
+      return () => {
+        observer.disconnect();
+        cleanup();
+      };
+    }
 
     const check = () => {
       frame = 0;
