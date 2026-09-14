@@ -12,6 +12,10 @@ import { useMemo, useState } from "react";
  *
  *   clients lost per year  = clients × loss %            (= the standing-still number)
  *   years a client stays   = 1 ÷ loss %                  (capped at MAX_YEARS)
+ *
+ * Loss % and years a client stays are the same figure seen two ways, so they
+ * are one piece of state with two linked sliders: moving either moves the
+ * other. An owner can set whichever number they actually know.
  *   profit from one client = annual fee × margin × years a client stays
  *   cost to stand still    = clients lost × cost to win and onboard one client
  *
@@ -25,7 +29,7 @@ import { useMemo, useState } from "react";
  * Everything runs in the browser. Nothing is stored or transmitted.
  */
 
-const MAX_YEARS = 20;
+const MAX_YEARS = 30;
 const HORIZON_YEARS = 5;
 
 const rand = new Intl.NumberFormat("en-ZA", {
@@ -40,8 +44,13 @@ const formatMoney = (value: number) =>
 const formatCompact = (value: number) =>
   value >= 1000 ? `R${Math.round(value / 1000)}k` : `R${value}`;
 
-const formatYears = (value: number) =>
-  value >= MAX_YEARS ? `${MAX_YEARS}+ years` : `${value.toFixed(value < 10 ? 1 : 0)} years`;
+const formatPercent = (value: number) => `${Math.round(value * 10) / 10}%`;
+
+const formatYears = (value: number) => {
+  if (value >= MAX_YEARS) return `${MAX_YEARS}+ years`;
+  const rounded = value < 10 ? Math.round(value * 10) / 10 : Math.round(value);
+  return `${rounded} years`;
+};
 
 function Slider({
   label,
@@ -163,24 +172,38 @@ export function StandingStillCalculator() {
         <Slider
           label="Clients lost in a typical year"
           value={currentLoss}
-          min={2}
-          max={30}
-          step={1}
+          min={3}
+          max={50}
+          step={0.5}
           unit="%"
-          display={`${currentLoss}%`}
+          display={formatPercent(currentLoss)}
           onChange={(value) => {
             setCurrentLoss(value);
             if (value < targetLoss) setTargetLoss(value);
           }}
         />
         <Slider
+          label="Or: years a client usually stays"
+          value={Math.min(MAX_YEARS, Math.max(2, Math.round(100 / currentLoss)))}
+          min={2}
+          max={MAX_YEARS}
+          step={1}
+          unit=" yrs"
+          display={formatYears(100 / currentLoss)}
+          onChange={(years) => {
+            const loss = Math.round(1000 / years) / 10;
+            setCurrentLoss(loss);
+            if (loss < targetLoss) setTargetLoss(loss);
+          }}
+        />
+        <Slider
           label="Loss rate you want to model"
           value={targetLoss}
-          min={1}
-          max={30}
-          step={1}
+          min={2}
+          max={50}
+          step={0.5}
           unit="%"
-          display={`${targetLoss}%`}
+          display={formatPercent(targetLoss)}
           onChange={(value) => {
             setTargetLoss(value);
             if (value > currentLoss) setCurrentLoss(value);
@@ -215,7 +238,7 @@ export function StandingStillCalculator() {
           {standStill} {standStill === 1 ? "client" : "clients"}
         </strong>
         <p className="vrc-result-explanation">
-          At {currentLoss}% a year, about <b>{standStill} of your {clients} clients</b> leave.
+          At {formatPercent(currentLoss)} a year, about <b>{standStill} of your {clients} clients</b> leave.
           Every one has to be replaced before the practice grows by a single client — roughly{" "}
           <b>{formatMoney(calculation.standStillCost)}</b> a year in winning and onboarding, while{" "}
           <b>{formatMoney(calculation.feesOut)}</b> in annual fees walks out of the door.
@@ -226,28 +249,28 @@ export function StandingStillCalculator() {
             <span>Profit from one client, over the years they stay</span>
             <strong>{formatMoney(calculation.clientProfitNow)}</strong>
             <small>
-              about {formatYears(calculation.yearsNow)} at a {currentLoss}% loss rate
+              about {formatYears(calculation.yearsNow)} at a {formatPercent(currentLoss)} loss rate
             </small>
           </div>
           <div className="vrc-afford-target">
             <span>At the loss rate you modelled</span>
             <strong>{formatMoney(calculation.clientProfitTarget)}</strong>
             <small>
-              about {formatYears(calculation.yearsTarget)} at {targetLoss}%
+              about {formatYears(calculation.yearsTarget)} at {formatPercent(targetLoss)}
             </small>
           </div>
         </div>
 
         {calculation.hasGap ? (
           <p className="vrc-afford-read">
-            Bring the loss rate from {currentLoss}% to {targetLoss}% and you keep about{" "}
+            Bring the loss rate from {formatPercent(currentLoss)} to {formatPercent(targetLoss)} and you keep about{" "}
             {Math.round(calculation.keptPerYear * 10) / 10} more clients a year. Over five years
             that is roughly <b>{formatMoney(calculation.fiveYearFees)}</b> in fees — before a
             single new client is won, and without a cent of extra marketing.
           </p>
         ) : (
           <p className="vrc-afford-read">
-            Lower the modelled loss rate below your current {currentLoss}% to see what keeping more
+            Lower the modelled loss rate below your current {formatPercent(currentLoss)} to see what keeping more
             of your clients would be worth.
           </p>
         )}

@@ -212,9 +212,10 @@ export default function ForAccountingPracticesPage() {
             <h2>How many clients do you have to win just to stay the same size?</h2>
           </div>
           <p>
-            Move six sliders. It uses only the figures you enter, assumes no result and invents no
-            clients. If you do not track your loss rate, count the clients who did not come back
-            for last year&rsquo;s return.
+            Move the sliders. It uses only the figures you enter, assumes no result and invents no
+            clients. Set either the share of clients you lose a year or how long clients usually
+            stay &mdash; the two move together. If you track neither, count the clients who did not
+            come back for last year&rsquo;s return.
           </p>
         </div>
 
