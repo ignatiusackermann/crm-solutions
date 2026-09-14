@@ -1,4 +1,7 @@
 import { GoogleGenAI } from "@google/genai";
+import { issueClaraPass } from "@/lib/clara/pass";
+
+const CLARA_MODEL = "gemini-3.1-flash-live-preview";
 
 interface GeminiVoiceEnv {
   GEMINI_API_KEY?: string;
@@ -50,6 +53,14 @@ export async function handleGeminiVoiceToken(
         uses: 1,
         expireTime: new Date(Date.now() + 30 * 60 * 1000).toISOString(),
         newSessionExpireTime: new Date(Date.now() + 60 * 1000).toISOString(),
+        // Pin the token to Clara's model so an intercepted token is useless
+        // for anything else.
+        liveConnectConstraints: { model: CLARA_MODEL },
+        // REQUIRED alongside the constraint. Without a field mask the server
+        // locks every setup field to its default, silently discarding Clara's
+        // system prompt, tools and VAD tuning (found on Star Aesthetic's Niki,
+        // 11 Sept 2026). [] locks only the constrained model.
+        lockAdditionalFields: [],
         httpOptions: { apiVersion: "v1alpha" },
       },
     });
@@ -57,8 +68,10 @@ export async function handleGeminiVoiceToken(
     return new Response(
       JSON.stringify({
         token: token.name,
-        model: "gemini-3.1-flash-live-preview",
+        model: CLARA_MODEL,
         apiVersion: "v1alpha",
+        // Signed pass for the callback and transcript endpoints.
+        pass: await issueClaraPass(),
       }),
       { headers: JSON_HEADERS },
     );

@@ -7,30 +7,24 @@ import {
   GoogleGenAI,
   Modality,
   ThinkingLevel,
-  Type,
   type LiveServerMessage,
   type Session,
 } from "@google/genai";
+import {
+  CLARA_ROUTES,
+  CLARA_TOOLS,
+  calendarText,
+  runClaraTool,
+  type Availability,
+  type ClaraBooking,
+  type ClaraCallback,
+} from "@/lib/clara/tools";
 
 type VoiceStatus = "idle" | "connecting" | "active" | "error";
+type Speaker = "Visitor" | "Clara";
 
-const ROUTES = {
-  home: "/",
-  platform: "/revenue-platform",
-  audit: "/revenue-leak-audit",
-  work: "/#work",
-  lava: "/work/lava-sa",
-  star: "/work/star-aesthetic",
-  storvac: "/work/storvac",
-  discovery: "/book-discovery-call",
-  payments: "/payment-options",
-  commitment: "/delivery-commitment",
-  terms: "/terms-and-conditions",
-  privacy: "/privacy-policy",
-  cookies: "/cookie-policy",
-} as const;
-
-const ALLOWED_PATHS = new Set(Object.values(ROUTES).map((route) => route.split("#")[0]));
+const TRANSCRIPT_LIMIT = 12000;
+const SETUP_WAIT_MS = 6000;
 
 function pageText(): string {
   if (typeof document === "undefined") return "";
@@ -40,11 +34,6 @@ function pageText(): string {
     .replace(/\n{3,}/g, "\n\n")
     .trim()
     .slice(0, 6500);
-}
-
-function routeIsAllowed(route: string): boolean {
-  if (!route.startsWith("/") || route.startsWith("//")) return false;
-  return ALLOWED_PATHS.has(route.split("#")[0]);
 }
 
 function scrollToSubject(subject: string): boolean {
@@ -70,6 +59,33 @@ function scrollToSubject(subject: string): boolean {
   if (!match) return false;
   match.scrollIntoView({ behavior: "smooth", block: "start" });
   return true;
+}
+
+async function readSitePage(route: string): Promise<Record<string, unknown>> {
+  if (route.split("#")[0] === window.location.pathname) {
+    return { success: true, route, publishedText: pageText() };
+  }
+  try {
+    const result = await fetch(route, { credentials: "same-origin" });
+    const html = await result.text();
+    const documentCopy = new DOMParser().parseFromString(html, "text/html");
+    documentCopy.querySelectorAll("script,style,svg,noscript").forEach((node) => node.remove());
+    const text = (documentCopy.querySelector("main")?.textContent || "")
+      .replace(/\s+/g, " ")
+      .trim()
+      .slice(0, 6500);
+    return { success: result.ok, route, publishedText: text };
+  } catch {
+    return { success: false, route, error: "The page could not be read." };
+  }
+}
+
+function visitorTimezone(): string {
+  try {
+    return Intl.DateTimeFormat().resolvedOptions().timeZone || "Africa/Johannesburg";
+  } catch {
+    return "Africa/Johannesburg";
+  }
 }
 
 function resample(input: Float32Array, fromRate: number, toRate: number): Float32Array {
@@ -112,11 +128,11 @@ function base64ToFloat32(value: string): Float32Array {
   return output;
 }
 
-function systemPrompt(pathname: string): string {
+function systemPrompt(pathname: string, calendar: string): string {
   return `You are Clara, CRM Solutions' AI Voice Business Advisor. You are the most capable, composed and commercially useful voice guide a serious business owner could meet on an agency website.
 
 IDENTITY AND OPENING
-- Speak first. Say: "Hello — I'm Clara, CRM Solutions' AI Voice Business Advisor. I can explain any part of the site and help you decide what is relevant to your business. May I ask who I'm speaking with?"
+- Speak first. Say: "Hello — I'm Clara, CRM Solutions' AI Voice Business Advisor. I can explain any part of the site, help you decide what is relevant to your business, and book a call with Ignatius if that would help. May I ask who I'm speaking with?"
 - Learn the visitor's first name within the first two turns. If they ask a question first, answer briefly, then ask their name.
 - Be transparent that you are an AI voice advisor. Never imply that you are Ignatius or a human employee.
 - English by default. Continue naturally in another supported language when the visitor requests it.
@@ -126,10 +142,10 @@ VOICE AND JUDGMENT
 - Prefer 1–3 spoken sentences per turn. Explain one idea, then pause.
 - Ask intelligent questions about the business, the constraint and the commercial objective.
 - Use plain business language. Never invent results, client facts, availability, prices or guarantees.
-- When something needs Ignatius' judgment, say so and offer the Discovery Call.
+- When something needs Ignatius' judgment, say so and offer to book the Discovery Call.
 
 CRM SOLUTIONS
-- Founder-led by Ignatius Ackermann from Durban, South Africa; established in 2001; serving growth-minded US and selected international businesses remotely.
+- Founder-led by Ignatius Ackermann from Durban, South Africa, building commercial platforms since 2001. CRM Solutions works with established South African businesses that want the whole customer journey connected.
 - Category: Business Growth Systems. The site, customer journey, CRM, automation and follow-up should work as one connected revenue system.
 - Core message: Make every click, enquiry and customer worth more.
 
@@ -138,8 +154,8 @@ OFFERS AND METHOD
 - Revenue Platform: engagements begin at R20,000. It connects positioning, website, conversion journeys, CRM, automation, follow-up, retention and measurement. Exact scope depends on complexity, content, journeys, integrations and value.
 - Revenue Loop stages: Position, Attract, Convert, Follow through, Retain and Improve.
 - Growth Stewardship: ongoing review and optimisation after the core platform is live.
-- Discovery Call: a focused 60-minute conversation with Ignatius, Monday to Friday, with morning, afternoon and evening South African availability slots shown automatically in the visitor's timezone.
-- Payment approach: normally 50% deposit and 50% final payment. Custom two-part arrangements can be created. Public wording is provider-neutral; the current secure checkout provider is shown only when payment is made.
+- Discovery Call: a focused 60-minute online conversation with Ignatius, Monday to Friday excluding South African public holidays, with morning, afternoon and evening start times in South African time. You can book it during this conversation.
+- Payment: terms are agreed with each client in the written proposal. Do not quote a payment split or instalment structure; say Ignatius sets this out in the proposal.
 - Delivery Commitment: CRM Solutions guarantees what it controls—approved scope, clear milestones, senior communication, testing, and correction of an agreed deliverable that misses its approved specification at no added professional fee. This is not a promise of revenue, rankings or outcomes beyond CRM Solutions' control. It includes 90-day launch support under the published terms.
 
 SELECTED WORK
@@ -148,17 +164,42 @@ SELECTED WORK
 - Storvac Systems: clearer product selection and commercial enquiry paths for specialist storage systems.
 - Never claim unverified revenue improvements. Describe the systems and verified launch evidence only.
 
+INDUSTRY PAGES
+- Accounting practices: /for-accounting-practices — the standing-still calculator: how many new clients a practice must win each year just to stay the same size.
+- Established local businesses: /value-of-returning-customer — what a returning customer is worth.
+- Guest houses and hospitality: /value-of-a-returning-guest — what a returning guest is worth.
+
+BOOKING A DISCOVERY CALL
+- Offer to book when the visitor wants to speak to Ignatius, asks something that needs his judgment (scope, price for their situation, fit), or shows clear intent. Offer once, then follow their lead. Never push.
+- Before booking you need: first name and surname; email address; company name; and what would make the call valuable, in their own words. A phone number and website are helpful but optional.
+- Email addresses: ask the visitor to spell it, then read it back. Confirm any unusual spelling letter by letter.
+- Always call check_availability before offering times. Offer at most three options. Say times in South African time; when the tool gives visitor_local, mention their local time as well.
+- Resolve days from the BOOKING CALENDAR below. Never work out weekdays or dates yourself.
+- Before booking, read back the day, time, full name, email and company, and ask "Shall I book that for you?". Only a clear yes counts.
+- Then call book_discovery_call exactly once. Never say the call is booked until the tool confirms it.
+- After success, confirm the day and time, and say a confirmation email with the calendar details is on its way and Ignatius has been notified.
+- If the tool reports slot_taken, apologise briefly, check availability again and offer new times.
+- For any other failure, do not retry. Offer to open the booking page (/book-discovery-call) or to arrange a callback.
+- Book only one Discovery Call per conversation.
+
+CALLBACKS
+- If the visitor would rather be phoned, confirm their name and phone number, ask when suits them and what they want to discuss, then call request_callback once.
+- If a tool fails, the direct number is 076 180 9799.
+
 SITE TOOLS
 - Use read_site_page when exact published wording or a detail should be checked before answering.
-- Use navigate_to when the visitor asks to see a page, wants to take the Audit, book a call, review work or understand a published term. Say what you are opening, then call the tool.
+- Use navigate_to when the visitor asks to see a page, wants to take the Audit, review work or understand a published term. Say what you are opening, then call the tool.
 - Use scroll_to_section for a point already on the current page.
-- Only navigate within this approved route map: ${JSON.stringify(ROUTES)}.
-- A successful tool response is the source of truth. Never claim that a page moved or opened before the tool confirms it.
+- Only navigate within this approved route map: ${JSON.stringify(CLARA_ROUTES)}.
+- A successful tool response is the source of truth. Never claim that a page moved, opened or a booking went through before the tool confirms it.
 
 PRIVACY AND SAFETY
-- Do not request payment-card details, passwords, identity numbers, health data or confidential company information.
+- Do not request payment-card details, passwords, identity numbers, health data or confidential company information. A name, email, phone number and company name for a booking or callback are fine.
 - Do not provide legal, medical or financial advice. Explain published CRM Solutions information and recommend professional advice where appropriate.
-- Voice audio is processed to provide the live conversation. If asked, direct the visitor to the Privacy and Cookie Policies.
+- Voice audio is processed to provide the live conversation, and a transcript is kept so Ignatius can follow up. If asked, direct the visitor to the Privacy and Cookie Policies.
+
+BOOKING CALENDAR
+${calendar}
 
 CURRENT PAGE
 Path: ${pathname}
@@ -187,6 +228,8 @@ export function VoiceBusinessAdvisor() {
   const [muted, setMuted] = useState(false);
   const [speaking, setSpeaking] = useState(false);
   const [error, setError] = useState("");
+  const [booking, setBooking] = useState<ClaraBooking | null>(null);
+  const [showConfirmation, setShowConfirmation] = useState(false);
 
   const sessionRef = useRef<Session | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
@@ -197,6 +240,22 @@ export function VoiceBusinessAdvisor() {
   const sourcesRef = useRef(new Set<AudioBufferSourceNode>());
   const mutedRef = useRef(false);
   const endedByUserRef = useRef(false);
+
+  // Per-conversation state lives in refs: Gemini's callbacks outlive renders.
+  const passRef = useRef<string | undefined>(undefined);
+  const bookingsRef = useRef<ClaraBooking[]>([]);
+  const callbackRef = useRef<ClaraCallback | null>(null);
+  const callbackSentRef = useRef(false);
+  const transcriptRef = useRef<string[]>([]);
+  const lastSpeakerRef = useRef<Speaker | null>(null);
+  const startedAtRef = useRef("");
+  const savedRef = useRef(true);
+  const setupDoneRef = useRef<(() => void) | null>(null);
+  // Tool calls run strictly one after another. On Star Aesthetic, Gemini re-sent
+  // a booking while the first was still in flight; run in parallel, both passed
+  // the duplicate check and two slots were booked (11 Sept 2026). Queued, the
+  // repeat sees the first booking.
+  const toolQueueRef = useRef<Promise<void>>(Promise.resolve());
 
   useEffect(() => {
     mutedRef.current = muted;
@@ -213,9 +272,65 @@ export function VoiceBusinessAdvisor() {
     setSpeaking(false);
   }, []);
 
+  const noteLine = useCallback((line: string) => {
+    transcriptRef.current.push(line);
+    lastSpeakerRef.current = null;
+  }, []);
+
+  const appendTranscript = useCallback((speaker: Speaker, fragment?: string) => {
+    if (!fragment) return;
+    const lines = transcriptRef.current;
+    const last = lines.length - 1;
+    if (lastSpeakerRef.current === speaker && last >= 0) {
+      lines[last] = `${lines[last] ?? ""}${fragment}`;
+    } else {
+      lines.push(`${speaker}: ${fragment.trimStart()}`);
+      lastSpeakerRef.current = speaker;
+    }
+  }, []);
+
+  // Saves the conversation to the admin Voice log, once per conversation. The
+  // beacon variant survives the visitor closing the tab mid-call.
+  const saveSession = useCallback((viaBeacon = false) => {
+    if (savedRef.current || !passRef.current) return;
+    const transcript = transcriptRef.current
+      .map((line) => line.replace(/\s+/g, " ").trim())
+      .filter(Boolean)
+      .join("\n")
+      .slice(-TRANSCRIPT_LIMIT);
+    const firstBooking = bookingsRef.current[0] ?? null;
+    if (!transcript && !firstBooking && !callbackRef.current) return;
+    savedRef.current = true;
+
+    const body = JSON.stringify({
+      pass: passRef.current,
+      transcript,
+      page: window.location.pathname,
+      startedAt: startedAtRef.current,
+      endedAt: new Date().toISOString(),
+      booking: firstBooking,
+      callback: callbackRef.current,
+    });
+    try {
+      if (viaBeacon && typeof navigator.sendBeacon === "function") {
+        navigator.sendBeacon("/api/clara-session", new Blob([body], { type: "application/json" }));
+        return;
+      }
+      void fetch("/api/clara-session", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body,
+        keepalive: true,
+      }).catch(() => undefined);
+    } catch {
+      /* the page is going away */
+    }
+  }, []);
+
   const teardown = useCallback(
     async (userEnded = false) => {
       endedByUserRef.current = userEnded;
+      saveSession();
       stopPlayback();
       processorRef.current?.disconnect();
       processorRef.current = null;
@@ -232,7 +347,7 @@ export function VoiceBusinessAdvisor() {
       setMuted(false);
       setStatus("idle");
     },
-    [stopPlayback],
+    [saveSession, stopPlayback],
   );
 
   useEffect(() => {
@@ -240,6 +355,13 @@ export function VoiceBusinessAdvisor() {
       void teardown(false);
     };
   }, [teardown]);
+
+  useEffect(() => {
+    if (status !== "active") return;
+    const onPageHide = () => saveSession(true);
+    window.addEventListener("pagehide", onPageHide);
+    return () => window.removeEventListener("pagehide", onPageHide);
+  }, [saveSession, status]);
 
   const playAudio = useCallback((base64: string) => {
     const context =
@@ -269,78 +391,81 @@ export function VoiceBusinessAdvisor() {
       const calls = message.toolCall?.functionCalls ?? [];
       if (!calls.length || !sessionRef.current) return;
 
-      const responses = await Promise.all(
-        calls.map(async (call) => {
-          const args = (call.args || {}) as Record<string, string>;
-          let response: Record<string, unknown>;
+      const functionResponses: { id?: string; name?: string; response: Record<string, unknown> }[] = [];
+      for (const call of calls) {
+        const result = await runClaraTool(call.name, call.args as Record<string, unknown> | undefined, {
+          pass: passRef.current,
+          timezone: visitorTimezone(),
+          alreadyBooked: bookingsRef.current,
+          callbackSent: callbackSentRef,
+          navigate: (route) => router.push(route),
+          scroll: scrollToSubject,
+          readPage: readSitePage,
+          transcript: () => transcriptRef.current,
+          page: () => window.location.pathname,
+        });
 
-          if (call.name === "navigate_to") {
-            const route = args.route || "";
-            if (!routeIsAllowed(route)) {
-              response = { success: false, error: "That route is not approved." };
-            } else {
-              router.push(route);
-              response = { success: true, route, message: "The approved page is opening." };
-            }
-          } else if (call.name === "scroll_to_section") {
-            const found = scrollToSubject(args.subject || "");
-            response = {
-              success: found,
-              subject: args.subject,
-              message: found ? "The relevant section is in view." : "No matching section was found.",
-            };
-          } else if (call.name === "read_site_page") {
-            const route = args.route || pathname;
-            if (!routeIsAllowed(route)) {
-              response = { success: false, error: "That route is not approved." };
-            } else if (route.split("#")[0] === pathname) {
-              response = { success: true, route, publishedText: pageText() };
-            } else {
-              try {
-                const result = await fetch(route, { credentials: "same-origin" });
-                const html = await result.text();
-                const documentCopy = new DOMParser().parseFromString(html, "text/html");
-                documentCopy.querySelectorAll("script,style,svg,noscript").forEach((node) => node.remove());
-                const text = (documentCopy.querySelector("main")?.textContent || "")
-                  .replace(/\s+/g, " ")
-                  .trim()
-                  .slice(0, 6500);
-                response = { success: result.ok, route, publishedText: text };
-              } catch {
-                response = { success: false, route, error: "The page could not be read." };
-              }
-            }
-          } else {
-            response = { success: false, error: "Unknown tool." };
-          }
+        if (result.booking) {
+          const booked = result.booking;
+          bookingsRef.current = [...bookingsRef.current, booked];
+          setBooking(booked);
+          setShowConfirmation(true);
+          noteLine(
+            `[Booked Discovery Call: ${booked.saTime} — ${booked.firstName} ${booked.lastName}, ${booked.company}, ${booked.email}]`,
+          );
+        }
+        if (result.callback) {
+          callbackRef.current = result.callback;
+          noteLine(`[Callback requested: ${result.callback.name}, ${result.callback.phone}]`);
+        }
+        functionResponses.push({ id: call.id, name: call.name, response: result.response });
+      }
 
-          return {
-            id: call.id,
-            name: call.name,
-            response,
-          };
-        }),
-      );
-
-      sessionRef.current?.sendToolResponse({ functionResponses: responses });
+      try {
+        sessionRef.current?.sendToolResponse({ functionResponses });
+      } catch {
+        /* the session closed while the tool ran */
+      }
     },
-    [pathname, router],
+    [noteLine, router],
   );
 
   const handleMessage = useCallback(
     (message: LiveServerMessage) => {
+      if (message.setupComplete) {
+        setupDoneRef.current?.();
+        setupDoneRef.current = null;
+      }
       if (message.serverContent?.interrupted) stopPlayback();
+      appendTranscript("Visitor", message.serverContent?.inputTranscription?.text);
+      appendTranscript("Clara", message.serverContent?.outputTranscription?.text);
       const audio = message.data;
       if (audio) playAudio(audio);
-      if (message.toolCall?.functionCalls?.length) void handleToolCall(message);
+      if (message.toolCall?.functionCalls?.length) {
+        toolQueueRef.current = toolQueueRef.current
+          .then(() => handleToolCall(message))
+          .catch(() => undefined);
+      }
     },
-    [handleToolCall, playAudio, stopPlayback],
+    [appendTranscript, handleToolCall, playAudio, stopPlayback],
   );
 
   const start = useCallback(async () => {
     setStatus("connecting");
     setError("");
+    setShowConfirmation(false);
     endedByUserRef.current = false;
+
+    passRef.current = undefined;
+    bookingsRef.current = [];
+    callbackRef.current = null;
+    callbackSentRef.current = false;
+    transcriptRef.current = [];
+    lastSpeakerRef.current = null;
+    startedAtRef.current = new Date().toISOString();
+    savedRef.current = false;
+    toolQueueRef.current = Promise.resolve();
+    setBooking(null);
 
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
@@ -352,6 +477,12 @@ export function VoiceBusinessAdvisor() {
       });
       streamRef.current = stream;
 
+      // Load the live calendar alongside the token, so Clara starts the call
+      // already knowing which days can be booked.
+      const availabilityRequest = fetch("/api/discovery-bookings", { cache: "no-store" })
+        .then(async (response) => (response.ok ? ((await response.json()) as Availability) : null))
+        .catch(() => null);
+
       const tokenResult = await fetch("/api/gemini-voice-token", {
         method: "POST",
         headers: { "content-type": "application/json" },
@@ -360,22 +491,32 @@ export function VoiceBusinessAdvisor() {
         token?: string;
         model?: string;
         apiVersion?: string;
+        pass?: string | null;
         error?: string;
       };
       if (!tokenResult.ok || !tokenBody.token) {
         throw new Error(tokenBody.error || "The private voice connection is not available.");
       }
+      passRef.current = tokenBody.pass || undefined;
+      const availability = await availabilityRequest;
 
       const ai = new GoogleGenAI({
         apiKey: tokenBody.token,
         httpOptions: { apiVersion: tokenBody.apiVersion || "v1alpha" },
       });
 
+      // connect() resolves when the socket opens, not when Gemini has loaded
+      // the system prompt and tools. Anything sent before setupComplete is
+      // answered by bare Gemini, so the opening line waits for it.
+      const setupDone = new Promise<void>((resolve) => {
+        setupDoneRef.current = resolve;
+      });
+
       const session = await ai.live.connect({
         model: tokenBody.model || "gemini-3.1-flash-live-preview",
         config: {
           responseModalities: [Modality.AUDIO],
-          systemInstruction: systemPrompt(pathname),
+          systemInstruction: systemPrompt(pathname, calendarText(availability)),
           speechConfig: {
             voiceConfig: { prebuiltVoiceConfig: { voiceName: "Aoede" } },
           },
@@ -389,54 +530,7 @@ export function VoiceBusinessAdvisor() {
           },
           inputAudioTranscription: {},
           outputAudioTranscription: {},
-          tools: [
-            {
-              functionDeclarations: [
-                {
-                  name: "navigate_to",
-                  description: "Open an approved CRM Solutions page for the visitor.",
-                  parameters: {
-                    type: Type.OBJECT,
-                    properties: {
-                      route: {
-                        type: Type.STRING,
-                        description: `One exact route from: ${Object.values(ROUTES).join(", ")}`,
-                      },
-                    },
-                    required: ["route"],
-                  },
-                },
-                {
-                  name: "scroll_to_section",
-                  description: "Bring a relevant section of the current page into view.",
-                  parameters: {
-                    type: Type.OBJECT,
-                    properties: {
-                      subject: {
-                        type: Type.STRING,
-                        description: "The visible heading or subject to bring into view.",
-                      },
-                    },
-                    required: ["subject"],
-                  },
-                },
-                {
-                  name: "read_site_page",
-                  description: "Read the published text of an approved page before explaining it.",
-                  parameters: {
-                    type: Type.OBJECT,
-                    properties: {
-                      route: {
-                        type: Type.STRING,
-                        description: "An exact approved CRM Solutions route.",
-                      },
-                    },
-                    required: ["route"],
-                  },
-                },
-              ],
-            },
-          ],
+          tools: [{ functionDeclarations: CLARA_TOOLS }],
         },
         callbacks: {
           onmessage: handleMessage,
@@ -446,6 +540,7 @@ export function VoiceBusinessAdvisor() {
           },
           onclose: () => {
             if (!endedByUserRef.current) {
+              saveSession();
               setStatus((current) => (current === "active" ? "idle" : current));
             }
           },
@@ -477,6 +572,10 @@ export function VoiceBusinessAdvisor() {
 
       setStatus("active");
       setOpen(false);
+      await Promise.race([
+        setupDone,
+        new Promise<void>((resolve) => window.setTimeout(resolve, SETUP_WAIT_MS)),
+      ]);
       session.sendRealtimeInput({
         text: "The visitor has deliberately started the voice conversation. Speak your opening now.",
       });
@@ -487,7 +586,7 @@ export function VoiceBusinessAdvisor() {
       setStatus("error");
       setOpen(true);
     }
-  }, [handleMessage, pathname]);
+  }, [handleMessage, pathname, saveSession]);
 
   const toggleMute = () => {
     const next = !muted;
@@ -501,7 +600,11 @@ export function VoiceBusinessAdvisor() {
         <span className={`voice-live-dot ${speaking ? "speaking" : ""}`} />
         <div>
           <strong>{speaking ? "Clara is speaking…" : muted ? "Microphone muted" : "Clara is listening…"}</strong>
-          <small>AI Voice Business Advisor</small>
+          {booking ? (
+            <small className="voice-booked">Discovery Call booked</small>
+          ) : (
+            <small>AI Voice Business Advisor</small>
+          )}
         </div>
         <button type="button" className="voice-control" onClick={toggleMute} aria-label={muted ? "Unmute microphone" : "Mute microphone"}>
           <VoiceGlyph muted={muted} />
@@ -516,6 +619,16 @@ export function VoiceBusinessAdvisor() {
 
   return (
     <>
+      {booking && showConfirmation && !open && (
+        <div className="voice-booking-note" role="status">
+          <div>
+            <strong>Discovery Call booked</strong>
+            <span>{booking.visitorTime || booking.saTime}</span>
+            <small>Confirmation sent to {booking.email}</small>
+          </div>
+          <button type="button" onClick={() => setShowConfirmation(false)} aria-label="Dismiss booking confirmation">×</button>
+        </div>
+      )}
       {open && (
         <section className="voice-panel" aria-label="Clara Voice Business Advisor">
           <header>
@@ -528,7 +641,7 @@ export function VoiceBusinessAdvisor() {
           </header>
           <div className="voice-panel-body">
             <h2>Ask. Understand.<br />Move forward.</h2>
-            <p className="voice-intro">Clara can explain any point on this website, compare the options and open the page that makes the answer clearer.</p>
+            <p className="voice-intro">Clara can explain any point on this website, compare the options, open the page that makes the answer clearer — and book your Discovery Call with Ignatius.</p>
             <div className="voice-orbit" aria-hidden="true">
               <span /><span /><span />
               <VoiceGlyph />
@@ -537,7 +650,7 @@ export function VoiceBusinessAdvisor() {
             <button type="button" className="voice-start" onClick={() => void start()} disabled={status === "connecting"}>
               {status === "connecting" ? <><i /> Connecting securely…</> : <><VoiceGlyph /> Start voice conversation</>}
             </button>
-            <p className="voice-privacy">By starting, you consent to live audio processing for this conversation. <a href="/privacy-policy">Privacy</a></p>
+            <p className="voice-privacy">By starting, you consent to live audio processing for this conversation and a transcript being kept for follow-up. <a href="/privacy-policy">Privacy</a></p>
           </div>
         </section>
       )}
