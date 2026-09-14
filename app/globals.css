@@ -4048,6 +4048,15 @@ html.motion-ready .reveal .is-in.is-in {
   opacity: 1;
   translate: none;
 }
+/* A [data-reveal] wrapper that is itself a unit of an outer block hands its
+   fade down to its own children instead of fading as one slab. Without this
+   the wrapper and its children would both fade, doubling the travel. The
+   doubled attribute scores (0,4,1), enough to outrank the (0,3,3) hiding rules. */
+html.motion-ready .reveal > [data-reveal][data-reveal] {
+  opacity: 1;
+  translate: none;
+  transition: none;
+}
 
 /* Page transition: the wrapper is keyed on the pathname, so each
    navigation replays this once. Short and shallow on purpose — the

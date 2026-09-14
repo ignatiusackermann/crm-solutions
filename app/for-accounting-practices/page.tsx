@@ -178,7 +178,7 @@ export default function ForAccountingPracticesPage() {
       </section>
 
       <section className="vrc-forces" id="forces">
-        <div className="section-shell">
+        <div className="section-shell" data-reveal>
           <div className="vrc-heading">
             <p className="eyebrow eyebrow-light">The commercial problem</p>
             <h2>Clients rarely leave over the fee. They leave over the silence.</h2>
@@ -295,7 +295,7 @@ export default function ForAccountingPracticesPage() {
           <p className="eyebrow">Evidence before claims</p>
           <h2>Built for real South African businesses.</h2>
         </div>
-        <div className="vrc-proof-grid">
+        <div className="vrc-proof-grid" data-reveal>
           {PORTFOLIO.map((project) => (
             <article key={project.name} className="vrc-proof-card">
               <div className="vrc-browser" aria-hidden="true">
