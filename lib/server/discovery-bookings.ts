@@ -356,6 +356,7 @@ async function createBooking(request: Request, env: DiscoveryEnv) {
   }
 
   const googleEvent: GoogleEventResult = await createGoogleEvent(env,{id,startIso,endIso,firstName,lastName,email,company,phone,website,message}).catch((error:Error)=>({error:error.message}));
+  if (googleEvent.error) console.error("discovery google calendar failed", googleEvent.error);
   const apiKey = env.RESEND_API_KEY || "";
   const adminEmail = env.DISCOVERY_ADMIN_EMAIL || ADMIN_EMAIL_FALLBACK;
   const from = env.DISCOVERY_FROM_EMAIL || FROM_EMAIL_FALLBACK;
