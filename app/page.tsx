@@ -1,6 +1,11 @@
 
 import Link from "next/link";
-import { DiscoveryCallSection, SiteFooter } from "./site-components";
+import {
+  DiscoveryCallSection,
+  IndustriesMenu,
+  MobileIndustryLinks,
+  SiteFooter,
+} from "./site-components";
 
 const leakCards = [
   {
@@ -167,7 +172,7 @@ export default function Home() {
         </a>
         <nav className="desktop-nav" aria-label="Main navigation">
           <Link href="/revenue-platform">Revenue Platform</Link>
-          <Link href="/for-debt-counsellors">Debt Counsellors</Link>
+          <IndustriesMenu />
           <a href="#work">Work</a>
           <a href="#insights">Insights</a>
           <Link href="/contact">Contact</Link>
@@ -185,8 +190,7 @@ export default function Home() {
           <summary aria-label="Open navigation">Menu</summary>
           <nav aria-label="Mobile navigation">
             <Link href="/revenue-platform">Revenue Platform</Link>
-            <Link href="/for-debt-counsellors">Debt Counsellors</Link>
-            <Link href="/for-accounting-practices">Accounting Practices</Link>
+            <MobileIndustryLinks />
             <a href="#work">Work</a>
             <Link href="/contact">Contact</Link>
             <Link href="/client/login">Client login</Link>

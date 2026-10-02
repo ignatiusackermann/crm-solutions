@@ -4255,3 +4255,44 @@ a:focus-visible .drb-shot img {
   .drb-card-grid, .drb-steps, .drb-shot-grid, .drb-style-grid, .drb-split { grid-template-columns: 1fr; }
   .drb-frame-hint { display: none; }
 }
+
+/* ── Industries dropdown in the main menu ─────────────────────────────
+   CSS only: opens on hover and on keyboard focus anywhere inside the
+   wrapper, so it works without JavaScript and before hydration. The
+   ::before strip bridges the gap under the button so the panel does not
+   close while the pointer travels to it. */
+.nav-dropdown { position: relative; display: inline-flex; }
+.nav-dropdown-toggle {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 0; border: 0; background: none; cursor: pointer;
+  color: var(--ink-soft); font: inherit; font-size: 14px;
+  transition: color .2s ease;
+}
+.nav-dropdown-toggle span { font-size: 10px; translate: 0 1px; }
+.nav-dropdown:hover .nav-dropdown-toggle,
+.nav-dropdown:focus-within .nav-dropdown-toggle { color: var(--copper); }
+.nav-dropdown-panel {
+  position: absolute; top: 100%; left: 50%; z-index: 70;
+  translate: -50% 10px;
+  min-width: 268px; margin-top: 14px; padding: 9px;
+  display: grid; gap: 2px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: 0 30px 60px -34px rgba(8, 21, 33, .5);
+  opacity: 0; visibility: hidden;
+  transition: opacity .18s ease, translate .18s var(--ease-out), visibility .18s;
+}
+.nav-dropdown-panel::before { content: ""; position: absolute; inset: -16px 0 100% 0; }
+.nav-dropdown:hover .nav-dropdown-panel,
+.nav-dropdown:focus-within .nav-dropdown-panel {
+  opacity: 1; visibility: visible; translate: -50% 0;
+}
+.nav-dropdown-panel a {
+  padding: 10px 13px; border-radius: 9px;
+  color: var(--ink-soft); font-size: 14px; line-height: 1.3;
+  transition: background .18s ease, color .18s ease;
+}
+.nav-dropdown-panel a:hover,
+.nav-dropdown-panel a:focus-visible { background: var(--canvas); color: var(--copper); }
+@media (prefers-reduced-motion: reduce) { .nav-dropdown-panel { transition: none; } }

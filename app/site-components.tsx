@@ -27,6 +27,48 @@ function ClientLoginIcon() {
   );
 }
 
+/* One list of industry pages, used by the header dropdown on every page,
+   the home page's own header and the mobile menus. Add a new industry here
+   and it appears everywhere. */
+export const INDUSTRY_LINKS = [
+  { href: "/for-accounting-practices", label: "Accounting practices" },
+  { href: "/for-debt-counsellors", label: "Debt counselling practices" },
+  { href: "/value-of-a-returning-guest", label: "Guest houses & hospitality" },
+  { href: "/value-of-returning-customer", label: "Established local businesses" },
+] as const;
+
+/* CSS-only dropdown: it opens on hover and on keyboard focus (focus-within),
+   so it needs no JavaScript and works before hydration. */
+export function IndustriesMenu() {
+  return (
+    <div className="nav-dropdown">
+      <button type="button" className="nav-dropdown-toggle" aria-haspopup="true">
+        Industries
+        <span aria-hidden="true">▾</span>
+      </button>
+      <div className="nav-dropdown-panel">
+        {INDUSTRY_LINKS.map((item) => (
+          <Link key={item.href} href={item.href}>
+            {item.label}
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export function MobileIndustryLinks() {
+  return (
+    <>
+      {INDUSTRY_LINKS.map((item) => (
+        <Link key={item.href} href={item.href}>
+          {item.label}
+        </Link>
+      ))}
+    </>
+  );
+}
+
 export function StandardHeader({
   current,
 }: {
@@ -44,7 +86,7 @@ export function StandardHeader({
       </Link>
       <nav className="desktop-nav" aria-label="Main navigation">
         <Link href="/revenue-platform">Revenue Platform</Link>
-        <Link href="/for-debt-counsellors">Debt Counsellors</Link>
+        <IndustriesMenu />
         <Link href="/#work">Work</Link>
         <Link href="/#insights">Insights</Link>
         <Link href="/contact" className={current === "contact" ? "nav-current" : undefined}>
@@ -65,8 +107,7 @@ export function StandardHeader({
         <nav aria-label="Mobile navigation">
           <Link href="/">Home</Link>
           <Link href="/revenue-platform">Revenue Platform</Link>
-          <Link href="/for-debt-counsellors">Debt Counsellors</Link>
-          <Link href="/for-accounting-practices">Accounting Practices</Link>
+          <MobileIndustryLinks />
           <Link href="/#work">Work</Link>
           <Link href="/contact">Contact</Link>
           <Link href="/client/login">Client login</Link>
