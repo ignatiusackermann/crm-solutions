@@ -105,6 +105,7 @@ export function SiteFooter() {
         <nav className="footer-column" aria-label="Who we work with">
           <strong>Who we work with</strong>
           <Link href="/for-accounting-practices">Accounting practices</Link>
+          <Link href="/for-debt-counsellors">Debt counselling practices</Link>
           <Link href="/value-of-a-returning-guest">Guest houses &amp; hospitality</Link>
           <Link href="/value-of-returning-customer">Established local businesses</Link>
         </nav>

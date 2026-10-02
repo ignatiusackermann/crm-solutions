@@ -4113,3 +4113,145 @@ html.lenis body { height: auto; }
 .lenis:not(.lenis-autoToggle).lenis-stopped { overflow: clip; }
 .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
 .lenis.lenis-smooth iframe { pointer-events: none; }
+
+/* ── /for-debt-counsellors — the DebtReliefBiz sales page ──────────────
+   Screenshot cards scroll their full-page image on hover (container query
+   units: 100cqh is the card height). Layout borrows the sticky side menu
+   from the DebtReliefBiz original, in CRM Solutions' cream-and-copper tokens. */
+.drb-page { background: var(--canvas); }
+.drb-hero { padding: 86px 0 34px; }
+.drb-hero-copy h1 {
+  max-width: 15ch;
+  margin: 0;
+  color: var(--ink);
+  font-size: clamp(40px, 4.4vw, 58px);
+  font-weight: 430;
+  line-height: 1.03;
+  letter-spacing: -0.055em;
+}
+.drb-hero-intro { max-width: 640px; margin: 24px 0 0; color: var(--slate); font-size: 17px; line-height: 1.62; }
+.drb-hero-intro strong { color: var(--ink); font-weight: 600; }
+.drb-hero-actions { flex-wrap: wrap; gap: 28px; margin-top: 30px; }
+.drb-flag { margin: 26px 0 0; }
+.drb-flag a {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 18px; border-radius: 999px;
+  background: var(--copper-tint); color: #8d3c1d;
+  font-size: 13px; font-weight: 620;
+  border: 1px solid rgba(199, 92, 54, .35);
+  transition: background .2s ease;
+}
+.drb-flag a:hover { background: #f1cfc2; }
+
+.drb-frame-section { padding: 18px 0 0; }
+.drb-frame {
+  overflow: hidden; border-radius: 16px; background: var(--white);
+  border: 1px solid var(--line);
+  box-shadow: 0 46px 90px -56px rgba(8, 21, 33, .55);
+}
+.drb-frame-bar { display: flex; align-items: center; gap: 8px; padding: 13px 16px; border-bottom: 1px solid var(--line); }
+.drb-frame-bar i { width: 11px; height: 11px; border-radius: 50%; background: var(--canvas-deep); }
+.drb-frame-bar i:first-child { background: #e4b2a1; }
+.drb-frame-url {
+  margin-inline: auto; padding: 5px 16px; border-radius: 999px;
+  background: var(--canvas); color: var(--slate); font-size: 12px;
+}
+.drb-frame-hint { color: var(--slate); font-size: 12px; }
+
+.drb-shot {
+  position: relative; display: block; overflow: hidden;
+  container-type: size; background: var(--canvas-deep);
+  border: 1px solid var(--line); border-radius: 12px;
+}
+.drb-shot-wide { border: 0; border-radius: 0; }
+.drb-shot img {
+  position: absolute; inset: 0 0 auto 0; width: 100%; height: auto; display: block;
+  transform: translateY(0); transition: transform 1.1s var(--ease-out);
+}
+.drb-shot:hover img,
+.drb-shot:focus-visible img,
+a:focus-visible .drb-shot img {
+  transform: translateY(calc(-100% + 100cqh));
+  transition: transform var(--scroll-dur, 6s) linear;
+}
+.drb-shot:focus-visible, a:focus-visible .drb-shot { outline: 3px solid var(--copper); outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) { .drb-shot img { transition: none !important; } }
+
+.drb-body { display: grid; grid-template-columns: 180px 1fr; gap: 54px; padding: 96px 0 40px; }
+.drb-sections { min-width: 0; display: grid; gap: 104px; }
+.drb-sections > section { scroll-margin-top: 110px; }
+.drb-sidenav { position: sticky; top: 108px; }
+.drb-sidenav strong { display: block; color: var(--ink); font-size: 13px; font-weight: 620; }
+.drb-sidenav ul { margin: 14px 0 0; padding: 0; list-style: none; display: grid; gap: 7px; }
+.drb-sidenav a {
+  display: block; padding: 3px 0 3px 14px;
+  border-left: 2px solid transparent; color: var(--slate); font-size: 14px;
+  transition: color .2s ease, border-color .2s ease;
+}
+.drb-sidenav a:hover { color: var(--ink); }
+.drb-sidenav a.is-active { border-left-color: var(--copper); color: var(--ink); font-weight: 600; }
+
+.drb-card-grid { margin-top: 36px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.drb-card { padding: 24px 22px 26px; background: var(--white); border: 1px solid var(--line); border-radius: 14px; }
+.drb-card h3 { margin: 0; color: var(--ink); font-size: 17px; font-weight: 600; letter-spacing: -.02em; }
+.drb-card p { margin: 10px 0 0; color: var(--slate); font-size: 14px; line-height: 1.62; }
+.drb-ticks { margin: 14px 0 0; padding: 0; list-style: none; display: grid; gap: 9px; color: var(--slate); font-size: 14px; line-height: 1.5; }
+.drb-ticks li { position: relative; padding-left: 22px; }
+.drb-ticks li::before { content: "✓"; position: absolute; left: 0; top: 0; color: var(--success); font-weight: 700; }
+
+.drb-subhead { margin: 64px 0 0; color: var(--ink); font-size: 22px; font-weight: 500; letter-spacing: -.03em; }
+.drb-steps { margin: 24px 0 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.drb-steps li { padding: 24px 22px 26px; background: var(--white); border: 1px solid var(--line); border-radius: 14px; }
+.drb-step-number {
+  display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%;
+  background: var(--deep-blue); color: var(--white); font-size: 13px; font-weight: 650;
+}
+.drb-steps strong { display: block; margin: 14px 0 0; color: var(--ink); font-size: 16px; font-weight: 600; }
+.drb-steps p { margin: 7px 0 0; color: var(--slate); font-size: 14px; line-height: 1.6; }
+
+.drb-shot-grid { margin-top: 36px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px 22px; }
+.drb-shot-grid figure, .drb-style-grid figure { margin: 0; }
+.drb-shot-grid figcaption, .drb-style-grid figcaption { margin-top: 11px; color: var(--ink); font-size: 14px; font-weight: 600; }
+.drb-style-grid { margin-top: 36px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 34px 22px; }
+.drb-style-grid img { width: 100%; height: auto; display: block; border: 1px solid var(--line); border-radius: 12px; }
+.drb-note { margin: 26px 0 0; color: var(--slate); font-size: 13px; }
+
+.drb-pricing { margin-top: 36px; display: grid; grid-template-columns: 1.15fr 1fr; gap: 20px; align-items: start; }
+.drb-price-card { padding: 34px 32px 36px; border-radius: 18px; background: var(--deep-blue); color: var(--white); }
+.drb-price-kicker { margin: 0; color: var(--copper-bright); font-size: 13px; font-weight: 620; }
+.drb-price-badge {
+  display: inline-block; margin: 16px 0 0; padding: 6px 14px; border-radius: 999px;
+  background: var(--copper); color: var(--white); font-size: 12px; font-weight: 650;
+}
+.drb-price-figure { display: flex; flex-wrap: wrap; align-items: baseline; gap: 14px; margin: 16px 0 0; }
+.drb-price-figure span { font-size: 46px; font-weight: 500; letter-spacing: -.045em; }
+.drb-price-figure s { color: rgba(255, 255, 255, .45); font-size: 22px; }
+.drb-price-note { margin: 6px 0 0; color: rgba(255, 255, 255, .7); font-size: 14px; }
+.drb-split { margin-top: 26px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.drb-split div { padding: 16px 18px; border-radius: 12px; background: rgba(255, 255, 255, .08); }
+.drb-split strong { display: block; font-size: 22px; font-weight: 500; letter-spacing: -.035em; }
+.drb-split span { display: block; margin-top: 4px; color: rgba(255, 255, 255, .65); font-size: 13px; }
+.drb-price-button { width: 100%; margin-top: 26px; }
+.drb-price-side { display: grid; gap: 16px; }
+.drb-side-card { padding: 26px 24px 28px; background: var(--white); border: 1px solid var(--line); border-radius: 18px; }
+.drb-side-kicker { margin: 0; color: var(--slate); font-size: 13px; font-weight: 620; }
+.drb-side-figure { margin: 6px 0 0; color: var(--ink); font-size: 30px; font-weight: 500; letter-spacing: -.04em; }
+.drb-side-figure span { color: var(--slate); font-size: 15px; font-weight: 500; }
+.drb-side-figure-small { font-size: 20px; }
+.drb-side-card p { margin: 10px 0 0; color: var(--slate); font-size: 14px; line-height: 1.6; }
+
+@media (max-width: 1080px) {
+  .drb-card-grid, .drb-steps { grid-template-columns: repeat(2, 1fr); }
+  .drb-shot-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 960px) {
+  .drb-body { grid-template-columns: 1fr; gap: 0; padding-top: 70px; }
+  .drb-body > aside { display: none; }
+  .drb-sections { gap: 78px; }
+  .drb-pricing { grid-template-columns: 1fr; }
+}
+@media (max-width: 680px) {
+  .drb-hero { padding-top: 60px; }
+  .drb-card-grid, .drb-steps, .drb-shot-grid, .drb-style-grid, .drb-split { grid-template-columns: 1fr; }
+  .drb-frame-hint { display: none; }
+}

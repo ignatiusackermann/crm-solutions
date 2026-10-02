@@ -1,0 +1,191 @@
+{
+ "home": {
+  "label": "Home page",
+  "group": "pages",
+  "url": "/",
+  "width": 1400,
+  "height": 8093
+ },
+ "how-it-works": {
+  "label": "How it works",
+  "group": "pages",
+  "url": "/how-it-works",
+  "width": 960,
+  "height": 1494
+ },
+ "stories": {
+  "label": "Client stories + Share your story",
+  "group": "pages",
+  "url": "/testimonials",
+  "width": 960,
+  "height": 2600
+ },
+ "qualify": {
+  "label": "Check if you qualify",
+  "group": "pages",
+  "url": "/qualify",
+  "width": 960,
+  "height": 1009
+ },
+ "upload": {
+  "label": "Send documents",
+  "group": "pages",
+  "url": "/upload",
+  "width": 960,
+  "height": 1042
+ },
+ "terms": {
+  "label": "Terms and conditions",
+  "group": "pages",
+  "url": "/terms",
+  "width": 960,
+  "height": 2093
+ },
+ "privacy": {
+  "label": "Privacy policy (POPIA)",
+  "group": "pages",
+  "url": "/privacy",
+  "width": 960,
+  "height": 1936
+ },
+ "member-login": {
+  "label": "Client login",
+  "group": "portal",
+  "url": "/members/login",
+  "width": 960,
+  "height": 877
+ },
+ "member-emma": {
+  "label": "Client dashboard — Emma, 58% paid",
+  "group": "portal",
+  "url": "/members?demo=emma",
+  "width": 960,
+  "height": 3358
+ },
+ "member-david": {
+  "label": "Client dashboard — David, 6 months to go",
+  "group": "portal",
+  "url": "/members?demo=david",
+  "width": 960,
+  "height": 3309
+ },
+ "staff-login": {
+  "label": "Staff sign-in",
+  "group": "crm",
+  "url": "/login",
+  "width": 960,
+  "height": 600
+ },
+ "crm-dashboard": {
+  "label": "CRM dashboard",
+  "group": "crm",
+  "url": "/admin",
+  "width": 960,
+  "height": 772
+ },
+ "crm-leads": {
+  "label": "Leads",
+  "group": "crm",
+  "url": "/admin/leads",
+  "width": 960,
+  "height": 1935
+ },
+ "crm-lead": {
+  "label": "Lead record",
+  "group": "crm",
+  "url": "/admin/leads/L10264",
+  "width": 960,
+  "height": 788
+ },
+ "crm-clients": {
+  "label": "Clients",
+  "group": "crm",
+  "url": "/admin/clients",
+  "width": 960,
+  "height": 831
+ },
+ "crm-client": {
+  "label": "Client record",
+  "group": "crm",
+  "url": "/admin/clients/CL-1040",
+  "width": 960,
+  "height": 701
+ },
+ "crm-pipeline": {
+  "label": "Pipeline",
+  "group": "crm",
+  "url": "/admin/pipeline",
+  "width": 960,
+  "height": 1231
+ },
+ "crm-dialler": {
+  "label": "Dialler bridge",
+  "group": "crm",
+  "url": "/admin/integration",
+  "width": 960,
+  "height": 625
+ },
+ "crm-growth": {
+  "label": "2027 growth plan",
+  "group": "crm",
+  "url": "/admin/growth",
+  "width": 960,
+  "height": 891
+ },
+ "style-navy": {
+  "label": "Night navy + sand gold",
+  "group": "styles",
+  "url": "/",
+  "width": 960,
+  "height": 600,
+  "vars": {
+   "--brand-h": "214",
+   "--brand-s": "54%",
+   "--accent-h": "38",
+   "--accent-s": "70%",
+   "--accent-l": "70%"
+  }
+ },
+ "style-teal": {
+  "label": "Ocean teal + coral",
+  "group": "styles",
+  "url": "/",
+  "width": 960,
+  "height": 600,
+  "vars": {
+   "--brand-h": "188",
+   "--brand-s": "62%",
+   "--accent-h": "14",
+   "--accent-s": "82%",
+   "--accent-l": "68%"
+  }
+ },
+ "style-burgundy": {
+  "label": "Burgundy + champagne",
+  "group": "styles",
+  "url": "/",
+  "width": 960,
+  "height": 600,
+  "vars": {
+   "--brand-h": "345",
+   "--brand-s": "48%",
+   "--accent-h": "42",
+   "--accent-s": "62%",
+   "--accent-l": "74%"
+  }
+ },
+ "style-forest": {
+  "label": "Forest green + sunflower",
+  "group": "styles",
+  "url": "/",
+  "width": 960,
+  "height": 600,
+  "vars": {
+   "--brand-h": "152",
+   "--brand-s": "42%",
+   "--accent-h": "46",
+   "--accent-s": "88%",
+   "--accent-l": "62%"
+  }
+ }
+}

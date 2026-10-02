@@ -13,6 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/value-of-returning-customer",
     "/value-of-a-returning-guest",
     "/for-accounting-practices",
+    "/for-debt-counsellors",
     "/ignatius-ackermann",
     "/book-discovery-call",
     "/contact",
