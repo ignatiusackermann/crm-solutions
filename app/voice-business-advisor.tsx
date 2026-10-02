@@ -166,6 +166,7 @@ SELECTED WORK
 
 INDUSTRY PAGES
 - Accounting practices: /for-accounting-practices — the client replacement calculator: how many new clients a practice must win each year just to stay the same size.
+- Debt counselling practices: /for-debt-counsellors — DebtReliefBiz: a ready-to-trade website with an AI voice assistant, a client portal and a CRM that connects to their dialler. Screenshots open the live demo.
 - Established local businesses: /value-of-returning-customer — what a returning customer is worth.
 - Guest houses and hospitality: /value-of-a-returning-guest — what a returning guest is worth.
 

@@ -44,6 +44,7 @@ export function StandardHeader({
       </Link>
       <nav className="desktop-nav" aria-label="Main navigation">
         <Link href="/revenue-platform">Revenue Platform</Link>
+        <Link href="/for-debt-counsellors">Debt Counsellors</Link>
         <Link href="/#work">Work</Link>
         <Link href="/#insights">Insights</Link>
         <Link href="/contact" className={current === "contact" ? "nav-current" : undefined}>
@@ -64,6 +65,8 @@ export function StandardHeader({
         <nav aria-label="Mobile navigation">
           <Link href="/">Home</Link>
           <Link href="/revenue-platform">Revenue Platform</Link>
+          <Link href="/for-debt-counsellors">Debt Counsellors</Link>
+          <Link href="/for-accounting-practices">Accounting Practices</Link>
           <Link href="/#work">Work</Link>
           <Link href="/contact">Contact</Link>
           <Link href="/client/login">Client login</Link>
