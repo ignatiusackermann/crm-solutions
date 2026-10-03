@@ -4296,3 +4296,8 @@ a:focus-visible .drb-shot img {
 .nav-dropdown-panel a:hover,
 .nav-dropdown-panel a:focus-visible { background: var(--canvas); color: var(--copper); }
 @media (prefers-reduced-motion: reduce) { .nav-dropdown-panel { transition: none; } }
+
+/* The cancellation calculator sits inside the sales page body, so it needs
+   less top margin than on the accountant page, and rounded corners to match
+   the cards around it. */
+.drb-calculator .vrc-calculator { margin-top: 36px; border-radius: 14px; overflow: hidden; }

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { DiscoveryCallSection, SiteFooter, StandardHeader } from "../site-components";
 import previews from "../../lib/debtreliefbiz-previews.json";
 import { Preview, SideNav } from "./sales-parts";
+import { CancellationCalculator } from "./cancellation-calculator";
 
 /* CRM Solutions' page for South African debt counsellors. It sells DebtReliefBiz —
    the website, AI voice assistant, client portal and CRM we built for debt review —
@@ -42,6 +43,7 @@ const ALL = previews as Record<string, PreviewMeta>;
 const group = (name: string) => Object.entries(ALL).filter(([, item]) => item.group === name);
 
 const NAV = [
+  { id: "calculator", label: "What churn costs" },
   { id: "features", label: "Features" },
   { id: "pages", label: "Pages" },
   { id: "portal", label: "Client portal" },
@@ -177,9 +179,9 @@ export default function ForDebtCounsellorsPage() {
             <li>POPIA built in, not bolted on</li>
           </ul>
           <div className="hero-actions drb-hero-actions">
-            <Link className="button button-copper" href="/book-discovery-call">
-              Book a walkthrough <span aria-hidden="true">→</span>
-            </Link>
+            <a className="button button-copper" href="#calculator">
+              Work out what churn costs you <span aria-hidden="true">→</span>
+            </a>
             <a className="text-link" href={DEMO} target="_blank" rel="noreferrer">
               Try the live demo — talk to Sandy <span aria-hidden="true">→</span>
             </a>
@@ -225,6 +227,25 @@ export default function ForDebtCounsellorsPage() {
         </aside>
 
         <div className="drb-sections">
+          <section id="calculator">
+            <div className="vrc-heading vrc-heading-split">
+              <h2>What a cancellation costs you</h2>
+              <p>
+                Your income is the after-care fee, month after month, for as long as a client
+                stays under review. A client who falls out does not cost you one fee — they cost
+                you every fee that was still to come. Move the sliders to your own figures.
+              </p>
+            </div>
+            <div className="drb-calculator" data-reveal>
+              <CancellationCalculator />
+            </div>
+            <p className="drb-note">
+              The NDRC reported 24.3% of its matters cancelled between March 2020 and March 2026.
+              Nationally, close to 2 million debt review applications have produced about 213 000
+              clearance certificates.
+            </p>
+          </section>
+
           <section id="features">
             <div className="vrc-heading vrc-heading-split">
               <h2>Features</h2>
