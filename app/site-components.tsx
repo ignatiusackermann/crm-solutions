@@ -145,6 +145,33 @@ export function SiteFooter() {
             <span>104 Lothian Rd, Durban North, Durban, 4051</span>
           </address>
           <Link href="/contact">Contact</Link>
+          {/* The same two profiles are claimed in the schema (Facebook on the
+              Organization, LinkedIn on the Person), so the visible links
+              corroborate what the structured data says. */}
+          <div className="footer-social">
+            <a
+              href="https://www.linkedin.com/in/ignatiusackermann/"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Ignatius Ackermann on LinkedIn"
+              title="LinkedIn"
+            >
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="currentColor">
+                <path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3V9Zm7 0h3.8v1.7h.05c.53-1 1.82-2.05 3.75-2.05C21.6 8.65 23 10.6 23 14v7h-4v-6.2c0-1.5-.03-3.4-2.07-3.4-2.07 0-2.39 1.6-2.39 3.3V21h-4V9Z" />
+              </svg>
+            </a>
+            <a
+              href="https://www.facebook.com/p/CRM-Solutions-100066631755979/"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="CRM Solutions on Facebook"
+              title="Facebook"
+            >
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" fill="currentColor">
+                <path d="M14 9V7.3c0-.8.2-1.3 1.4-1.3H17V3.1A20 20 0 0 0 14.8 3C12.3 3 10.5 4.5 10.5 7v2H8v3h2.5v9H14v-9h2.6l.4-3H14Z" />
+              </svg>
+            </a>
+          </div>
         </div>
         <nav className="footer-column" aria-label="Who we work with">
           <strong>Who we work with</strong>

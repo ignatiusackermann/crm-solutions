@@ -4301,3 +4301,14 @@ a:focus-visible .drb-shot img {
    less top margin than on the accountant page, and rounded corners to match
    the cards around it. */
 .drb-calculator .vrc-calculator { margin-top: 36px; border-radius: 14px; overflow: hidden; }
+
+/* Footer social links. Only LinkedIn and Facebook exist, so only those two
+   render — never a dead icon. */
+.footer-social { display: flex; gap: 10px; margin-top: 18px; }
+.footer-social a {
+  display: grid; place-items: center; width: 34px; height: 34px;
+  border: 1px solid var(--line); border-radius: 50%;
+  color: var(--slate);
+  transition: color .2s ease, border-color .2s ease, background .2s ease;
+}
+.footer-social a:hover { color: var(--white); background: var(--copper); border-color: var(--copper); }
