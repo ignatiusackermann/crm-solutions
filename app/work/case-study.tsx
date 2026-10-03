@@ -119,9 +119,27 @@ const siblings = [
 ];
 
 export function caseMetadata(study: CaseStudy): Metadata {
+  // LinkedIn, WhatsApp and Slack read the OpenGraph tags first and only fall
+  // back to <title>. Without these a shared case study showed the site-wide
+  // title ("CRM Solutions | Connected Revenue Platforms") and no description.
+  const title = `${study.name} | CRM Solutions Work`;
   return {
-    title: `${study.name} | CRM Solutions Work`,
+    title,
     description: study.intro,
+    alternates: { canonical: `/work/${study.slug}` },
+    openGraph: {
+      type: "article",
+      locale: "en_ZA",
+      siteName: "CRM Solutions",
+      url: `https://www.crmsolutions.app/work/${study.slug}`,
+      title: `${study.name} — ${study.headline}`,
+      description: study.intro,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${study.name} — ${study.headline}`,
+      description: study.intro,
+    },
   };
 }
 
