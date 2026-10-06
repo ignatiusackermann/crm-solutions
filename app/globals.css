@@ -4312,3 +4312,36 @@ a:focus-visible .drb-shot img {
   transition: color .2s ease, border-color .2s ease, background .2s ease;
 }
 .footer-social a:hover { color: var(--white); background: var(--copper); border-color: var(--copper); }
+
+/* ── /calculator — the installable app page ───────────────────────────
+   Deliberately without the site header and footer: once it is added to a
+   home screen this is the whole screen, so it has to read as an app. */
+.calc-app { min-height: 100svh; background: var(--canvas); padding: 0 0 40px; }
+.calc-app-bar {
+  position: sticky; top: 0; z-index: 20;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: 14px clamp(16px, 4vw, 34px);
+  background: var(--white); border-bottom: 1px solid var(--line);
+}
+.calc-brand { display: inline-flex; align-items: center; gap: 10px; color: var(--ink); font-size: 14px; font-weight: 620; }
+.calc-brand img { display: block; }
+.calc-install { min-height: 42px; padding: 0 18px; font-size: 13px; }
+.calc-install-hint { margin: 0; color: var(--slate); font-size: 12px; max-width: 230px; text-align: right; line-height: 1.4; }
+.calc-app-intro { width: min(760px, calc(100vw - 36px)); margin: 34px auto 0; }
+.calc-app-intro h1 {
+  margin: 0; color: var(--ink); font-size: clamp(26px, 4.6vw, 36px);
+  font-weight: 430; line-height: 1.12; letter-spacing: -.04em;
+}
+.calc-app-intro p { margin: 14px 0 0; color: var(--slate); font-size: 15px; line-height: 1.6; }
+.calc-app-body { width: min(1060px, calc(100vw - 36px)); margin: 26px auto 0; }
+.calc-app-body .vrc-calculator { margin-top: 0; border-radius: 14px; overflow: hidden; }
+.calc-app-foot { width: min(760px, calc(100vw - 36px)); margin: 34px auto 0; color: var(--slate); font-size: 13px; line-height: 1.6; }
+.calc-app-foot a { color: var(--blue); border-bottom: 1px solid var(--copper); padding-bottom: 2px; }
+.calc-app-foot p + p { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 18px; }
+@media (max-width: 640px) {
+  .calc-app-bar { padding: 12px 16px; }
+  .calc-brand span { display: none; }
+  .calc-install-hint { font-size: 11px; max-width: 190px; }
+}
+.calc-app-site { display: flex; flex-wrap: wrap; gap: 18px; font-weight: 600; }
+.calc-app-site a { color: var(--ink); }

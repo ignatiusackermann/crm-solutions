@@ -1,0 +1,16 @@
+{
+  "name": "Client Value Calculator — CRM Solutions",
+  "short_name": "Client Value",
+  "description": "Work out what a lost client really costs your practice. Works offline, nothing is stored or sent.",
+  "start_url": "/calculator",
+  "scope": "/calculator",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f5f2ea",
+  "theme_color": "#0b2a55",
+  "icons": [
+    { "src": "/brand/crm-solutions-icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/brand/crm-solutions-icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/brand/crm-solutions-icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
