@@ -635,7 +635,7 @@ export default function RevenuePlatformPage() {
           <Link className="button button-primary" href="/revenue-leak-audit">
             Find Your Revenue Leaks <Arrow />
           </Link>
-          <Link className="text-link" href="/#work">
+          <Link className="text-link" href="/work">
             See the Work <Arrow />
           </Link>
         </div>

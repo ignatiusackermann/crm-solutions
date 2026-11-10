@@ -42,6 +42,61 @@ const study: CaseStudy = {
       body: "Raise enquiry quality so the team starts with a defined need, not a blank slate.",
     },
   ],
+  powerTitle: "What the platform does, every day.",
+  powerIntro:
+    "Storvac sells vacuum storage bags online. It is a small catalogue, so the site’s work is helping people choose and making it easy to order again.",
+  power: [
+    {
+      title: "Find my size",
+      body: "A size guide shows what fits in each bag, so a buyer can choose the right one before reaching the basket.",
+    },
+    {
+      title: "Card or EFT checkout",
+      body: "Customers pay by card or by bank transfer, and choose courier delivery or collection.",
+    },
+    {
+      title: "Customer accounts",
+      body: "A returning customer signs in, sees past orders and repeats one with a single button.",
+    },
+    {
+      title: "Live stock",
+      body: "The shop shows when a product is running low or out of stock, and stock drops as orders are paid.",
+    },
+    {
+      title: "Abandoned-cart reminders",
+      body: "A shopper who leaves with a full basket gets a reminder by email.",
+    },
+    {
+      title: "An owner’s admin",
+      body: "The owner adds and edits products, prices and photos, marks EFT orders as paid and handles refunds.",
+    },
+  ],
+  challengesTitle: "A small catalogue that still has to feel like a proper shop.",
+  challengesIntro:
+    "Each of these was a real constraint on the project. The answer is what shaped the site.",
+  challenges: [
+    {
+      title: "Buyers do not know their size",
+      problem:
+        "The wrong bag is a wasted order and a return. Most first-time buyers cannot tell from a list of dimensions which one fits their need.",
+      answer:
+        "A size guide sets out what each bag holds in plain terms, and it comes before price or checkout.",
+    },
+    {
+      title: "Few products, full expectations",
+      problem:
+        "A shop with a handful of products is still judged against the big retailers: payment choice, order emails, accounts and delivery options.",
+      answer:
+        "The complete shop was built at the right scale: card and EFT, accounts, order history, stock and delivery choices, with nothing added for show.",
+    },
+    {
+      title: "The owner must run it alone",
+      problem:
+        "A small shop cannot call a developer every time a price changes or an EFT payment arrives.",
+      answer:
+        "Products, stock, orders and refunds are all handled by the owner in a plain admin area.",
+    },
+  ],
   decisionTitle: "Design the sizing decision—not merely the pages.",
   decisions: [
     {

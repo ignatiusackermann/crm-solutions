@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { DiscoveryCallSection, SiteFooter } from "../site-components";
+import { portfolio, type PortfolioTone } from "./portfolio";
 
 export type CaseStudy = {
   slug: string;
@@ -8,7 +9,7 @@ export type CaseStudy = {
   category: string;
   liveUrl: string;
   liveLabel: string;
-  heroTone: "lava" | "star" | "storvac";
+  heroTone: PortfolioTone;
   screenshot: string;
   headline: string;
   intro: string;
@@ -17,6 +18,12 @@ export type CaseStudy = {
   narrativeTitle: string;
   narrative: string[];
   pillars: { title: string; body: string }[];
+  powerTitle: string;
+  powerIntro: string;
+  power: { title: string; body: string }[];
+  challengesTitle: string;
+  challengesIntro: string;
+  challenges: { title: string; problem: string; answer: string }[];
   decisionTitle: string;
   decisions: { label: string; title: string; body: string }[];
   layersTitle: string;
@@ -49,7 +56,7 @@ function CaseHeader({ tone }: { tone: CaseStudy["heroTone"] }) {
       </Link>
       <nav className="desktop-nav" aria-label="Main navigation">
         <Link href="/revenue-platform">Revenue Platform</Link>
-        <Link href="/#work">Work</Link>
+        <Link href="/work">Work</Link>
         <Link href="/contact">Contact</Link>
         <Link href="/#about">About</Link>
       </nav>
@@ -79,7 +86,7 @@ function CaseHeader({ tone }: { tone: CaseStudy["heroTone"] }) {
         <summary aria-label="Open navigation">Menu</summary>
         <nav aria-label="Mobile navigation">
           <Link href="/">Home</Link>
-          <Link href="/#work">Work</Link>
+          <Link href="/work">Work</Link>
           <Link href="/contact">Contact</Link>
           <Link href="/client/login">Client login</Link>
           <Link href="/book-discovery-call">Book a Discovery Call</Link>
@@ -112,11 +119,6 @@ function CaseVisual({ study }: { study: CaseStudy }) {
   );
 }
 
-const siblings = [
-  { href: "/work/lava-sa", name: "Lava-SA" },
-  { href: "/work/star-aesthetic", name: "Star Aesthetic" },
-  { href: "/work/storvac", name: "Storvac Systems" },
-];
 
 export function caseMetadata(study: CaseStudy): Metadata {
   // LinkedIn, WhatsApp and Slack read the OpenGraph tags first and only fall
@@ -213,6 +215,23 @@ export function CaseStudyPage({ study }: { study: CaseStudy }) {
         </div>
       </section>
 
+      <section className={`case-power case-depth-${study.heroTone}`}>
+        <div className="section-shell">
+          <div className="case-depth-intro">
+            <h2>{study.powerTitle}</h2>
+            <p>{study.powerIntro}</p>
+          </div>
+          <div className="case-power-grid">
+            {study.power.map((item) => (
+              <article key={item.title}>
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="case-light case-light-tight section-shell">
         <div className="case-split">
           <h2>{study.decisionTitle}</h2>
@@ -228,6 +247,27 @@ export function CaseStudyPage({ study }: { study: CaseStudy }) {
               </article>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="case-light case-light-tight section-shell" id="challenges">
+        <div className="case-challenges-intro">
+          <p className="eyebrow">The challenges</p>
+          <h2>{study.challengesTitle}</h2>
+          <p>{study.challengesIntro}</p>
+        </div>
+        <div className="case-challenges">
+          {study.challenges.map((item, index) => (
+            <article key={item.title}>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <h3>{item.title}</h3>
+              <p>{item.problem}</p>
+              <p className="case-challenge-answer">
+                <strong>What we did</strong>
+                {item.answer}
+              </p>
+            </article>
+          ))}
         </div>
       </section>
 
@@ -308,13 +348,16 @@ export function CaseStudyPage({ study }: { study: CaseStudy }) {
           <h2>Other platforms shaped around a buying decision.</h2>
         </div>
         <div className="case-more-links">
-          {siblings
-            .filter((item) => item.href !== `/work/${study.slug}`)
+          {portfolio
+            .filter((item) => item.slug !== study.slug)
             .map((item) => (
-              <Link key={item.href} href={item.href}>
+              <Link key={item.slug} href={`/work/${item.slug}`}>
                 {item.name} <Arrow />
               </Link>
             ))}
+          <Link href="/work">
+            All work <Arrow />
+          </Link>
         </div>
       </section>
 

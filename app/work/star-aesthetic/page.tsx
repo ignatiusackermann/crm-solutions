@@ -42,6 +42,61 @@ const study: CaseStudy = {
       body: "Enquiry and booking designed as a guided next step—not a cold form at the end of a brochure.",
     },
   ],
+  powerTitle: "What the platform does, every day.",
+  powerIntro:
+    "Star Aesthetic Centre is a doctor-led clinic. The site takes bookings, sells products and gives patients reasons to return, around the clock.",
+  power: [
+    {
+      title: "On-site booking",
+      body: "A patient chooses a treatment and a time on the clinic’s own site, and the clinic is told at once.",
+    },
+    {
+      title: "Niki, the voice assistant",
+      body: "Niki answers questions about treatments and takes a booking by voice, including after hours.",
+    },
+    {
+      title: "A product shop",
+      body: "Skincare products are sold online with card payment, and a forgotten basket gets a reminder.",
+    },
+    {
+      title: "Gift vouchers",
+      body: "Vouchers are bought and redeemed on the site, which brings in new patients through existing ones.",
+    },
+    {
+      title: "Membership and rewards",
+      body: "Returning patients earn rewards, which gives them a reason to book the next visit here.",
+    },
+    {
+      title: "Reviews",
+      body: "Patients are asked for a review after a visit, so the clinic’s reputation grows with its work.",
+    },
+  ],
+  challengesTitle: "Earning clinical trust before a single consultation.",
+  challengesIntro:
+    "Each of these was a real constraint on the project. The answer is what shaped the site.",
+  challenges: [
+    {
+      title: "A medical decision, made online",
+      problem:
+        "Nobody books an aesthetic treatment on impulse. The visitor is judging safety and credibility long before price.",
+      answer:
+        "The doctor and the clinic’s standards lead every page, and the tone stays calm and factual: no pressure and no inflated promises.",
+    },
+    {
+      title: "A long treatment menu",
+      problem:
+        "Patients often do not know the name of the treatment they need, and a long menu sends them away to research elsewhere.",
+      answer:
+        "Each treatment has a plain-language page that says who it is for and what to expect, with consultation as the next step.",
+    },
+    {
+      title: "Enquiries after the clinic closes",
+      problem:
+        "Many people research treatments in the evening. A site that can only say “phone us tomorrow” loses them overnight.",
+      answer:
+        "Online booking and Niki, the voice assistant, take the booking when the front desk cannot.",
+    },
+  ],
   decisionTitle: "Design the patient decision—not merely the pages.",
   decisions: [
     {

@@ -87,7 +87,7 @@ export function StandardHeader({
       <nav className="desktop-nav" aria-label="Main navigation">
         <Link href="/revenue-platform">Revenue Platform</Link>
         <IndustriesMenu />
-        <Link href="/#work">Work</Link>
+        <Link href="/work">Work</Link>
         <Link href="/#insights">Insights</Link>
         <Link href="/contact" className={current === "contact" ? "nav-current" : undefined}>
           Contact
@@ -108,7 +108,7 @@ export function StandardHeader({
           <Link href="/">Home</Link>
           <Link href="/revenue-platform">Revenue Platform</Link>
           <MobileIndustryLinks />
-          <Link href="/#work">Work</Link>
+          <Link href="/work">Work</Link>
           <Link href="/contact">Contact</Link>
           <Link href="/client/login">Client login</Link>
           <Link href="/revenue-leak-audit">Revenue Leak Audit</Link>
@@ -184,7 +184,7 @@ export function SiteFooter() {
           <strong>Explore</strong>
           <Link href="/revenue-platform">Revenue Platform</Link>
           <Link href="/revenue-leak-audit">Revenue Leak Audit</Link>
-          <Link href="/#work">Selected Work</Link>
+          <Link href="/work">Selected Work</Link>
           <Link href="/book-discovery-call">Book a Discovery Call</Link>
         </nav>
         <nav className="footer-column" aria-label="Working together">

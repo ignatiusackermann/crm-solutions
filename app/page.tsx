@@ -173,7 +173,7 @@ export default function Home() {
         <nav className="desktop-nav" aria-label="Main navigation">
           <Link href="/revenue-platform">Revenue Platform</Link>
           <IndustriesMenu />
-          <a href="#work">Work</a>
+          <Link href="/work">Work</Link>
           <a href="#insights">Insights</a>
           <Link href="/contact">Contact</Link>
         </nav>
@@ -191,7 +191,7 @@ export default function Home() {
           <nav aria-label="Mobile navigation">
             <Link href="/revenue-platform">Revenue Platform</Link>
             <MobileIndustryLinks />
-            <a href="#work">Work</a>
+            <Link href="/work">Work</Link>
             <Link href="/contact">Contact</Link>
             <Link href="/client/login">Client login</Link>
             <a href="#about">About</a>
@@ -366,6 +366,9 @@ export default function Home() {
               </article>
             ))}
           </div>
+          <p className="work-all-link">
+            <Link className="button button-primary" href="/work">See all six platforms <Arrow /></Link>
+          </p>
           <p className="section-deep-link">
             <Link href="/insights/proof-before-claims">
               How do you know a platform will work before you buy it? <Arrow />

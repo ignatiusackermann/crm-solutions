@@ -42,6 +42,61 @@ const study: CaseStudy = {
       body: "Premium presentation that matches the seriousness of the purchase—not a generic template shop.",
     },
   ],
+  powerTitle: "What the platform does, every day.",
+  powerIntro:
+    "Lava-SA sells vacuum sealers that cost as much as a good appliance. The site has to do the explaining a showroom would do, then take the order.",
+  power: [
+    {
+      title: "A full online shop",
+      body: "Machines, bags, rolls and spare parts, with card payment at checkout and order emails to the customer and the business.",
+    },
+    {
+      title: "Janet, the voice assistant",
+      body: "A visitor can ask a question out loud at any hour and get an answer drawn from the site’s own product information.",
+    },
+    {
+      title: "Lava TV",
+      body: "Product, care and servicing videos sit beside the machines they belong to, so a buyer can see one working before paying.",
+    },
+    {
+      title: "Abandoned-cart reminders",
+      body: "A shopper who leaves with a full basket gets a reminder by email, with the basket waiting.",
+    },
+    {
+      title: "Reviews and rewards",
+      body: "Customers are asked for a review after buying, and returning customers earn rewards on later orders.",
+    },
+    {
+      title: "An owner’s admin",
+      body: "Orders, customers, mailings and content are managed by the business, without a developer in the middle.",
+    },
+  ],
+  challengesTitle: "Selling a serious machine to someone who cannot touch it.",
+  challengesIntro:
+    "Each of these was a real constraint on the project. The answer is what shaped the site.",
+  challenges: [
+    {
+      title: "A high price, bought unseen",
+      problem:
+        "A buyer spending thousands of rand on a machine wants to see it, compare it and ask about it. A product photo and a price do none of that.",
+      answer:
+        "Every machine has its own page with video, the differences between models are set out side by side, and a voice assistant answers what is left.",
+    },
+    {
+      title: "Three kinds of buyer in one catalogue",
+      problem:
+        "A hunter, a home cook and a butchery need different machines, and existing owners only want bags or a spare part. One product list serves none of them well.",
+      answer:
+        "The catalogue is arranged around what the buyer is trying to do, with spare parts and consumables on their own short path.",
+    },
+    {
+      title: "The sale does not end at checkout",
+      problem:
+        "Bags and rolls are bought again and again. A shop that forgets the customer after the first order leaves most of the value behind.",
+      answer:
+        "Accounts, rewards, review requests and mailings keep the customer connected to the shop after the machine arrives.",
+    },
+  ],
   decisionTitle: "Design the buying decision—not merely the pages.",
   decisions: [
     {
