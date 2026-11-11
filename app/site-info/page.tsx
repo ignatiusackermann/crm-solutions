@@ -56,6 +56,7 @@ const pages = [
   ["/work/shades-of-blue", "Case study — Shades of Blue"],
   ["/work/coastal-preferred-escapes", "Case study — Coastal Preferred Escapes"],
   ["/work/cabana-mio", "Case study — Cabana Mio"],
+  ["/work/yasuke-safety", "Case study — Yasuke Safety"],
   ["/insights/*", "8 insight articles"],
   ["/privacy-policy", "Privacy Policy"],
   ["/cookie-policy", "Cookie Policy"],

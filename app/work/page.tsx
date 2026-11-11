@@ -5,7 +5,7 @@ import { portfolio } from "./portfolio";
 
 const title = "Work | CRM Solutions";
 const description =
-  "Six live platforms built by CRM Solutions: online shops, booking engines, a quoting system and a holiday membership. Each has its own page on what it does and the challenges behind it.";
+  "Seven live platforms built by CRM Solutions: online shops, booking engines, quoting systems and a holiday membership. Each has its own page on what it does and the challenges behind it.";
 
 export const metadata: Metadata = {
   title,
@@ -16,21 +16,21 @@ export const metadata: Metadata = {
     locale: "en_ZA",
     siteName: "CRM Solutions",
     url: "https://www.crmsolutions.app/work",
-    title: "Work — six live platforms, and the challenges behind each",
+    title: "Work — seven live platforms, and the challenges behind each",
     description,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Work — six live platforms, and the challenges behind each",
+    title: "Work — seven live platforms, and the challenges behind each",
     description,
   },
 };
 
-// What the six sites have in common. Counted from the case studies themselves:
+// What the sites have in common. Counted from the case studies themselves:
 // a site is counted only where its own page describes the feature.
 const shared = [
-  { value: "6", label: "Live platforms, each on the client’s own domain" },
-  { value: "5", label: "Have a voice assistant that answers visitors aloud" },
+  { value: "7", label: "Live platforms, each on the client’s own domain" },
+  { value: "6", label: "Have a voice assistant that answers visitors aloud" },
   { value: "3", label: "Are online shops with card payment" },
   { value: "3", label: "Take bookings on the site itself" },
 ];
@@ -64,7 +64,7 @@ export default function WorkPage() {
         <div>
           <p className="eyebrow">Work</p>
           <h1>
-            Six live platforms. Six different commercial problems
+            Seven live platforms. Seven different commercial problems
             <span>.</span>
           </h1>
         </div>
@@ -74,7 +74,7 @@ export default function WorkPage() {
         </p>
       </section>
 
-      <section className="work-index-stats section-shell" aria-label="What the six platforms share">
+      <section className="work-index-stats section-shell" aria-label="What the seven platforms share">
         {shared.map((item) => (
           <div key={item.label}>
             <strong>{item.value}</strong>

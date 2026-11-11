@@ -26,6 +26,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/work/shades-of-blue",
     "/work/coastal-preferred-escapes",
     "/work/cabana-mio",
+    "/work/yasuke-safety",
     "/privacy-policy",
     "/cookie-policy",
     "/terms-and-conditions",

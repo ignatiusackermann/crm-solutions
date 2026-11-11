@@ -2,7 +2,7 @@
 // "more work" links on each case study all read this list, so a new site is
 // added here once and then given its own page in app/work/<slug>/page.tsx.
 
-export type PortfolioTone = "lava" | "star" | "storvac" | "shades" | "cpe" | "cabana";
+export type PortfolioTone = "lava" | "star" | "storvac" | "shades" | "cpe" | "cabana" | "yasuke";
 
 export type PortfolioEntry = {
   slug: string;
@@ -81,5 +81,16 @@ export const portfolio: PortfolioEntry[] = [
     tone: "cabana",
     screenshot: "/portfolio/cabana-mio-desktop.jpg",
     host: "cabanamio.co.za",
+  },
+  {
+    slug: "yasuke-safety",
+    name: "Yasuke Safety",
+    category: "Mine supply",
+    statement:
+      "Replacing a once-off shop quote with a bulk request a mine can send again.",
+    themes: ["Bulk quantities", "Repeat orders", "Voice assistant"],
+    tone: "yasuke",
+    screenshot: "/portfolio/yasuke-safety-desktop.jpg",
+    host: "www.yasukesafety.co.za",
   },
 ];
