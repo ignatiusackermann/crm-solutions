@@ -1,82 +1,114 @@
 # Video 00 — DebtReliefBiz: Sandy's walkthrough (the main body)
 
-**First in the campaign** (decided 18 Nov 2026): it is for sale, needs no client's
-permission, and every view is a potential buyer (an NCR-registered debt counsellor).
+**First in the campaign** (decided 18 Nov 2026). It is for sale, needs no client's
+permission, and every viewer who owns a practice is a potential buyer.
 
-## How these videos are built (the Shades of Blue /site-info idea)
+## Who Sandy is talking to (corrected 18 Nov)
 
-1. **Opening scene** (5–8 s) — the hook, made once per video.
-2. **Main body** — the site's own voice agent walks the viewer through the live site,
-   and the page scrolls with her, exactly like "Meet Blue" on shadesobl.co.za/site-info.
-   This is a screen recording with the agent's own voice. Same recording, two shapes:
-   desktop (16:9) and mobile (9:16).
-3. **Closing scene** (5–10 s) — the subtle CRM Solutions CTA: *Book a Discovery Call.*
+**The owner of a debt counselling practice**, often a qualified attorney, running a
+call centre of **20 to 50 agents** and collecting **a few hundred thousand rand a month**.
+Not the consumer in debt.
 
-The same body recording is also embedded at the bottom of the site's /site-info page
-(noindex, shared with owners only).
+The owner's desire: **a practice that is open 24 hours a day, 365 days a year, takes every
+call and every lead, and grows without employing more staff.** Higher margin, less
+pressure on the floor, no lead lost because everyone was busy, at lunch or asleep.
+
+The picture to paint: the business transformed, not a website toured.
+
+## Sandy's three levels
+
+| Level | What Sandy does | Status |
+|---|---|---|
+| **1 — Website** | Answers visitors aloud 24/7, explains debt review, qualifies, books call-backs, collects documents, feeds the CRM and client portal | **Live in the demo** |
+| **2 — Missed calls** | Answers the practice's phone when every agent is busy, on lunch or after hours; answers questions, takes details, books the call-back | **Can be added** (not yet live) |
+| **3 — Outbound** | Phones clients to ask questions, request missing documents and send the upload link, so agents work on higher-value tasks | **Can be added** (not yet live) |
+
+**Any language:** English, isiZulu, Setswana, Afrikaans, Sesotho, Portuguese, German —
+Sandy answers in the caller's language.
+
+Honesty rule: the video says Levels 2 and 3 **can be added**, as Blue's tour does on
+shadesobl.co.za. It never shows them as running today, and never promises a number of
+leads or a rand result.
+
+## How these videos are built
+
+1. **Opening scene** (5–8 s) — the hook, made separately.
+2. **Main body** — Sandy walks the owner through, in her own live voice, and the page
+   scrolls with her, like "Meet Blue" on shadesobl.co.za/site-info. Recorded on desktop
+   (16:9) and mobile (9:16).
+3. **Closing scene** (5–10 s) — *Book a Discovery Call* (crmsolutions.app).
 
 ## Lengths
 
 | Where | Format | Total | Opening | **Body** | Closing |
 |---|---|---|---|---|---|
-| WhatsApp Status (max 60 s per clip) | 9:16 | 60 s | 5 s | **≈ 50 s** | 5 s |
-| Instagram / Facebook Reels, TikTok | 9:16 | 60 s | same file as WhatsApp | | |
+| WhatsApp Status (max 60 s), Reels, TikTok | 9:16 | 60 s | 5 s | **≈ 50 s** | 5 s |
 | YouTube, LinkedIn | 16:9 | ≈ 2:30 | 8 s | **≈ 2:10** | 10 s |
 | /site-info page (owners) | 16:9 + 9:16 | — | — | **the long body** | — |
 
-So each site needs **two body scripts**: short (≈ 50 s, about 105 spoken words) and
-long (≈ 2:10, about 290 words), each recorded on desktop and on mobile.
+---
 
-The viewer is a **debt counsellor**, so Sandy speaks to them about *their* practice:
-the moment first, the pain briefly, features only as proof. No prices.
+## Short body — ≈ 50 s (portrait)
+
+| # | Shown on screen | Sandy says |
+|---|---|---|
+| 1 | Home hero, Sandy's card | "Hi, I'm Sandy. Picture a debt counselling practice that never closes." |
+| 2 | Sandy answering on the site at night | "At two in the morning, when your call centre is empty, I'm answering the people who need you, and booking them for the morning." |
+| 3 | Qualify check → call-back booked → CRM lead | "I explain debt review, check if it could help, and every lead lands in your CRM before your team arrives." |
+| 4 | Missed-call card (Level 2) | "I can also answer your phones when every agent is busy or at lunch." |
+| 5 | Outbound card (Level 3), upload link on a phone | "And I can call your clients for missing documents, so your agents work on what earns." |
+| 6 | Language list: isiZulu, Setswana, Afrikaans, Portuguese… | "In isiZulu, Setswana, Afrikaans, Portuguese. Whatever your client speaks." |
+| 7 | Hero with "Your practice name · NCR registered" | "More calls answered. No more staff. Your name, your NCR number." |
+
+≈ 105 words.
+
+## Long body — ≈ 2:10 (landscape, and the /site-info embed)
+
+| # | Shown on screen | Sandy says |
+|---|---|---|
+| 1 | Home hero | "Hello, I'm Sandy. I'm built into this debt counselling practice, and I'd like to show you what I could do for yours. The page will move along with me." |
+| 2 | The site at night; clock 02:10 | "Your call centre closes at five. But people in debt don't. They look for help at night, alone and often ashamed. Every one who can't reach you tonight phones someone else tomorrow." |
+| 3 | Sandy's card → talking | "That's where I come in. On your website I answer out loud, in the caller's own words, any hour of the day, every day of the year. I explain debt review honestly, without judgement." |
+| 4 | /qualify, then call-back confirmation | "I help them check whether debt review could work, and book a call-back with your team. When your agents log in, the conversation summary is already waiting." |
+| 5 | /upload | "Payslips, statements and ID arrive through a secure link. Reminders go out on their own and stop the moment the documents arrive." |
+| 6 | Admin CRM, leads and milestones | "Every lead, every call-back, every application and every deadline sits in one CRM, so nothing your practice has paid to attract gets lost." |
+| 7 | /members — client portal | "And clients can see their balances falling every month. Clients who can see progress keep paying, and stay the course." |
+| 8 | Missed-call card (Level 2) | "That's what I do today. I can also be extended. When every agent is busy, at lunch, or the office is closed, I can answer your phone line, answer questions and take the details, so no call goes to voicemail." |
+| 9 | Outbound card (Level 3) | "And I can make calls. I can phone clients to ask for a missing payslip, send them the upload link, and remind them of the next step, so your agents spend their day on the work that earns." |
+| 10 | Language list | "I speak your clients' languages: English, isiZulu, Setswana, Sesotho, Afrikaans, even Portuguese and German. And as the technology improves, I only get better." |
+| 11 | Hero with practice name, NCR number, phones | "A practice that is open twenty-four seven, three hundred and sixty-five days a year, without adding a single person to the payroll. Under your name and your NCR number." |
+| 12 | Back to hero | "Picture what that does to your month." |
+
+≈ 330 words (trim lines 5 or 10 if the take runs past 2:15).
 
 ---
 
-## Short body — ≈ 50 s (portrait: WhatsApp, Reels, TikTok)
+## Screens needed that the demo does not have yet
 
-| # | Page / section shown | Sandy says (live, in her own voice) |
-|---|---|---|
-| 1 | Home hero, Sandy's card glowing | "Hi, I'm Sandy. I work for a debt counselling practice, and I never sleep." |
-| 2 | Hero → "Talk to Sandy now" | "At two in the morning, when someone is too ashamed to phone, they talk to me instead, in their own words." |
-| 3 | /qualify — the 2-minute check | "I explain debt review without judgement, help them check if it could work for them," |
-| 4 | Call-back confirmation | "and book a call-back with a registered counsellor for the morning." |
-| 5 | /upload — secure documents | "Their payslips and statements arrive through a secure link. Nobody chases paperwork." |
-| 6 | /members — client portal, 58% paid | "And every month, clients see their balances falling, so they stay the course." |
-| 7 | Admin CRM, leads list | "Your team sees every lead and every milestone in one place." |
-| 8 | Hero with "NCR registered" line | "Your name, your NCR number, ready in days." |
+Levels 2 and 3 and the language list are not on debtreliefbiz.co.za today. For the body
+recording they need a simple section to scroll to, ideally on /site-info (owners only):
+a "Sandy's three levels" band (three cards) and a language strip. That is a small change
+in the **TDRG project**, done in its own session, before recording.
 
-≈ 100 words.
+## Pricing note (not in any video)
 
-## Long body — ≈ 2:10 (landscape: YouTube, LinkedIn, /site-info)
+An industry contact says R20 000 is far too low, and the owner described above supports
+that: a practice running 20–50 agents measures cost in salaries and lost leads, not in
+website prices. Suggested structure for the Discovery Call (quote privately, never on the
+site or in the video):
 
-| # | Page / section shown | Sandy says |
-|---|---|---|
-| 1 | Home hero | "Hello, I'm Sandy, the voice assistant built into this debt counselling practice. Let me show you around, and the page will move along with me." |
-| 2 | Hero headline "There is a way out" | "Most debt counselling websites are a form and an office number. But people in debt look for help late at night, alone, and often ashamed. A form at two in the morning sends them back to bed with nothing." |
-| 3 | Sandy's card → talking | "So the first thing they meet is me. They can talk out loud, in their own words, with no judgement. I explain what debt review means, what it costs them, and what happens to their credit record." |
-| 4 | /qualify | "If they would rather type, there's a two-minute check. It tells them whether debt review could help before anyone asks for their ID number." |
-| 5 | Call-back booking / confirmation | "Then I book a free call-back with a registered counsellor. When your counsellor phones the next morning, the summary of our conversation is already waiting." |
-| 6 | /upload | "Documents arrive through a secure upload link: payslips, statements, ID. Reminders go out on their own and stop the moment the file arrives." |
-| 7 | /members — client portal | "Debt review lasts years. In the client portal, every client sees their payments, their balances falling, and the next milestone. Clients who can see progress stay the course." |
-| 8 | /how-it-works and /testimonials | "Plain-language pages explain the process step by step, and real stories show that it works." |
-| 9 | Admin CRM | "Behind the scenes, your team has a CRM for the whole journey: every lead, call-back, application and milestone, with a reminder for each deadline." |
-| 10 | /calculator | "And for the practice itself, a calculator shows what one cancelled client really costs you." |
-| 11 | Header: NCR number, phone, WhatsApp | "Everything carries your practice's name, your NCR registration and your own phone numbers. It is ready to launch in days, not months." |
-| 12 | Back to hero | "Picture the next frightened caller finding your practice at two in the morning, and being helped." |
+- **Level 1** (practice platform + Sandy on the web): once-off setup + monthly.
+- **Level 2** (missed-call answering): higher monthly, priced against the cost of one
+  agent's salary and the leads that go to voicemail today.
+- **Level 3** (outbound calls): monthly plus usage (call minutes).
 
-≈ 290 words.
+Ask on the call: how many agents, what one agent costs a month, how many calls go
+unanswered after hours. The price follows from their numbers.
 
----
+## Compliance to mention when selling Levels 2 and 3
 
-## Recording plan (next step)
-
-- **Voice:** Sandy's own live voice (the same voice and model as on the site), driven
-  line by line from this script, like Blue's tour. This uses the live voice service,
-  not the text-to-speech service whose free daily limit ran out on 18 Nov.
-- **Picture:** the recorder in `scripts/video/` scrolls to each section as Sandy reaches
-  its line, so voice and page stay in step. Desktop 1920×1080 and mobile 1080×1920.
-- **Demo data only:** the client portal uses the demo account; the CRM shows demo leads.
-  No real person's details on screen.
-- **Note:** debtreliefbiz.co.za/site-info returns 404 on the live site (it exists in the
-  code), so the embed needs a DebtReliefBiz deploy. That work belongs in the TDRG
-  project, in its own session.
+- Calls must say up front that the caller is speaking to an AI assistant.
+- Recorded calls and client data fall under POPIA; outbound calls to existing clients
+  about their own matter are service calls, not marketing.
+- Debt advice and the assessment stay with the registered debt counsellor; Sandy
+  explains, collects and books.
