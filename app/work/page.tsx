@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { DiscoveryCallSection, SiteFooter, StandardHeader } from "../site-components";
-import { portfolio } from "./portfolio";
+import { portfolio, readyToLaunch } from "./portfolio";
 
 const title = "Work | CRM Solutions";
 const description =
@@ -113,7 +113,7 @@ export default function WorkPage() {
                 </Link>
                 <div className="project-copy">
                   <span className="project-number">
-                    0{index + 1} / {project.category}
+                    {String(index + 1).padStart(2, "0")} / {project.category}
                   </span>
                   <h2>{project.name}</h2>
                   <p>{project.statement}</p>
@@ -128,6 +128,56 @@ export default function WorkPage() {
                 </div>
               </article>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="work-section work-index-list work-ready" aria-labelledby="ready-title">
+        <div className="section-shell">
+          <p className="eyebrow">Ready to launch</p>
+          <h2 id="ready-title" className="work-ready-title">
+            Built, live and waiting for its owner<span>.</span>
+          </h2>
+          <div className="project-list">
+            {readyToLaunch.map((project) => {
+              const href = project.href ?? `/work/${project.slug}`;
+              return (
+                <article className="project" key={project.slug}>
+                  <Link
+                    className={`project-visual project-visual-real ${project.tone}`}
+                    href={href}
+                    aria-label={`${project.name}: ready to launch`}
+                  >
+                    <div className="project-browser project-browser-real">
+                      <div className="browser-bar">
+                        <i />
+                        <i />
+                        <i />
+                        <span>{project.host}</span>
+                      </div>
+                      <div className="screenshot-window">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={project.screenshot} alt={`The ${project.name} demo practice`} loading="lazy" />
+                      </div>
+                    </div>
+                    <span className="visual-label">Ready to launch</span>
+                  </Link>
+                  <div className="project-copy">
+                    <span className="project-number">Available / {project.category}</span>
+                    <h2>{project.name}</h2>
+                    <p>{project.statement}</p>
+                    <ul>
+                      {project.themes.map((theme) => (
+                        <li key={theme}>{theme}</li>
+                      ))}
+                    </ul>
+                    <Link className="text-link" href={href}>
+                      See the practice platform <Arrow />
+                    </Link>
+                  </div>
+                </article>
+              );
+            })}
           </div>
         </div>
       </section>

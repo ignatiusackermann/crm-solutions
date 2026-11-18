@@ -2,7 +2,7 @@
 // "more work" links on each case study all read this list, so a new site is
 // added here once and then given its own page in app/work/<slug>/page.tsx.
 
-export type PortfolioTone = "lava" | "star" | "storvac" | "shades" | "cpe" | "cabana" | "yasuke" | "sca" | "scap" | "sax";
+export type PortfolioTone = "lava" | "star" | "storvac" | "shades" | "cpe" | "cabana" | "yasuke" | "sca" | "scap" | "sax" | "drb";
 
 export type PortfolioEntry = {
   slug: string;
@@ -13,6 +13,8 @@ export type PortfolioEntry = {
   tone: PortfolioTone;
   screenshot: string;
   host: string;
+  // Where the card links. Defaults to /work/<slug>.
+  href?: string;
 };
 
 export const portfolio: PortfolioEntry[] = [
@@ -125,5 +127,23 @@ export const portfolio: PortfolioEntry[] = [
     tone: "yasuke",
     screenshot: "/portfolio/yasuke-safety-desktop.jpg",
     host: "www.yasukesafety.co.za",
+  },
+];
+
+// Platforms built by CRM Solutions with no owner yet, ready to launch under a
+// buyer's own name. Shown apart from the client work so they are never
+// mistaken for a client project.
+export const readyToLaunch: PortfolioEntry[] = [
+  {
+    slug: "debtreliefbiz",
+    name: "DebtReliefBiz",
+    category: "Debt Counselling",
+    statement:
+      "A debt counselling practice that answers worried callers at 2 a.m., ready to launch under a registered counsellor’s own name.",
+    themes: ["Ready to launch", "Sandy answers 24/7", "Client portal & CRM"],
+    tone: "drb",
+    screenshot: "/portfolio/debtreliefbiz-desktop.jpg",
+    host: "debtreliefbiz.co.za",
+    href: "/for-debt-counsellors",
   },
 ];
