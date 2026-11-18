@@ -29,6 +29,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/work/yasuke-safety",
     "/work/sca-za",
     "/work/sca-properties",
+    "/work/saxophone-for-functions",
     "/privacy-policy",
     "/cookie-policy",
     "/terms-and-conditions",

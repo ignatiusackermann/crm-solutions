@@ -4355,18 +4355,21 @@ a:focus-visible .drb-shot img {
 .project-visual.yasuke { background: #e4e8ef; }
 .project-visual.sca { background: #e1e4f0; }
 .project-visual.scap { background: #e3e3f4; }
+.project-visual.sax { background: #ece6d6; }
 .case-header-shades, .case-hero-shades, .case-depth-shades { background: #0a1257; color: #fff; }
 .case-header-cpe, .case-hero-cpe, .case-depth-cpe { background: #24505a; color: #fff; }
 .case-header-cabana, .case-hero-cabana, .case-depth-cabana { background: #17324d; color: #fff; }
 .case-header-yasuke, .case-hero-yasuke, .case-depth-yasuke { background: #2f4468; color: #fff; }
 .case-header-sca, .case-hero-sca, .case-depth-sca { background: #1f2752; color: #fff; }
 .case-header-scap, .case-hero-scap, .case-depth-scap { background: #2a2c86; color: #fff; }
+.case-header-sax, .case-hero-sax, .case-depth-sax { background: #0b1433; color: #fff; }
 .case-services-shades { background: #070d42; }
 .case-services-cpe { background: #1b3e46; }
 .case-services-cabana { background: #11273d; }
 .case-services-yasuke { background: #243652; }
 .case-services-sca { background: #171d40; }
 .case-services-scap { background: #21236b; }
+.case-services-sax { background: #060d26; }
 
 .case-power { padding: 110px 0; }
 .case-power-grid {
