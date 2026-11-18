@@ -65,6 +65,7 @@ const pages = [
   ["/industries/medical-health", "Industry guide — Medical & Health"],
   ["/industries/property-management", "Industry guide — Property Management"],
   ["/industries/holiday-hospitality", "Industry guide — Holiday & Hospitality"],
+  ["/industries/specialised-ecommerce", "Industry guide — Specialised E-commerce"],
   ["/insights/*", "8 insight articles"],
   ["/privacy-policy", "Privacy Policy"],
   ["/cookie-policy", "Cookie Policy"],

@@ -42,6 +42,11 @@ const GUIDES = [
     name: "Holiday & Hospitality",
     line: "Your guests already want to book you. AI trip planners, booking-site commission and the end of price parity in South Africa.",
   },
+  {
+    href: "/industries/specialised-ecommerce",
+    name: "Specialised E-commerce",
+    line: "Specialist products are sold by confidence. R159bn of online retail, marketplaces, AI shopping agents and the 70% abandoned cart.",
+  },
 ];
 
 export default function IndustriesPage() {

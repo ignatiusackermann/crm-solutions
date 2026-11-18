@@ -61,6 +61,7 @@ export function industryMetadata(industry: Industry): Metadata {
 }
 
 function Cite({ ids }: { ids: number[] }) {
+  if (ids.length === 0) return null;
   return (
     <sup className="ind-cite">
       {ids.map((id, i) => (
