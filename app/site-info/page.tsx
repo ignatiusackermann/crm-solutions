@@ -58,6 +58,7 @@ const pages = [
   ["/work/cabana-mio", "Case study — Cabana Mio"],
   ["/work/yasuke-safety", "Case study — Yasuke Safety"],
   ["/work/sca-za", "Case study — South Coast Advisory"],
+  ["/work/sca-properties", "Case study — SCA Properties"],
   ["/insights/*", "8 insight articles"],
   ["/privacy-policy", "Privacy Policy"],
   ["/cookie-policy", "Cookie Policy"],

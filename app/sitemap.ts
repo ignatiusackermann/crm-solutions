@@ -28,6 +28,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/work/cabana-mio",
     "/work/yasuke-safety",
     "/work/sca-za",
+    "/work/sca-properties",
     "/privacy-policy",
     "/cookie-policy",
     "/terms-and-conditions",
