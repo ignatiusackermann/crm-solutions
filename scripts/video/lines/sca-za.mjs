@@ -4,8 +4,9 @@
 export const name = "01-sca-za";
 
 // How Sandy should sound. Sent to the text-to-speech model with every line.
-export const style =
-  "You are Sandy, a warm, calm South African woman who works for an accounting practice. Speak gently and clearly, at an unhurried pace, like reassuring someone late at night.";
+// Gemini TTS takes a short spoken-style prefix ("Say warmly: …"); a longer
+// instruction gets read aloud.
+export const style = "Say warmly, calmly and unhurriedly, like a kind South African woman reassuring someone late at night";
 
 export const portrait = [
   { id: "01-midnight", text: "It's twenty to midnight. A business owner can't sleep. SARS has written again." },
