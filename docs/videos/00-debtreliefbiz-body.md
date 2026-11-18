@@ -112,3 +112,15 @@ unanswered after hours. The price follows from their numbers.
   about their own matter are service calls, not marketing.
 - Debt advice and the assessment stay with the registered debt counsellor; Sandy
   explains, collects and books.
+
+## Where the finished video goes (agreed 18 Nov)
+
+- **Traffic goes to CRM Solutions.** The closing scene shows **crmsolutions.app/call** (redirects to
+  the Discovery Call booking page), Ignatius Ackermann and 076 180 9799. No debtreliefbiz URL.
+- **Portrait (≤ 60 s):** WhatsApp Status, Reels, TikTok. Post text:
+  "Book a Discovery Call: crmsolutions.app/call · Ignatius 076 180 9799".
+- **Landscape (≈ 2:30):** upload to YouTube (and LinkedIn). Then embed the YouTube video:
+  - CRM Solutions `/for-debt-counsellors`, just under the hero. Never autoplay: poster + play
+    button, "Hear Sandy explain it — 2 min", light embed that loads YouTube only on play.
+  - DebtReliefBiz `/get-this-website` (sales page) — done in the TDRG project.
+  - **Not** on the DebtReliefBiz homepage: that is the Clearview demo, written for consumers.
