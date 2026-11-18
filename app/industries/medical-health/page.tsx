@@ -147,7 +147,7 @@ const industry: Industry = {
       why: "AI-written marketing is still your marketing. Practitioners remain responsible for misleading content, wherever it came from.",
     },
   ],
-  relatedSlugs: ["star-aesthetic"],
+  relatedSlugs: ["star-aesthetic", "aestheticbiz"],
   faq: [
     {
       q: "Will AI replace doctors?",

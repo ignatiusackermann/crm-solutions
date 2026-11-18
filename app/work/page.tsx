@@ -136,7 +136,7 @@ export default function WorkPage() {
         <div className="section-shell">
           <p className="eyebrow">Ready to launch</p>
           <h2 id="ready-title" className="work-ready-title">
-            Built, live and waiting for its owner<span>.</span>
+            Built, live and waiting for their owners<span>.</span>
           </h2>
           <div className="project-list">
             {readyToLaunch.map((project) => {

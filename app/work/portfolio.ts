@@ -2,7 +2,7 @@
 // "more work" links on each case study all read this list, so a new site is
 // added here once and then given its own page in app/work/<slug>/page.tsx.
 
-export type PortfolioTone = "lava" | "star" | "storvac" | "shades" | "cpe" | "cabana" | "yasuke" | "sca" | "scap" | "sax" | "drb";
+export type PortfolioTone = "lava" | "star" | "storvac" | "shades" | "cpe" | "cabana" | "yasuke" | "sca" | "scap" | "sax" | "drb" | "ab";
 
 export type PortfolioEntry = {
   slug: string;
@@ -145,5 +145,17 @@ export const readyToLaunch: PortfolioEntry[] = [
     screenshot: "/portfolio/debtreliefbiz-desktop.jpg",
     host: "debtreliefbiz.co.za",
     href: "/for-debt-counsellors",
+  },
+  {
+    slug: "aestheticbiz",
+    name: "AestheticBiz",
+    category: "Medical Spa (USA)",
+    statement:
+      "A medical spa that books, sells skincare and rewards loyalty on its own brand, ready to launch for a US practice in 90 days.",
+    themes: ["Ready to launch", "Booking & retail", "Voice guide"],
+    tone: "ab",
+    screenshot: "/portfolio/aestheticbiz-desktop.jpg",
+    host: "www.aestheticbiz.site",
+    href: "https://www.aestheticbiz.site/",
   },
 ];

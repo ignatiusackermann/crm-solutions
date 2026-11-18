@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { DiscoveryCallSection, SiteFooter, StandardHeader } from "../site-components";
-import { portfolio } from "../work/portfolio";
+import { portfolio, readyToLaunch } from "../work/portfolio";
 
 // One complete, sourced guide per industry. Each industry is a data object
 // (app/industries/<slug>/page.tsx) rendered by IndustryPage, so every guide has
@@ -79,7 +79,7 @@ function Cite({ ids }: { ids: number[] }) {
 export function IndustryPage({ industry }: { industry: Industry }) {
   const url = `${SITE}/industries/${industry.slug}`;
   const related = industry.relatedSlugs
-    .map((slug) => portfolio.find((p) => p.slug === slug))
+    .map((slug) => [...portfolio, ...readyToLaunch].find((p) => p.slug === slug))
     .filter((p): p is (typeof portfolio)[number] => Boolean(p));
 
   const schema = {
@@ -246,14 +246,16 @@ export function IndustryPage({ industry }: { industry: Industry }) {
                 <div className="vrc-proof-copy">
                   <div className="vrc-proof-topline">
                     <span>{project.category}</span>
-                    <span>Live platform</span>
+                    <span>{readyToLaunch.includes(project) ? "Ready to launch" : "Live platform"}</span>
                   </div>
                   <h3>{project.name}</h3>
                   <p>{project.statement}</p>
                   <div className="vrc-proof-links">
-                    <Link className="text-link" href={`/work/${project.slug}`}>
-                      Read the case study <span aria-hidden="true">→</span>
-                    </Link>
+                    {readyToLaunch.includes(project) ? null : (
+                      <Link className="text-link" href={`/work/${project.slug}`}>
+                        Read the case study <span aria-hidden="true">→</span>
+                      </Link>
+                    )}
                     <a href={`https://${project.host.replace(/^https?:\/\//, "")}/`} target="_blank" rel="noreferrer">
                       Visit {project.host} <span aria-hidden="true">↗</span>
                     </a>
