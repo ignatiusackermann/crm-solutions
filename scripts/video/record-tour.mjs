@@ -120,7 +120,15 @@ while (!(await isDone())) {
 }
 await sleep(1500); // hold the closing scene
 await send("Page.stopScreencast");
-const tour = await evaluate("JSON.parse(JSON.stringify(window.__sandyTour || {}))", 60000);
+// Fetch the voice in batches: one large reply over a busy connection can take
+// longer than the time limit.
+const head = await evaluate("(() => { const t = window.__sandyTour || {}; return { rate: t.rate, sync: t.sync, lines: t.lines, count: (t.chunks || []).length }; })()", 60000);
+const tour = { rate: head.rate, sync: head.sync, lines: head.lines, chunks: [] };
+for (let i = 0; i < head.count; i += 40) {
+  const batch = await evaluate(`window.__sandyTour.chunks.slice(${i}, ${i + 40})`, 60000);
+  tour.chunks.push(...batch);
+}
+console.log(`  ✓ collected ${tour.chunks.length} audio chunks`);
 ws.close();
 edge.kill();
 await sleep(500);
