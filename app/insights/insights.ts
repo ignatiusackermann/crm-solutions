@@ -270,7 +270,7 @@ export const insights: InsightArticle[] = [
     bottleneck:
       "Without an investment case, leaders cannot tell whether the work is an asset, a cost centre or theatre.",
     summary:
-      "Revenue Platform engagements begin at R20,000. Final investment follows complexity and the value of the constraint—not arbitrary page volume.",
+      "The investment follows complexity and the value of the constraint—not arbitrary page volume—and is set out after the Discovery Call.",
     sections: [
       {
         heading: "What the investment should purchase",

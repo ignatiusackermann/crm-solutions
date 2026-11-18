@@ -436,8 +436,8 @@ export default function Home() {
             <h2>A serious commercial asset deserves a clear investment case.</h2>
           </div>
           <div className="investment-copy">
-            <p>Revenue Platform engagements begin at</p>
-            <strong>R20,000</strong>
+            <p>Every engagement is scoped and priced after a</p>
+            <strong>Discovery Call</strong>
             <p>
               Final investment depends on business complexity, customer journeys, content depth,
               integrations and the value of the problem—not an arbitrary page count.

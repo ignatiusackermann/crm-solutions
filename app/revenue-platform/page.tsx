@@ -493,7 +493,7 @@ export default function RevenuePlatformPage() {
             </div>
             <div className="example">
               <span>Example</span>
-              <b>R20,000 ÷ R10,000 = 2 customers</b>
+              <b>Each new customer contributes a tenth of the investment → 10 customers to break even</b>
             </div>
             <small>
               Illustration only. The actual business case uses your economics, capacity and sales
@@ -576,7 +576,7 @@ export default function RevenuePlatformPage() {
         <div>
           <p className="eyebrow">Revenue Platform engagements</p>
           <h2>
-            Begin at <em>R20,000</em>.
+            Priced on <em>your</em> numbers.
           </h2>
         </div>
         <div>
@@ -586,7 +586,7 @@ export default function RevenuePlatformPage() {
             likely return cannot justify the work, the honest answer is not to proceed.
           </p>
           <p>
-            The figure purchases a clearer commercial journey, a platform the business can
+            The investment purchases a clearer commercial journey, a platform the business can
             operate, connected follow-up where it matters, measurement that supports decisions,
             and senior accountability through launch support.
           </p>

@@ -93,14 +93,7 @@ export function serviceSchema() {
     description:
       "A connected revenue system joining positioning, demand, conversion, CRM follow-up, retention and commercial measurement.",
     areaServed: ["ZA"],
-    offers: {
-      "@type": "Offer",
-      priceCurrency: "ZAR",
-      price: "20000",
-      priceValidUntil: "2027-12-31",
-      description: "Revenue Platform engagements begin at R20,000.",
-      url: `${SITE_URL}/revenue-platform`,
-    },
+    // No Offer/price: pricing is set out after the Discovery Call (decided 18 Nov 2026).
   };
 }
 
