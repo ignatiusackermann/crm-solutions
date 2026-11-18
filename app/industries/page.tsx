@@ -27,6 +27,11 @@ const GUIDES = [
     name: "Accounting",
     line: "The accounting practice of 2030 is being built this year: Xero and Claude in the ledger, SARS automating the simple return, and clients asking for an adviser.",
   },
+  {
+    href: "/industries/medical-health",
+    name: "Medical & Health",
+    line: "Patients now arrive informed. AI scribes, Claude for Healthcare and AI-informed patients, within POPIA and the HPCSA rules.",
+  },
 ];
 
 export default function IndustriesPage() {

@@ -32,6 +32,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/work/saxophone-for-functions",
     "/industries",
     "/industries/accounting",
+    "/industries/medical-health",
     "/privacy-policy",
     "/cookie-policy",
     "/terms-and-conditions",
