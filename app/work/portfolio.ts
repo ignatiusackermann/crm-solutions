@@ -19,10 +19,10 @@ export const portfolio: PortfolioEntry[] = [
   {
     slug: "sca-za",
     name: "South Coast Advisory",
-    category: "Accounting practice",
+    category: "Accounting",
     statement:
-      "Turning a 46-year-old accounting practice into the firm a local business owner finds, trusts and books.",
-    themes: ["Local search", "Consultation booking", "Voice assistant"],
+      "Forty-six years of trust. Now the new clients find the practice, and book themselves in.",
+    themes: ["Found first", "Booked online", "Answered aloud"],
     tone: "sca",
     screenshot: "/portfolio/sca-za-desktop.jpg",
     host: "www.sca-za.co.za",

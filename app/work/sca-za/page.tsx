@@ -3,143 +3,143 @@ import { CaseStudyPage, caseMetadata, type CaseStudy } from "../case-study";
 const study: CaseStudy = {
   slug: "sca-za",
   name: "South Coast Advisory",
-  category: "Accounting practice",
+  category: "Accounting",
   liveUrl: "https://www.sca-za.co.za/",
   liveLabel: "Visit the live platform",
   heroTone: "sca",
   screenshot: "/portfolio/sca-za-desktop.jpg",
-  headline: "A respected practice that the internet could not find",
+  headline: "Forty-six years of trust. Now the new clients find you",
   intro:
-    "South Coast Advisory has kept the books, tax and payroll of KZN South Coast businesses from Amanzimtoti since 1980. It is a Xero Silver Partner and a SAICA member practice, and its founder is a past president of SAIPA. The old website said very little of this, and it never produced an enquiry. A business owner searching for an accountant or a Xero partner on the South Coast found other firms first.",
+    "Picture it. It is 23:40. A business owner in Amanzimtoti cannot sleep because SARS has written to her again. She searches for an accountant who understands Xero. Your firm is the first she finds. Your credentials are the first thing she reads. She asks Sandy two questions aloud, gets clear answers, and books a free consultation for nine the next morning. You were asleep the whole time.",
   meta: [
     { label: "Client", value: "South Coast Advisory (Pty) Ltd" },
-    { label: "Focus", value: "Local search & booked consultations" },
+    { label: "Industry", value: "Accounting" },
     { label: "Work", value: "Strategy, design, development" },
     { label: "Live since", value: "November 2026" },
   ],
   services: [
-    { label: "Strategy", title: "Be found for the local search" },
-    { label: "Experience", title: "Trust before the first call" },
-    { label: "Platform", title: "Book a consultation online" },
-    { label: "Assistant", title: "Sandy, by voice" },
+    { label: "Found", title: "First on the local search" },
+    { label: "Trusted", title: "Credentials before the first call" },
+    { label: "Booked", title: "Consultations in your diary" },
+    { label: "Answered", title: "Sandy speaks for you, day and night" },
   ],
-  narrativeTitle: "The reputation was real. The website hid it.",
+  narrativeTitle: "Every accountant knows the feeling.",
   narrative: [
-    "Accounting is chosen on trust, and trust is built over years. South Coast Advisory had 46 of them, the Xero partnership and the professional memberships. None of it reached the person searching at night for help with SARS or with Xero.",
-    "The job was not a prettier brochure. It was a site that answers the questions an owner-managed business is actually asking, ranks for the searches they type, and turns that visit into a booked conversation.",
+    "You have built a practice on decades of trust. Your clients would recommend you to anyone. And yet the new clients you want, the growing business owners who have just moved to Xero, go to a younger firm with a better website. Not because that firm is better. Because it was easier to find, and easier to say yes to.",
+    "South Coast Advisory had been in Amanzimtoti since 1980. It is a Xero Silver Partner and a SAICA member practice, and its founder is a past president of SAIPA. Its old website said almost none of this, and in all its years online it never produced a single enquiry. The new site was built to change one thing: who picks up the phone first. Now it is the client.",
   ],
   pillars: [
     {
-      title: "Found for the right search",
-      body: "Pages for each service, for Xero and for Amanzimtoti, written for the words people type into Google.",
+      title: "They find you first",
+      body: "Picture a business owner searching “Xero accountant South Coast” and seeing your name, not a competitor’s. Every service, and Amanzimtoti itself, has its own page written for exactly those searches.",
     },
     {
-      title: "Credibility in the first screen",
-      body: "Xero Silver Partner, 46 years in Amanzimtoti, SAICA and SAIPA: the proof sits beside the headline, not on an About page.",
+      title: "They trust you before you speak",
+      body: "Forty-six years, Xero Silver Partner, SAICA, SAIPA. The proof sits beside the headline, so the decision is half made before the first call.",
     },
     {
-      title: "A conversation, not a contact form",
-      body: "A free 20-minute consultation can be requested on the first screen, or booked straight into the calendar.",
+      title: "They book themselves",
+      body: "No phone tag, no “we’ll get back to you”. A free 20-minute consultation goes straight into the diary, from any page.",
     },
   ],
-  powerTitle: "What the platform does, every day.",
+  powerTitle: "What happens while you are with your clients.",
   powerIntro:
-    "One site that ranks, answers, teaches and books, so the practice is working while the office is closed.",
+    "Your team is busy with real work. The site carries on finding, answering and booking new clients, every hour of the day.",
   power: [
     {
-      title: "Eight service pages",
-      body: "Bookkeeping, tax, payroll, company secretarial, advisory, valuations, HR and body corporate management, each with its own page.",
-    },
-    {
-      title: "Xero, explained and priced",
-      body: "A dedicated Xero section and pricing page for the business owner who is moving to Xero or already on it.",
+      title: "Questions answered aloud",
+      body: "Sandy, the voice assistant, answers questions on Xero, tax and payroll at any hour, then points the visitor to a consultation.",
     },
     {
       title: "Consultations booked online",
-      body: "A request form on the home page and a calendar for choosing a time, protected against spam.",
+      body: "A request on the first screen, or a time chosen on the calendar. Spam is filtered out before it reaches the office.",
     },
     {
-      title: "Sandy, by voice",
-      body: "Sandy answers questions on Xero, tax and payroll aloud, at any hour, and points the visitor to a consultation.",
+      title: "A page for every service",
+      body: "Bookkeeping, tax, payroll, company secretarial, advisory, valuations, HR and body corporate management: eight pages, each one able to win its own search.",
     },
     {
-      title: "A library of practical guides",
-      body: "Seven downloadable guides, from the SARS and CIPC deadline calendar to the Xero migration checklist, exchanged for an email address.",
+      title: "Xero, explained and priced",
+      body: "The owner moving to Xero, the most valuable new client a practice can win, has a section written just for them.",
     },
     {
-      title: "AI, explained for business owners",
-      body: "Five short guides on where AI helps a small business and what should never be pasted into it.",
+      title: "Guides that earn an email address",
+      body: "Seven practical downloads, from the SARS and CIPC deadline calendar to the Xero migration checklist. Each one starts a relationship.",
     },
     {
-      title: "Answers before the call",
-      body: "A SARS deadlines page, 31 FAQs and a 117-term glossary of accounting and tax language.",
+      title: "Answers before the phone rings",
+      body: "SARS deadlines, 31 FAQs and a 117-term glossary answer the routine questions, so the calls you do take are about real work.",
     },
     {
-      title: "Reviews, moderated",
-      body: "Clients can submit a testimonial, and the practice approves it before it appears.",
+      title: "AI, explained for owners",
+      body: "Five short guides on where AI helps a small business, and what must never be pasted into it. A practice that looks ahead.",
+    },
+    {
+      title: "Reviews you approve",
+      body: "Happy clients can leave a testimonial, and nothing appears until the practice approves it.",
     },
   ],
-  challengesTitle: "Forty-six years of trust, and no enquiries.",
+  challengesTitle: "What was standing between the practice and its next client.",
   challengesIntro:
-    "Each of these was a real constraint on the project. The answer is what shaped the site.",
+    "Every established firm will recognise at least one of these. Each answer is what shaped the site.",
   challenges: [
     {
-      title: "The old site never produced a lead",
+      title: "Decades of reputation, and no enquiries",
       problem:
-        "The previous website listed services and an address. It gave a searching business owner no reason to call, and no easy way to do it.",
+        "The old website listed services and an address. A searching business owner found no reason to call, and no easy way to do it. In all its years online, it never produced a lead.",
       answer:
-        "Every page now leads to one action: a free 20-minute consultation, requested on the page or booked on the calendar.",
+        "Every page now leads to one small step: a free 20-minute consultation, requested on the page or booked on the calendar.",
     },
     {
-      title: "Bigger firms owned the local searches",
+      title: "Other firms owned the local searches",
       problem:
-        "Searches for an accountant or a Xero partner on the South Coast went to other firms, even though this practice has been there since 1980.",
+        "Search for an accountant or a Xero partner on the South Coast, and other firms appeared first, even though this practice had been there since 1980.",
       answer:
-        "Separate pages for each service and for Xero, local wording, structured data and a sitemap built for search engines and AI assistants.",
+        "Separate pages for each service and for Xero, local wording, structured data, and a sitemap written for Google and for AI assistants.",
     },
     {
-      title: "The credentials were buried",
+      title: "The proof was hidden",
       problem:
         "The Xero partnership, the SAICA membership and the SAIPA presidency are what make an owner trust an accountant. They were hard to find.",
       answer:
-        "They sit in the first screen, under the headline, where the decision is made.",
+        "They now sit in the first screen, under the headline, where the decision is made.",
     },
     {
-      title: "The office cannot answer every question",
+      title: "Nobody free to answer the phone",
       problem:
-        "A small team is busy with client work. Questions about deadlines, Xero or VAT registration arrive when nobody is free to answer them.",
+        "A small team is busy with client work. Questions about deadlines, Xero or VAT arrive when nobody can take them, and those callers try the next firm.",
       answer:
-        "Guides, FAQs, a glossary and Sandy answer the common questions, so the calls that do come in are about real work.",
+        "Guides, FAQs, a glossary and Sandy answer the common questions at any hour, and turn the caller into a booking.",
     },
     {
-      title: "Old links and the company email had to keep working",
+      title: "Old links, and email that had to keep working",
       problem:
-        "The old site had pages people had bookmarked and linked to, and the practice's email could not be disturbed during the move.",
+        "The old site had pages that people had bookmarked and linked to, and the office email could not be interrupted during the move.",
       answer:
-        "Every old address redirects to its new page. The email was left where it was.",
+        "Every old address redirects to its new page. The email was never touched.",
     },
   ],
-  decisionTitle: "Design for the owner who is worried about SARS.",
+  decisionTitle: "Built for the owner who is worried about SARS.",
   decisions: [
     {
-      label: "Orientation",
-      title: "Say who, where and since when",
-      body: "Accountants and Xero partner in Amanzimtoti since 1980. The visitor knows in one line whether this is the firm for them.",
+      label: "Recognition",
+      title: "Tell them in one line that they are in the right place",
+      body: "Accountants and Xero partner in Amanzimtoti since 1980. The visitor knows at once whether this is the firm for them.",
     },
     {
-      label: "Proof",
-      title: "Put the credentials beside the claim",
-      body: "Xero, 46 years, SAICA, SAIPA. No invented statistics, only the facts the practice can stand behind.",
+      label: "Trust",
+      title: "Put the proof beside the promise",
+      body: "Xero, 46 years, SAICA, SAIPA. No invented statistics, only facts the practice can stand behind.",
     },
     {
-      label: "Action",
-      title: "Make the first step small",
-      body: "A free 20-minute consultation is easier to say yes to than an engagement letter.",
+      label: "Relief",
+      title: "Make the first step feel easy",
+      body: "A free 20-minute conversation is easy to say yes to when you are worried. An engagement letter is not.",
     },
     {
-      label: "Help",
-      title: "Be useful before being paid",
-      body: "The deadline calendar, the checklists and the guides earn trust and an email address at the same time.",
+      label: "Generosity",
+      title: "Help them before they pay",
+      body: "The deadline calendar and the checklists solve a problem tonight. The owner remembers who helped.",
     },
   ],
   layersTitle: "Six layers working as one business.",
@@ -148,53 +148,53 @@ const study: CaseStudy = {
   layers: [
     {
       title: "Business strategy",
-      body: "Win the local searches for accounting, tax and Xero, and turn those visits into consultations.",
+      body: "Win the local searches for accounting, tax and Xero, and turn those visits into booked consultations.",
     },
     {
       title: "Content & messaging",
-      body: "Plain-language service pages, guides, FAQs and a glossary written for owner-managed businesses.",
+      body: "Plain language for worried owners: service pages, guides, FAQs and a glossary.",
     },
     {
       title: "Experience design",
-      body: "Credentials and the consultation form in the first screen; every page ends at the same next step.",
+      body: "Credentials and the consultation request in the first screen; every page ends at the same next step.",
     },
     {
       title: "Technical platform",
-      body: "Service pages, booking, a gated resource library, moderated reviews and the voice assistant on one site.",
+      body: "Service pages, booking, a resource library, approved reviews and a voice assistant on one site.",
     },
     {
       title: "Customer communication",
-      body: "Enquiries and bookings are stored and emailed to the office, so none is lost.",
+      body: "Every enquiry and booking is stored and emailed to the office, so none is lost.",
     },
     {
       title: "Ongoing improvement",
-      body: "An owner's overview shows what the site contains and what is still to connect.",
+      body: "An owner’s overview shows what the site contains and what is still to connect.",
     },
   ],
-  proofTitle: "Every section answers a different commercial question.",
+  proofTitle: "The questions a worried owner asks, answered before they call.",
   proofPoints: [
-    "Are you a real, established firm near me?",
-    "Can you help me with Xero?",
+    "Is this a real, established firm near me?",
+    "Can they help me with Xero?",
     "When are my SARS deadlines?",
-    "What will it cost?",
+    "What will it cost me?",
     "Can I talk to someone without committing?",
   ],
   depthTitle: "Proof of depth—without inventing performance claims.",
   depthIntro:
-    "The site went live in November 2026, so there are no ranking or enquiry results to report yet. The measure for now is how much of a business owner's question the site answers before they call.",
+    "The site went live in November 2026, so we will not claim results it has not had time to earn. What we can show is how much of a worried owner’s question it answers before they pick up the phone.",
   depthStats: [
-    { value: "36", label: "Pages in the sitemap" },
+    { value: "36", label: "Pages working to be found" },
     { value: "8", label: "Services, each with its own page" },
-    { value: "7", label: "Practical guides in the library" },
-    { value: "117", label: "Terms in the accounting glossary" },
+    { value: "7", label: "Guides that start a relationship" },
+    { value: "24/7", label: "Sandy answering, aloud" },
   ],
   stewardshipTitle: "Launch is the beginning of the evidence—not the end of the work.",
   stewardship: [
-    "Search Console will show which local searches the site starts to win, and which pages need more depth.",
-    "The first booked consultations will show which page and which question brought each client in.",
-    "Approved client reviews will replace the empty space that no website can fake.",
+    "Search Console will show which local searches the practice starts to win, and which pages need more depth.",
+    "The first booked consultations will show which page and which worry brought each new client in.",
+    "Approved client reviews will fill the one space no website can fake.",
   ],
-  closingTitle: "Is your reputation bigger than your website?",
+  closingTitle: "Picture your next client finding you tonight. What would they see?",
 };
 
 export const metadata = caseMetadata(study);
