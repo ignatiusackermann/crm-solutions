@@ -63,6 +63,7 @@ const pages = [
   ["/industries", "Industry guides (hub)"],
   ["/industries/accounting", "Industry guide — Accounting"],
   ["/industries/medical-health", "Industry guide — Medical & Health"],
+  ["/industries/property-management", "Industry guide — Property Management"],
   ["/insights/*", "8 insight articles"],
   ["/privacy-policy", "Privacy Policy"],
   ["/cookie-policy", "Cookie Policy"],

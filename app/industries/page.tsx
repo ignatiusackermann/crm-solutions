@@ -32,6 +32,11 @@ const GUIDES = [
     name: "Medical & Health",
     line: "Patients now arrive informed. AI scribes, Claude for Healthcare and AI-informed patients, within POPIA and the HPCSA rules.",
   },
+  {
+    href: "/industries/property-management",
+    name: "Property Management",
+    line: "Trustees are choosing a new kind of managing agent: arrears chased on day one, a portal for owners abroad, and a monthly pack that is never late.",
+  },
 ];
 
 export default function IndustriesPage() {
