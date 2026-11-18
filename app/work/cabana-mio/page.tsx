@@ -3,7 +3,7 @@ import { CaseStudyPage, caseMetadata, type CaseStudy } from "../case-study";
 const study: CaseStudy = {
   slug: "cabana-mio",
   name: "Cabana Mio",
-  category: "Holiday resort",
+  category: "Vacation Bookings",
   liveUrl: "https://www.cabanamio.co.za/",
   liveLabel: "Visit the live platform",
   heroTone: "cabana",

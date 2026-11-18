@@ -30,9 +30,9 @@ export const portfolio: PortfolioEntry[] = [
   {
     slug: "sca-properties",
     name: "SCA Properties",
-    category: "Managing agents",
+    category: "Property Management",
     statement:
-      "Turning a managing agent’s website into the place a trustee asks for a proposal.",
+      "After years of a website that undersold them, finally one as well run as the complexes they manage.",
     themes: ["Proposal requests", "Owner portal", "Voice assistant"],
     tone: "scap",
     screenshot: "/portfolio/sca-properties-desktop.jpg",
@@ -41,9 +41,9 @@ export const portfolio: PortfolioEntry[] = [
   {
     slug: "saxophone-for-functions",
     name: "Saxophone for Functions",
-    category: "Wedding & event music",
+    category: "Entertainment Bookings",
     statement:
-      "Letting a couple hear the saxophonist, check his diary and send a booking in one visit.",
+      "After years of a website that undersold him, finally one that sounds as good as he does.",
     themes: ["Event enquiries", "Diary check", "Voice assistant"],
     tone: "sax",
     screenshot: "/portfolio/saxophone-for-functions-desktop.jpg",
@@ -52,9 +52,9 @@ export const portfolio: PortfolioEntry[] = [
   {
     slug: "lava-sa",
     name: "Lava-SA",
-    category: "Specialist commerce",
+    category: "Specialised E-commerce",
     statement:
-      "Turning a specialist product catalogue into a premium commerce and education platform.",
+      "After years of a website that undersold them, finally one as premium as the products they sell.",
     themes: ["Product architecture", "Buying confidence", "Commerce"],
     tone: "lava",
     screenshot: "/portfolio/lava-sa-desktop.jpg",
@@ -63,9 +63,9 @@ export const portfolio: PortfolioEntry[] = [
   {
     slug: "star-aesthetic",
     name: "Star Aesthetic",
-    category: "Aesthetic practice",
+    category: "Medical & Health E-commerce",
     statement:
-      "Structuring complex treatment choices into a calm, credible patient journey.",
+      "After years of a website that undersold them, finally one as refined as the care they give.",
     themes: ["Premium identity", "Treatment clarity", "Consultations"],
     tone: "star",
     screenshot: "/portfolio/star-aesthetic-desktop.jpg",
@@ -74,9 +74,9 @@ export const portfolio: PortfolioEntry[] = [
   {
     slug: "storvac",
     name: "Storvac Systems",
-    category: "Product selection",
+    category: "Specialised E-commerce",
     statement:
-      "Helping buyers understand capacity and find the right solution faster.",
+      "After years of a website that undersold them, finally one as precisely engineered as the systems they sell.",
     themes: ["Decision support", "Find my size", "Restrained commerce"],
     tone: "storvac",
     screenshot: "/portfolio/storvac-desktop.jpg",
@@ -85,9 +85,9 @@ export const portfolio: PortfolioEntry[] = [
   {
     slug: "shades-of-blue",
     name: "Shades of Blue",
-    category: "Industrial services",
+    category: "Service Quotations",
     statement:
-      "Replacing a brochure site with a quoting system for labour hire, steel and building maintenance.",
+      "After years of a website that undersold them, finally one that quotes as fast as their teams work.",
     themes: ["Quote requests", "Procurement proof", "Client area"],
     tone: "shades",
     screenshot: "/portfolio/shades-of-blue-desktop.jpg",
@@ -96,9 +96,9 @@ export const portfolio: PortfolioEntry[] = [
   {
     slug: "coastal-preferred-escapes",
     name: "Coastal Preferred Escapes",
-    category: "Holiday membership",
+    category: "Vacation Packages",
     statement:
-      "Launching a five-year family holiday membership that a visitor can understand in one visit.",
+      "A five-year family holiday membership, finally presented to feel like the holiday itself.",
     themes: ["New product launch", "Week finder", "Membership"],
     tone: "cpe",
     screenshot: "/portfolio/coastal-preferred-escapes-desktop.jpg",
@@ -107,9 +107,9 @@ export const portfolio: PortfolioEntry[] = [
   {
     slug: "cabana-mio",
     name: "Cabana Mio",
-    category: "Holiday resort",
+    category: "Vacation Bookings",
     statement:
-      "Giving a beach resort its own booking engine, and its guests a reason to choose the dates.",
+      "After years of a website that undersold them, finally one as inviting as the beach outside the door.",
     themes: ["Direct bookings", "Events calendar", "Area guides"],
     tone: "cabana",
     screenshot: "/portfolio/cabana-mio-desktop.jpg",
@@ -118,9 +118,9 @@ export const portfolio: PortfolioEntry[] = [
   {
     slug: "yasuke-safety",
     name: "Yasuke Safety",
-    category: "Mine supply",
+    category: "Safety Wear Quotations (Mining)",
     statement:
-      "Replacing a once-off shop quote with a bulk request a mine can send again.",
+      "After years of a website that undersold them, finally one built as tough as the boots they sell.",
     themes: ["Bulk quantities", "Repeat orders", "Voice assistant"],
     tone: "yasuke",
     screenshot: "/portfolio/yasuke-safety-desktop.jpg",

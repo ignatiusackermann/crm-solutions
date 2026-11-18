@@ -3,7 +3,7 @@ import { CaseStudyPage, caseMetadata, type CaseStudy } from "../case-study";
 const study: CaseStudy = {
   slug: "saxophone-for-functions",
   name: "Saxophone for Functions",
-  category: "Wedding & event music",
+  category: "Entertainment Bookings",
   liveUrl: "https://www.saxophone-for-functions.co.za/",
   liveLabel: "Visit the live platform",
   heroTone: "sax",

@@ -3,7 +3,7 @@ import { CaseStudyPage, caseMetadata, type CaseStudy } from "../case-study";
 const study: CaseStudy = {
   slug: "sca-properties",
   name: "SCA Properties",
-  category: "Managing agents",
+  category: "Property Management",
   liveUrl: "https://www.sca-properties.co.za/",
   liveLabel: "Visit the live platform",
   heroTone: "scap",

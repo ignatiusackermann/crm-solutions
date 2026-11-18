@@ -21,6 +21,13 @@
 5. **Identification.** Speak to who they want to be: the firm people
    recommend, the agent trustees trust, the musician who is always booked.
 
+## Card vs page (decided 18 Nov)
+- **Work card = the vision.** Pride and what the industry is known for.
+  Pattern: "After years of a website that undersold them, finally one as
+  [the quality the industry prides itself on]."
+  SCA-ZA: "...finally one as precise as the books they keep."
+- **Case study page = the pain**, then the answer.
+
 ## Honesty rule
 Most sites are new. We never invent results. We use **"Picture it"** to describe
 the imagined moment, and keep facts (counts, features) as proof under it.

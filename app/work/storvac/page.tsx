@@ -3,7 +3,7 @@ import { CaseStudyPage, caseMetadata, type CaseStudy } from "../case-study";
 const study: CaseStudy = {
   slug: "storvac",
   name: "Storvac Systems",
-  category: "Product selection",
+  category: "Specialised E-commerce",
   liveUrl: "https://www.storvac.co.za/",
   liveLabel: "Visit the live platform",
   heroTone: "storvac",

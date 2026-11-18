@@ -3,7 +3,7 @@ import { CaseStudyPage, caseMetadata, type CaseStudy } from "../case-study";
 const study: CaseStudy = {
   slug: "coastal-preferred-escapes",
   name: "Coastal Preferred Escapes",
-  category: "Holiday membership",
+  category: "Vacation Packages",
   liveUrl: "https://www.coastalpreferredescapes.co.za/",
   liveLabel: "Visit the live platform",
   heroTone: "cpe",

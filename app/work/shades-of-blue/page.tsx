@@ -3,7 +3,7 @@ import { CaseStudyPage, caseMetadata, type CaseStudy } from "../case-study";
 const study: CaseStudy = {
   slug: "shades-of-blue",
   name: "Shades of Blue",
-  category: "Industrial services",
+  category: "Service Quotations",
   liveUrl: "https://www.shadesobl.co.za/",
   liveLabel: "Visit the live platform",
   heroTone: "shades",

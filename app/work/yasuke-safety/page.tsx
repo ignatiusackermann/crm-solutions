@@ -3,7 +3,7 @@ import { CaseStudyPage, caseMetadata, type CaseStudy } from "../case-study";
 const study: CaseStudy = {
   slug: "yasuke-safety",
   name: "Yasuke Safety",
-  category: "Mine supply",
+  category: "Safety Wear Quotations (Mining)",
   liveUrl: "https://www.yasukesafety.co.za/",
   liveLabel: "Visit the live platform",
   heroTone: "yasuke",

@@ -3,7 +3,7 @@ import { CaseStudyPage, caseMetadata, type CaseStudy } from "../case-study";
 const study: CaseStudy = {
   slug: "star-aesthetic",
   name: "Star Aesthetic",
-  category: "Aesthetic practice",
+  category: "Medical & Health E-commerce",
   liveUrl: "https://staraesthetic.co.za/",
   liveLabel: "Visit the live platform",
   heroTone: "star",
