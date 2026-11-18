@@ -8,18 +8,10 @@ import { CancellationCalculator } from "./cancellation-calculator";
 /* CRM Solutions' page for South African debt counsellors. It sells DebtReliefBiz —
    the website, AI voice assistant, client portal and CRM we built for debt review —
    and every screenshot opens the live demo on debtreliefbiz.co.za.
-   Pricing lives in one place (OFFER below) so it can be changed in one edit. */
+   No prices on this page (decided 18 Nov 2026): the investment depends on the size of the
+   practice and which of Sandy's levels it takes, and is set out on the walkthrough. */
 
 const DEMO = "https://debtreliefbiz.co.za";
-
-const OFFER = {
-  price: 25000,
-  founding: 20000,
-  monthly: 995,
-  placesLeft: 3,
-};
-
-const zar = (value: number) => "R" + value.toLocaleString("en-ZA").replace(/,/g, " ");
 
 export const metadata: Metadata = {
   title: "Websites and CRM for Debt Counsellors | CRM Solutions",
@@ -50,7 +42,7 @@ const NAV = [
   { id: "crm", label: "CRM" },
   { id: "styles", label: "Styles" },
   { id: "included", label: "What's included" },
-  { id: "pricing", label: "Pricing" },
+  { id: "pricing", label: "How it is priced" },
   { id: "questions", label: "Questions" },
 ];
 
@@ -156,8 +148,6 @@ const FAQ = [
 
 export default function ForDebtCounsellorsPage() {
   const home = ALL.home;
-  const saving = OFFER.price - OFFER.founding;
-  const payable = OFFER.placesLeft > 0 ? OFFER.founding : OFFER.price;
 
   return (
     <main className="drb-page" id="top">
@@ -186,14 +176,12 @@ export default function ForDebtCounsellorsPage() {
               Try the live demo — talk to Sandy <span aria-hidden="true">→</span>
             </a>
           </div>
-          {OFFER.placesLeft > 0 && (
-            <p className="drb-flag">
-              <a href="#pricing">
-                Founding practices save {zar(saving)} — {OFFER.placesLeft} of 3 places left
-                <span aria-hidden="true"> →</span>
-              </a>
-            </p>
-          )}
+          <p className="drb-flag">
+            <a href="#pricing">
+              Sandy can also answer your phones and call your clients
+              <span aria-hidden="true"> →</span>
+            </a>
+          </p>
         </div>
       </section>
 
@@ -394,44 +382,25 @@ export default function ForDebtCounsellorsPage() {
 
           <section id="pricing">
             <div className="vrc-heading vrc-heading-split">
-              <h2>What it costs</h2>
-              <p>One price for the whole system. No fee per user, no fee per lead.</p>
+              <h2>How it is priced</h2>
+              <p>
+                Priced for your practice: how many agents you run, how many calls you take, and which
+                of Sandy&apos;s levels you switch on. Set out on the walkthrough, never per user or per
+                lead.
+              </p>
             </div>
             <div className="drb-pricing">
               <div className="drb-price-card">
-                <p className="drb-price-kicker">Website, Sandy, client portal and CRM</p>
-                {OFFER.placesLeft > 0 ? (
-                  <>
-                    <p className="drb-price-badge">
-                      Founding practice — {OFFER.placesLeft} of 3 places left
-                    </p>
-                    <p className="drb-price-figure">
-                      <span>{zar(OFFER.founding)}</span>
-                      <s>{zar(OFFER.price)}</s>
-                    </p>
-                    <p className="drb-price-note">
-                      once-off, in two payments · {zar(saving)} off for the first three practices to
-                      sign
-                    </p>
-                  </>
-                ) : (
-                  <>
-                    <p className="drb-price-figure">
-                      <span>{zar(OFFER.price)}</span>
-                    </p>
-                    <p className="drb-price-note">once-off, in two payments</p>
-                  </>
-                )}
-                <div className="drb-split">
-                  <div>
-                    <strong>{zar(payable / 2)}</strong>
-                    <span>deposit — we start building</span>
-                  </div>
-                  <div>
-                    <strong>{zar(payable / 2)}</strong>
-                    <span>when your website goes live</span>
-                  </div>
-                </div>
+                <p className="drb-price-kicker">Level 1 — the practice platform</p>
+                <p className="drb-price-figure drb-side-figure-small">
+                  <span>Website, Sandy, client portal and CRM</span>
+                </p>
+                <ul className="drb-ticks">
+                  <li>Sandy answers your website aloud, 24 hours a day, 365 days a year</li>
+                  <li>Qualifies, books call-backs and collects documents</li>
+                  <li>Client portal and a CRM built for debt review</li>
+                  <li>Hosting, secure document storage, backups and support</li>
+                </ul>
                 <Link className="button button-copper drb-price-button" href="/book-discovery-call">
                   Book a walkthrough <span aria-hidden="true">→</span>
                 </Link>
@@ -439,27 +408,27 @@ export default function ForDebtCounsellorsPage() {
 
               <div className="drb-price-side">
                 <div className="drb-side-card">
-                  <p className="drb-side-kicker">Monthly</p>
-                  <p className="drb-side-figure">
-                    {zar(OFFER.monthly)} <span>/ month</span>
+                  <p className="drb-side-kicker">Level 2 — Sandy answers your phones</p>
+                  <p>
+                    When every agent is busy, at lunch or after hours, Sandy answers your practice&apos;s
+                    own number, answers questions, takes the details and books the call-back. All it
+                    needs is a registered phone number.
                   </p>
-                  <ul className="drb-ticks">
-                    <li>Hosting, secure document storage and backups</li>
-                    <li>Sandy, answering 24/7</li>
-                    <li>Security updates and support</li>
-                  </ul>
                 </div>
                 <div className="drb-side-card">
-                  <p className="drb-side-kicker">Marketing package</p>
-                  <p className="drb-side-figure drb-side-figure-small">Negotiable, after launch</p>
+                  <p className="drb-side-kicker">Level 3 — Sandy calls your clients</p>
                   <p>
-                    Google Business Profile, reviews and ads to fill the pipeline — agreed once your
-                    website is live and we can see your numbers.
+                    Sandy phones clients for missing documents, sends the secure upload link and
+                    reminds them of the next step, so your agents spend their day on higher-value work.
+                    In English, isiZulu, Setswana, Sesotho, Afrikaans and more.
                   </p>
                 </div>
               </div>
             </div>
-            <p className="drb-note">Prices exclude VAT. CRM Solutions is not VAT-registered.</p>
+            <p className="drb-note">
+              Callers are always told they are speaking to an AI assistant. Advice and assessment stay
+              with your registered debt counsellors.
+            </p>
           </section>
 
           <section id="questions" className="vrc-faq">
