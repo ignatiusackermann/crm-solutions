@@ -77,3 +77,15 @@ The viewer is a **business owner**, so each moment is the owner's, not their cus
 3. **The turn (12–30 s):** walk through the site as the answer, with features as proof.
 4. **Identity (30–38 s):** who the owner gets to be now.
 5. **CTA:** "Book a Discovery Call." No prices.
+
+## Industry pages (planned 18 Nov 2026)
+- One complete, researched guide per industry at /industries/<slug>, plus an /industries hub.
+- Each: the industry's real frustrations, what AI is changing now (sourced, dated), what a
+  2030-ready practice looks like, the complete package, FAQs + JSON-LD, share card;
+  related live site(s) at the bottom linking to the case study and the live site.
+- Positioning: premium (the US$10k class of solution) but **no price shown**; CTA is
+  Book a Discovery Call.
+- Every AI claim needs a current source; no vendor claims we cannot cite.
+- Existing sales pages /for-accounting-practices and /for-debt-counsellors stay and are
+  linked from the matching industry page.
+- Order: Accounting (pilot) → Medical & Health → Property Management → the rest.
