@@ -47,6 +47,11 @@ const GUIDES = [
     name: "Specialised E-commerce",
     line: "Specialist products are sold by confidence. R159bn of online retail, marketplaces, AI shopping agents and the 70% abandoned cart.",
   },
+  {
+    href: "/industries/industrial-mining-supply",
+    name: "Industrial & Mining Supply",
+    line: "The order goes to the supplier who answers first. Self-service buying, AI supplier research, mining procurement and the two-minute reorder.",
+  },
 ];
 
 export default function IndustriesPage() {

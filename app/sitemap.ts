@@ -36,6 +36,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/industries/property-management",
     "/industries/holiday-hospitality",
     "/industries/specialised-ecommerce",
+    "/industries/industrial-mining-supply",
     "/privacy-policy",
     "/cookie-policy",
     "/terms-and-conditions",
