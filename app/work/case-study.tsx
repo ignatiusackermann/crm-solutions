@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { DiscoveryCallSection, SiteFooter } from "../site-components";
+import { guideForWork } from "../industries/guides";
 import { portfolio, type PortfolioTone } from "./portfolio";
 
 export type CaseStudy = {
@@ -58,6 +59,7 @@ function CaseHeader({ tone }: { tone: CaseStudy["heroTone"] }) {
       </Link>
       <nav className="desktop-nav" aria-label="Main navigation">
         <Link href="/revenue-platform">Revenue Platform</Link>
+        <Link href="/industries">Industries</Link>
         <Link href="/work">Work</Link>
         <Link href="/contact">Contact</Link>
         <Link href="/#about">About</Link>
@@ -89,6 +91,7 @@ function CaseHeader({ tone }: { tone: CaseStudy["heroTone"] }) {
         <nav aria-label="Mobile navigation">
           <Link href="/">Home</Link>
           <Link href="/work">Work</Link>
+          <Link href="/industries">Industry guides</Link>
           <Link href="/contact">Contact</Link>
           <Link href="/client/login">Client login</Link>
           <Link href="/book-discovery-call">Book a Discovery Call</Link>
@@ -149,6 +152,7 @@ export function caseMetadata(study: CaseStudy): Metadata {
 }
 
 export function CaseStudyPage({ study }: { study: CaseStudy }) {
+  const guide = guideForWork(study.slug);
   return (
     <main className={`case-page case-${study.heroTone}`} id="top">
       <CaseHeader tone={study.heroTone} />
@@ -174,6 +178,11 @@ export function CaseStudyPage({ study }: { study: CaseStudy }) {
               <Link className="text-link text-link-light" href="/book-discovery-call">
                 Discuss a similar build <Arrow />
               </Link>
+              {guide && (
+                <Link className="text-link text-link-light" href={`/industries/${guide.slug}`}>
+                  The {guide.name} industry guide <Arrow />
+                </Link>
+              )}
             </div>
           </div>
           <CaseVisual study={study} />
@@ -341,6 +350,11 @@ export function CaseStudyPage({ study }: { study: CaseStudy }) {
             <Link className="text-link" href="/contact">
               Contact Ignatius <Arrow />
             </Link>
+            {guide && (
+              <Link className="text-link" href={`/industries/${guide.slug}`}>
+                Read the {guide.name} industry guide <Arrow />
+              </Link>
+            )}
           </div>
         </div>
       </section>

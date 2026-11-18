@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { DiscoveryCallSection, SiteFooter, StandardHeader } from "../site-components";
+import { GUIDES } from "./guides";
 
 const description =
   "Sourced guides to how AI and customer expectations are changing each industry we build for, and what a business ready for 2030 looks like.";
@@ -20,49 +21,6 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", title: "Industry guides: what the 2030 business looks like", description },
 };
 
-// Add each guide here as it is published.
-const GUIDES = [
-  {
-    href: "/industries/accounting",
-    name: "Accounting",
-    line: "The accounting practice of 2030 is being built this year: Xero and Claude in the ledger, SARS automating the simple return, and clients asking for an adviser.",
-  },
-  {
-    href: "/industries/medical-health",
-    name: "Medical & Health",
-    line: "Patients now arrive informed. AI scribes, Claude for Healthcare and AI-informed patients, within POPIA and the HPCSA rules.",
-  },
-  {
-    href: "/industries/property-management",
-    name: "Property Management",
-    line: "Trustees are choosing a new kind of managing agent: arrears chased on day one, a portal for owners abroad, and a monthly pack that is never late.",
-  },
-  {
-    href: "/industries/holiday-hospitality",
-    name: "Holiday & Hospitality",
-    line: "Your guests already want to book you. AI trip planners, booking-site commission and the end of price parity in South Africa.",
-  },
-  {
-    href: "/industries/specialised-ecommerce",
-    name: "Specialised E-commerce",
-    line: "Specialist products are sold by confidence. R159bn of online retail, marketplaces, AI shopping agents and the 70% abandoned cart.",
-  },
-  {
-    href: "/industries/industrial-mining-supply",
-    name: "Industrial & Mining Supply",
-    line: "The order goes to the supplier who answers first. Self-service buying, AI supplier research, mining procurement and the two-minute reorder.",
-  },
-  {
-    href: "/industries/entertainment-bookings",
-    name: "Entertainment Bookings",
-    line: "Couples book the entertainer who answers first. AI wedding planning, instant replies, reviews by venue and a diary that books itself.",
-  },
-  {
-    href: "/industries/debt-counselling",
-    name: "Debt Counselling",
-    line: "People in debt look for help at 2 a.m. Record household debt, rising rates and a first conversation without shame.",
-  },
-];
 
 export default function IndustriesPage() {
   return (
@@ -79,7 +37,7 @@ export default function IndustriesPage() {
       <section className="ind-section section-shell">
         <div className="ind-guides">
           {GUIDES.map((g) => (
-            <Link key={g.href} href={g.href} className="ind-guide">
+            <Link key={g.slug} href={`/industries/${g.slug}`} className="ind-guide">
               <h2>{g.name}</h2>
               <p>{g.line}</p>
               <span className="text-link">

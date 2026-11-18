@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { GUIDES } from "./industries/guides";
 import { CookieSettingsButton } from "./cookie-consent";
 
 function Arrow() {
@@ -30,12 +31,13 @@ function ClientLoginIcon() {
 /* One list of industry pages, used by the header dropdown on every page,
    the home page's own header and the mobile menus. Add a new industry here
    and it appears everywhere. */
+// The industry guides, plus a link to the hub. Calculators and sales pages
+// (/for-accounting-practices, /value-of-a-returning-guest …) are linked from
+// inside the matching guide.
 export const INDUSTRY_LINKS = [
-  { href: "/for-accounting-practices", label: "Accounting practices" },
-  { href: "/for-debt-counsellors", label: "Debt counselling practices" },
-  { href: "/value-of-a-returning-guest", label: "Guest houses & hospitality" },
-  { href: "/value-of-returning-customer", label: "Established local businesses" },
-] as const;
+  { href: "/industries", label: "All industry guides" },
+  ...GUIDES.map((g) => ({ href: `/industries/${g.slug}`, label: g.name })),
+];
 
 /* CSS-only dropdown: it opens on hover and on keyboard focus (focus-within),
    so it needs no JavaScript and works before hydration. */
@@ -185,6 +187,7 @@ export function SiteFooter() {
           <Link href="/revenue-platform">Revenue Platform</Link>
           <Link href="/revenue-leak-audit">Revenue Leak Audit</Link>
           <Link href="/work">Selected Work</Link>
+          <Link href="/industries">Industry Guides</Link>
           <Link href="/book-discovery-call">Book a Discovery Call</Link>
         </nav>
         <nav className="footer-column" aria-label="Working together">
