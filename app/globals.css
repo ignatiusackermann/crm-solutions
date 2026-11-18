@@ -4481,3 +4481,43 @@ a:focus-visible .drb-shot img {
   .work-index-stats { grid-template-columns: 1fr 1fr; padding-bottom: 60px; }
   .case-power { padding: 80px 0; }
 }
+
+/* Industry guides (/industries). Colours come from the existing tokens. */
+.ind-hero { padding: 120px 0 70px; max-width: 980px; }
+.ind-hero .eyebrow a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+.ind-hero h1 { font-size: clamp(42px, 5.6vw, 80px); font-weight: 440; line-height: 1.02; letter-spacing: -.05em; margin: 18px 0 0; }
+.ind-lede { margin-top: 30px; max-width: 760px; color: var(--slate); font-size: 19px; line-height: 1.75; }
+.ind-hero .hero-actions { display: flex; flex-wrap: wrap; gap: 24px; align-items: center; margin-top: 36px; }
+.ind-section { padding: 90px 0; }
+.ind-band { background: var(--canvas-deep); }
+.ind-forces, .ind-package { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1px; margin-top: 50px; background: var(--line); border: 1px solid var(--line); }
+.ind-forces article, .ind-package article { background: var(--canvas); padding: 34px 30px; }
+.ind-forces h3, .ind-package h3 { font-size: 22px; font-weight: 500; line-height: 1.25; letter-spacing: -.02em; margin: 0 0 14px; }
+.ind-forces p, .ind-package p { color: var(--slate); font-size: 15.5px; line-height: 1.7; margin: 0; }
+.ind-kicker { font-size: 12px !important; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 14px !important; color: var(--ink-soft) !important; }
+.ind-cite { font-size: 11px; margin-left: 2px; }
+.ind-cite a { color: inherit; text-decoration: underline; }
+.ind-meaning { display: grid; grid-template-columns: .9fr 1.1fr; gap: 60px; }
+.ind-meaning h2 { font-size: clamp(30px, 3.4vw, 48px); font-weight: 440; line-height: 1.1; letter-spacing: -.04em; }
+.ind-meaning p:not(.eyebrow) { color: var(--slate); font-size: 17px; line-height: 1.8; margin: 0 0 20px; }
+.ind-vision, .ind-ask { list-style: none; padding: 0; margin: 50px 0 0; display: grid; gap: 0; counter-reset: ind; }
+.ind-vision li, .ind-ask li { counter-increment: ind; display: grid; grid-template-columns: 70px 1fr; column-gap: 20px; padding: 28px 0; border-top: 1px solid var(--line); }
+.ind-vision li::before, .ind-ask li::before { content: counter(ind, decimal-leading-zero); grid-row: span 2; font-size: 14px; color: var(--ink-soft); padding-top: 6px; }
+.ind-vision h3, .ind-ask h3 { font-size: 22px; font-weight: 500; letter-spacing: -.02em; margin: 0 0 8px; }
+.ind-vision p, .ind-ask p { color: var(--slate); font-size: 16px; line-height: 1.7; margin: 0; max-width: 760px; }
+.ind-extra { display: flex; align-items: flex-end; }
+.ind-sources ol { padding-left: 20px; margin: 30px 0 0; display: grid; gap: 10px; color: var(--slate); font-size: 14.5px; line-height: 1.6; }
+.ind-sources li { scroll-margin-top: 100px; }
+.ind-sources a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+.ind-sources h2 { font-size: clamp(26px, 2.6vw, 36px); font-weight: 440; letter-spacing: -.03em; }
+.ind-note { margin-top: 24px; color: var(--slate); font-size: 14px; }
+.ind-guides { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+.ind-guide { display: block; padding: 34px 30px; border: 1px solid var(--line); background: var(--canvas); color: var(--ink); text-decoration: none; }
+.ind-guide h2 { font-size: 30px; font-weight: 460; letter-spacing: -.03em; margin: 0 0 12px; }
+.ind-guide p { color: var(--slate); line-height: 1.7; margin: 0 0 20px; }
+@media (max-width: 820px) {
+  .ind-hero { padding: 80px 0 40px; }
+  .ind-section { padding: 60px 0; }
+  .ind-meaning { grid-template-columns: 1fr; gap: 24px; }
+  .ind-vision li, .ind-ask li { grid-template-columns: 44px 1fr; }
+}

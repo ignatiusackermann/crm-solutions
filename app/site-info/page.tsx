@@ -60,6 +60,8 @@ const pages = [
   ["/work/sca-za", "Case study — South Coast Advisory"],
   ["/work/sca-properties", "Case study — SCA Properties"],
   ["/work/saxophone-for-functions", "Case study — Saxophone for Functions"],
+  ["/industries", "Industry guides (hub)"],
+  ["/industries/accounting", "Industry guide — Accounting"],
   ["/insights/*", "8 insight articles"],
   ["/privacy-policy", "Privacy Policy"],
   ["/cookie-policy", "Cookie Policy"],

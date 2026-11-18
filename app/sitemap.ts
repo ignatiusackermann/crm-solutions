@@ -30,6 +30,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/work/sca-za",
     "/work/sca-properties",
     "/work/saxophone-for-functions",
+    "/industries",
+    "/industries/accounting",
     "/privacy-policy",
     "/cookie-policy",
     "/terms-and-conditions",
