@@ -21,7 +21,7 @@ export const portfolio: PortfolioEntry[] = [
     name: "South Coast Advisory",
     category: "Accounting",
     statement:
-      "Forty-six years of trust. Now the new clients find the practice, and book themselves in.",
+      "Forty-six years of loyal clients, and not one of them came from the website.",
     themes: ["Found first", "Booked online", "Answered aloud"],
     tone: "sca",
     screenshot: "/portfolio/sca-za-desktop.jpg",
