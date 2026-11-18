@@ -67,6 +67,8 @@ const pages = [
   ["/industries/holiday-hospitality", "Industry guide — Holiday & Hospitality"],
   ["/industries/specialised-ecommerce", "Industry guide — Specialised E-commerce"],
   ["/industries/industrial-mining-supply", "Industry guide — Industrial & Mining Supply"],
+  ["/industries/entertainment-bookings", "Industry guide — Entertainment Bookings"],
+  ["/industries/debt-counselling", "Industry guide — Debt Counselling"],
   ["/insights/*", "8 insight articles"],
   ["/privacy-policy", "Privacy Policy"],
   ["/cookie-policy", "Cookie Policy"],

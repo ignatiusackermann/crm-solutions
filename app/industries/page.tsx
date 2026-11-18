@@ -52,6 +52,16 @@ const GUIDES = [
     name: "Industrial & Mining Supply",
     line: "The order goes to the supplier who answers first. Self-service buying, AI supplier research, mining procurement and the two-minute reorder.",
   },
+  {
+    href: "/industries/entertainment-bookings",
+    name: "Entertainment Bookings",
+    line: "Couples book the entertainer who answers first. AI wedding planning, instant replies, reviews by venue and a diary that books itself.",
+  },
+  {
+    href: "/industries/debt-counselling",
+    name: "Debt Counselling",
+    line: "People in debt look for help at 2 a.m. Record household debt, rising rates and a first conversation without shame.",
+  },
 ];
 
 export default function IndustriesPage() {
