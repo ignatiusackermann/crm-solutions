@@ -2,7 +2,7 @@
 // "more work" links on each case study all read this list, so a new site is
 // added here once and then given its own page in app/work/<slug>/page.tsx.
 
-export type PortfolioTone = "lava" | "star" | "storvac" | "shades" | "cpe" | "cabana" | "yasuke";
+export type PortfolioTone = "lava" | "star" | "storvac" | "shades" | "cpe" | "cabana" | "yasuke" | "sca";
 
 export type PortfolioEntry = {
   slug: string;
@@ -16,6 +16,17 @@ export type PortfolioEntry = {
 };
 
 export const portfolio: PortfolioEntry[] = [
+  {
+    slug: "sca-za",
+    name: "South Coast Advisory",
+    category: "Accounting practice",
+    statement:
+      "Turning a 46-year-old accounting practice into the firm a local business owner finds, trusts and books.",
+    themes: ["Local search", "Consultation booking", "Voice assistant"],
+    tone: "sca",
+    screenshot: "/portfolio/sca-za-desktop.jpg",
+    host: "www.sca-za.co.za",
+  },
   {
     slug: "lava-sa",
     name: "Lava-SA",

@@ -367,7 +367,7 @@ export default function Home() {
             ))}
           </div>
           <p className="work-all-link">
-            <Link className="button button-primary" href="/work">See all seven platforms <Arrow /></Link>
+            <Link className="button button-primary" href="/work">See all eight platforms <Arrow /></Link>
           </p>
           <p className="section-deep-link">
             <Link href="/insights/proof-before-claims">
