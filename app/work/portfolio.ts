@@ -32,7 +32,7 @@ export const portfolio: PortfolioEntry[] = [
     name: "SCA Properties",
     category: "Property Management",
     statement:
-      "After years of a website that undersold them, finally one as well run as the complexes they manage.",
+      "The first thing trustees see is now as well run as the complexes they manage.",
     themes: ["Proposal requests", "Owner portal", "Voice assistant"],
     tone: "scap",
     screenshot: "/portfolio/sca-properties-desktop.jpg",
@@ -43,7 +43,7 @@ export const portfolio: PortfolioEntry[] = [
     name: "Saxophone for Functions",
     category: "Entertainment Bookings",
     statement:
-      "After years of a website that undersold him, finally one that sounds as good as he does.",
+      "107 glowing reviews, and at last a website that sounds as good as he does.",
     themes: ["Event enquiries", "Diary check", "Voice assistant"],
     tone: "sax",
     screenshot: "/portfolio/saxophone-for-functions-desktop.jpg",
@@ -54,7 +54,7 @@ export const portfolio: PortfolioEntry[] = [
     name: "Lava-SA",
     category: "Specialised E-commerce",
     statement:
-      "After years of a website that undersold them, finally one as premium as the products they sell.",
+      "Premium products deserved a premium shop window. Now they have one.",
     themes: ["Product architecture", "Buying confidence", "Commerce"],
     tone: "lava",
     screenshot: "/portfolio/lava-sa-desktop.jpg",
@@ -65,7 +65,7 @@ export const portfolio: PortfolioEntry[] = [
     name: "Star Aesthetic",
     category: "Medical & Health E-commerce",
     statement:
-      "After years of a website that undersold them, finally one as refined as the care they give.",
+      "Patients judge a clinic before they walk in. Now that first impression is as refined as the care they give.",
     themes: ["Premium identity", "Treatment clarity", "Consultations"],
     tone: "star",
     screenshot: "/portfolio/star-aesthetic-desktop.jpg",
@@ -76,7 +76,7 @@ export const portfolio: PortfolioEntry[] = [
     name: "Storvac Systems",
     category: "Specialised E-commerce",
     statement:
-      "After years of a website that undersold them, finally one as precisely engineered as the systems they sell.",
+      "Engineered systems, finally sold by a website engineered the same way.",
     themes: ["Decision support", "Find my size", "Restrained commerce"],
     tone: "storvac",
     screenshot: "/portfolio/storvac-desktop.jpg",
@@ -87,7 +87,7 @@ export const portfolio: PortfolioEntry[] = [
     name: "Shades of Blue",
     category: "Service Quotations",
     statement:
-      "After years of a website that undersold them, finally one that quotes as fast as their teams work.",
+      "Their teams never keep a client waiting. Now neither does the quote.",
     themes: ["Quote requests", "Procurement proof", "Client area"],
     tone: "shades",
     screenshot: "/portfolio/shades-of-blue-desktop.jpg",
@@ -109,7 +109,7 @@ export const portfolio: PortfolioEntry[] = [
     name: "Cabana Mio",
     category: "Vacation Bookings",
     statement:
-      "After years of a website that undersold them, finally one as inviting as the beach outside the door.",
+      "The holiday now starts on the first page, as inviting as the beach outside the door.",
     themes: ["Direct bookings", "Events calendar", "Area guides"],
     tone: "cabana",
     screenshot: "/portfolio/cabana-mio-desktop.jpg",
@@ -120,7 +120,7 @@ export const portfolio: PortfolioEntry[] = [
     name: "Yasuke Safety",
     category: "Safety Wear Quotations (Mining)",
     statement:
-      "After years of a website that undersold them, finally one built as tough as the boots they sell.",
+      "Built for the mine, not the casual shopper, and as tough as the boots they sell.",
     themes: ["Bulk quantities", "Repeat orders", "Voice assistant"],
     tone: "yasuke",
     screenshot: "/portfolio/yasuke-safety-desktop.jpg",
