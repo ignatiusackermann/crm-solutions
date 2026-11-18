@@ -37,6 +37,11 @@ const GUIDES = [
     name: "Property Management",
     line: "Trustees are choosing a new kind of managing agent: arrears chased on day one, a portal for owners abroad, and a monthly pack that is never late.",
   },
+  {
+    href: "/industries/holiday-hospitality",
+    name: "Holiday & Hospitality",
+    line: "Your guests already want to book you. AI trip planners, booking-site commission and the end of price parity in South Africa.",
+  },
 ];
 
 export default function IndustriesPage() {

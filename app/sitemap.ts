@@ -34,6 +34,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/industries/accounting",
     "/industries/medical-health",
     "/industries/property-management",
+    "/industries/holiday-hospitality",
     "/privacy-policy",
     "/cookie-policy",
     "/terms-and-conditions",
