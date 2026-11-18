@@ -58,3 +58,6 @@ phplist-batches-*/
 /scripts/build-medspa-packs.ps1
 __pycache__/
 tsconfig.tsbuildinfo
+
+# Recorded video clips (large; kept out of git)
+video-assets/
