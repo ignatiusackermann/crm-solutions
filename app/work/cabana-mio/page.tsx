@@ -8,9 +8,9 @@ const study: CaseStudy = {
   liveLabel: "Visit the live platform",
   heroTone: "cabana",
   screenshot: "/portfolio/cabana-mio-desktop.jpg",
-  headline: "From a listing on booking sites to a resort that takes its own bookings",
+  headline: "The guests already wanted to stay. The booking sites took the commission",
   intro:
-    "Cabana Mio is a group of self-catering beach chalets in Amanzimtoti on the KwaZulu-Natal South Coast. The new site lets a guest check dates and book direct, and gives them reasons to pick those dates: events, places to visit and the weather to expect.",
+    "Picture a family who searched for Cabana Mio by name, found it on a booking site, and booked there. The resort paid commission on a guest it had already won. For a holiday resort, that is the most painful booking of all. Cabana Mio, self-catering beach chalets in Amanzimtoti, now takes its own bookings: guests check the dates, see what is on, and book direct.",
   meta: [
     { label: "Client", value: "Cabana Mio" },
     { label: "Focus", value: "Direct bookings" },
@@ -23,10 +23,10 @@ const study: CaseStudy = {
     { label: "Platform", title: "Booking engine" },
     { label: "Assistant", title: "Cheryl, by voice" },
   ],
-  narrativeTitle: "The job was bigger than showing the chalets.",
+  narrativeTitle: "Paying commission on your own guests.",
   narrative: [
     "Travellers search for a place and a date together. If a resort’s own website cannot answer “is it free that weekend, and what does it cost?”, the guest goes back to a booking site, and the resort pays commission on a guest who was already looking for it.",
-    "The work was to put that answer in the first screen, take the booking on the resort’s own site, and surround it with the local knowledge a booking site does not have.",
+    "So that answer now sits in the first screen, the booking is taken on the resort’s own site, and the events, places to visit and weather give guests a reason to choose their dates.",
   ],
   pillars: [
     {
@@ -42,9 +42,9 @@ const study: CaseStudy = {
       body: "Rates, seasons, closed dates and deposits are managed by the resort in its own admin area.",
     },
   ],
-  powerTitle: "What the platform does, every day.",
+  powerTitle: "What happens while the owner is asleep.",
   powerIntro:
-    "A guest can go from “what’s on in Toti?” to a held booking without leaving the resort’s own site.",
+    "The site answers, books and inspires on the resort’s own domain, with no booking site in between.",
   power: [
     {
       title: "Its own booking engine",
@@ -179,7 +179,7 @@ const study: CaseStudy = {
     "A review request after every stay builds the resort’s own reputation, on its own site.",
     "Past guests are the first people to hear about free dates and what is on.",
   ],
-  closingTitle: "Are booking sites earning the commission your own website should save?",
+  closingTitle: "Picture your guests booking you direct. How much more would you keep?",
 };
 
 export const metadata = caseMetadata(study);

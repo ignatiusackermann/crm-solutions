@@ -8,9 +8,9 @@ const study: CaseStudy = {
   liveLabel: "Visit the live platform",
   heroTone: "scap",
   screenshot: "/portfolio/sca-properties-desktop.jpg",
-  headline: "Trustees choose a managing agent. The website never asked them to.",
+  headline: "Trustees were tired of chasing their managing agent",
   intro:
-    "SCA Properties manages sectional title schemes, home owners associations, share blocks, timeshare and rental pools on the KZN South Coast. It belongs to an accounting group that has been in Amanzimtoti since 1980. The old WordPress site described property in general terms, sent owners to a third-party login, and gave a board of trustees no clear way to ask for a proposal.",
+    "Picture the chair of a holiday complex board: levies in arrears, a financial report months late, and owners in Johannesburg asking what is going on. They want a new managing agent, but changing feels risky. SCA Properties manages schemes on the KZN South Coast, and belongs to an accounting group that has been in Amanzimtoti since 1980. Its new site meets that chair with the answer: books kept by accountants, a report pack every month, and a proposal they can take to the board.",
   meta: [
     { label: "Client", value: "SCA Properties" },
     { label: "Focus", value: "Proposal requests from trustees" },
@@ -23,9 +23,9 @@ const study: CaseStudy = {
     { label: "Platform", title: "Proposals, bookings, owner portal" },
     { label: "Assistant", title: "Claire, by voice" },
   ],
-  narrativeTitle: "The buyer is a board of trustees, not a tenant.",
+  narrativeTitle: "Changing agent feels risky. Staying feels worse.",
   narrative: [
-    "A managing agent is not chosen by someone browsing for a flat. It is chosen by trustees who are unhappy with their current agent, worried about levy arrears, or tired of late financial reports. They compare two or three agents, and they need something to put in front of the rest of the board.",
+    "A managing agent is chosen by trustees who are unhappy with their current one: late reports, levy arrears, and owners far away who hear nothing. They compare two or three agents, and they need something solid to put in front of the board.",
     "So the scope was cut on purpose: schemes and rental pools only. No property sales, no rentals, no guest bookings. Every page leads a trustee to one step: request a proposal, or book a meeting or a site inspection.",
   ],
   pillars: [
@@ -42,7 +42,7 @@ const study: CaseStudy = {
       body: "Holiday complexes on the South Coast are often owned from Gauteng or abroad. The portal and the monthly pack are made for them.",
     },
   ],
-  powerTitle: "What the platform does, every day.",
+  powerTitle: "What happens before the trustees meet.",
   powerIntro:
     "One site that wins the trustee, then serves the owners and the office once the scheme signs.",
   power: [
@@ -194,7 +194,7 @@ const study: CaseStudy = {
     "Search Console will show which area and scheme pages start to rank.",
     "As owners use the portal, it becomes the record each scheme relies on.",
   ],
-  closingTitle: "Does your website ask your real buyer for the business?",
+  closingTitle: "Picture a board choosing you before the meeting starts.",
 };
 
 export const metadata = caseMetadata(study);

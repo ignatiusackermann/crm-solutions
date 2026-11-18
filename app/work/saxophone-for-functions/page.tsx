@@ -8,9 +8,9 @@ const study: CaseStudy = {
   liveLabel: "Visit the live platform",
   heroTone: "sax",
   screenshot: "/portfolio/saxophone-for-functions-desktop.jpg",
-  headline: "Ten years of glowing reviews, hidden on a ten-year-old website",
+  headline: "He was on stage while the next couple chose someone else",
   intro:
-    "Friedel Knobel plays live saxophone at weddings, private parties and corporate functions across Gauteng: jazz, Latin, ballads and gospel. He is also a professional sound engineer, so the music is elegant and never too loud. Over the years he collected more than a hundred written reviews. His Joomla website, built around 2016, showed fourteen of them and asked couples to make contact without answering the question they came with: is he free on our date?",
+    "Picture Friedel playing a first dance. At that same moment, a couple planning their wedding late at night finds his old website. They cannot hear him play. They cannot see whether he is free. So they book another musician. Friedel Knobel has played weddings and functions across Gauteng for years, with 107 written reviews to prove it. The new site lets that couple hear him, check the date and send the booking before the song ends.",
   meta: [
     { label: "Client", value: "Friedel Knobel" },
     { label: "Focus", value: "Event booking enquiries" },
@@ -23,7 +23,7 @@ const study: CaseStudy = {
     { label: "Platform", title: "Enquiries and a diary he can run" },
     { label: "Assistant", title: "Janet, by voice" },
   ],
-  narrativeTitle: "A couple wants three answers before they ask for a quote.",
+  narrativeTitle: "Talent was never the problem.",
   narrative: [
     "Can we hear him? Is he free on our date? Has he played somewhere like our venue? A wedding couple or an events coordinator decides on those three things, usually late at night and on a phone.",
     "The new site answers all three on the first screen, and then lets the visitor send the enquiry while they are still excited. Friedel works by WhatsApp and email, so the site, and Janet, do the talking for him.",
@@ -42,7 +42,7 @@ const study: CaseStudy = {
       body: "Every written review since 2009 is on the site, grouped by area and pinned to the venues on a map.",
     },
   ],
-  powerTitle: "What the platform does, every day.",
+  powerTitle: "What happens while he is on stage.",
   powerIntro:
     "A musician’s whole booking process, from first listen to a confirmed date, on one site he can run from his phone.",
   power: [
@@ -194,7 +194,7 @@ const study: CaseStudy = {
     "New reviews from recent functions will join the 107 already on the site.",
     "Once his upcoming bookings are all in the diary, the date check becomes exact rather than a guide.",
   ],
-  closingTitle: "Can your customers check your availability before they ask?",
+  closingTitle: "Picture the next booking arriving while you are working. What would it take?",
 };
 
 export const metadata = caseMetadata(study);

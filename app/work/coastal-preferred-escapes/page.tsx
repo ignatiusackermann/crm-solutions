@@ -8,9 +8,9 @@ const study: CaseStudy = {
   liveLabel: "Visit the live platform",
   heroTone: "cpe",
   screenshot: "/portfolio/coastal-preferred-escapes-desktop.jpg",
-  headline: "From an idea on paper to a holiday membership people can join",
+  headline: "Every family plans a beach holiday. Most never book it",
   intro:
-    "Coastal Preferred Escapes is a new product: five years of family beach holidays at Cabana Mio in Amanzimtoti for one fixed monthly payment. It was brand new, with no name recognition and no reviews yet. The website had to explain it, earn trust and take the application.",
+    "Every parent knows the plan: this year we will go to the sea. Then the cost, the dates and the school calendar get in the way, and another year passes. Coastal Preferred Escapes is a new answer: five years of family beach holidays at Cabana Mio in Amanzimtoti for one fixed monthly payment. It was brand new, with no name and no reviews, so the website had to make a family see that holiday, trust the offer, and apply.",
   meta: [
     { label: "Client", value: "Coastal Preferred Escapes" },
     { label: "Focus", value: "New product launch" },
@@ -23,10 +23,10 @@ const study: CaseStudy = {
     { label: "Platform", title: "Membership website" },
     { label: "Assistant", title: "Pearl, by voice" },
   ],
-  narrativeTitle: "The job was bigger than announcing a product.",
+  narrativeTitle: "A five-year promise needs a lot of trust.",
   narrative: [
-    "A five-year commitment is a serious decision for a young family. They need to understand exactly what they get, when they can go, what it costs each month and what happens if life changes.",
-    "The work was to turn the membership into something a parent can grasp in one visit, answer the doubts honestly, and make joining a clear and unhurried step.",
+    "A five-year commitment is a serious decision for a young family. They need to know exactly what they get, when they can go, what it costs each month and what happens if life changes.",
+    "So the site turns the membership into something a parent can picture and grasp in one visit, answers the doubts honestly, and makes joining a calm, unhurried step.",
   ],
   pillars: [
     {
@@ -42,9 +42,9 @@ const study: CaseStudy = {
       body: "Seasons, booking rules and terms are set out in plain words, where a careful buyer will look.",
     },
   ],
-  powerTitle: "What the platform does, every day.",
+  powerTitle: "What happens while the family is deciding.",
   powerIntro:
-    "The site carries a family from first curiosity to a submitted application, and gives them reasons to look forward to the holiday.",
+    "The site explains, reassures and takes the application, so no family needs a sales call to say yes.",
   power: [
     {
       title: "A week finder",
@@ -179,7 +179,7 @@ const study: CaseStudy = {
     "Reviews from the first member holidays become the proof the launch could not have.",
     "Each audience gets its own campaign in the order its holiday season opens.",
   ],
-  closingTitle: "Launching something new—and need people to understand it at once?",
+  closingTitle: "Picture a family choosing five summers at once. What would they need to see?",
 };
 
 export const metadata = caseMetadata(study);

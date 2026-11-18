@@ -8,9 +8,9 @@ const study: CaseStudy = {
   liveLabel: "Visit the live platform",
   heroTone: "yasuke",
   screenshot: "/portfolio/yasuke-safety-desktop.jpg",
-  headline: "A once-off quote button cannot take a mine's order",
+  headline: "The mine wanted to order again. The website made them start from zero",
   intro:
-    "Yasuke Safety supplies safety boots, boiler suits and protective equipment to mines and contractors in Tete Province, Mozambique. The old website was a standard shop, with a quote request switched on. That form was built for a person buying a few items once. A mine orders for a crew, in large quantities, and then orders the same thing again.",
+    "Picture the procurement officer at a mine in Tete Province, with a whole crew needing boots and boiler suits by next week. They already have the list. The old website asked them to search for one product at a time and type it all again, every month. Yasuke Safety supplies safety boots, boiler suits and protective equipment to mines and contractors in Tete. Now that buyer pastes the list, checks it, and sends last month’s order again in minutes.",
   meta: [
     { label: "Client", value: "Yasuke Safety" },
     { label: "Focus", value: "Bulk quotes & repeat orders" },
@@ -23,7 +23,7 @@ const study: CaseStudy = {
     { label: "Platform", title: "Bulk request and reorder" },
     { label: "Assistant", title: "Sandy, by voice" },
   ],
-  narrativeTitle: "The job was the order, not the catalogue.",
+  narrativeTitle: "A mine does not shop. It orders.",
   narrative: [
     "A procurement officer at a mine does not browse a shop and add one pair of boots. They order for a shift: many pairs, several sizes, often a whole list, and they need a price in meticais for that list.",
     "The old quote request asked for one product at a time and treated every request as new. Large orders were being typed out by hand, and a repeat order meant starting again. The catalogue stayed. The way an order is asked for was replaced.",
@@ -42,7 +42,7 @@ const study: CaseStudy = {
       body: "A previous request can be opened, the quantities changed, and sent as a new quote. Nothing is retyped.",
     },
   ],
-  powerTitle: "What the platform does, every day.",
+  powerTitle: "What happens while the owner is on the road.",
   powerIntro:
     "One catalogue, two kinds of buyer, and a request that can carry a crew order instead of a single product.",
   power: [
@@ -194,7 +194,7 @@ const study: CaseStudy = {
     "Repeat orders will show what a mine buys every month, and what should sit ready for them.",
     "The portal grows into a record of each mine's requests once the real users are on it.",
   ],
-  closingTitle: "Does your quote form fit the order your customer actually sends?",
+  closingTitle: "Picture your biggest customer ordering again in two minutes.",
 };
 
 export const metadata = caseMetadata(study);

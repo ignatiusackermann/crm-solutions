@@ -8,9 +8,9 @@ const study: CaseStudy = {
   liveLabel: "Visit the live platform",
   heroTone: "shades",
   screenshot: "/portfolio/shades-of-blue-desktop.jpg",
-  headline: "From brochure site to a quoting system for industry",
+  headline: "In industry, the work goes to the supplier who answers first",
   intro:
-    "Shades of Blue Lifestyles supplies labour, steel fabrication and building maintenance to mines and factories across Gauteng. The old website described the company. The new one takes the quote request and follows the job through.",
+    "A site manager needs workers or steel by Monday. A procurement officer needs proof that the supplier qualifies. Shades of Blue Lifestyles supplies labour, steel fabrication and building maintenance to mines and factories across Gauteng, but its old website only described the company, and buyers in a hurry move on. Picture it now: the request arrives complete, the proof has already been read, and the quote can go out the same day.",
   meta: [
     { label: "Client", value: "Shades of Blue Lifestyles" },
     { label: "Focus", value: "Quotes & procurement" },
@@ -23,10 +23,10 @@ const study: CaseStudy = {
     { label: "Platform", title: "Quoting and client area" },
     { label: "Assistant", title: "Blue, by voice" },
   ],
-  narrativeTitle: "The job was bigger than a new look.",
+  narrativeTitle: "The slowest reply loses the job.",
   narrative: [
-    "A contractor’s website is read by two people: the site manager who needs workers or steel by a date, and the procurement officer who must prove the supplier qualifies. Each has a different question, and each leaves if it is not answered quickly.",
-    "The work was to put a quote request within reach of every page, place the procurement proof where it is looked for, and connect what happens after the enquiry to the same system.",
+    "A contractor’s website is read by two people in a hurry: the site manager who needs workers or steel by a date, and the procurement officer who must prove the supplier qualifies. If either has to search or wait, they call the next supplier on the list.",
+    "So a quote request sits within reach of every page, the procurement proof sits where it is looked for, and what happens after the enquiry follows the job through the same system.",
   ],
   pillars: [
     {
@@ -42,9 +42,9 @@ const study: CaseStudy = {
       body: "A client can sign in and see where a quote or site inspection stands, without phoning the office.",
     },
   ],
-  powerTitle: "What the platform does, every day.",
+  powerTitle: "What happens while the teams are on site.",
   powerIntro:
-    "Four service lines, sixteen area pages and two very different audiences, handled by one connected site.",
+    "The site takes the request, shows the proof and keeps the job moving, so no enquiry waits for someone to get back to the office.",
   power: [
     {
       title: "Quote requests and a quote basket",
@@ -179,7 +179,7 @@ const study: CaseStudy = {
     "Reviews from completed jobs build the proof that new buyers look for.",
     "The client area can grow into a full record of each customer’s work.",
   ],
-  closingTitle: "Does your website describe the business—or win the work?",
+  closingTitle: "Picture every request answered before your competitor picks up the phone.",
 };
 
 export const metadata = caseMetadata(study);

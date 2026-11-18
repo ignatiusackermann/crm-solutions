@@ -8,9 +8,9 @@ const study: CaseStudy = {
   liveLabel: "Visit the live platform",
   heroTone: "storvac",
   screenshot: "/portfolio/storvac-desktop.jpg",
-  headline: "From product list to a faster fit decision",
+  headline: "Every wrong choice cost a return, an apology and a customer",
   intro:
-    "Storvac Systems needed a platform that helps buyers understand capacity, choose the right configuration, and reach a confident next step—without turning every visit into a long sales call.",
+    "When a buyer picks the wrong capacity, everybody loses: the product comes back, the buyer is frustrated, and the sale becomes a cost. Storvac Systems used to prevent that one long sales call at a time. Picture it instead: the buyer works out exactly what fits, chooses with confidence, and the first conversation with Storvac is about delivery, not about what they need.",
   meta: [
     { label: "Client", value: "Storvac Systems" },
     { label: "Focus", value: "Selection & enquiry" },
@@ -23,10 +23,10 @@ const study: CaseStudy = {
     { label: "Platform", title: "Product journey build" },
     { label: "Sales", title: "Qualified enquiry path" },
   ],
-  narrativeTitle: "The job was bigger than publishing a catalogue.",
+  narrativeTitle: "The fear of buying the wrong one.",
   narrative: [
-    "When fit is wrong, the cost is real—for the buyer and for the business. Storvac’s digital experience had to reduce specification anxiety and guide visitors toward the right solution faster.",
-    "The work was to design decision support first, then connect commerce and enquiry around that clearer path.",
+    "Technical buyers hesitate for one reason: they are afraid of getting the specification wrong. That fear turns into long calls, slow decisions, or no decision at all.",
+    "So the platform leads with decision support: capacity explained, the right configuration found, and only then the order or the enquiry.",
   ],
   pillars: [
     {
@@ -42,9 +42,9 @@ const study: CaseStudy = {
       body: "Raise enquiry quality so the team starts with a defined need, not a blank slate.",
     },
   ],
-  powerTitle: "What the platform does, every day.",
+  powerTitle: "What happens while the sales team is on other calls.",
   powerIntro:
-    "Storvac sells vacuum storage bags online. It is a small catalogue, so the site’s work is helping people choose and making it easy to order again.",
+    "The site does the specifying, so the buyers who do call already know what they want.",
   power: [
     {
       title: "Find my size",
@@ -172,7 +172,7 @@ const study: CaseStudy = {
     "Enquiry quality shows whether the digital path is doing its job.",
     "The platform remains a commercial tool for selection—not a static brochure.",
   ],
-  closingTitle: "Do you need more products online—or a clearer path to the right one?",
+  closingTitle: "Picture every buyer choosing right the first time. What would that save you?",
 };
 
 export const metadata = caseMetadata(study);

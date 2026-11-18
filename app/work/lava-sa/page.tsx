@@ -8,9 +8,9 @@ const study: CaseStudy = {
   liveLabel: "Visit the live platform",
   heroTone: "lava",
   screenshot: "/portfolio/lava-sa-desktop.jpg",
-  headline: "From specialist catalogue to a premium ecommerce system",
+  headline: "The buyers wanted the machine. They were not sure enough to pay",
   intro:
-    "Lava-SA needed a commercial platform that educates specialist buyers, builds trust around high-consideration products, and carries the sale cleanly from selection to payment and fulfilment.",
+    "Every specialist seller knows the feeling. A serious buyer looks at a machine for a long time, then leaves to “think about it”, and does not come back. Lava-SA’s products are bought with care, and a catalogue left those buyers alone with their doubts. Picture it instead: the buyer understands which machine fits, sees why it is worth the money, and pays online without a single phone call.",
   meta: [
     { label: "Client", value: "Lava-SA" },
     { label: "Focus", value: "Specialist commerce" },
@@ -23,10 +23,10 @@ const study: CaseStudy = {
     { label: "Platform", title: "Ecommerce build" },
     { label: "Operations", title: "Checkout & fulfilment" },
   ],
-  narrativeTitle: "The job was bigger than selling machines.",
+  narrativeTitle: "Doubt was the real competitor.",
   narrative: [
-    "A catalogue alone does not create confident purchase decisions. Specialist buyers need orientation, comparison, reassurance and a clear next step before they commit money and operational change.",
-    "The work was to design the commercial journey around how those buyers actually decide—then build the storefront, content and checkout as one connected system.",
+    "Specialist buyers rarely leave because of the price. They leave because nobody answered the question they were too busy, or too unsure, to ask.",
+    "So the platform was built to do the answering: guidance, comparison and reassurance first, then a checkout that carries the sale from choice to payment and delivery in one flow.",
   ],
   pillars: [
     {
@@ -42,9 +42,9 @@ const study: CaseStudy = {
       body: "Premium presentation that matches the seriousness of the purchase—not a generic template shop.",
     },
   ],
-  powerTitle: "What the platform does, every day.",
+  powerTitle: "What happens while the owner runs the business.",
   powerIntro:
-    "Lava-SA sells vacuum sealers that cost as much as a good appliance. The site has to do the explaining a showroom would do, then take the order.",
+    "The platform guides, reassures and sells, so the owner is no longer the only person who can close a sale.",
   power: [
     {
       title: "A full online shop",
@@ -172,7 +172,7 @@ const study: CaseStudy = {
     "Product, content and checkout can be improved from evidence—not opinion.",
     "The platform remains a commercial asset the business can operate and extend.",
   ],
-  closingTitle: "Do you need a new website—or a better revenue engine?",
+  closingTitle: "Picture your best buyer ready to pay tonight. Would your website let them?",
 };
 
 export const metadata = caseMetadata(study);

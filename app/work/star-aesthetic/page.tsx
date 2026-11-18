@@ -8,9 +8,9 @@ const study: CaseStudy = {
   liveLabel: "Visit the live platform",
   heroTone: "star",
   screenshot: "/portfolio/star-aesthetic-desktop.jpg",
-  headline: "From treatment menu to a calm patient journey",
+  headline: "Patients decide whether to trust a clinic long before they meet it",
   intro:
-    "Star Aesthetic Centre needed a digital experience that builds clinical trust quickly—clarifying treatments, presenting doctor-led care, and making consultation the natural next step.",
+    "A patient thinking about a treatment reads about it late at night, alone. Is it safe? Will it suit me? Is this the right clinic? Most clinic websites answer with a price list. Star Aesthetic Centre’s visitors now find calm explanations, doctor-led care and a consultation that feels like the natural next step. Picture it: the patient arrives for the first appointment already trusting the clinic.",
   meta: [
     { label: "Client", value: "Star Aesthetic Centre" },
     { label: "Focus", value: "Patient journey" },
@@ -23,10 +23,10 @@ const study: CaseStudy = {
     { label: "Platform", title: "Practice website" },
     { label: "Conversion", title: "Consultation booking" },
   ],
-  narrativeTitle: "The job was bigger than listing treatments.",
+  narrativeTitle: "Nobody books a treatment they feel nervous about.",
   narrative: [
-    "Prospective patients do not buy procedures the way shoppers buy commodities. They evaluate credibility, safety, fit and emotional confidence before they book.",
-    "The work was to organise the practice’s digital presence around those decisions—so interest becomes a consultation with less confusion and less hesitation.",
+    "Patients do not buy procedures the way shoppers buy products. They weigh safety, credibility and how they will feel afterwards, and a confusing treatment menu only adds to the hesitation.",
+    "So the site was organised around those feelings: each treatment explained plainly, the doctor-led care made visible, and a consultation offered as the calm next step.",
   ],
   pillars: [
     {
@@ -42,9 +42,9 @@ const study: CaseStudy = {
       body: "Enquiry and booking designed as a guided next step—not a cold form at the end of a brochure.",
     },
   ],
-  powerTitle: "What the platform does, every day.",
+  powerTitle: "What happens before the patient walks in.",
   powerIntro:
-    "Star Aesthetic Centre is a doctor-led clinic. The site takes bookings, sells products and gives patients reasons to return, around the clock.",
+    "The site answers the private questions first, so the consultation starts with trust instead of doubt.",
   power: [
     {
       title: "On-site booking",
@@ -172,7 +172,7 @@ const study: CaseStudy = {
     "Trust and booking friction can be improved from real behaviour.",
     "The site remains an asset that supports the consultation room—not a static brochure.",
   ],
-  closingTitle: "Do you need a prettier clinic site—or a clearer patient engine?",
+  closingTitle: "Picture your next patient arriving already confident. What would they need to read first?",
 };
 
 export const metadata = caseMetadata(study);
