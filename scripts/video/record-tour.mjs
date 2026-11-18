@@ -65,8 +65,14 @@ const send = (method, params = {}) => new Promise((resolve, reject) => {
   pending.set(id, { resolve, reject });
   ws.send(JSON.stringify({ id, method, params }));
 });
-const evaluate = async (expression) =>
-  (await send("Runtime.evaluate", { expression, awaitPromise: true, returnByValue: true })).result?.value;
+// Every page call has a time limit, so a busy or frozen page can never hang the recorder.
+const evaluate = async (expression, ms = 15000) => {
+  const res = await Promise.race([
+    send("Runtime.evaluate", { expression, awaitPromise: true, returnByValue: true }),
+    sleep(ms).then(() => { throw new Error("page did not answer within " + ms / 1000 + " s"); }),
+  ]);
+  return res.result?.value;
+};
 
 await send("Page.enable");
 await send("Emulation.setDeviceMetricsOverride", { width: fmt.width, height: fmt.height, deviceScaleFactor: fmt.scale, mobile: fmt.mobile });
@@ -93,19 +99,28 @@ listeners.push(async (m) => {
   writeFileSync(file, Buffer.from(data, "base64"));
   send("Page.screencastFrameAck", { sessionId }).catch(() => {});
 });
-await send("Page.startScreencast", { format: "jpeg", quality: 85, maxWidth: fmt.width * fmt.scale, maxHeight: fmt.height * fmt.scale, everyNthFrame: 1 });
+// Full-HD frames at the full rate can swamp the connection and stall the page,
+// so landscape takes every second frame at slightly lower quality.
+await send("Page.startScreencast", { format: "jpeg", quality: fmt.mobile ? 85 : 78, maxWidth: fmt.width * fmt.scale, maxHeight: fmt.height * fmt.scale, everyNthFrame: fmt.mobile ? 1 : 2 });
 await sleep(1500); // a moment on the opening scene before she speaks
 
 console.log(`Recording ${outName} — ${format}`);
 await evaluate("window.dispatchEvent(new Event('sandy:tour'))");
 const started = Date.now();
-while (!(await evaluate("Boolean(window.__sandyTour && window.__sandyTour.done)"))) {
+let lastReport = 0;
+const isDone = async () => { try { return await evaluate("Boolean(window.__sandyTour && window.__sandyTour.done)"); } catch (e) { console.log("  … " + e.message); return false; } };
+while (!(await isDone())) {
   if (Date.now() - started > 6 * 60 * 1000) { console.log("  ! tour did not finish within 6 minutes"); break; }
+  if (Date.now() - lastReport > 15000) {
+    lastReport = Date.now();
+    const p = await evaluate("(() => { const t = window.__sandyTour || {}; return { lines: (t.lines || []).length, chunks: (t.chunks || []).length, section: (t.lines || []).slice(-1)[0]?.section || '' }; })()").catch(() => null);
+    console.log(`  … ${Math.round((Date.now() - started) / 1000)} s: ${p?.lines ?? 0} lines, ${p?.chunks ?? 0} audio chunks, on ${p?.section || "-"}`);
+  }
   await sleep(500);
 }
 await sleep(1500); // hold the closing scene
 await send("Page.stopScreencast");
-const tour = await evaluate("JSON.parse(JSON.stringify(window.__sandyTour || {}))");
+const tour = await evaluate("JSON.parse(JSON.stringify(window.__sandyTour || {}))", 60000);
 ws.close();
 edge.kill();
 await sleep(500);
