@@ -9,6 +9,8 @@ const study: CaseStudy = {
   heroTone: "scap",
   screenshot: "/portfolio/sca-properties-desktop.jpg",
   headline: "Trustees were tired of chasing their managing agent",
+  shareDescription:
+    "A South Coast managing agent whose website now wins the trustees: proposals, site inspections, an owner portal and Claire answering by voice.",
   intro:
     "Picture the chair of a holiday complex board: levies in arrears, a financial report months late, and owners in Johannesburg asking what is going on. They want a new managing agent, but changing feels risky. SCA Properties manages schemes on the KZN South Coast, and belongs to an accounting group that has been in Amanzimtoti since 1980. Its new site meets that chair with the answer: books kept by accountants, a report pack every month, and a proposal they can take to the board.",
   meta: [

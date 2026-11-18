@@ -9,6 +9,8 @@ const study: CaseStudy = {
   heroTone: "cpe",
   screenshot: "/portfolio/coastal-preferred-escapes-desktop.jpg",
   headline: "Every family plans a beach holiday. Most never book it",
+  shareDescription:
+    "Five years of family beach holidays, explained in one visit: a new membership that families can understand, trust and join online.",
   intro:
     "Every parent knows the plan: this year we will go to the sea. Then the cost, the dates and the school calendar get in the way, and another year passes. Coastal Preferred Escapes is a new answer: five years of family beach holidays at Cabana Mio in Amanzimtoti for one fixed monthly payment. It was brand new, with no name and no reviews, so the website had to make a family see that holiday, trust the offer, and apply.",
   meta: [

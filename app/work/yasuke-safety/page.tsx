@@ -9,6 +9,8 @@ const study: CaseStudy = {
   heroTone: "yasuke",
   screenshot: "/portfolio/yasuke-safety-desktop.jpg",
   headline: "The mine wanted to order again. The website made them start from zero",
+  shareDescription:
+    "A mine safety-wear supplier where buyers paste their list and reorder last month’s crew order in minutes. Built as tough as the boots.",
   intro:
     "Picture the procurement officer at a mine in Tete Province, with a whole crew needing boots and boiler suits by next week. They already have the list. The old website asked them to search for one product at a time and type it all again, every month. Yasuke Safety supplies safety boots, boiler suits and protective equipment to mines and contractors in Tete. Now that buyer pastes the list, checks it, and sends last month’s order again in minutes.",
   meta: [

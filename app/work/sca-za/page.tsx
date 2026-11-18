@@ -9,6 +9,8 @@ const study: CaseStudy = {
   heroTone: "sca",
   screenshot: "/portfolio/sca-za-desktop.jpg",
   headline: "Forty-six years of trust. Now the new clients find you",
+  shareDescription:
+    "After years of a website that undersold them, an Amanzimtoti accounting practice is now found, trusted and booked online, day and night.",
   intro:
     "Picture it. It is 23:40. A business owner in Amanzimtoti cannot sleep because SARS has written to her again. She searches for an accountant who understands Xero. Your firm is the first she finds. Your credentials are the first thing she reads. She asks Sandy two questions aloud, gets clear answers, and books a free consultation for nine the next morning. You were asleep the whole time.",
   meta: [

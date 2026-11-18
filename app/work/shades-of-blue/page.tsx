@@ -9,6 +9,8 @@ const study: CaseStudy = {
   heroTone: "shades",
   screenshot: "/portfolio/shades-of-blue-desktop.jpg",
   headline: "In industry, the work goes to the supplier who answers first",
+  shareDescription:
+    "An industrial supplier that answers first: labour, steel and maintenance quotes requested from any page, with procurement proof ready.",
   intro:
     "A site manager needs workers or steel by Monday. A procurement officer needs proof that the supplier qualifies. Shades of Blue Lifestyles supplies labour, steel fabrication and building maintenance to mines and factories across Gauteng, but its old website only described the company, and buyers in a hurry move on. Picture it now: the request arrives complete, the proof has already been read, and the quote can go out the same day.",
   meta: [

@@ -9,6 +9,8 @@ const study: CaseStudy = {
   heroTone: "storvac",
   screenshot: "/portfolio/storvac-desktop.jpg",
   headline: "Every wrong choice cost a return, an apology and a customer",
+  shareDescription:
+    "Storvac Systems lets buyers choose the right capacity themselves, so each order fits the first time and sales calls are about delivery.",
   intro:
     "When a buyer picks the wrong capacity, everybody loses: the product comes back, the buyer is frustrated, and the sale becomes a cost. Storvac Systems used to prevent that one long sales call at a time. Picture it instead: the buyer works out exactly what fits, chooses with confidence, and the first conversation with Storvac is about delivery, not about what they need.",
   meta: [

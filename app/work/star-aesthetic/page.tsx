@@ -9,6 +9,8 @@ const study: CaseStudy = {
   heroTone: "star",
   screenshot: "/portfolio/star-aesthetic-desktop.jpg",
   headline: "Patients decide whether to trust a clinic long before they meet it",
+  shareDescription:
+    "An aesthetic clinic whose website builds trust before the first visit: calm treatment guides, doctor-led care and consultations online.",
   intro:
     "A patient thinking about a treatment reads about it late at night, alone. Is it safe? Will it suit me? Is this the right clinic? Most clinic websites answer with a price list. Star Aesthetic Centre’s visitors now find calm explanations, doctor-led care and a consultation that feels like the natural next step. Picture it: the patient arrives for the first appointment already trusting the clinic.",
   meta: [

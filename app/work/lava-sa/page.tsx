@@ -9,6 +9,8 @@ const study: CaseStudy = {
   heroTone: "lava",
   screenshot: "/portfolio/lava-sa-desktop.jpg",
   headline: "The buyers wanted the machine. They were not sure enough to pay",
+  shareDescription:
+    "Specialist machines, sold with confidence: a premium shop that guides, reassures and takes payment, so buyers stop leaving to think about it.",
   intro:
     "Every specialist seller knows the feeling. A serious buyer looks at a machine for a long time, then leaves to “think about it”, and does not come back. Lava-SA’s products are bought with care, and a catalogue left those buyers alone with their doubts. Picture it instead: the buyer understands which machine fits, sees why it is worth the money, and pays online without a single phone call.",
   meta: [

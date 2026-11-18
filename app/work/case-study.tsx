@@ -12,6 +12,8 @@ export type CaseStudy = {
   heroTone: PortfolioTone;
   screenshot: string;
   headline: string;
+  // Short description for search and share previews (70–160 characters).
+  shareDescription?: string;
   intro: string;
   meta: { label: string; value: string }[];
   services: { label: string; title: string }[];
@@ -125,9 +127,10 @@ export function caseMetadata(study: CaseStudy): Metadata {
   // back to <title>. Without these a shared case study showed the site-wide
   // title ("CRM Solutions | Connected Revenue Platforms") and no description.
   const title = `${study.name} | CRM Solutions Work`;
+  const description = study.shareDescription ?? study.intro;
   return {
     title,
-    description: study.intro,
+    description,
     alternates: { canonical: `/work/${study.slug}` },
     openGraph: {
       type: "article",
@@ -135,12 +138,12 @@ export function caseMetadata(study: CaseStudy): Metadata {
       siteName: "CRM Solutions",
       url: `https://www.crmsolutions.app/work/${study.slug}`,
       title: `${study.name} — ${study.headline}`,
-      description: study.intro,
+      description,
     },
     twitter: {
       card: "summary_large_image",
       title: `${study.name} — ${study.headline}`,
-      description: study.intro,
+      description,
     },
   };
 }

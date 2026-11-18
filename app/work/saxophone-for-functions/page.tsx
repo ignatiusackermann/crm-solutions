@@ -9,6 +9,8 @@ const study: CaseStudy = {
   heroTone: "sax",
   screenshot: "/portfolio/saxophone-for-functions-desktop.jpg",
   headline: "He was on stage while the next couple chose someone else",
+  shareDescription:
+    "107 glowing reviews, and a website that finally sounds as good as he does. Couples hear Friedel play, check his date and book in one visit.",
   intro:
     "Picture Friedel playing a first dance. At that same moment, a couple planning their wedding late at night finds his old website. They cannot hear him play. They cannot see whether he is free. So they book another musician. Friedel Knobel has played weddings and functions across Gauteng for years, with 107 written reviews to prove it. The new site lets that couple hear him, check the date and send the booking before the song ends.",
   meta: [

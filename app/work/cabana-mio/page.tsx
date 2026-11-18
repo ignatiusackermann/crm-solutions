@@ -9,6 +9,8 @@ const study: CaseStudy = {
   heroTone: "cabana",
   screenshot: "/portfolio/cabana-mio-desktop.jpg",
   headline: "The guests already wanted to stay. The booking sites took the commission",
+  shareDescription:
+    "Beach chalets in Amanzimtoti that now take their own bookings: guests check dates, see what is on and book direct, with no commission.",
   intro:
     "Picture a family who searched for Cabana Mio by name, found it on a booking site, and booked there. The resort paid commission on a guest it had already won. For a holiday resort, that is the most painful booking of all. Cabana Mio, self-catering beach chalets in Amanzimtoti, now takes its own bookings: guests check the dates, see what is on, and book direct.",
   meta: [
